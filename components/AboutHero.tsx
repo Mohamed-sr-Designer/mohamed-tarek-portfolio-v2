@@ -26,10 +26,12 @@ export default function AboutHero() {
           className="object-cover object-[center_18%]"
         />
       </div>
-      {/* fixed dark scrim (not theme-tinted) so the portrait never washes out */}
+      {/* Fixed dark scrim (not theme-tinted) so the portrait never washes out.
+          Lightened again: only the very bottom needs to be dense enough to
+          carry the text, the rest of the photograph should stay visible. */}
       <div
         aria-hidden
-        className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/45 to-black/20"
+        className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-black/5"
       />
 
       <div className="container-edge relative z-10 mx-auto w-full max-w-edge pb-14 pt-40">

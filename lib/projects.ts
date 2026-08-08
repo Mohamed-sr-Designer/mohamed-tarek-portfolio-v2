@@ -332,6 +332,14 @@ export const projects: Project[] = [
       "A development that reads as a home rather than an investment listing, and a feed that stays consistent as it scales.",
     contribution: ["Campaign Direction", "Key Visuals", "Social System", "Bilingual Layout"],
     gallery: g(...seq("/work/tilal-social/", 1, 15), "/work/tilal-social/site.webp"),
+    // 03 and 04 are the same street shot, so the default first-three row showed
+    // it twice. Hand-picked instead: a family moment, an interior and the
+    // aerial, so the card spans people, product and place.
+    cardPicks: [
+      "/work/tilal-social/06.webp",
+      "/work/tilal-social/12.webp",
+      "/work/tilal-social/08.webp",
+    ],
   },
   {
     slug: "fresh-valley",

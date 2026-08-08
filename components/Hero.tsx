@@ -172,7 +172,7 @@ export default function Hero() {
               <div className="absolute -inset-3 -z-10 rounded-[2rem] bg-gradient-to-br from-mint/25 via-transparent to-electric/25 blur-2xl" />
               <div className="relative overflow-hidden rounded-[1.6rem] border border-line/15 bg-ink-700 shadow-[0_40px_120px_-30px_rgba(0,0,0,0.7)]">
                 <Media
-                  src="/me/portrait-2026.webp"
+                  src="/me/portrait-hero.webp"
                   alt="Mohamed Tarek, Sr Designer, Team Lead"
                   sizes="(max-width: 1024px) 80vw, 34vw"
                   className="h-auto w-full"

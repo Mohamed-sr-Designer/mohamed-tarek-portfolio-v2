@@ -1238,5 +1238,15 @@
     "width": 200,
     "height": 200,
     "blur": "data:image/webp;base64,UklGRpYAAABXRUJQVlA4IIoAAACQAgCdASoQABAABMB4JbACdDBACI0KB25pVu7mWAD+2FLJGivQT+fvcmozGSQux1Rq/bEVBY/8KIAPfuLIz9KMtS4SnrK5uD13ZLvuHIBPzM3EwzJbCqD3cF351W+2iSUPxz/VFssS1TDSjCuw5QUpEO5BDN2zlMIK4SG97iHDXgHCrea0QVccAAA="
+  },
+  "/me/portrait-hero.webp": {
+    "width": 1600,
+    "height": 1701,
+    "blur": "data:image/webp;base64,UklGRlgAAABXRUJQVlA4IEwAAADwAwCdASoQABEAPzGCt1MuqKUisAgB0CYJZQDG9CHw1SrBHxYLkVqAAP7ozLjzjsdl50YsSpihvQeKFxIb+M0Y0Bmm4rrhgUWAEgAA"
+  },
+  "/me/contact-banner.webp": {
+    "width": 2600,
+    "height": 1189,
+    "blur": "data:image/webp;base64,UklGRj4AAABXRUJQVlA4IDIAAADQAQCdASoQAAcABMB4JZQC7ADD2AUvgAD+8N8HCA43YpWnY9h8fI7/HAgv17fIdLlgAA=="
   }
 }
