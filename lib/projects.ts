@@ -331,7 +331,9 @@ export const projects: Project[] = [
     impact:
       "A development that reads as a home rather than an investment listing, and a feed that stays consistent as it scales.",
     contribution: ["Campaign Direction", "Key Visuals", "Social System", "Bilingual Layout"],
-    gallery: g(...seq("/work/tilal-social/", 1, 15), "/work/tilal-social/site.webp"),
+    // site.webp (the laptop mock-up of the website) is out: this is the social
+    // campaign case, and a browser mock-up sat oddly among the campaign frames.
+    gallery: g(...seq("/work/tilal-social/", 1, 15)),
     // 03 and 04 are the same street shot, so the default first-three row showed
     // it twice. Hand-picked instead: a family moment, an interior and the
     // aerial, so the card spans people, product and place.

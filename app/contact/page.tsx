@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import SiteShell from "@/components/SiteShell";
+import ContactHero from "@/components/ContactHero";
 import Contact from "@/components/Contact";
 
 export const metadata: Metadata = {
@@ -11,7 +12,8 @@ export const metadata: Metadata = {
 
 export default function ContactPage() {
   return (
-    <SiteShell pad>
+    <SiteShell>
+      <ContactHero />
       <Contact />
     </SiteShell>
   );

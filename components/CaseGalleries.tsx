@@ -66,6 +66,82 @@ export default function CaseGalleries({
 
   if (!groups.length) return null;
 
+  // A Before/After pair is the whole point of the photo case, so it gets its
+  // own side-by-side layout instead of hiding one half behind a toggle: the
+  // source shots run small and desaturated on the left, the delivered library
+  // large and full-colour on the right, with the transformation visible in one
+  // look. The two sets are not paired one-to-one (15 against 12), so they are
+  // shown as two columns rather than as matched pairs.
+  const isBeforeAfter =
+    groups.length === 2 &&
+    /^before$/i.test(groups[0].label) &&
+    /^after$/i.test(groups[1].label);
+
+  if (isBeforeAfter) {
+    return (
+      <section className="container-edge mx-auto max-w-edge pb-14 md:pb-20">
+        <div className="grid gap-8 lg:grid-cols-2 lg:gap-6">
+          {groups.map((grp, gi) => (
+            <div key={grp.label} className="relative">
+              <Reveal>
+                <div className="mb-4 flex items-baseline gap-3">
+                  <h2
+                    className={`text-2xl font-semibold tracking-tight md:text-3xl ${
+                      gi === 0 ? "text-bone-400" : "text-mint"
+                    }`}
+                  >
+                    {grp.label}
+                  </h2>
+                  <span className="text-xs tabular-nums text-bone-500">
+                    {grp.items.length}
+                  </span>
+                  {gi === 1 ? (
+                    <span
+                      aria-hidden
+                      className="ms-auto text-xs uppercase tracking-ultra text-mint"
+                    >
+                      {t.case.delivered}
+                    </span>
+                  ) : null}
+                </div>
+              </Reveal>
+
+              <div className="grid grid-cols-3 gap-2 md:gap-3">
+                {grp.items.map((g) => (
+                  <button
+                    key={g.src}
+                    type="button"
+                    onClick={() => setOpen(g.src)}
+                    aria-label={`${grp.label} — ${t.master.expand}`}
+                    className={`group relative aspect-square overflow-hidden rounded-lg bg-ink-700 ${
+                      gi === 0
+                        ? "opacity-55 saturate-[0.35] transition-all duration-500 hover:opacity-100 hover:saturate-100"
+                        : ""
+                    }`}
+                  >
+                    <Media
+                      src={g.src}
+                      alt={g.caption ?? `${title} — ${grp.label}`}
+                      fill
+                      sizes="(max-width: 1024px) 30vw, 15vw"
+                      className="object-cover transition-transform duration-700 ease-cinema group-hover:scale-105"
+                    />
+                  </button>
+                ))}
+              </div>
+
+              {grp.note ? (
+                <p className="mt-4 text-sm text-bone-400">{grp.note}</p>
+              ) : null}
+            </div>
+          ))}
+        </div>
+
+        <Lightbox open={open} onClose={() => setOpen(null)} title={title} />
+      </section>
+    );
+  }
+
   return (
     <section className="container-edge mx-auto max-w-edge pb-14 md:pb-20">
       <Reveal>
@@ -128,33 +204,48 @@ export default function CaseGalleries({
         </button>
       ) : null}
 
-      <AnimatePresence>
-        {open && (
-          <motion.div
-            className="fixed inset-0 z-[95] flex items-center justify-center bg-black/90 p-3 md:p-8"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={() => setOpen(null)}
-          >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={withBase(open)}
-              alt={title}
-              className="max-h-full max-w-full rounded-lg object-contain"
-              onClick={(e) => e.stopPropagation()}
-            />
-            <button
-              type="button"
-              onClick={() => setOpen(null)}
-              aria-label={t.master.close}
-              className="absolute right-5 top-5 grid h-11 w-11 place-items-center rounded-full border border-white/25 bg-black/40 text-white backdrop-blur-md transition-colors hover:border-mint/60 hover:text-mint"
-            >
-              ✕
-            </button>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      <Lightbox open={open} onClose={() => setOpen(null)} title={title} />
     </section>
+  );
+}
+
+function Lightbox({
+  open,
+  onClose,
+  title,
+}: {
+  open: string | null;
+  onClose: () => void;
+  title: string;
+}) {
+  const { t } = useLang();
+  return (
+    <AnimatePresence>
+      {open && (
+        <motion.div
+          className="fixed inset-0 z-[95] flex items-center justify-center bg-black/90 p-3 md:p-8"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          onClick={onClose}
+        >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={withBase(open)}
+            alt={title}
+            className="max-h-full max-w-full rounded-lg object-contain"
+            onClick={(e) => e.stopPropagation()}
+          />
+          <button
+            type="button"
+            onClick={onClose}
+            aria-label={t.master.close}
+            className="absolute right-5 top-5 grid h-11 w-11 place-items-center rounded-full border border-white/25 bg-black/40 text-white backdrop-blur-md transition-colors hover:border-mint/60 hover:text-mint"
+          >
+            ✕
+          </button>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 }

@@ -18,22 +18,6 @@ export default function Contact() {
         <div className="absolute bottom-[-30%] left-1/2 h-[50vw] w-[50vw] -translate-x-1/2 rounded-full bg-electric/10 blur-[140px]" />
       </div>
 
-      {/* Banner carries its own lettering, so nothing is overlaid on it. */}
-      <Reveal>
-        <div className="container-edge mx-auto mb-14 max-w-edge">
-          <div className="relative aspect-[21/9] overflow-hidden rounded-2xl border border-line/10 bg-ink-800 sm:aspect-[64/21]">
-            <Media
-              src="/me/contact-banner.webp"
-              alt=""
-              fill
-              priority
-              sizes="(max-width: 1024px) 100vw, 80rem"
-              className="object-cover"
-            />
-          </div>
-        </div>
-      </Reveal>
-
       <div className="container-edge mx-auto max-w-edge">
         <Reveal>
           <SectionLabel>{t.contact.label}</SectionLabel>

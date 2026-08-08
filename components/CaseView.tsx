@@ -208,27 +208,34 @@ export default function CaseView({ project }: { project: Project }) {
         <CaseGalleries groups={project.galleries} title={title} />
       ) : null}
 
-      {/* final videos */}
+      {/* Final videos: the payoff of the whole case, so it gets a banded
+          section and full width rather than a small tile in a two-up grid. */}
       {caseVideos.length > 0 ? (
-        <section className="container-edge mx-auto max-w-edge pb-14 md:pb-20">
-          <Reveal>
-            <h2 className="mb-6 text-2xl font-semibold tracking-tight text-bone-50 md:text-3xl">
-              {t.case.finalVideos}
-            </h2>
-          </Reveal>
-          <div className="grid gap-4 sm:grid-cols-2">
-            {caseVideos.map((v) => (
-              <Reveal key={v.slug}>
-                <video
-                  src={withBase(v.src)}
-                  poster={withBase(v.poster)}
-                  controls
-                  playsInline
-                  preload="none"
-                  className="w-full rounded-xl bg-ink-700"
-                />
-              </Reveal>
-            ))}
+        <section className="border-y border-line/10 bg-ink-800/40">
+          <div className="container-edge mx-auto max-w-edge py-16 md:py-24">
+            <Reveal>
+              <h2 className="mb-8 max-w-2xl text-balance text-3xl font-semibold leading-[1.05] tracking-tight text-bone-50 md:text-5xl">
+                {t.case.finalVideos}
+              </h2>
+            </Reveal>
+            <div
+              className={`grid gap-6 ${
+                caseVideos.length > 1 ? "lg:grid-cols-2" : ""
+              }`}
+            >
+              {caseVideos.map((v) => (
+                <Reveal key={v.slug}>
+                  <video
+                    src={withBase(v.src)}
+                    poster={withBase(v.poster)}
+                    controls
+                    playsInline
+                    preload="none"
+                    className="w-full rounded-2xl border border-line/10 bg-ink-700 shadow-[0_30px_90px_-30px_rgba(0,0,0,0.8)]"
+                  />
+                </Reveal>
+              ))}
+            </div>
           </div>
         </section>
       ) : null}
