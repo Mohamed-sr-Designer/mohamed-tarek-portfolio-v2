@@ -12,25 +12,31 @@ export default function Skills() {
         <Reveal>
           <SectionLabel>{t.skills.label}</SectionLabel>
         </Reveal>
+        <Reveal delay={0.05}>
+          <p className="mt-4 max-w-xl text-sm leading-relaxed text-bone-400">
+            {t.skills.note}
+          </p>
+        </Reveal>
 
-        <Stagger className="mt-12 grid gap-12 md:grid-cols-3 md:gap-8">
+        {/* Keyword chips per discipline, each group carrying the line of
+            evidence for it. Dense and scannable on purpose: this is the block
+            a recruiter skims and a search engine indexes. */}
+        <Stagger className="mt-12 grid gap-10 md:grid-cols-2 md:gap-x-12">
           {t.skills.groups.map((grp) => (
             <StaggerItem key={grp.title}>
-              <h3 className="text-sm uppercase tracking-ultra text-bone-400">
+              <h3 className="text-base font-medium tracking-tight text-bone-50 md:text-lg">
                 {grp.title}
               </h3>
-              <ul className="mt-6 flex flex-col">
+              <p className="mt-1.5 text-xs leading-relaxed text-bone-500">
+                {grp.proof}
+              </p>
+              <ul className="mt-4 flex flex-wrap gap-2">
                 {grp.items.map((item) => (
                   <li
                     key={item}
-                    className="group flex items-center justify-between border-b border-line/10 py-4"
+                    className="rounded-full border border-line/15 bg-ink-900 px-3.5 py-1.5 text-sm text-bone-200 transition-colors duration-300 hover:border-mint/50 hover:text-mint"
                   >
-                    <span className="font-sans text-xl font-light tracking-tight text-bone-50 transition-colors duration-300 group-hover:text-mint md:text-2xl">
-                      {item}
-                    </span>
-                    <span className="text-mint opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                      ✦
-                    </span>
+                    {item}
                   </li>
                 ))}
               </ul>
