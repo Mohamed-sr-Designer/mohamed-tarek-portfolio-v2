@@ -13,13 +13,10 @@ const PROJECT = path.resolve(__dirname, "..");
 const PUBLIC = path.join(PROJECT, "public");
 const SRC = "C:\\Users\\tarek\\OneDrive\\Desktop\\New folder";
 
-// [file, slug, crop] — crop is the post artwork inside the screenshot
+// [file, slug, crop] — crop is the post artwork inside the screenshot.
+// The leadership photo (113448) and the speaking clip (113609) were pulled
+// from the section; re-add their entries here if they are ever wanted back.
 const POSTS = [
-  [
-    "Screenshot 2026-08-09 113448.png",
-    "leadership",
-    { left: 8, top: 186, width: 588, height: 300 },
-  ],
   [
     "Screenshot 2026-08-09 113546.png",
     "nano-banana",
@@ -34,11 +31,6 @@ const POSTS = [
     "Screenshot 2026-08-09 113554.png",
     "ai-photo-session",
     { left: 46, top: 45, width: 340, height: 232 },
-  ],
-  [
-    "Screenshot 2026-08-09 113609.png",
-    "talk",
-    { left: 160, top: 40, width: 145, height: 232 },
   ],
 ];
 

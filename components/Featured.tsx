@@ -56,18 +56,14 @@ export default function Featured() {
         {featured.map((p) => {
           const post = t.featured.posts[p.slug];
           return (
-            <StaggerItem key={p.slug} className={p.portrait ? "sm:row-span-2" : ""}>
+            <StaggerItem key={p.slug}>
               <a
                 href={p.url}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group flex h-full flex-col overflow-hidden rounded-2xl border border-line/12 bg-ink-900 transition-colors duration-300 hover:border-mint/40"
               >
-                <div
-                  className={`relative overflow-hidden bg-ink-700 ${
-                    p.portrait ? "aspect-[3/4]" : "aspect-video"
-                  }`}
-                >
+                <div className="relative aspect-video overflow-hidden bg-ink-700">
                   <Media
                     src={p.image}
                     alt={post?.title ?? t.featured.label}

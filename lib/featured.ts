@@ -9,14 +9,15 @@ export const PROFILE_ACTIVITY =
 export type FeaturedPost = {
   slug: string;
   image: string;
-  /** portrait artwork needs a taller tile */
-  portrait?: boolean;
   reactions?: number;
   comments?: number;
   reposts?: number;
   url: string;
 };
 
+// Three AI-workflow posts. The leadership photo and the speaking clip were
+// pulled: they sat oddly next to the craft breakdowns and neither carried the
+// reach the other three do.
 export const featured: FeaturedPost[] = [
   {
     slug: "skin-texture",
@@ -40,18 +41,6 @@ export const featured: FeaturedPost[] = [
     reactions: 523,
     comments: 20,
     reposts: 47,
-    url: PROFILE_ACTIVITY,
-  },
-  {
-    slug: "leadership",
-    image: "/featured/leadership.webp",
-    url: PROFILE_ACTIVITY,
-  },
-  {
-    slug: "talk",
-    image: "/featured/talk.webp",
-    portrait: true,
-    reactions: 15,
     url: PROFILE_ACTIVITY,
   },
 ];

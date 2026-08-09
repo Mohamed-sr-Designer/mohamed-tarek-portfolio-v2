@@ -1249,11 +1249,6 @@
     "height": 1189,
     "blur": "data:image/webp;base64,UklGRj4AAABXRUJQVlA4IDIAAADQAQCdASoQAAcABMB4JZQC7ADD2AUvgAD+8N8HCA43YpWnY9h8fI7/HAgv17fIdLlgAA=="
   },
-  "/featured/leadership.webp": {
-    "width": 1200,
-    "height": 612,
-    "blur": "data:image/webp;base64,UklGRlYAAABXRUJQVlA4IEoAAAAQAgCdASoQAAgABMB4JQBOgB9FLcCjn80AAP5YlB/0BN6e7LchXzPY53iQV/lEtG/ArptT5kJLzITr7Q5PWctP1YLYMdxq6AoAAA=="
-  },
   "/featured/nano-banana.webp": {
     "width": 1200,
     "height": 674,
@@ -1268,10 +1263,5 @@
     "width": 1200,
     "height": 819,
     "blur": "data:image/webp;base64,UklGRloAAABXRUJQVlA4IE4AAAAwAgCdASoQAAsABMB4JZAC7AEUompk5rLUAAD+23KAmo490AH6fz3SUluJq4ZCF++EW5+Lu0KygKnTeZoOR/ax9c3PH8wpmNcAQjVyAAA="
-  },
-  "/featured/talk.webp": {
-    "width": 1200,
-    "height": 1920,
-    "blur": "data:image/webp;base64,UklGRpgAAABXRUJQVlA4IIwAAAAwBACdASoQABoAPzGAt1KuqCUisAgB0CYJZACsH8AJW18uklUqHl6Q8QAA9ilb/tcNArxAqvN2Kb2HdFgH4ho6E7H1UYYN9samJwYtzcUvedW2LusVJX4XDHaseOlBmlvqhcMvpnEpszNV23VTcztfNZkMgddgdagzRpiz9D/j3mxJS1gosoa8UxgAAA=="
   }
 }
