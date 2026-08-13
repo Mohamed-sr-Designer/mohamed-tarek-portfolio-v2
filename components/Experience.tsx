@@ -30,7 +30,7 @@ const jobs: Job[] = [
   {
     company: "Osolutions",
     logo: "/orgs/osolutions.webp",
-    role: "Art Team Lead",
+    role: "Team Lead",
     type: "Full-time · On-site",
     period: "May 2026 — Present",
     place: "Cairo, Egypt",
@@ -175,7 +175,9 @@ const bucket = (j: Job): Exclude<Filter, "all"> =>
 
 export default function Experience() {
   const { t } = useLang();
-  const [filter, setFilter] = useState<Filter>("all");
+  // Full-time opens the section: it is the commitment a hiring manager is
+  // usually scanning for, so it should not need a click to reach.
+  const [filter, setFilter] = useState<Filter>("full");
 
   const count = (f: Exclude<Filter, "all">) =>
     jobs.filter((j) => bucket(j) === f).length;
@@ -215,7 +217,6 @@ export default function Experience() {
             value={filter}
             onChange={setFilter}
             options={[
-              { value: "all", label: t.exp.all, hint: String(jobs.length) },
               {
                 value: "full",
                 label: t.exp.fullTime,
@@ -226,6 +227,7 @@ export default function Experience() {
                 label: t.exp.partTime,
                 hint: String(count("flex")),
               },
+              { value: "all", label: t.exp.all, hint: String(jobs.length) },
             ]}
           />
         </div>

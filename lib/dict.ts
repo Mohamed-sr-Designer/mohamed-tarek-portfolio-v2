@@ -360,7 +360,7 @@ const en = {
     groups: [
       {
         title: "Direction & Leadership",
-        proof: "Art Team Lead at Osolutions · led designers at JUMPPEAK",
+        proof: "Team Lead at Osolutions · led designers at JUMPPEAK",
         items: [
           "Art Direction",
           "Creative Direction",
@@ -905,7 +905,7 @@ const ar: typeof en = {
     groups: [
       {
         title: "الإخراج والقيادة",
-        proof: "قائد فريق الآرت في Osolutions · قدت مصممين في JUMPPEAK",
+        proof: "قائد فريق في Osolutions · قدت مصممين في JUMPPEAK",
         items: [
           "إخراج فني",
           "إخراج إبداعي",

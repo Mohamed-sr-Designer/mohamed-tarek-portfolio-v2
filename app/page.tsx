@@ -21,11 +21,13 @@ export default function Home() {
       <MasterVisuals />
       <TypeDesign />
       <SocialCards />
+      {/* the wall of selected designs closes out the social run, before the
+          page moves on to how the films get planned */}
+      <LoopSlider />
       <Storyboards />
       <Motion />
       <WebProjects />
       <Services />
-      <LoopSlider />
       <HireCta />
     </SiteShell>
   );
