@@ -371,8 +371,10 @@ export const projects: Project[] = [
     summary:
       "A full produce campaign generated with AI. Every frame was written as a prompt and produced in Google Flow, then art-directed into one consistent set: the same light, the same skin tones, the same appetite.",
     tagline: "Written as prompts, produced in Google Flow, directed into a set.",
-    cover: "/work/social/fresh-valley/01.webp",
-    hero: "/work/social/fresh-valley/01.webp",
+    // numbering follows the source folder, so the hero is named rather than
+    // shuffled to the front: 11 leads the card, 14 / 12 / 09 support it
+    cover: "/work/social/fresh-valley/11.webp",
+    hero: "/work/social/fresh-valley/11.webp",
     tags: [
       "AI Imaging",
       "Prompt Engineering",
@@ -386,8 +388,13 @@ export const projects: Project[] = [
       "Art Direction",
       "Selection & Retouch",
     ],
-    // the whole set is new: 15 AI-generated frames, 01 is the master
+    // the whole set is new: 15 AI-generated frames, in source-folder order
     gallery: g(...seq("/work/social/fresh-valley/", 1, 15)),
+    cardPicks: [
+      "/work/social/fresh-valley/14.webp",
+      "/work/social/fresh-valley/12.webp",
+      "/work/social/fresh-valley/09.webp",
+    ],
   },
   {
     slug: "gf",
@@ -429,15 +436,37 @@ export const projects: Project[] = [
     summary:
       "Social media design for a specialty café, a black and white brand world where the food and the pour do all the talking.",
     tagline: "Specialty coffee, served with a clean black-and-white look.",
-    cover: "/work/social/the-nine/01.webp",
+    cover: "/work/social/the-nine/02.webp",
     hero: "/work/social/the-nine/02.webp",
     tags: ["Café", "Social Design", "Brand World"],
     contribution: ["Social Design", "Art Direction", "Menu Visuals"],
     gallery: g(...seq("/work/social/the-nine/", 1, 9)),
   },
+  // NEXT Academy takes the slot HR Link used to hold, so it lands earlier in
+  // the social grid; HR Link follows it.
+  {
+    slug: "next-academy",
+    index: "09",
+    title: "NEXT Academy, Skills, Recruited",
+    client: "NEXT Academy",
+    year: "2025",
+    category: "Education · Social",
+    sector: "Technology",
+    discipline: "Social Design · Enrolment",
+    accent: "electric",
+    simple: true,
+    summary:
+      "Social media design for a training academy, sharp, high-contrast posts built to turn interest into enrolment.",
+    tagline: "Training posts built to convert interest into enrolment.",
+    cover: "/work/social/next-academy/06.webp",
+    hero: "/work/social/next-academy/02.webp",
+    tags: ["Education", "Social Design", "Enrolment"],
+    contribution: ["Social Design", "Art Direction", "Campaign"],
+    gallery: g(...seq("/work/social/next-academy/", 1, 9)),
+  },
   {
     slug: "hr-link",
-    index: "09",
+    index: "10",
     title: "HR Link, Software, Sold Simply",
     client: "HR Link",
     year: "2025",
@@ -454,26 +483,6 @@ export const projects: Project[] = [
     tags: ["SaaS", "Social Design", "Bilingual AR/EN"],
     contribution: ["Social Design", "Product Marketing", "Art Direction"],
     gallery: g(...seq("/work/social/hr-link/", 1, 9)),
-  },
-  {
-    slug: "next-academy",
-    index: "10",
-    title: "NEXT Academy, Skills, Recruited",
-    client: "NEXT Academy",
-    year: "2025",
-    category: "Education · Social",
-    sector: "Technology",
-    discipline: "Social Design · Enrolment",
-    accent: "electric",
-    simple: true,
-    summary:
-      "Social media design for a training academy, sharp, high-contrast posts built to turn interest into enrolment.",
-    tagline: "Training posts built to convert interest into enrolment.",
-    cover: "/work/social/next-academy/01.webp",
-    hero: "/work/social/next-academy/02.webp",
-    tags: ["Education", "Social Design", "Enrolment"],
-    contribution: ["Social Design", "Art Direction", "Campaign"],
-    gallery: g(...seq("/work/social/next-academy/", 1, 9)),
   },
   {
     slug: "brand-vitals",

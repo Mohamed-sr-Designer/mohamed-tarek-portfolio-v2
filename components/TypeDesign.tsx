@@ -53,7 +53,7 @@ function Piece({
         onOpen(piece.dark);
       }}
       aria-label={`${label} ${index + 1}`}
-      className={`group relative h-32 w-56 shrink-0 rounded-xl px-6 py-4 transition-transform duration-500 ease-cinema hover:scale-[1.05] sm:h-40 sm:w-72 sm:px-8 sm:py-5 ${
+      className={`group relative h-24 w-44 shrink-0 rounded-xl transition-transform duration-500 ease-cinema hover:scale-[1.06] sm:h-32 sm:w-56 ${
         piece.plated ? "bg-[#100F0D]" : ""
       }`}
     >

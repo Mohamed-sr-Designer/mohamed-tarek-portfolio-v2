@@ -29,9 +29,10 @@ const all = (await fs.readdir(SRC))
   .filter((f) => /\.(png|jpe?g|webp)$/i.test(f))
   .sort(natural);
 
-// 11.png is the master, so it takes slot 01 and the rest keep folder order
-const LEAD = "11.png";
-const ordered = [LEAD, ...all.filter((f) => f !== LEAD)];
+// Straight folder order: 1.png -> 01.webp, 15.png -> 15.webp. The hero is set
+// on the project itself rather than by reshuffling the numbering, so the set
+// on the page reads in the same order as the source folder.
+const ordered = all;
 
 const dupes = [];
 const seen = new Map();
@@ -66,7 +67,7 @@ for (const f of ordered) {
 }
 
 await fs.writeFile(manifestPath, JSON.stringify(manifest, null, 2));
-console.log(`\nfresh-valley: ${n} images (01 = ${LEAD})`);
+console.log(`\nfresh-valley: ${n} images, folder order preserved`);
 if (dupes.length) {
   console.log("repeated source images:");
   for (const d of dupes) console.log("  ! " + d);
