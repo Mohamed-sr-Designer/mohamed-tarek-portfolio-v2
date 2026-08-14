@@ -221,6 +221,7 @@ export default function Motion() {
         <div className="mt-10">
           <Toggle
             ariaLabel="Video collections"
+            hint={t.motion.pick}
             value={tab}
             onChange={(v) => setTab(v as "landscape" | "portrait")}
             options={[

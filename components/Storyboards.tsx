@@ -65,6 +65,7 @@ export default function Storyboards() {
         <div className="mt-10">
           <Toggle
             ariaLabel={t.story.label}
+            hint={t.story.pick}
             value={String(idx)}
             onChange={(v) => setIdx(Number(v))}
             options={boards.map((_, i) => ({

@@ -89,11 +89,19 @@ function Card({ p }: { p: Project }) {
         {tr.tagline ?? p.tagline}
       </p>
 
+      {/* A filled pill, not a text link. As underlined mint text this read as
+          a caption and people did not realise the card led anywhere. */}
       <Link
         href={`/work/${p.slug}`}
-        className="mt-auto pt-4 text-sm text-mint underline-offset-4 hover:underline"
+        className="group/cta mt-auto flex w-full items-center justify-between gap-3 rounded-full border border-mint/40 bg-mint/10 px-5 py-3 text-sm font-medium text-mint transition-colors duration-300 hover:bg-mint hover:text-ink-900"
       >
-        {t.socialCards.viewAll}
+        <span>{t.socialCards.viewAll}</span>
+        <span
+          aria-hidden
+          className="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-mint/20 transition-transform duration-300 group-hover/cta:translate-x-0.5 group-hover/cta:bg-ink-900/15 rtl:rotate-180"
+        >
+          →
+        </span>
       </Link>
     </article>
   );

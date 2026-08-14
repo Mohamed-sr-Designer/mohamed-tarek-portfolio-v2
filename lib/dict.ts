@@ -90,7 +90,7 @@ const en = {
     note: "Each brand gets a key visual and a repeatable post system, so the feed stays on brand at posting speed.",
     keyVisual: "Key visual",
     posts: "designs",
-    viewAll: "View the full set →",
+    viewAll: "View the full set",
   },
   story: {
     label: "Storyboards",
@@ -99,6 +99,7 @@ const en = {
     h2b: " it is shot.",
     note: "Frame-by-frame boards that lock the story, the shots and the pacing before production starts.",
     board: "Board",
+    pick: "Pick a board",
   },
   clients: {
     label: "Clients",
@@ -155,6 +156,7 @@ const en = {
     note: "Brand films, social reels and animation, tap the speaker to hear it, or expand any clip to watch larger.",
     landscape: "Landscape",
     portrait: "Portrait",
+    pick: "Pick a format",
   },
   featured: {
     label: "Featured on LinkedIn",
@@ -644,7 +646,7 @@ const ar: typeof en = {
     note: "كل علامة ليها صورة رئيسية ونظام بوستات قابل للتكرار، فالفيد يفضل متّسق بسرعة النشر.",
     keyVisual: "الصورة الرئيسية",
     posts: "تصميم",
-    viewAll: "شوف السِت كامل →",
+    viewAll: "شوف السِت كامل",
   },
   story: {
     label: "ستوري بورد",
@@ -653,6 +655,7 @@ const ar: typeof en = {
     h2b: " ما يتصوّر.",
     note: "لوحات إطار بإطار تثبّت القصة واللقطات والإيقاع قبل بدء الإنتاج.",
     board: "لوحة",
+    pick: "اختر لوحة",
   },
   clients: {
     label: "العملاء",
@@ -709,6 +712,7 @@ const ar: typeof en = {
     note: "أفلام علامات وريلز وأنيميشن، اضغط السماعة للصوت، أو كبّر أي مقطع.",
     landscape: "أفقي",
     portrait: "رأسي",
+    pick: "اختر الصيغة",
   },
   featured: {
     label: "مختارات لينكد إن",
