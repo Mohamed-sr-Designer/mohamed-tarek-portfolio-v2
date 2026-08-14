@@ -97,12 +97,18 @@ export const projects: Project[] = [
     galleries: [
       {
         label: "Before",
-        note: "The source product shots the session started from.",
-        items: g(...seq("/work/photo-sessions/before-", 1, 15)),
+        note: "What the client sent: plain product photographs, shot on the spot, with no consistent light or setting between them.",
+        // 11 and 15 are byte-for-byte copies of 10 and 14, and 03 is two bits
+        // off 02 — the same source shot submitted more than once.
+        items: g(
+          ...seq("/work/photo-sessions/before-", 1, 2),
+          ...seq("/work/photo-sessions/before-", 4, 10),
+          ...seq("/work/photo-sessions/before-", 12, 14)
+        ),
       },
       {
         label: "After",
-        note: "The finished, premium set delivered for campaigns.",
+        note: "What was delivered: one library where every frame shares the same light, framing and premium feel, ready for campaigns, social and print.",
         items: g(...seq("/work/photo-sessions/after-", 1, 12)),
       },
     ],
@@ -177,17 +183,17 @@ export const projects: Project[] = [
     gallery: [],
     galleries: [
       {
-        label: "Characters",
-        note: "Campaign characters, wardrobe and appearance guidelines.",
+        label: "The cast",
+        note: "Before a single scene was built, every character in the campaign was designed and locked: who they are, what they wear, how they look on camera. Fixing the cast first is what lets the same people appear across every film without the look drifting.",
         items: g(...seq("/work/video-production/char-", 1, 7)),
       },
       {
-        label: "Scene Construction",
-        note: "Every environment and production location, mapped before filming.",
+        label: "The scenes",
+        note: "Every location the cast appears in, mapped out before filming. Because the scenes were planned around one fixed cast, a single shot could be cut into several different films instead of being shot again for each one.",
         items: g(...seq("/work/video-production/sc-", 1, 17)),
       },
     ],
-    videoSlugs: ["landscape-05"],
+    // no videoSlugs: the Final Videos block was pulled from this case
     workflow: {
       title: "Production Workflow",
       intro: [
@@ -265,9 +271,10 @@ export const projects: Project[] = [
       "A waterfront community that reads as a lifestyle brand, giving the sales team warm interest instead of cold price questions.",
     contribution: ["Campaign Direction", "Key Visuals", "Social System", "Bilingual Layout"],
     // 12 and 13 are dropped: they repeat the "كل إطلالة" villa-and-pool frame
-    // that 09-11 already cover.
+    // that 09-11 already cover. 10 goes too — it is a byte-for-byte copy of 08.
     gallery: g(
-      ...seq("/work/amam-re/", 1, 11),
+      ...seq("/work/amam-re/", 1, 9),
+      "/work/amam-re/11.webp",
       "/work/amam-re/14.webp"
     ),
     strategyBlock: {
@@ -333,7 +340,14 @@ export const projects: Project[] = [
     contribution: ["Campaign Direction", "Key Visuals", "Social System", "Bilingual Layout"],
     // site.webp (the laptop mock-up of the website) is out: this is the social
     // campaign case, and a browser mock-up sat oddly among the campaign frames.
-    gallery: g(...seq("/work/tilal-social/", 1, 15)),
+    //
+    // 04 and 14 are gone too. Perceptual hashing put 03/04 four bits apart and
+    // 11/14 one bit apart out of 256 — the same street shot and the same
+    // bedroom, twice each. 15 was pulled by hand.
+    gallery: g(
+      ...seq("/work/tilal-social/", 1, 3),
+      ...seq("/work/tilal-social/", 5, 13)
+    ),
     // 03 and 04 are the same street shot, so the default first-three row showed
     // it twice. Hand-picked instead: a family moment, an interior and the
     // aerial, so the card spans people, product and place.
@@ -351,17 +365,29 @@ export const projects: Project[] = [
     year: "2025",
     category: "Food & Retail · Social",
     sector: "Food & Retail",
-    discipline: "Social Design · Brand System",
+    discipline: "AI Imaging · Prompt Engineering · Social Design",
     accent: "mint",
     simple: true,
     summary:
-      "Social media design for a premium produce brand, natural light, kraft texture and a green identity that makes everyday produce feel premium.",
-    tagline: "Everyday produce, made to look deliberately premium.",
+      "A full produce campaign generated with AI. Every frame was written as a prompt and produced in Google Flow, then art-directed into one consistent set: the same light, the same skin tones, the same appetite.",
+    tagline: "Written as prompts, produced in Google Flow, directed into a set.",
     cover: "/work/social/fresh-valley/01.webp",
-    hero: "/work/social/fresh-valley/02.webp",
-    tags: ["Food & Retail", "Social Design", "Brand System"],
-    contribution: ["Social Design", "Art Direction", "Brand System"],
-    gallery: g(...seq("/work/social/fresh-valley/", 1, 9)),
+    hero: "/work/social/fresh-valley/01.webp",
+    tags: [
+      "AI Imaging",
+      "Prompt Engineering",
+      "Google Flow",
+      "Food & Retail",
+      "Social Design",
+    ],
+    contribution: [
+      "Prompt Engineering",
+      "AI Production (Google Flow)",
+      "Art Direction",
+      "Selection & Retouch",
+    ],
+    // the whole set is new: 15 AI-generated frames, 01 is the master
+    gallery: g(...seq("/work/social/fresh-valley/", 1, 15)),
   },
   {
     slug: "gf",

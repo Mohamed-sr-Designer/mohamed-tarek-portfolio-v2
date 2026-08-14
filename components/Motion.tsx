@@ -25,6 +25,9 @@ const clips = motionData as Clip[];
 const landscape = clips.filter((c) => c.collection === "landscape");
 const portrait = clips.filter((c) => c.collection === "portrait");
 
+// Landscape clips sit in a 16:9 frame, portrait ones in 9:16 — which is what
+// every reel in the set actually is. The portrait frame used to be 4:5, so
+// object-cover was cropping the top and bottom off all fourteen of them.
 function VideoCard({
   clip,
   onExpand,
@@ -69,7 +72,7 @@ function VideoCard({
       onMouseEnter={play}
       onMouseLeave={stop}
       className={`group relative overflow-hidden rounded-xl bg-ink-700 ${
-        wide ? "aspect-video" : "aspect-[4/5]"
+        wide ? "aspect-video" : "aspect-[9/16]"
       }`}
     >
       <video

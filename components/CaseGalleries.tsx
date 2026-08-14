@@ -31,7 +31,11 @@ export default function CaseGalleries({
   const [expanded, setExpanded] = useState(false);
   const [open, setOpen] = useState<string | null>(null);
 
-  const group = groups.find((g) => g.label === active) ?? groups[0];
+  const index = Math.max(
+    0,
+    groups.findIndex((g) => g.label === active)
+  );
+  const group = groups[index];
 
   // Landscape sets (film scenes) want a 16:9 tile; product and portrait sets
   // read better at 4:5. Decide from the artwork itself rather than hard-coding.
@@ -145,27 +149,53 @@ export default function CaseGalleries({
   return (
     <section className="container-edge mx-auto max-w-edge pb-14 md:pb-20">
       <Reveal>
-        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-          {groups.length > 1 ? (
+        {/* A bare toggle reading "Characters 7 / Scene Construction 17" told
+            nobody what they were looking at. The stage is now numbered and
+            named in full above the grid, with its own sentence of explanation
+            and the count spelled out, and the toggle sits underneath as the
+            way to move between stages. */}
+        {groups.length > 1 ? (
+          <div className="mb-8 flex flex-col gap-5">
             <Toggle
               ariaLabel={title}
+              hint={t.case.stageHint}
               value={active}
               onChange={setActive}
-              options={groups.map((g) => ({
+              options={groups.map((g, i) => ({
                 value: g.label,
-                label: g.label,
+                label: `${String(i + 1).padStart(2, "0")} · ${g.label}`,
                 hint: String(g.items.length),
               }))}
             />
-          ) : (
-            <h2 className="text-2xl font-semibold tracking-tight text-bone-50">
+
+            <div className="border-s-2 border-mint/50 ps-5">
+              <p className="text-[10px] uppercase tracking-ultra text-mint">
+                {t.case.stage} {String(index + 1).padStart(2, "0")} {t.case.of}{" "}
+                {String(groups.length).padStart(2, "0")}
+              </p>
+              <h2 className="mt-2 text-2xl font-semibold tracking-tight text-bone-50 md:text-3xl">
+                {group.label}
+              </h2>
+              <p className="mt-2 max-w-2xl text-pretty text-sm leading-relaxed text-bone-300 md:text-base">
+                {group.note}
+              </p>
+              <p className="mt-3 text-xs text-bone-500">
+                {group.items.length} {t.case.frames}
+              </p>
+            </div>
+          </div>
+        ) : (
+          <div className="mb-6">
+            <h2 className="text-2xl font-semibold tracking-tight text-bone-50 md:text-3xl">
               {group.label}
             </h2>
-          )}
-          {group.note ? (
-            <p className="max-w-sm text-sm text-bone-400">{group.note}</p>
-          ) : null}
-        </div>
+            {group.note ? (
+              <p className="mt-2 max-w-2xl text-sm leading-relaxed text-bone-400">
+                {group.note}
+              </p>
+            ) : null}
+          </div>
+        )}
       </Reveal>
 
       <div
