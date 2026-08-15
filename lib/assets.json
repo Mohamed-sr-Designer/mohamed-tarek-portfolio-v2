@@ -1293,5 +1293,90 @@
     "width": 1080,
     "height": 1350,
     "blur": "data:image/webp;base64,UklGRpoAAABXRUJQVlA4II4AAACwBACdASoQABQAPzGAt1MuqCUisAgB0CYJagCdMoRwH1/AWy/WJL/QBdwc+nyAAP4G7Zb+pjSujC5MTd9e7s/OrpXuS2THzPYUm794arSxjp6BUUS8nOAwJXakj2eQ+CmEqD8Thg7RCCXDhCtuIADHzVuCkbNk/cKTtNQIIWglgkylaap496KOfMAt1xAA"
+  },
+  "/recs/ahmed-altamimi.webp": {
+    "width": 240,
+    "height": 240,
+    "blur": "data:image/webp;base64,UklGRl4AAABXRUJQVlA4IFIAAAAQAgCdASoQABAABMB4JZQAAvzVjyVCKDYAAP7tU/SH9TCiu61tnacuBD2wzjyEa9m/x6N/Aepu5FOnkV0cKwR6Xk/kVLwzNraSnfc77MgBg4AA"
+  },
+  "/recs/ahmed-hassan.webp": {
+    "width": 240,
+    "height": 240,
+    "blur": "data:image/webp;base64,UklGRl4AAABXRUJQVlA4IFIAAADQAQCdASoQABAABMB4JbACdAC90pzJoADieRpa7dnW0ctKfI9iMIDg10j/2xvONUn2LsNGbvd+bEjQLVkGGxEllFg4Z6B4TGj6bvT8jLx7bwAA"
+  },
+  "/recs/amr-el-hawary.webp": {
+    "width": 240,
+    "height": 240,
+    "blur": "data:image/webp;base64,UklGRl4AAABXRUJQVlA4IFIAAADQAQCdASoQABAABMB4JYwAAh5FBXO4gAD+7V16y8B4Bz821mPCY0U1Ha1Rs5TLZ6e6tBCNieI+YnJpfA82otlpptQokPTQlk57LzMKaXs4NAAA"
+  },
+  "/recs/amr-tolba.webp": {
+    "width": 240,
+    "height": 240,
+    "blur": "data:image/webp;base64,UklGRjwAAABXRUJQVlA4IDAAAADQAQCdASoQABAABMB4JZwAAt4+l+KWgAD+8qulc0WqtwMPf0WScrqimGkFyEMKAAA="
+  },
+  "/recs/canzy-bahgat.webp": {
+    "width": 240,
+    "height": 240,
+    "blur": "data:image/webp;base64,UklGRkgAAABXRUJQVlA4IDwAAAAQAgCdASoQABAABMB4JYwCw7ECwJHY6wCYAP5T7Mwl2fknWO63dOpXmYeCCy6GogY4tTt9LEWEM0GYoAA="
+  },
+  "/recs/enjy-elshiekh.webp": {
+    "width": 240,
+    "height": 240,
+    "blur": "data:image/webp;base64,UklGRmYAAABXRUJQVlA4IFoAAADQAQCdASoQABAABMB4JbACdADRimOQAAD9ijs+XAuFv1GV/lcQ/zjD3HgVnZSw9kjp+tcYbWgzPWiuvt7oCezYnHFYf0JvCjEYYujl2yQ/h3fwHfdvKraFsAA="
+  },
+  "/recs/iman-abdelwahab.webp": {
+    "width": 240,
+    "height": 240,
+    "blur": "data:image/webp;base64,UklGRlQAAABXRUJQVlA4IEgAAADQAQCdASoQABAABMB4JaQAAm2JweQdwAD+nuvXsM+aNkI2fKNlrKzed5pxX5877G4lLUaqp9uYRM1IZrRf49w7+/m5cHhkQAA="
+  },
+  "/recs/islam-samir.webp": {
+    "width": 240,
+    "height": 240,
+    "blur": "data:image/webp;base64,UklGRmQAAABXRUJQVlA4IFgAAADwAQCdASoQABAABMB4JaQAAv5bYRJRIQAA/t7vXCoWzwxrePDARgbVq7gCyrZsewuZYxkn+jR5Qs7eY212sHcE65mfmKOaPwpGswpme0CpqeAgysBUAAAA"
+  },
+  "/recs/kirolse-nazeh.webp": {
+    "width": 240,
+    "height": 240,
+    "blur": "data:image/webp;base64,UklGRk4AAABXRUJQVlA4IEIAAADQAQCdASoQABAABMB4JZwAAlghq9meAAD+6pXUVKuVNu1/KNZkuSPviv6cmAJRddcesMOG7lu983WdPqktrHjyEAA="
+  },
+  "/recs/maggie-milad.webp": {
+    "width": 240,
+    "height": 240,
+    "blur": "data:image/webp;base64,UklGRmIAAABXRUJQVlA4IFYAAAAwAgCdASoQABAABMB4JQBOgCIcrPzMV3yWkAD+v8g3hFywiPN6f+ucNP5uWyK1DhklHjlYKPrQxkl7kcO+uMkSbgKAjLaWlz+sEKjS8WS5Hd8VPXggAA=="
+  },
+  "/recs/menna-ibrahim.webp": {
+    "width": 240,
+    "height": 240,
+    "blur": "data:image/webp;base64,UklGRlYAAABXRUJQVlA4IEoAAAAwAgCdASoQABAABMB4JbACdAD5OrQjUxgCYAD+vl7ASjosGnaQZXvrmAtSNnA/+rYd3q96lPUiPNKe9zcckFwt123GbHgAB5gAAA=="
+  },
+  "/recs/mohamed-abd-eltawab.webp": {
+    "width": 240,
+    "height": 240,
+    "blur": "data:image/webp;base64,UklGRlQAAABXRUJQVlA4IEgAAADwAQCdASoQABAABMB4JZQAAsRCRsWJiZwA/vQxnoKGi38mqAjF+tvek/iSlWaq4bpHL/yYjiTbTw0CD1OT4RtFxHu/8IwAAAA="
+  },
+  "/recs/mohannad-el-gammal.webp": {
+    "width": 240,
+    "height": 240,
+    "blur": "data:image/webp;base64,UklGRlgAAABXRUJQVlA4IEwAAAAQAgCdASoQABAABMB4JQBOj+ACNt7ZfUgAAPxcSi5hRNNoSNZ+14/2JC4DfSYL7KGXdUuHN5uGuT5PobVU2c4gIxh2CyM3LLnwAAAA"
+  },
+  "/recs/omar-khater.webp": {
+    "width": 240,
+    "height": 240,
+    "blur": "data:image/webp;base64,UklGRnYAAABXRUJQVlA4IGoAAAAQAgCdASoQABAABMB4JbACdAYw6xs3YIUAAP7locUEhbEe/iM7e0ZvosHIVi8gx8kFrhcK8oYLRLJTdoxOC5cgBxtnRpzfMvDkL0kXVq064YesmdRNYqxxmqD4dM3F80DbRW5RVQafvZAA"
+  },
+  "/recs/reham-elkhateeb.webp": {
+    "width": 240,
+    "height": 240,
+    "blur": "data:image/webp;base64,UklGRloAAABXRUJQVlA4IE4AAADQAQCdASoQABAABMB4JYwCdADjSTtgAAD+hz10tTq1TpnyCiPEAfZTYkknwupnsx9UlQvXYjqmqAA/NjZ2+feU7cgscNn0T2+mkI8/nAA="
+  },
+  "/recs/yara-shahine.webp": {
+    "width": 240,
+    "height": 240,
+    "blur": "data:image/webp;base64,UklGRm4AAABXRUJQVlA4IGIAAADQAQCdASoQABAABMB4JbACdAB2CwILgADIjKzcpPzyiu4O2KYFaT9PahS/yG08GCwvRT+mR8UKERp1C0jzoAHLb/abbs1g+vVb0nxvEjfelcjoBARt12SxNKCvpdS8KYAAAA=="
+  },
+  "/recs/ziad-tolba.webp": {
+    "width": 240,
+    "height": 240,
+    "blur": "data:image/webp;base64,UklGRk4AAABXRUJQVlA4IEIAAABQAgCdASoQABAABMB4JQBOmT+AwOHBMLwaiIAA/vKqg+17bQHuGIMFm4xHY04attDyfW818a5oeEQorGU3aKHvwAA="
   }
 }

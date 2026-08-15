@@ -12,6 +12,17 @@ export type Recommendation = {
   body: string;
 };
 
+// Profile photo path, derived from the name the same way the import script
+// slugifies the filenames (scripts/import-avatars.mjs). Keeping it a function
+// means a new avatar only has to be dropped in the folder and re-imported —
+// there is no second list to keep in sync.
+export const avatarFor = (name: string) =>
+  `/recs/${name
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "")}.webp`;
+
 export const recommendations: Recommendation[] = [
   {
     name: "Islam Samir",

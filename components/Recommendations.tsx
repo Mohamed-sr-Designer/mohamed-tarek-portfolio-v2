@@ -4,8 +4,13 @@ import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionLabel } from "@/components/ui/SectionLabel";
+import { Media } from "@/components/ui/Media";
 import { useLang } from "@/lib/i18n";
-import { recommendations, type Recommendation } from "@/lib/recommendations";
+import {
+  avatarFor,
+  recommendations,
+  type Recommendation,
+} from "@/lib/recommendations";
 
 // LinkedIn recommendations, verbatim.
 //
@@ -39,8 +44,18 @@ function Card({
   return (
     <figure className="mb-4 break-inside-avoid rounded-2xl border border-line/12 bg-ink-900 p-6 transition-colors duration-300 hover:border-mint/30 md:p-7">
       <div className="flex items-start gap-3">
-        <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full border border-line/15 bg-ink-800 font-serif text-sm text-mint">
+        {/* Photo in the circle the initials used to fill. The initials stay
+            underneath as the fallback, so a missing avatar degrades to the
+            old treatment instead of an empty ring. */}
+        <span className="relative grid h-11 w-11 shrink-0 place-items-center overflow-hidden rounded-full border border-line/15 bg-ink-800 font-serif text-sm text-mint">
           {initials(rec.name)}
+          <Media
+            src={avatarFor(rec.name)}
+            alt={rec.name}
+            fill
+            sizes="44px"
+            className="object-cover"
+          />
         </span>
         <div className="min-w-0">
           <figcaption className="truncate text-base font-medium tracking-tight text-bone-50">

@@ -1,8 +1,5 @@
 // LinkedIn "Featured" posts, mirrored on the About page.
 //
-// `url` points at each individual post. The exact post permalinks were not in
-// the source screenshots, so they currently fall back to the profile's
-// activity feed — swap in the real hrefs and nothing else needs to change.
 export const PROFILE_ACTIVITY =
   "https://www.linkedin.com/in/mohamedrk/recent-activity/all/";
 
@@ -18,6 +15,10 @@ export type FeaturedPost = {
 // Three AI-workflow posts. The leadership photo and the speaking clip were
 // pulled: they sat oddly next to the craft breakdowns and neither carried the
 // reach the other three do.
+//
+// Share-tracking query strings (utm_source, rcm and friends) are stripped from
+// the permalinks — they identify the share that produced the link and have no
+// business in a public portfolio.
 export const featured: FeaturedPost[] = [
   {
     slug: "skin-texture",
@@ -25,7 +26,7 @@ export const featured: FeaturedPost[] = [
     reactions: 699,
     comments: 37,
     reposts: 104,
-    url: PROFILE_ACTIVITY,
+    url: "https://www.linkedin.com/feed/update/urn:li:activity:7362583005082566658/",
   },
   {
     slug: "nano-banana",
@@ -33,7 +34,7 @@ export const featured: FeaturedPost[] = [
     reactions: 534,
     comments: 28,
     reposts: 107,
-    url: PROFILE_ACTIVITY,
+    url: "https://www.linkedin.com/posts/mohamedrk_nano-banana-activity-7368567112853811201-RpFe",
   },
   {
     slug: "ai-photo-session",
@@ -41,6 +42,6 @@ export const featured: FeaturedPost[] = [
     reactions: 523,
     comments: 20,
     reposts: 47,
-    url: PROFILE_ACTIVITY,
+    url: "https://www.linkedin.com/feed/update/urn:li:activity:7318136606383611907/",
   },
 ];

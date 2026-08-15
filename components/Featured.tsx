@@ -6,6 +6,63 @@ import { Media } from "@/components/ui/Media";
 import { useLang } from "@/lib/i18n";
 import { featured, PROFILE_ACTIVITY } from "@/lib/featured";
 
+// Engagement figures read as icons, so the numbers land before the words do
+// and the row stays legible at this size. The word is still rendered for
+// screen readers and as the icon's tooltip.
+function Stat({
+  icon,
+  value,
+  label,
+}: {
+  icon: React.ReactNode;
+  value: string;
+  label: string;
+}) {
+  return (
+    <span className="flex items-center gap-1.5" title={`${value} ${label}`}>
+      <span aria-hidden className="text-bone-500">
+        {icon}
+      </span>
+      <span className="tabular-nums text-bone-300">{value}</span>
+      <span className="sr-only">{label}</span>
+    </span>
+  );
+}
+
+const ico = {
+  width: 14,
+  height: 14,
+  viewBox: "0 0 24 24",
+  fill: "none",
+  stroke: "currentColor",
+  strokeWidth: 1.8,
+  strokeLinecap: "round" as const,
+  strokeLinejoin: "round" as const,
+  "aria-hidden": true,
+};
+
+const ThumbIcon = () => (
+  <svg {...ico}>
+    <path d="M7 22V11m0 0 4.2-8.4A2 2 0 0 1 15 3.5V9h4.6a2 2 0 0 1 2 2.4l-1.5 8A2 2 0 0 1 18 21H7Z" />
+    <path d="M2 11h5v11H2z" />
+  </svg>
+);
+
+const CommentIcon = () => (
+  <svg {...ico}>
+    <path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 9.1 9.1 0 0 1-3.6-.7L3 21l1.9-5a8.2 8.2 0 0 1-.9-3.8 8.4 8.4 0 0 1 8.6-8.2A8.4 8.4 0 0 1 21 11.5Z" />
+  </svg>
+);
+
+const RepostIcon = () => (
+  <svg {...ico}>
+    <path d="m17 2 4 4-4 4" />
+    <path d="M3 11V9a4 4 0 0 1 4-4h14" />
+    <path d="m7 22-4-4 4-4" />
+    <path d="M21 13v2a4 4 0 0 1-4 4H3" />
+  </svg>
+);
+
 // The posts pinned to his LinkedIn Featured section, mirrored here so the
 // teaching and AI-workflow side of his profile is visible without leaving the
 // site — each tile opens the post itself.
@@ -84,21 +141,27 @@ export default function Featured() {
                     {post?.body}
                   </p>
 
-                  <div className="mt-auto flex flex-wrap items-center gap-x-4 gap-y-1 pt-4 text-xs text-bone-500">
+                  <div className="mt-auto flex flex-wrap items-center gap-x-4 gap-y-2 pt-4 text-xs text-bone-400">
                     {p.reactions ? (
-                      <span>
-                        {p.reactions.toLocaleString()} {t.featured.reactions}
-                      </span>
+                      <Stat
+                        icon={<ThumbIcon />}
+                        value={p.reactions.toLocaleString()}
+                        label={t.featured.reactions}
+                      />
                     ) : null}
                     {p.comments ? (
-                      <span>
-                        {p.comments} {t.featured.comments}
-                      </span>
+                      <Stat
+                        icon={<CommentIcon />}
+                        value={String(p.comments)}
+                        label={t.featured.comments}
+                      />
                     ) : null}
                     {p.reposts ? (
-                      <span>
-                        {p.reposts} {t.featured.reposts}
-                      </span>
+                      <Stat
+                        icon={<RepostIcon />}
+                        value={String(p.reposts)}
+                        label={t.featured.reposts}
+                      />
                     ) : null}
                     <span className="ms-auto text-mint opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                       {t.featured.open} ↗
