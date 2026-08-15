@@ -150,6 +150,30 @@ html.modal-open .custom-cursor {
       padding-bottom: 7rem;
     }
   }
+  /* Card rails run edge to edge on phones. The container's own side padding is
+     cancelled with negative margins so a slide can sit flush against the screen
+     edge, then paid back inside as padding and scroll-padding — that way the
+     first slide still lines up with the heading above it, and the last one can
+     still be snapped fully into view. Undone at `sm`, where the rail becomes an
+     ordinary grid and must sit inside the container again. */
+  .rail-bleed {
+    --rail-edge: clamp(1.25rem, 5vw, 6rem);
+    margin-left: calc(-1 * var(--rail-edge));
+    margin-right: calc(-1 * var(--rail-edge));
+    padding-left: var(--rail-edge);
+    padding-right: var(--rail-edge);
+    scroll-padding-left: var(--rail-edge);
+    scroll-padding-right: var(--rail-edge);
+    overscroll-behavior-x: contain;
+  }
+  @media (min-width: 640px) {
+    .rail-bleed {
+      margin-left: 0;
+      margin-right: 0;
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
   .link-underline {
     background-image: linear-gradient(currentColor, currentColor);
     background-size: 0% 1px;

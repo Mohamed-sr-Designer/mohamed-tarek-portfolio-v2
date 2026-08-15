@@ -76,7 +76,7 @@ export default function Hero() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1, delay: 0.2 }}
-          className="flex w-full items-center justify-between text-xs uppercase tracking-[0.28em] text-bone-400"
+          className="flex w-full items-center justify-between text-[10px] uppercase tracking-[0.16em] text-bone-400 sm:text-xs sm:tracking-[0.28em]"
         >
           <span className="flex items-center gap-2">
             <span className="relative flex h-2 w-2">
@@ -100,7 +100,11 @@ export default function Hero() {
               {t.hero.intro}
             </motion.p>
 
-            <h1 className="font-display text-[11vw] font-semibold leading-[0.98] tracking-[-0.03em] text-bone-50 sm:text-[8vw] lg:text-[4.3vw]">
+            {/* 11vw put the headline at 41px on a 375px screen — three lines
+                of it towered over a 240px portrait and the two fought each
+                other. Dropping to 8.4vw (~31px) lets the photo lead, which is
+                the right order on a personal portfolio. */}
+            <h1 className="font-display text-[8.4vw] font-semibold leading-[1.02] tracking-[-0.03em] text-bone-50 sm:text-[7.4vw] sm:leading-[0.98] lg:text-[4.3vw]">
               <Line delay={0.45}>{t.hero.l1}</Line>
               <Line delay={0.58}>{t.hero.l2}</Line>
               <Line delay={0.71}>
@@ -168,7 +172,7 @@ export default function Hero() {
             transition={{ duration: 1.2, ease, delay: 0.5 }}
             className="order-1 lg:order-2 lg:col-span-5"
           >
-            <div className="relative mx-auto max-w-[15rem] sm:max-w-[19rem] lg:max-w-none">
+            <div className="relative mx-auto max-w-[17.5rem] sm:max-w-[20rem] lg:max-w-none">
               <div className="absolute -inset-3 -z-10 rounded-[2rem] bg-gradient-to-br from-mint/25 via-transparent to-electric/25 blur-2xl" />
               <div className="relative overflow-hidden rounded-[1.6rem] border border-line/15 bg-ink-700 shadow-[0_40px_120px_-30px_rgba(0,0,0,0.7)]">
                 <Media

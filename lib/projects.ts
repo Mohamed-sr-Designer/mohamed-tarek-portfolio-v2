@@ -270,13 +270,9 @@ export const projects: Project[] = [
     impact:
       "A waterfront community that reads as a lifestyle brand, giving the sales team warm interest instead of cold price questions.",
     contribution: ["Campaign Direction", "Key Visuals", "Social System", "Bilingual Layout"],
-    // 12 and 13 are dropped: they repeat the "كل إطلالة" villa-and-pool frame
-    // that 09-11 already cover. 10 goes too — it is a byte-for-byte copy of 08.
-    gallery: g(
-      ...seq("/work/amam-re/", 1, 9),
-      "/work/amam-re/11.webp",
-      "/work/amam-re/14.webp"
-    ),
+    // Three duplicates were dropped and the survivors renumbered, so the set
+    // counts straight up from 01 with no gaps in the grid.
+    gallery: g(...seq("/work/amam-re/", 1, 11)),
     strategyBlock: {
       toneLabel: "Tone of voice",
       tone: "Warm, refined and human-centered, celebrating comfort, belonging, family connections and everyday moments through a seamless lifestyle experience that inspires ease and confidence.",

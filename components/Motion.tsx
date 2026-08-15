@@ -5,6 +5,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { Toggle } from "@/components/ui/Toggle";
+import { SwipeRail } from "@/components/ui/SwipeRail";
 import { withBase } from "@/lib/base";
 import { useLang } from "@/lib/i18n";
 import motionData from "@/lib/motion.json";
@@ -232,19 +233,34 @@ export default function Motion() {
         </div>
       </Reveal>
 
-      {tab === "landscape" ? (
-        <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {landscape.map((c) => (
-            <VideoCard key={c.slug} clip={c} onExpand={setExpanded} wide />
-          ))}
-        </div>
-      ) : (
-        <div className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
-          {portrait.map((c) => (
-            <VideoCard key={c.slug} clip={c} onExpand={setExpanded} />
-          ))}
-        </div>
-      )}
+      {/* On phones both collections ride a rail rather than stacking: seven
+          16:9 frames one under the other was two screens, and fourteen reels
+          two-up was nearly three. */}
+      <div className="mt-6">
+        {tab === "landscape" ? (
+          <SwipeRail
+            key="landscape"
+            grid="sm:grid-cols-2 lg:grid-cols-3"
+            slide="w-[86%]"
+            ariaLabel={t.motion.landscape}
+          >
+            {landscape.map((c) => (
+              <VideoCard key={c.slug} clip={c} onExpand={setExpanded} wide />
+            ))}
+          </SwipeRail>
+        ) : (
+          <SwipeRail
+            key="portrait"
+            grid="grid-cols-2 sm:grid-cols-3 lg:grid-cols-5"
+            slide="w-[45%]"
+            ariaLabel={t.motion.portrait}
+          >
+            {portrait.map((c) => (
+              <VideoCard key={c.slug} clip={c} onExpand={setExpanded} />
+            ))}
+          </SwipeRail>
+        )}
+      </div>
 
       <AnimatePresence>
         {expanded && (

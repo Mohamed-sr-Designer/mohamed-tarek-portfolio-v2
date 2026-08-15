@@ -4,6 +4,10 @@
 export type Lang = "en" | "ar";
 
 const en = {
+  // shared micro-copy that is not tied to one section
+  ui: {
+    swipe: "Swipe",
+  },
   nav: {
     work: "Work",
     about: "About",
@@ -369,14 +373,11 @@ const en = {
         proof: "Team Lead at Osolutions · led designers at JUMPPEAK",
         items: [
           "Art Direction",
-          "Creative Direction",
           "Design Team Leadership",
-          "Design Review & Critique",
           "Campaign Concept Development",
           "Brand Strategy",
           "Tone of Voice",
           "Content Pillars",
-          "Client & Stakeholder Presentation",
           "Design Mentorship",
         ],
       },
@@ -388,7 +389,6 @@ const en = {
           "AI Video Production",
           "Prompt Engineering",
           "Character & Scene Design",
-          "Shot Planning",
           "Retouching & Compositing",
           "AI Voice-Over",
           "Production Workflow Design",
@@ -400,28 +400,21 @@ const en = {
         items: [
           "Key Visual Development",
           "Visual Identity Systems",
-          "Custom Arabic & Latin Lettering",
           "Logotype Design",
-          "Arabic Typography",
           "Bilingual AR/EN Design",
-          "RTL Layout",
           "Storyboarding",
           "Advertising Campaigns",
-          "Packaging & Print",
         ],
       },
       {
         title: "Digital, Social & Motion",
         proof: "9 brand feeds · 20 films and reels · 9 shipped websites",
         items: [
-          "Social Media Systems",
           "Feed & Grid Design",
           "Motion Design",
           "Social Reels",
           "UI Design",
-          "Design Systems",
           "Landing Page Design",
-          "Design-to-Code",
           "Real Estate Marketing",
           "SaaS & F&B Marketing Design",
         ],
@@ -499,6 +492,9 @@ const en = {
 
 // ---------------------------------------------------------------- Arabic
 const ar: typeof en = {
+  ui: {
+    swipe: "اسحب",
+  },
   nav: {
     work: "الأعمال",
     about: "عنّي",
@@ -924,14 +920,11 @@ const ar: typeof en = {
         proof: "قائد فريق في Osolutions · قدت مصممين في JUMPPEAK",
         items: [
           "إخراج فني",
-          "إخراج إبداعي",
           "قيادة فريق تصميم",
-          "مراجعة ونقد التصميم",
           "تطوير مفاهيم الحملات",
           "استراتيجية العلامة",
           "نبرة الصوت",
           "محاور المحتوى",
-          "العرض على العملاء",
           "إرشاد المصممين",
         ],
       },
@@ -943,7 +936,6 @@ const ar: typeof en = {
           "إنتاج فيديو بالذكاء الاصطناعي",
           "هندسة البرومبت",
           "تصميم الشخصيات والمشاهد",
-          "تخطيط اللقطات",
           "الريتاتش والتركيب",
           "تعليق صوتي بالذكاء الاصطناعي",
           "تصميم سير الإنتاج",
@@ -955,28 +947,21 @@ const ar: typeof en = {
         items: [
           "تطوير الفيجوال الرئيسي",
           "أنظمة الهوية البصرية",
-          "حروف عربية ولاتينية مخصّصة",
           "تصميم لوجوتايب",
-          "التايبوغرافي العربي",
           "تصميم ثنائي عربي/إنجليزي",
-          "تخطيط من اليمين لليسار",
           "الستوري بورد",
           "الحملات الإعلانية",
-          "التغليف والمطبوعات",
         ],
       },
       {
         title: "الديجيتال والسوشيال والموشن",
         proof: "٩ حسابات علامات · ٢٠ فيلم وريل · ٩ مواقع منشورة",
         items: [
-          "أنظمة السوشيال ميديا",
           "تصميم الفييد والجريد",
           "موشن ديزاين",
           "ريلز السوشيال",
           "تصميم واجهات",
-          "أنظمة تصميم",
           "تصميم صفحات هبوط",
-          "من التصميم للكود",
           "تسويق عقاري",
           "تصميم تسويقي لـ SaaS و F&B",
         ],

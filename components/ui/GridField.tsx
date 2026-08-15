@@ -47,7 +47,10 @@ function Square({
   return (
     <motion.span
       aria-hidden
-      className={`absolute rounded-[3px] ${cls}`}
+      // Phones don't have a mouse, so the parallax never fires — all these do
+      // there is crowd a much narrower hero and sit behind the availability
+      // line, where light grey on solid mint stopped being readable.
+      className={`absolute hidden rounded-[3px] sm:block ${cls}`}
       style={{ left, top, width: size, height: size, x, y, rotate }}
     />
   );

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { Media } from "@/components/ui/Media";
+import { SwipeRail } from "@/components/ui/SwipeRail";
 import { useLang } from "@/lib/i18n";
 import { projects, type Project } from "@/lib/projects";
 
@@ -35,7 +36,10 @@ function Card({ p }: { p: Project }) {
       {/* header */}
       <div className="flex items-start justify-between gap-3">
         <div className="min-w-0">
-          <h3 className="truncate text-xl font-semibold tracking-tight text-bone-50 md:text-2xl">
+          {/* wraps rather than truncates — on a rail slide the card is 307px
+              wide and the count badge takes a third of the row, so "Amam Real
+              Estate" was being cut to "Amam Real E…" */}
+          <h3 className="line-clamp-2 text-lg font-semibold leading-snug tracking-tight text-bone-50 sm:text-xl md:text-2xl">
             {shortClient}
           </h3>
           <p className="mt-1 text-sm text-bone-400">
@@ -136,12 +140,16 @@ export default function SocialCards() {
         </Reveal>
       </div>
 
-      <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-        {social.map((p) => (
-          <Reveal key={p.slug}>
-            <Card p={p} />
-          </Reveal>
-        ))}
+      {/* eleven brands stacked one per column ran eight screens on a phone —
+          side by side on a rail it is one, and the set is still all here */}
+      <div className="mt-12">
+        <SwipeRail grid="sm:grid-cols-2 lg:grid-cols-3" ariaLabel={t.socialCards.label}>
+          {social.map((p) => (
+            <Reveal key={p.slug}>
+              <Card p={p} />
+            </Reveal>
+          ))}
+        </SwipeRail>
       </div>
     </section>
   );

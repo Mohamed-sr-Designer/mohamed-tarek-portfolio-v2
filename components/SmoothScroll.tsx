@@ -16,11 +16,18 @@ export default function SmoothScroll() {
       return;
     }
 
+    // Duration is how long Lenis takes to catch up to where the wheel already
+    // put you. At 1.15s that lag was long enough to read as the page being
+    // slow rather than smooth — one notch of the wheel kept coasting after the
+    // hand had stopped. 0.75s still glides but tracks the input.
     const lenis = new Lenis({
-      duration: 1.15,
+      duration: 0.75,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       smoothWheel: true,
-      touchMultiplier: 1.6,
+      wheelMultiplier: 1.15,
+      // Touch is left to the OS. Phones already scroll at 120Hz with real
+      // momentum, and rewriting that in JS is what makes a site feel heavy.
+      syncTouch: false,
     });
     lenisRef.current = lenis;
 

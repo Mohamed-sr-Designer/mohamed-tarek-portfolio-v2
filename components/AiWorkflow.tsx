@@ -69,8 +69,21 @@ export default function AiWorkflow() {
       {/* Diagram beside the summary, steps on one scrolling rail underneath.
           The old stacked layout — full-width diagram, then a 2-column intro,
           then six tall step cards, then a repeat CTA card — ran nearly three
-          screens for what is an intro section. */}
-      <article key={p.slug} className="mt-8 grid gap-8 lg:grid-cols-12 lg:gap-10">
+          screens for what is an intro section.
+
+          `grid-cols-1` is load-bearing, not cosmetic: a bare `grid` leaves the
+          single implicit column sized to its content, and a grid item's
+          automatic minimum size is its content's min-content width — which for
+          the flow diagram is the image's intrinsic 1728px. The column blew past
+          the viewport, the whole page picked up a horizontal scrollbar, and the
+          diagram rendered mostly off-screen on phones. Tailwind's `grid-cols-1`
+          is `repeat(1, minmax(0, 1fr))`, and that `minmax(0, …)` is what lets
+          the track shrink below its content — the same reason the `lg` layout
+          was never affected. */}
+      <article
+        key={p.slug}
+        className="mt-8 grid grid-cols-1 gap-8 lg:grid-cols-12 lg:gap-10"
+      >
         <Reveal className="lg:col-span-7">
           <Link
             href={`/work/${p.slug}`}
