@@ -65,6 +65,14 @@ export const recommendations: Recommendation[] = [
     body: "I've had the pleasure of working closely with Mohammed, our graphic designer at Osolutions. He consistently brings fresh perspectives and creative solutions to our projects, always eager to explore new techniques. Mohammed goes the extra mile, inspiring our team with his passion for improvement. He is not only a talented designer but also a collaborative team player with exceptional design skills. I highly recommend Mohammed for his exceptional dedication and contributions inspiring our entire team to strive for excellence.",
   },
   {
+    name: "Enjy Elshiekh",
+    title: "Colleague",
+    relation: "peer",
+    date: "2025-01-01",
+    dateLabel: "2025",
+    body: "He could create a whole design in a very tight time. Mohamed is one of the most creative designers I have ever worked with. I highly recommend him.",
+  },
+  {
     name: "Mohamed Abd-Eltawab",
     title: "Visual Designer · Exploring how design shapes value and perception",
     relation: "peer",

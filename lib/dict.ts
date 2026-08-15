@@ -359,6 +359,10 @@ const en = {
   skills: {
     label: "Capabilities",
     note: "What I actually do, with the work on this site as the evidence.",
+    filterHint: "Filter by discipline",
+    all: "All",
+    totalLabel: "capabilities in total",
+    shownLabel: "in this discipline",
     groups: [
       {
         title: "Direction & Leadership",
@@ -910,6 +914,10 @@ const ar: typeof en = {
   skills: {
     label: "القدرات",
     note: "اللي بعمله فعلًا، والدليل عليه هو الشغل الموجود في الموقع ده.",
+    filterHint: "تصفية حسب التخصّص",
+    all: "الكل",
+    totalLabel: "قدرة إجمالًا",
+    shownLabel: "في التخصّص ده",
     groups: [
       {
         title: "الإخراج والقيادة",

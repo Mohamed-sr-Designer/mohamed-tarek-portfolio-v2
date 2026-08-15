@@ -1204,21 +1204,6 @@
     "height": 1189,
     "blur": "data:image/webp;base64,UklGRj4AAABXRUJQVlA4IDIAAADQAQCdASoQAAcABMB4JZQC7ADD2AUvgAD+8N8HCA43YpWnY9h8fI7/HAgv17fIdLlgAA=="
   },
-  "/featured/nano-banana.webp": {
-    "width": 1200,
-    "height": 674,
-    "blur": "data:image/webp;base64,UklGRjwAAABXRUJQVlA4IDAAAACwAQCdASoQAAkABMB4JZQAAtz+DeyAAP7bp/wZsTIVGhcSqEAIoYT5CUt9sIbLwAA="
-  },
-  "/featured/skin-texture.webp": {
-    "width": 1200,
-    "height": 674,
-    "blur": "data:image/webp;base64,UklGRjwAAABXRUJQVlA4IDAAAADQAQCdASoQAAkABMB4JZQAAudmZs97cAD+26fT0zhrYaINNTpMCf/kTbQcdgDwAAA="
-  },
-  "/featured/ai-photo-session.webp": {
-    "width": 1200,
-    "height": 819,
-    "blur": "data:image/webp;base64,UklGRloAAABXRUJQVlA4IE4AAAAwAgCdASoQAAsABMB4JZAC7AEUompk5rLUAAD+23KAmo490AH6fz3SUluJq4ZCF++EW5+Lu0KygKnTeZoOR/ax9c3PH8wpmNcAQjVyAAA="
-  },
   "/work/social/fresh-valley/01.webp": {
     "width": 1080,
     "height": 1350,
@@ -1378,5 +1363,20 @@
     "width": 240,
     "height": 240,
     "blur": "data:image/webp;base64,UklGRk4AAABXRUJQVlA4IEIAAABQAgCdASoQABAABMB4JQBOmT+AwOHBMLwaiIAA/vKqg+17bQHuGIMFm4xHY04attDyfW818a5oeEQorGU3aKHvwAA="
+  },
+  "/featured/nano-banana.webp": {
+    "width": 1200,
+    "height": 674,
+    "blur": "data:image/webp;base64,UklGRjgAAABXRUJQVlA4ICwAAACwAQCdASoQAAkABMB4JZQAAjU9o3wAAP7r/ySjP28tRIp2tS4i+MuFVusAAA=="
+  },
+  "/featured/skin-texture.webp": {
+    "width": 1200,
+    "height": 671,
+    "blur": "data:image/webp;base64,UklGRjYAAABXRUJQVlA4ICoAAAAwAQCdASoQAAkABMB4JZQAA3AA/u/mEi2cMZL9S1O28+gP7EDdfsAAAAA="
+  },
+  "/featured/ai-photo-session.webp": {
+    "width": 1200,
+    "height": 816,
+    "blur": "data:image/webp;base64,UklGRlgAAABXRUJQVlA4IEwAAADQAQCdASoQAAsABMB4JaAC7ADx/1nQ+AD+6fdeFygEnDkVKfo6YyMFvWpiJFXJw1kL/kDoC2dx7CQlXpsI0t+Al/2w6r8gFDVCAAAA"
   }
 }

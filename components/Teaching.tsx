@@ -44,29 +44,21 @@ export default function Teaching() {
               key={a.name}
               className="flex h-full flex-col gap-3 rounded-xl border border-line/10 bg-ink-900 p-7 transition-colors duration-300 hover:border-mint/30"
             >
-              <div className="flex items-start justify-between gap-3">
-                <div className="flex min-w-0 items-center gap-3">
-                  {a.logo ? (
-                    <span className="relative h-10 w-10 shrink-0 overflow-hidden rounded-lg bg-white/90">
-                      <Media
-                        src={a.logo}
-                        alt={a.name}
-                        fill
-                        sizes="40px"
-                        className="object-contain p-1"
-                      />
-                    </span>
-                  ) : null}
-                  <h3 className="min-w-0 text-xl font-semibold tracking-tight text-bone-50 md:text-2xl">
-                    {a.name}
-                  </h3>
-                </div>
-                {a.now ? (
-                  <span className="flex shrink-0 items-center gap-1.5 rounded-full border border-mint/30 bg-mint/5 px-3 py-1 text-xs text-mint">
-                    <span className="h-1.5 w-1.5 rounded-full bg-mint" />
-                    {t.teach.current}
+              <div className="flex min-w-0 items-center gap-3">
+                {a.logo ? (
+                  <span className="relative h-10 w-10 shrink-0 overflow-hidden rounded-lg bg-white/90">
+                    <Media
+                      src={a.logo}
+                      alt={a.name}
+                      fill
+                      sizes="40px"
+                      className="object-contain p-1"
+                    />
                   </span>
                 ) : null}
+                <h3 className="min-w-0 text-xl font-semibold tracking-tight text-bone-50 md:text-2xl">
+                  {a.name}
+                </h3>
               </div>
               <p className="text-xs uppercase tracking-ultra text-bone-400">
                 {t.teach.role}

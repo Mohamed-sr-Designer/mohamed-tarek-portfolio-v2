@@ -46,7 +46,16 @@ for (const [file, slug, crop] of POSTS) {
   const out = path.join(PUBLIC, rel);
   await fs.mkdir(path.dirname(out), { recursive: true });
 
-  const cropped = await sharp(path.join(SRC, file)).extract(crop).toBuffer();
+  // Trim the light card padding LinkedIn draws around the post artwork. The
+  // crop boxes catch a few pixels of it and it rendered as a white frame on a
+  // dark page. trim() works off the corner pixel, so it eats the surround and
+  // stops at the artwork. Done as its own pass: sharp applies trim before
+  // extract when both are in one pipeline, which would trim the whole
+  // screenshot instead of the crop.
+  const cropped = await sharp(path.join(SRC, file))
+    .extract(crop)
+    .toBuffer()
+    .then((buf) => sharp(buf).trim({ threshold: 25 }).toBuffer());
   const info = await sharp(cropped)
     .resize({ width: 1200, withoutEnlargement: false })
     .webp({ quality: 86, effort: 5 })
