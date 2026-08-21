@@ -7,7 +7,7 @@ import { SectionLabel } from "@/components/ui/SectionLabel";
 import { Toggle } from "@/components/ui/Toggle";
 import { Media } from "@/components/ui/Media";
 import { useLang } from "@/lib/i18n";
-import { withBase } from "@/lib/base";
+import { assetUrl } from "@/lib/assets";
 
 // 3D product rendering, built in Blender.
 //
@@ -145,7 +145,7 @@ export default function ThreeD() {
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src={withBase(open)}
+              src={assetUrl(open)}
               alt={t.threeD.label}
               className="max-h-full max-w-full rounded-lg object-contain"
               onClick={(e) => e.stopPropagation()}

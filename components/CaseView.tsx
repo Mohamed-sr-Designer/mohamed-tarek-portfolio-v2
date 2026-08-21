@@ -7,7 +7,7 @@ import { Carousel } from "@/components/ui/Carousel";
 import CaseGalleries from "@/components/CaseGalleries";
 import { site } from "@/lib/site";
 import { useLang } from "@/lib/i18n";
-import { withBase } from "@/lib/base";
+import { assetUrl } from "@/lib/assets";
 import { projects, type Project } from "@/lib/projects";
 import motionData from "@/lib/motion.json";
 
@@ -225,8 +225,8 @@ export default function CaseView({ project }: { project: Project }) {
               {caseVideos.map((v) => (
                 <Reveal key={v.slug}>
                   <video
-                    src={withBase(v.src)}
-                    poster={withBase(v.poster)}
+                    src={assetUrl(v.src)}
+                    poster={assetUrl(v.poster)}
                     controls
                     playsInline
                     preload="none"

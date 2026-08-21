@@ -1,6 +1,13 @@
 import manifest from "./assets.json";
+import { withBase } from "./base";
 
-export type AssetMeta = { width: number; height: number; blur: string };
+export type AssetMeta = {
+  width: number;
+  height: number;
+  blur: string;
+  /** short hash of the file's bytes, written by scripts/stamp-assets.mjs */
+  v?: string;
+};
 
 const map = manifest as Record<string, AssetMeta>;
 
@@ -15,4 +22,17 @@ export function getAsset(src: string): AssetMeta {
         "data:image/webp;base64,UklGRiIAAABXRUJQVlA4IBYAAAAwAQCdASoBAAEADsD+JaQAA3AAAAAA",
     }
   );
+}
+
+// The public URL for an asset, carrying a hash of its own bytes.
+//
+// Filenames here are deliberately stable -- the banner is always
+// /me/banner-2026.webp -- so replacing a photo used to leave the URL untouched,
+// and a browser holding the old copy went on serving it. The stamp makes new
+// bytes mean a new URL, so a re-import actually reaches people.
+//
+// Assets with no stamp (anything not in the manifest) fall through unchanged.
+export function assetUrl(src: string): string {
+  const v = map[src]?.v;
+  return v ? `${withBase(src)}?v=${v}` : withBase(src);
 }

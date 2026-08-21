@@ -5,8 +5,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Reveal } from "@/components/ui/Reveal";
 import { Toggle } from "@/components/ui/Toggle";
 import { Media } from "@/components/ui/Media";
-import { getAsset } from "@/lib/assets";
-import { withBase } from "@/lib/base";
+import { assetUrl, getAsset } from "@/lib/assets";
 import { useLang } from "@/lib/i18n";
 import type { GalleryGroup } from "@/lib/projects";
 
@@ -261,7 +260,7 @@ function Lightbox({
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src={withBase(open)}
+            src={assetUrl(open)}
             alt={title}
             className="max-h-full max-w-full rounded-lg object-contain"
             onClick={(e) => e.stopPropagation()}

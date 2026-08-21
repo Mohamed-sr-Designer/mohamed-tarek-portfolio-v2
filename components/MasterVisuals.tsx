@@ -6,7 +6,7 @@ import { Reveal } from "@/components/ui/Reveal";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { Media } from "@/components/ui/Media";
 import { useLang } from "@/lib/i18n";
-import { withBase } from "@/lib/base";
+import { assetUrl } from "@/lib/assets";
 
 // Master visuals — full campaign boards (key visual + the thinking behind it).
 // Shown as one large featured board with a thumbnail rail underneath, so all
@@ -131,7 +131,7 @@ export default function MasterVisuals() {
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src={withBase(open)}
+              src={assetUrl(open)}
               alt={t.master.label}
               className="max-h-full max-w-full rounded-lg object-contain"
               onClick={(e) => e.stopPropagation()}

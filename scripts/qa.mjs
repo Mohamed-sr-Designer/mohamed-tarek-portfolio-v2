@@ -29,9 +29,10 @@ const seen = new Set();
 for (const p of pages) {
   const html = await read(p);
   for (const m of html.matchAll(
-    /(?:src|href)="(\/[^"?#]+\.(?:webp|jpg|jpeg|png|svg|mp4|ico|css|js))"/g
+    /(?:src|href)="(\/[^"?#]+\.(?:webp|jpg|jpeg|png|svg|mp4|ico|css|js))(?:\?[^"#]*)?"/g
   )) {
-    // route-group folders like /work/[slug]/ arrive percent-encoded in the HTML
+    // route-group folders like /work/[slug]/ arrive percent-encoded in the HTML,
+    // and images carry a ?v= cache stamp the filesystem knows nothing about
     const rel = decodeURIComponent(m[1]);
     if (seen.has(rel)) continue;
     seen.add(rel);

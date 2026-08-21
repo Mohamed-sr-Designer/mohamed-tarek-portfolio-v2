@@ -5,8 +5,8 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { Media } from "@/components/ui/Media";
-import { withBase } from "@/lib/base";
 import { useLang } from "@/lib/i18n";
+import { assetUrl } from "@/lib/assets";
 
 // Custom Arabic and Latin lettering, produced with AI tooling and finished by
 // hand-off into logotypes and campaign headlines.
@@ -213,7 +213,7 @@ export default function TypeDesign() {
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src={withBase(open)}
+              src={assetUrl(open)}
               alt={t.type.label}
               className="max-h-full max-w-full object-contain"
               onClick={(e) => e.stopPropagation()}

@@ -7,7 +7,7 @@ import { SectionLabel } from "@/components/ui/SectionLabel";
 import { Media } from "@/components/ui/Media";
 import { Toggle } from "@/components/ui/Toggle";
 import { useLang } from "@/lib/i18n";
-import { withBase } from "@/lib/base";
+import { assetUrl } from "@/lib/assets";
 
 // Storyboards — the frame-by-frame plan behind the films. Wide boards, shown
 // full width with a lightbox, because the panels carry readable detail.
@@ -106,7 +106,7 @@ export default function Storyboards() {
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src={withBase(open)}
+              src={assetUrl(open)}
               alt={t.story.label}
               className="max-h-full max-w-full rounded-lg object-contain"
               onClick={(e) => e.stopPropagation()}

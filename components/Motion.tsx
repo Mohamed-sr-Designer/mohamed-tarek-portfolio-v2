@@ -6,8 +6,8 @@ import { Reveal } from "@/components/ui/Reveal";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { Toggle } from "@/components/ui/Toggle";
 import { SwipeRail } from "@/components/ui/SwipeRail";
-import { withBase } from "@/lib/base";
 import { useLang } from "@/lib/i18n";
+import { assetUrl } from "@/lib/assets";
 import motionData from "@/lib/motion.json";
 
 type Clip = {
@@ -78,8 +78,8 @@ function VideoCard({
     >
       <video
         ref={ref}
-        src={withBase(clip.src)}
-        poster={withBase(clip.poster)}
+        src={assetUrl(clip.src)}
+        poster={assetUrl(clip.poster)}
         muted={muted}
         loop
         playsInline
@@ -164,8 +164,8 @@ function Lightbox({ clip, onClose }: { clip: Clip; onClose: () => void }) {
         }`}
       >
         <video
-          src={withBase(clip.src)}
-          poster={withBase(clip.poster)}
+          src={assetUrl(clip.src)}
+          poster={assetUrl(clip.poster)}
           controls
           autoPlay
           loop

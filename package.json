@@ -8,7 +8,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "optimize": "node scripts/optimize-assets.mjs"
+    "optimize": "node scripts/optimize-assets.mjs",
+    "prebuild": "node scripts/stamp-assets.mjs",
+    "stamp": "node scripts/stamp-assets.mjs"
   },
   "dependencies": {
     "framer-motion": "^11.11.17",
