@@ -18,17 +18,17 @@ import { useLang } from "@/lib/i18n";
 // white for dark mode, black for light — so the letterforms sit straight on
 // the page with no tile behind them.
 //
-// Pieces 07 and 08 exist only as a single full-colour cut whose white elements
-// would vanish on the light theme, so those two keep a fixed dark plate.
-const PLATED = new Set([7, 8]);
-
+// He shot folders 01-06 as a pair, but 07 and 08 arrived as a single
+// full-colour file each, so both used to carry a dark plate behind them. 07 is
+// theme-neutral anyway - black-filled blue letters inside a white outline - and
+// 08's light cut is now derived from its own artwork
+// (scripts/type-08-light.mjs), so neither needs a tile any more.
 const pieces = Array.from({ length: 8 }, (_, i) => {
   const id = String(i + 1).padStart(2, "0");
   return {
     id,
     dark: `/work/type/${id}-dark.webp`,
     light: `/work/type/${id}-light.webp`,
-    plated: PLATED.has(i + 1),
   };
 });
 
@@ -53,9 +53,7 @@ function Piece({
         onOpen(piece.dark);
       }}
       aria-label={`${label} ${index + 1}`}
-      className={`group relative h-24 w-44 shrink-0 rounded-xl transition-transform duration-500 ease-cinema hover:scale-[1.06] sm:h-32 sm:w-56 ${
-        piece.plated ? "bg-[#100F0D]" : ""
-      }`}
+      className="group relative h-24 w-44 shrink-0 transition-transform duration-500 ease-cinema hover:scale-[1.06] sm:h-32 sm:w-56"
     >
       {/* white cut, dark theme */}
       <span className="absolute inset-0 hidden p-5 dark:block sm:p-7">
@@ -73,7 +71,7 @@ function Piece({
       <span className="absolute inset-0 block p-5 dark:hidden sm:p-7">
         <span className="relative block h-full w-full">
           <Media
-            src={piece.plated ? piece.dark : piece.light}
+            src={piece.light}
             alt={`${label} ${index + 1}`}
             fill
             sizes="288px"
