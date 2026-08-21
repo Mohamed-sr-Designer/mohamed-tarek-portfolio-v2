@@ -11,6 +11,10 @@ import { projects } from "@/lib/projects";
 
 // AI Work Flow — the opening story. One production at a time, chosen with a
 // toggle: the flow diagram leads, then the summary, then the steps.
+//
+// This section owns #work. The hero CTA and the selected-designs link both
+// point there and it is the first work on the page; the id used to sit on
+// SelectedWork, which no page renders, so both links were dead.
 const flows = projects.filter((p) => p.sector === "AI Workflow");
 
 export default function AiWorkflow() {
@@ -22,7 +26,7 @@ export default function AiWorkflow() {
 
   return (
     <section
-      id="ai-workflow"
+      id="work"
       className="container-edge mx-auto max-w-edge scroll-mt-24 section-y"
     >
       <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">

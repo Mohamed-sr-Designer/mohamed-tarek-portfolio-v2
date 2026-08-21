@@ -51,10 +51,10 @@ function SocialIcon({
 // The hero is one full-bleed frame now: the night shoot runs edge to edge and
 // the copy is cut back to the line, the availability and two actions.
 //
-// He stands dead centre in that photograph, so nothing of ours may sit in the
-// middle. From `md` up the copy is overlaid in the lower left -- wet tarmac and
-// forecourt, no subject -- capped at max-w-xl so the longest line stops well
-// short of him, with the scrim raking in from that corner only.
+// From `md` up the copy is overlaid in the lower left -- wet tarmac and
+// forecourt, no subject -- with the scrim raking in from that corner only. The
+// column is measured against where he stands rather than set by eye; see the
+// note on it below.
 //
 // Phones do not overlay at all. A 16:9 frame cropped into a portrait viewport
 // puts him head-to-foot in the middle of the screen with nowhere clear to put
@@ -113,12 +113,20 @@ export default function Hero() {
             1815 -- so the column can afford to grow, but only at the same
             pace. The wider banner bought room here: he used to be dead
             centre. */}
-        <div className="max-w-lg md:max-w-[26rem] lg:max-w-lg xl:max-w-xl 2xl:max-w-[40rem]">
+        {/* In Arabic this block is pinned left rather than following the
+            page direction. A max-width block sits at the inline-start, which in
+            RTL is the right -- straight over him in the photograph, which is the
+            one place the copy must never go. mr-auto pushes it back to the left
+            and text-left sets each line flush to that edge, so the column reads
+            exactly like the English one. The words themselves are untouched:
+            direction stays RTL, so the Arabic still runs right to left inside
+            each line. */}
+        <div className="max-w-lg rtl:mr-auto rtl:text-left md:max-w-[26rem] lg:max-w-lg xl:max-w-xl 2xl:max-w-[40rem]">
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1, delay: 0.2 }}
-            className="flex items-center gap-2 text-[10px] uppercase tracking-[0.16em] text-bone-400 sm:text-xs sm:tracking-[0.28em] md:text-white/75"
+            className="flex items-center gap-2 text-[10px] uppercase tracking-[0.16em] text-bone-400 rtl:flex-row-reverse sm:text-xs sm:tracking-[0.28em] md:text-white/75"
           >
             <span className="relative flex h-2 w-2">
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-mint opacity-70 md:bg-white" />
@@ -142,7 +150,7 @@ export default function Hero() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1, delay: 0.9 }}
-            className="mt-8 flex flex-wrap items-center gap-4 md:mt-10"
+            className="mt-8 flex flex-wrap items-center gap-4 rtl:flex-row-reverse md:mt-10"
           >
             <Magnetic>
               <a

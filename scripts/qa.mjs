@@ -20,6 +20,50 @@ async function htmlFiles(dir = OUT, acc = []) {
   return acc;
 }
 
+// Refuse to grade a stale export.
+//
+// This bit us: NEXT_DIST_DIR redirects the static export as well as the build
+// cache, so a build run with it set writes the site somewhere else entirely and
+// leaves out/ untouched. QA then read a half-hour-old export and passed every
+// check -- a green run that said nothing about the code just written. A QA pass
+// that can be satisfied by yesterday's output is worse than no QA at all, so
+// compare the export against the sources it was built from and stop if it is
+// behind.
+async function newestMtime(dir, skip = /node_modules|.next|^out$|.git/) {
+  let newest = 0;
+  for (const e of await fs.readdir(dir, { withFileTypes: true })) {
+    if (skip.test(e.name)) continue;
+    const p = path.join(dir, e.name);
+    if (e.isDirectory()) newest = Math.max(newest, await newestMtime(p, skip));
+    else if (/.(tsx?|css|json|mjs)$/.test(e.name)) {
+      newest = Math.max(newest, (await fs.stat(p)).mtimeMs);
+    }
+  }
+  return newest;
+}
+
+if (!(await exists(OUT))) {
+  console.error("no out/ — run the build first");
+  process.exit(1);
+}
+const exportedAt = (await fs.stat(path.join(OUT, "index.html"))).mtimeMs;
+const sourcedAt = Math.max(
+  await newestMtime("components"),
+  await newestMtime("lib"),
+  await newestMtime("app"),
+);
+if (sourcedAt > exportedAt) {
+  const mins = ((sourcedAt - exportedAt) / 60000).toFixed(1);
+  console.error(
+    `STALE EXPORT: out/ is ${mins} min older than the newest source file.
+` +
+      `Nothing below would reflect the current code. Rebuild before running QA.
+` +
+      `(If you built with NEXT_DIST_DIR set, the export went to that directory, not out/.)`
+  );
+  process.exit(1);
+}
+
 const pages = await htmlFiles();
 console.log(`pages: ${pages.length}\n`);
 

@@ -37,7 +37,10 @@ export default function AboutHero() {
         className="absolute inset-0 bg-gradient-to-tr from-black/85 via-black/35 to-transparent"
       />
 
-      <div className="container-edge relative z-10 mx-auto w-full max-w-edge pb-14 pt-40">
+      {/* Arabic pins left here for the same reason as the home hero: a block
+          that follows the page direction starts on the right, which in this
+          frame is where he is standing. */}
+      <div className="container-edge relative z-10 mx-auto w-full max-w-edge pb-14 pt-40 rtl:text-left">
         <Reveal>
           <SectionLabel>{t.about.label}</SectionLabel>
         </Reveal>
@@ -50,7 +53,7 @@ export default function AboutHero() {
           </h1>
         </Reveal>
 
-        <div className="mt-7 flex max-w-md flex-col gap-8">
+        <div className="mt-7 flex max-w-md flex-col gap-8 rtl:mr-auto">
           <div>
             <Reveal delay={0.12}>
               <p className="text-lg text-white/80 md:text-xl">
