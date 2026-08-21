@@ -128,7 +128,7 @@ export default function Hero() {
             <Magnetic>
               <a
                 href="#work"
-                className="group flex items-center gap-3 rounded-full bg-mint px-6 py-3 text-sm font-medium text-white transition-colors"
+                className="group flex items-center gap-3 rounded-full bg-mint px-6 py-3 text-sm font-medium text-ink-900 transition-colors"
               >
                 {t.hero.ctaPrimary}
                 <motion.span

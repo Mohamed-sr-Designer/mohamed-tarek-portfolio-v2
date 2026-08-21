@@ -42,7 +42,7 @@ const arabic = Alexandria({
 });
 
 export const viewport: Viewport = {
-  themeColor: "#F2F5F6",
+  themeColor: "#080E12",
   width: "device-width",
   initialScale: 1,
 };

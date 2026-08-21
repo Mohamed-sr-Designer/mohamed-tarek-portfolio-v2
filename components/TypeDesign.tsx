@@ -18,9 +18,10 @@ import { useLang } from "@/lib/i18n";
 // white for dark mode, black for light — so the letterforms sit straight on
 // the page with no tile behind them.
 //
-// Only the light cuts are on the page now that the dark theme is gone. The
-// dark cuts stay in the repo because the lightbox opens on a near-black scrim,
-// where the white artwork is the one that reads.
+// The white cuts are what the page shows: dark ground, and the lightbox opens
+// on a near-black scrim, so the same artwork serves both. The black cuts stay in
+// the repo -- 08's was derived from its own artwork rather than supplied, and
+// they cost nothing to keep.
 const pieces = Array.from({ length: 8 }, (_, i) => {
   const id = String(i + 1).padStart(2, "0");
   return {
@@ -56,7 +57,7 @@ function Piece({
       <span className="absolute inset-0 block p-5 sm:p-7">
         <span className="relative block h-full w-full">
           <Media
-            src={piece.light}
+            src={piece.dark}
             alt={`${label} ${index + 1}`}
             fill
             sizes="288px"

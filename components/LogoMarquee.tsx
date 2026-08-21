@@ -22,7 +22,7 @@ export default function LogoMarquee() {
             className="relative block h-14 w-36 shrink-0 opacity-75 transition-opacity duration-300 hover:opacity-100"
           >
             <Media
-              src={`/logos/light/${n}.webp`}
+              src={`/logos/dark/${n}.webp`}
               alt="Client logo"
               fill
               sizes="144px"

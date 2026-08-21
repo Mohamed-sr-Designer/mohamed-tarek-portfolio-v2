@@ -2,38 +2,35 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ---- One theme: cool paper, deep cyan, magenta second ----------------------
-   The site used to ship a dark theme as the default and a light one behind a
-   toggle. It is light-only now, so these live on :root with nothing to switch.
+/* ---- One theme: cool near-black, cyan and red ------------------------------
+   Dark only. There is no light theme and no toggle.
 
-   Two things were wrong with the old light values and both are fixed here.
-   The page sat at a glaring near-white, so it is pulled down to a cool paper
-   tone with a cyan cast that ties it to the accent. And --bg2 used to be
-   *lighter* than --bg, which is right for a raised panel on a dark ground and
-   backwards on a light one: every banded section washed out into the page and
-   the sections read as one run-on block. The ramp now darkens as it climbs, so
-   a band is a band.
+   The two accents are the photograph the site opens on: the teal haze of the
+   forecourt and the red of the tail lights. They are near-complementary, which
+   is a loud pair by default, so three things hold them together -- the neutrals
+   carry the cyan's cast so the cyan reads as native and the red as the accent
+   that pops; the ramp lightens as it climbs, which is what a raised surface
+   does on a dark ground; and the two are blended through magenta wherever they
+   meet (see .blend-field and .text-blend below) so the eye reads one system
+   rather than two colours arguing.
 
-   Accents are contrast-checked against --bg: cyan 5.43:1, magenta 5.63:1, and
-   white on either as a filled button is ~6:1. */
+   Measured on --bg: cyan 9.57:1, red 5.53:1. Both take near-black text as a
+   filled button (9.57 and 5.53); neither takes white, so buttons use ink. */
 :root {
-  --bg: 242 245 246;
-  --bg2: 231 237 239;
-  --bg3: 219 227 230;
-  --bg4: 201 212 216;
-  --bg5: 176 190 196;
-  --fg: 13 27 32;
-  --fg2: 45 63 69;
-  --fg3: 92 110 117;
-  --fg4: 116 133 140;
-  --line: 13 27 32;
-  --electric: 183 24 118; /* magenta, the second voice */
-  --mint: 5 110 124; /* deep cyan (primary accent) */
-  /* The accent is tuned to hold against paper, which makes it far too dark to
-     use over a photograph -- and the hero happens to be a teal night shot, so
-     the accent word vanished into it. This is the same hue lifted for type on
-     imagery: 8.6:1 against the darkest part of that frame. */
-  --mint-lift: 116 226 240;
+  --bg: 8 14 18;
+  --bg2: 14 23 28;
+  --bg3: 21 33 40;
+  --bg4: 32 48 57;
+  --bg5: 50 70 81;
+  --fg: 232 241 244;
+  --fg2: 186 203 210;
+  --fg3: 133 154 163;
+  --fg4: 100 120 129;
+  --line: 232 241 244;
+  --electric: 255 59 78; /* red, the second voice */
+  --mint: 25 200 222; /* cyan (primary accent) */
+  /* A touch brighter, for type sitting directly on the photography. */
+  --mint-lift: 86 226 245;
 }
 
 * {
@@ -196,6 +193,64 @@ main > * + * {
 }
 
 @layer utilities {
+  /* The dynamic blend. Two soft blobs -- one cyan, one red -- drifting on
+     different periods and screened over each other, so the overlap runs through
+     magenta and never sits still. Only transform is animated and there are two
+     elements per field, so this stays on the compositor.
+
+     The blobs are pseudo-elements of a single wrapper: no extra DOM, and any
+     section can pick it up by adding the class to a positioned backdrop. */
+  .blend-field {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    isolation: isolate;
+  }
+  .blend-field::before,
+  .blend-field::after {
+    content: "";
+    position: absolute;
+    width: 55vw;
+    height: 55vw;
+    max-width: 780px;
+    max-height: 780px;
+    border-radius: 9999px;
+    filter: blur(110px);
+    mix-blend-mode: screen;
+    will-change: transform;
+  }
+  .blend-field::before {
+    left: -12%;
+    top: -22%;
+    background: rgb(var(--mint) / 0.4);
+    animation: driftA 26s ease-in-out infinite alternate;
+  }
+  .blend-field::after {
+    right: -14%;
+    bottom: -26%;
+    background: rgb(var(--electric) / 0.32);
+    animation: driftB 34s ease-in-out infinite alternate;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .blend-field::before,
+    .blend-field::after {
+      animation: none;
+    }
+  }
+
+  /* The same blend, run through type. */
+  .text-blend {
+    background-image: linear-gradient(
+      100deg,
+      rgb(var(--mint)),
+      rgb(var(--electric))
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
   .text-balance {
     text-wrap: balance;
   }
@@ -211,6 +266,23 @@ main > * + * {
       ),
       linear-gradient(to bottom, rgb(var(--line) / 0.07) 1px, transparent 1px);
     background-size: 56px 56px;
+  }
+}
+
+@keyframes driftA {
+  from {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  to {
+    transform: translate3d(22vw, 16vh, 0) scale(1.25);
+  }
+}
+@keyframes driftB {
+  from {
+    transform: translate3d(0, 0, 0) scale(1.15);
+  }
+  to {
+    transform: translate3d(-20vw, -14vh, 0) scale(0.9);
   }
 }
 

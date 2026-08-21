@@ -46,7 +46,7 @@ export default function Clients() {
               <div className="group grid aspect-[3/2] place-items-center bg-ink-900 p-4 transition-colors duration-300 hover:bg-ink-800">
                 <div className="relative h-full w-full opacity-70 transition-opacity duration-300 group-hover:opacity-100">
                   <Media
-                    src={`/logos/light/${n}.webp`}
+                    src={`/logos/dark/${n}.webp`}
                     alt="Client logo"
                     fill
                     sizes="140px"

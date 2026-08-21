@@ -58,10 +58,7 @@ export default function ContactModal() {
             className="relative max-h-[92svh] w-full max-w-lg overflow-y-auto rounded-t-3xl border border-line/12 bg-ink-800 p-7 shadow-[0_30px_120px_-30px_rgb(var(--fg)/0.35)] sm:rounded-3xl md:p-9"
           >
             {/* soft glow behind the glass */}
-            <div
-              aria-hidden
-              className="pointer-events-none absolute -top-24 left-1/2 h-56 w-[28rem] -translate-x-1/2 rounded-full bg-mint/15 blur-[90px]"
-            />
+            <div aria-hidden className="blend-field opacity-45" />
 
             <div className="relative flex items-start justify-between gap-4">
               <div>

@@ -64,9 +64,6 @@ function Card({ p }: { p: Project }) {
             sizes="(max-width: 640px) 92vw, (max-width: 1024px) 46vw, 31vw"
             className="object-cover transition-transform duration-700 ease-cinema group-hover:scale-[1.04]"
           />
-          <span className="absolute left-4 top-4 rounded-full bg-black/45 px-3 py-1 text-[11px] uppercase tracking-widest text-white backdrop-blur-md">
-            {t.socialCards.keyVisual}
-          </span>
         </div>
       </Link>
 

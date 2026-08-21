@@ -78,7 +78,7 @@ const en = {
     pick: "Pick a production",
   },
   master: {
-    label: "Master Visuals",
+    label: "Key Visuals",
     h2a: "The campaign boards, and the",
     h2i: "thinking",
     h2b: " behind them.",
@@ -641,7 +641,7 @@ const ar: typeof en = {
     pick: "اختر إنتاجًا",
   },
   master: {
-    label: "الفيجوالز الرئيسية",
+    label: "الصور الرئيسية",
     h2a: "لوحات الحملات، و",
     h2i: "الفكرة",
     h2b: " اللي وراها.",
