@@ -156,7 +156,7 @@ export default function WebProjects() {
                   href={current.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="shrink-0 rounded-full border border-mint/45 px-3 py-1 text-[11px] font-medium text-mint transition-colors duration-300 hover:bg-mint hover:text-ink-900"
+                  className="cta-edge shrink-0 rounded-full px-3 py-1 text-[11px] font-medium text-mint"
                 >
                   {t.web.live}
                 </a>
@@ -178,7 +178,7 @@ export default function WebProjects() {
                   className="object-cover object-top transition-transform duration-[1.2s] ease-cinema group-hover:scale-[1.03]"
                 />
                 <span className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-                <span className="pointer-events-none absolute bottom-5 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-white px-6 py-3 text-sm font-medium text-black opacity-0 transition-opacity duration-500 group-hover:opacity-100">
+                <span className="cta-blend pointer-events-none absolute bottom-5 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full px-6 py-3 text-sm font-medium opacity-0 group-hover:opacity-100">
                   {t.web.visit} ↗
                 </span>
               </a>

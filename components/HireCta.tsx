@@ -47,7 +47,7 @@ export default function HireCta() {
           <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
             <a
               href={`mailto:${site.email}`}
-              className="rounded-full bg-bone-50 px-7 py-3.5 text-sm font-medium text-ink-900 transition-transform duration-300 hover:scale-[1.03]"
+              className="cta-blend rounded-full px-7 py-3.5 text-sm font-medium hover:scale-[1.03]"
             >
               {site.email}
             </a>
@@ -55,7 +55,7 @@ export default function HireCta() {
               href={`https://wa.me/${site.whatsapp}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="rounded-full border border-line/25 px-7 py-3.5 text-sm text-bone-50 transition-colors hover:border-mint/60 hover:text-mint"
+              className="cta-edge rounded-full px-7 py-3.5 text-sm text-bone-50"
             >
               {t.hire.wa}
             </a>

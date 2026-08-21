@@ -239,6 +239,71 @@ main > * + * {
     }
   }
 
+  /* Calls to action carry the blend too. Filled ones take the gradient as
+     their ground, outlined ones take it as their edge, so both sit in the same
+     family while the hierarchy between them survives.
+
+     Text on a filled one is ink, never white. Sampled across the whole ramp the
+     worst point for ink is #BF6276 at 4.83:1 -- AA everywhere -- while white
+     bottoms out at 2.03:1 on the cyan end and never clears 4.5 anywhere.
+
+     The gradient is laid out at more than twice the button's width with the
+     cyan repeated at both ends, so sliding it on hover runs the button from
+     cyan-to-red round to red-to-cyan. background-position is a paint, not a
+     composite, so this is a transition on interaction rather than an animation
+     that never stops -- a page of buttons quietly repainting forever is not a
+     trade worth making. */
+  .cta-blend {
+    background-image: linear-gradient(
+      100deg,
+      rgb(var(--mint)) 0%,
+      rgb(var(--electric)) 52%,
+      rgb(var(--mint)) 100%
+    );
+    background-size: 230% 100%;
+    background-position: 0% 0;
+    color: rgb(var(--bg));
+    /* opacity is in the list because the Vibe Coding overlay fades its
+       button in on hover, and a Tailwind transition-opacity utility would
+       replace this whole declaration rather than add to it. */
+    transition: background-position 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease;
+  }
+  .cta-blend:hover {
+    background-position: 100% 0;
+  }
+
+  /* The outlined counterpart. Two backgrounds: a translucent ground clipped to
+     the padding box, and the gradient clipped to the border box -- which is the
+     only way to get a gradient edge that still follows a border-radius, since
+     border-image squares the corners off. The ground is tinted rather than
+     clear because these sit on the hero photograph as often as on the page. */
+  .cta-edge {
+    border: 1px solid transparent;
+    /* The ground is fully opaque, not tinted. Both layers belong to the same
+       element and the padding-box one paints on top of the gradient, so at 50%
+       the gradient bled straight through the middle of the pill and the button
+       came out a washed pink slab instead of an outline. Opaque keeps the
+       gradient where it belongs -- the 1px edge -- and reads as a dark chip on
+       the hero photograph, which is what makes the label legible there. */
+    background-image: linear-gradient(rgb(var(--bg)), rgb(var(--bg))),
+      linear-gradient(
+        100deg,
+        rgb(var(--mint)) 0%,
+        rgb(var(--electric)) 52%,
+        rgb(var(--mint)) 100%
+      );
+    background-origin: padding-box, border-box;
+    background-clip: padding-box, border-box;
+    background-size: 100% 100%, 230% 100%;
+    background-position: 0 0, 0% 0;
+    transition: background-position 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+      color 0.3s;
+  }
+  .cta-edge:hover {
+    background-position: 0 0, 100% 0;
+  }
+
   /* The same blend, run through type. */
   .text-blend {
     background-image: linear-gradient(

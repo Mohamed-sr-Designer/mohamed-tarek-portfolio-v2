@@ -123,11 +123,11 @@ export default function AiWorkflow() {
 
             <Link
               href={`/work/${p.slug}`}
-              className="mt-6 inline-flex w-fit items-center gap-2 rounded-full bg-bone-50 px-6 py-3 text-sm font-medium text-ink-900 transition-transform duration-300 hover:scale-[1.03]"
+              className="cta-blend mt-6 inline-flex w-fit items-center gap-2 rounded-full px-6 py-3 text-sm font-medium hover:scale-[1.03]"
             >
               {t.case.readMore}
               {p.galleries?.length ? (
-                <span className="text-ink-900/55">
+                <span className="opacity-60">
                   ·{" "}
                   {p.galleries.reduce((n, grp) => n + grp.items.length, 0)}
                 </span>

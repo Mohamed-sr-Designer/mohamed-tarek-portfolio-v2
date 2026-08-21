@@ -42,7 +42,7 @@ export default function Contact() {
               href={`https://wa.me/${site.whatsapp}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="rounded-full bg-bone-50 px-7 py-3.5 text-sm font-medium text-ink-900 transition-transform duration-300 hover:scale-[1.03]"
+              className="cta-blend rounded-full px-7 py-3.5 text-sm font-medium hover:scale-[1.03]"
             >
               {t.hire.wa}
             </a>

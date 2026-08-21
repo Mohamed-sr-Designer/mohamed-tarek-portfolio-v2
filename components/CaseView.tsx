@@ -335,7 +335,7 @@ export default function CaseView({ project }: { project: Project }) {
           </h2>
           <Link
             href="/contact"
-            className="shrink-0 rounded-full bg-bone-50 px-7 py-3 text-sm font-medium text-ink-900 transition-transform duration-300 hover:scale-105"
+            className="cta-blend shrink-0 rounded-full px-7 py-3 text-sm font-medium hover:scale-105"
           >
             {t.case.ctaBtn}
           </Link>

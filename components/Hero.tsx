@@ -128,7 +128,7 @@ export default function Hero() {
             <Magnetic>
               <a
                 href="#work"
-                className="group flex items-center gap-3 rounded-full bg-mint px-6 py-3 text-sm font-medium text-ink-900 transition-colors"
+                className="cta-blend group flex items-center gap-3 rounded-full px-6 py-3 text-sm font-medium"
               >
                 {t.hero.ctaPrimary}
                 <motion.span
@@ -142,7 +142,7 @@ export default function Hero() {
             <Magnetic>
               <Link
                 href="/contact"
-                className="rounded-full border border-line/25 px-6 py-3 text-sm text-bone-50 transition-colors hover:border-mint/60 hover:text-mint md:border-white/35 md:text-white md:hover:border-mint md:hover:text-mint"
+                className="cta-edge rounded-full px-6 py-3 text-sm text-bone-50"
               >
                 {t.hero.ctaSecondary}
               </Link>

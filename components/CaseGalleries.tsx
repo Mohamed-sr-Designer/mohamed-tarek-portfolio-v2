@@ -227,7 +227,7 @@ export default function CaseGalleries({
         <button
           type="button"
           onClick={() => setExpanded(true)}
-          className="mx-auto mt-6 flex items-center gap-2 rounded-full border border-line/25 px-6 py-3 text-sm text-bone-200 transition-colors duration-300 hover:border-mint/50 hover:text-mint"
+          className="cta-edge mx-auto mt-6 flex items-center gap-2 rounded-full px-6 py-3 text-sm text-bone-200"
         >
           {t.case.showAll} · {hidden}
         </button>

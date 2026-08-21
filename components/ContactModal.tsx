@@ -134,7 +134,7 @@ export default function ContactModal() {
               href={`https://wa.me/${site.whatsapp}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="relative mt-5 block rounded-full bg-mint px-6 py-3.5 text-center text-sm font-semibold text-white shadow-[0_10px_30px_-10px_rgb(var(--mint)/0.7)] transition-transform duration-300 hover:scale-[1.02]"
+              className="cta-blend relative mt-5 block rounded-full px-6 py-3.5 text-center text-sm font-semibold shadow-[0_10px_30px_-12px_rgb(var(--mint)/0.6)] hover:scale-[1.02]"
             >
               {t.contact.startProject}
             </a>

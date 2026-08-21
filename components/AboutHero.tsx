@@ -69,7 +69,7 @@ export default function AboutHero() {
               <Magnetic>
                 <Link
                   href="/contact"
-                  className="rounded-full bg-white px-7 py-3.5 text-sm font-medium text-black transition-transform duration-300 hover:scale-[1.03]"
+                  className="cta-blend rounded-full px-7 py-3.5 text-sm font-medium hover:scale-[1.03]"
                 >
                   {t.hero.ctaSecondary}
                 </Link>
@@ -79,7 +79,7 @@ export default function AboutHero() {
                   href={`https://wa.me/${site.whatsapp}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="rounded-full border border-white/30 px-7 py-3.5 text-sm text-white transition-colors hover:border-mint-lift hover:text-mint-lift"
+                  className="cta-edge rounded-full px-7 py-3.5 text-sm text-white"
                 >
                   {t.hire.wa}
                 </a>
