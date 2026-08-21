@@ -94,7 +94,26 @@ export default function Hero() {
       </div>
 
       <div className="container-edge relative z-10 mx-auto w-full max-w-edge pb-4 pt-10 md:pb-20 md:pt-44">
-        <div className="max-w-lg">
+        {/* The measure has to grow with the type or the type outruns it. At
+            3.7vw unbounded the headline hit 67px on a 1815px screen while this
+            column stayed pinned at max-w-lg, so each of the three lines
+            rendered 516px wide inside a 512px box and broke in half -- six
+            lines instead of three, 419px of headline. Zooming to 150% shrank
+            the CSS viewport enough to make it fit again, which is what made
+            zooming look like the fix.
+
+            So the size is capped at 4rem and the column steps up with the
+            breakpoints instead of sitting at one width. Measured: the longest
+            line needs about nine times the font size, and the column is sized
+            to clear that at every step.
+
+            The ceiling on the column is where he stands, not taste. He is at
+            roughly 60% across the frame, and object-cover crops differently at
+            each width -- about 507px in from the left at md, about 1100px at
+            1815 -- so the column can afford to grow, but only at the same
+            pace. The wider banner bought room here: he used to be dead
+            centre. */}
+        <div className="max-w-lg md:max-w-[26rem] lg:max-w-lg xl:max-w-xl 2xl:max-w-[40rem]">
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -108,7 +127,7 @@ export default function Hero() {
             {t.hero.avail}
           </motion.p>
 
-          <h1 className="mt-5 font-display text-[8.4vw] font-semibold leading-[1.02] tracking-[-0.03em] text-bone-50 sm:text-[6vw] sm:leading-[0.98] md:mt-7 md:text-[3.7vw] md:text-white md:[text-shadow:0_2px_34px_rgb(0_0_0/0.55)]">
+          <h1 className="mt-5 font-display text-[8.4vw] font-semibold leading-[1.02] tracking-[-0.03em] text-bone-50 sm:text-[6vw] sm:leading-[0.98] md:mt-7 md:text-[clamp(2.6rem,3.6vw,4rem)] md:text-white md:[text-shadow:0_2px_34px_rgb(0_0_0/0.55)]">
             <Line delay={0.35}>{t.hero.l1}</Line>
             <Line delay={0.48}>{t.hero.l2}</Line>
             <Line delay={0.61}>
