@@ -12,7 +12,7 @@ export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
-  const { t, toggle } = useLang();
+  const { t } = useLang();
 
   const links = [
     { label: t.nav.work, href: "/" },
@@ -78,14 +78,6 @@ export default function Nav() {
           </nav>
 
           <div className="flex items-center gap-3">
-            <button
-              type="button"
-              onClick={toggle}
-              className="rounded-full border border-line/20 px-3 py-2 text-xs font-medium text-bone-200 transition-colors hover:border-mint/50 hover:text-mint"
-              aria-label="Switch language"
-            >
-              {t.nav.langBtn}
-            </button>
             <button
               type="button"
               onClick={openContact}

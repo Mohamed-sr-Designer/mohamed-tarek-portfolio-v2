@@ -3,9 +3,22 @@
 import Link from "next/link";
 import { site } from "@/lib/site";
 import { useLang } from "@/lib/i18n";
+import { type Lang } from "@/lib/dict";
+
+// The language control lives down here now rather than in the header.
+//
+// It is a pair rather than the single toggle the nav carried: a lone button
+// labelled "عربي" has to be read as "switch to Arabic" rather than as a state,
+// and there is nothing to tell you which language you are already in. Two
+// options with the current one marked answer both at a glance, and each is
+// named in its own language so it is legible whichever one you arrived in.
+const LANGS: { code: Lang; label: string }[] = [
+  { code: "en", label: "English" },
+  { code: "ar", label: "العربية" },
+];
 
 export default function Footer() {
-  const { t } = useLang();
+  const { t, lang, setLang } = useLang();
   const year = new Date().getFullYear();
 
   const links = [
@@ -95,13 +108,47 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-12 flex flex-col gap-4 border-t border-line/10 pt-6 text-sm text-bone-500 sm:flex-row sm:items-center sm:justify-between">
-          <p>
+        <div className="mt-12 flex flex-col gap-5 border-t border-line/10 pt-6 text-sm text-bone-500 md:flex-row md:items-center md:justify-between">
+          <p className="order-2 md:order-1">
             © {year} {site.name}. {t.footer.rights}
           </p>
-          <a href="#top" className="link-underline text-bone-300">
-            {t.footer.backTop}
-          </a>
+
+          <div className="order-1 flex flex-wrap items-center gap-x-5 gap-y-3 md:order-2">
+            <div className="flex items-center gap-2.5">
+              <span className="text-xs uppercase tracking-ultra text-bone-500">
+                {t.footer.language}
+              </span>
+              <div
+                role="group"
+                aria-label={t.footer.language}
+                className="inline-flex items-center gap-1 rounded-full border border-line/20 bg-ink-800 p-1"
+              >
+                {LANGS.map((l) => {
+                  const on = lang === l.code;
+                  return (
+                    <button
+                      key={l.code}
+                      type="button"
+                      lang={l.code}
+                      onClick={() => setLang(l.code)}
+                      aria-current={on ? "true" : undefined}
+                      className={`rounded-full px-3 py-1.5 text-xs transition-colors duration-300 ${
+                        on
+                          ? "cta-blend font-semibold"
+                          : "text-bone-300 hover:text-bone-50"
+                      }`}
+                    >
+                      {l.label}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+
+            <a href="#top" className="link-underline text-bone-300">
+              {t.footer.backTop}
+            </a>
+          </div>
         </div>
       </div>
     </footer>

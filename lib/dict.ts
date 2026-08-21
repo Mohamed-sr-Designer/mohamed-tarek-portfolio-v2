@@ -254,6 +254,7 @@ const en = {
     siteCol: "Site",
     connectCol: "Connect",
     rights: "Designed, art-directed & vibe-coded in-house.",
+    language: "Language",
     backTop: "Back to top ↑",
   },
   about: {
@@ -817,6 +818,7 @@ const ar: typeof en = {
     siteCol: "الموقع",
     connectCol: "تواصل",
     rights: "صُمّم وأُخرج فنيًا وبُرمج داخليًا.",
+    language: "اللغة",
     backTop: "العودة للأعلى ↑",
   },
   about: {
