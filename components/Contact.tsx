@@ -12,7 +12,7 @@ export default function Contact() {
   return (
     <section
       id="contact"
-      className="relative scroll-mt-24 overflow-hidden border-t border-line/10 section-y"
+      className="relative scroll-mt-24 overflow-hidden pb-[4.5rem] pt-32 md:pb-28 md:pt-44"
     >
       <div className="pointer-events-none absolute inset-0 -z-10">
         <div className="absolute bottom-[-30%] left-1/2 h-[50vw] w-[50vw] -translate-x-1/2 rounded-full bg-electric/10 blur-[140px]" />

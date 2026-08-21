@@ -2,37 +2,38 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ---- Dark (default): warm charcoal + ivory, molten-amber accent ---- */
-:root,
-:root[data-theme="dark"] {
-  --bg: 16 15 13;
-  --bg2: 24 22 19;
-  --bg3: 31 29 25;
-  --bg4: 41 38 33;
-  --bg5: 56 52 45;
-  --fg: 243 239 231;
-  --fg2: 201 195 183;
-  --fg3: 150 144 132;
-  --fg4: 110 104 94;
-  --line: 243 239 231;
-  --electric: 242 181 60; /* gold */
-  --mint: 255 90 31; /* molten amber (primary accent) */
-}
+/* ---- One theme: cool paper, deep cyan, magenta second ----------------------
+   The site used to ship a dark theme as the default and a light one behind a
+   toggle. It is light-only now, so these live on :root with nothing to switch.
 
-/* ---- Light: warm ivory ---- */
-:root[data-theme="light"] {
-  --bg: 244 240 232;
-  --bg2: 253 250 244;
-  --bg3: 235 230 220;
-  --bg4: 227 221 210;
-  --bg5: 214 207 195;
-  --fg: 22 20 15;
-  --fg2: 54 50 42;
-  --fg3: 102 95 84;
-  --fg4: 132 124 112;
-  --line: 22 20 15;
-  --electric: 178 120 16;
-  --mint: 214 64 14;
+   Two things were wrong with the old light values and both are fixed here.
+   The page sat at a glaring near-white, so it is pulled down to a cool paper
+   tone with a cyan cast that ties it to the accent. And --bg2 used to be
+   *lighter* than --bg, which is right for a raised panel on a dark ground and
+   backwards on a light one: every banded section washed out into the page and
+   the sections read as one run-on block. The ramp now darkens as it climbs, so
+   a band is a band.
+
+   Accents are contrast-checked against --bg: cyan 5.43:1, magenta 5.63:1, and
+   white on either as a filled button is ~6:1. */
+:root {
+  --bg: 242 245 246;
+  --bg2: 231 237 239;
+  --bg3: 219 227 230;
+  --bg4: 201 212 216;
+  --bg5: 176 190 196;
+  --fg: 13 27 32;
+  --fg2: 45 63 69;
+  --fg3: 92 110 117;
+  --fg4: 116 133 140;
+  --line: 13 27 32;
+  --electric: 183 24 118; /* magenta, the second voice */
+  --mint: 5 110 124; /* deep cyan (primary accent) */
+  /* The accent is tuned to hold against paper, which makes it far too dark to
+     use over a photograph -- and the hero happens to be a teal night shot, so
+     the accent word vanished into it. This is the same hue lifted for type on
+     imagery: 8.6:1 against the darkest part of that frame. */
+  --mint-lift: 116 226 240;
 }
 
 * {
@@ -130,6 +131,14 @@ html.modal-open label {
 }
 html.modal-open .custom-cursor {
   display: none !important;
+}
+
+/* Section boundaries. On the dark theme the vertical rhythm alone was enough
+   to separate them; on paper it is not, and consecutive unbanded sections ran
+   together. A hairline between every pair fixes that without adding weight --
+   sections that already draw their own border just restate the same value. */
+main > * + * {
+  border-top: 1px solid rgb(var(--line) / 0.1);
 }
 
 @layer components {

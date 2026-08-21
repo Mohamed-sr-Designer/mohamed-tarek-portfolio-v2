@@ -87,7 +87,7 @@ export default function AiWorkflow() {
         <Reveal className="lg:col-span-7">
           <Link
             href={`/work/${p.slug}`}
-            className="group block overflow-hidden rounded-2xl border border-line/10 bg-ink-800/40"
+            className="group block overflow-hidden rounded-2xl border border-line/10 bg-ink-800"
           >
             <Media
               src={wf.image!}
@@ -114,7 +114,7 @@ export default function AiWorkflow() {
               {wf.results.map((r) => (
                 <span
                   key={r}
-                  className="rounded-full border border-line/15 bg-ink-800/60 px-3 py-1 text-xs text-bone-200"
+                  className="rounded-full border border-line/15 bg-ink-800 px-3 py-1 text-xs text-bone-200"
                 >
                   {r}
                 </span>
@@ -145,7 +145,7 @@ export default function AiWorkflow() {
             {wf.steps.map((s) => (
               <li
                 key={s.n}
-                className="w-[15rem] shrink-0 snap-start rounded-xl border border-line/12 bg-ink-800/40 p-4"
+                className="w-[15rem] shrink-0 snap-start rounded-xl border border-line/12 bg-ink-800 p-4"
               >
                 <span className="font-display text-xs tabular-nums text-mint">
                   {s.n}

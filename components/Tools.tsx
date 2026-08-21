@@ -2,42 +2,41 @@
 
 import { Reveal, Stagger, StaggerItem } from "@/components/ui/Reveal";
 import { SectionLabel } from "@/components/ui/SectionLabel";
+import { Media } from "@/components/ui/Media";
 import { useLang } from "@/lib/i18n";
 
-type Tool = { name: string; role: string; mono: string; color: string };
+type Tool = { name: string; role: string; icon: string };
 
-// The six he specialises in. These get the weight on the page: a recruiter
-// should see what he is genuinely deep in before anything else.
+// Every logo is pre-normalised to one square canvas with the same padding
+// (scripts/import-tool-icons.mjs), so the cards can render them at a fixed box
+// and they all land at the same optical weight -- no per-logo nudging here.
+const icon = (slug: string) => `/tools/${slug}.webp`;
+
+// What he leads with. The Adobe run moved up here from the second row: it is
+// what the day actually gets spent in, and a recruiter should hit it first.
 const core: Tool[] = [
-  { name: "Photoshop", role: "Retouch & Composite", mono: "Ps", color: "#31A8FF" },
-  { name: "Figma", role: "UI & Systems", mono: "Fi", color: "#F24E1E" },
-  { name: "Magnific", role: "Upscale · Freepik", mono: "M", color: "#1273EB" },
-  { name: "ChatGPT", role: "AI Copy & Concept", mono: "AI", color: "#10A37F" },
-  { name: "Claude", role: "AI Reasoning", mono: "C", color: "#D97757" },
-  { name: "ElevenLabs", role: "AI Voice-Over", mono: "11", color: "#E1E1E1" },
+  { name: "Photoshop", role: "Retouch & Composite", icon: icon("photoshop") },
+  { name: "Illustrator", role: "Vector & Logo", icon: icon("illustrator") },
+  { name: "After Effects", role: "Motion", icon: icon("after-effects") },
+  { name: "Premiere Pro", role: "Video Edit", icon: icon("premiere") },
+  { name: "Figma", role: "UI & Systems", icon: icon("figma") },
+  { name: "Magnific", role: "Upscale · Freepik", icon: icon("magnific") },
 ];
 
-// Real, used, but not what he leads with. Seedance was dropped entirely.
+// Real, used, but supporting -- the AI set traded places with the Adobe one.
 const secondary: Tool[] = [
-  { name: "Illustrator", role: "Vector & Logo", mono: "Ai", color: "#FF9A00" },
-  { name: "After Effects", role: "Motion", mono: "Ae", color: "#9999FF" },
-  { name: "Premiere Pro", role: "Video Edit", mono: "Pr", color: "#9999FF" },
-  { name: "Blender", role: "3D (Basics)", mono: "Bl", color: "#E87D0D" },
-  { name: "Gemini", role: "AI Ideation", mono: "G", color: "#1A73E8" },
+  { name: "ChatGPT", role: "AI Copy & Concept", icon: icon("chatgpt") },
+  { name: "Claude", role: "AI Reasoning", icon: icon("claude") },
+  { name: "ElevenLabs", role: "AI Voice-Over", icon: icon("elevenlabs") },
+  { name: "Blender", role: "3D (Basics)", icon: icon("blender") },
+  { name: "Gemini", role: "AI Ideation", icon: icon("gemini") },
 ];
 
 function CoreCard({ t }: { t: Tool }) {
   return (
     <StaggerItem className="group flex items-center gap-4 rounded-xl border border-line/12 bg-ink-900 p-5 transition-colors duration-300 hover:border-mint/35">
-      <span
-        className="grid h-12 w-12 shrink-0 place-items-center rounded-lg text-sm font-semibold"
-        style={{
-          color: t.color,
-          backgroundColor: `${t.color}14`,
-          border: `1px solid ${t.color}40`,
-        }}
-      >
-        {t.mono}
+      <span className="relative grid h-12 w-12 shrink-0 place-items-center rounded-lg border border-line/10 bg-ink-800 p-2">
+        <Media src={t.icon} alt="" fill sizes="48px" className="object-contain p-2" />
       </span>
       <span className="min-w-0">
         <span className="block truncate text-lg font-medium tracking-tight text-bone-50">
@@ -52,12 +51,9 @@ function CoreCard({ t }: { t: Tool }) {
 // Quieter treatment for the secondary set: a chip, not a card.
 function SecondaryChip({ t }: { t: Tool }) {
   return (
-    <StaggerItem className="inline-flex items-center gap-2.5 rounded-full border border-line/15 px-4 py-2 transition-colors duration-300 hover:border-line/35">
-      <span
-        className="text-[11px] font-semibold"
-        style={{ color: `${t.color}CC` }}
-      >
-        {t.mono}
+    <StaggerItem className="inline-flex items-center gap-2.5 rounded-full border border-line/15 py-2 pe-4 ps-2.5 transition-colors duration-300 hover:border-line/35">
+      <span className="relative block h-5 w-5 shrink-0">
+        <Media src={t.icon} alt="" fill sizes="20px" className="object-contain" />
       </span>
       <span className="text-sm text-bone-200">{t.name}</span>
       <span className="text-xs text-bone-500">{t.role}</span>

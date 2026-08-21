@@ -1,9 +1,8 @@
 import type { Config } from "tailwindcss";
 
-// Colors are CSS-variable backed so the whole UI flips between dark (default)
-// and light themes just by swapping the variables on <html> (see globals.css).
+// Colors are CSS-variable backed. There is one theme now — see the :root block
+// in globals.css — so nothing swaps them and there is no dark variant.
 const config: Config = {
-  darkMode: ["class", '[data-theme="dark"]'],
   content: [
     "./app/**/*.{ts,tsx}",
     "./components/**/*.{ts,tsx}",
@@ -28,6 +27,7 @@ const config: Config = {
         line: "rgb(var(--line) / <alpha-value>)",
         electric: "rgb(var(--electric) / <alpha-value>)",
         mint: "rgb(var(--mint) / <alpha-value>)",
+        "mint-lift": "rgb(var(--mint-lift) / <alpha-value>)",
       },
       fontFamily: {
         sans: ["var(--font-sans)", "system-ui", "sans-serif"],

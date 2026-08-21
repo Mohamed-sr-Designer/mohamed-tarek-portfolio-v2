@@ -15,7 +15,7 @@ export default function Clients() {
   return (
     <section
       id="clients"
-      className="border-y border-line/10 bg-ink-800/40 scroll-mt-24"
+      className="border-y border-line/10 bg-ink-800 scroll-mt-24"
     >
       <div className="container-edge mx-auto max-w-edge py-20 md:py-24">
         <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
@@ -45,24 +45,13 @@ export default function Clients() {
             <Reveal key={n} delay={(i % 9) * 0.02}>
               <div className="group grid aspect-[3/2] place-items-center bg-ink-900 p-4 transition-colors duration-300 hover:bg-ink-800">
                 <div className="relative h-full w-full opacity-70 transition-opacity duration-300 group-hover:opacity-100">
-                  <span className="hidden h-full w-full dark:block">
-                    <Media
-                      src={`/logos/dark/${n}.webp`}
-                      alt="Client logo"
-                      fill
-                      sizes="140px"
-                      className="object-contain"
-                    />
-                  </span>
-                  <span className="block h-full w-full dark:hidden">
-                    <Media
-                      src={`/logos/light/${n}.webp`}
-                      alt="Client logo"
-                      fill
-                      sizes="140px"
-                      className="object-contain"
-                    />
-                  </span>
+                  <Media
+                    src={`/logos/light/${n}.webp`}
+                    alt="Client logo"
+                    fill
+                    sizes="140px"
+                    className="object-contain"
+                  />
                 </div>
               </div>
             </Reveal>

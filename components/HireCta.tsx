@@ -14,7 +14,7 @@ export default function HireCta() {
       id="hire"
       className="container-edge mx-auto max-w-edge scroll-mt-24 section-y"
     >
-      <div className="relative overflow-hidden rounded-3xl border border-line/10 bg-ink-800/60 px-7 py-16 text-center md:px-16 md:py-24">
+      <div className="relative overflow-hidden rounded-3xl border border-line/10 bg-ink-800 px-7 py-16 text-center md:px-16 md:py-24">
         <div
           aria-hidden
           className="pointer-events-none absolute left-1/2 top-0 -z-0 h-[30rem] w-[46rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-mint/10 blur-[120px]"

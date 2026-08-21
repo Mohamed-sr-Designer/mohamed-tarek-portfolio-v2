@@ -162,6 +162,16 @@ const en = {
     portrait: "Portrait",
     pick: "Pick a format",
   },
+  threeD: {
+    label: "3D Product Rendering",
+    h2a: "Built in 3D, lit like a",
+    h2i: "photograph",
+    h2b: ".",
+    note: "A fragrance bottle modelled, shaded and lit in Blender. The scene files are here too, not just the finished frame.",
+    renders: "Renders",
+    scene: "In Blender",
+    pick: "Result, or how it was built",
+  },
   featured: {
     label: "Featured on LinkedIn",
     h2a: "Teaching the",
@@ -197,6 +207,7 @@ const en = {
     h2i: "worked with me",
     h2b: " say.",
     note: "{n} recommendations written on LinkedIn by managers, founders and colleagues. Shown in full, unedited.",
+    verify: "Read them on LinkedIn",
     relations: {
       managed: "Managed him directly",
       senior: "Was senior to him",
@@ -714,6 +725,16 @@ const ar: typeof en = {
     portrait: "رأسي",
     pick: "اختر الصيغة",
   },
+  threeD: {
+    label: "رندر منتجات ثلاثي الأبعاد",
+    h2a: "مبني ثلاثي الأبعاد، ومضاء زي",
+    h2i: "الصورة الفوتوغرافية",
+    h2b: ".",
+    note: "زجاجة عطر متمودلة ومخامة ومضاءة في بليندر. وملفات المشهد نفسها موجودة، مش بس اللقطة النهائية.",
+    renders: "الرندرز",
+    scene: "داخل بليندر",
+    pick: "النتيجة، ولا طريقة البناء",
+  },
   featured: {
     label: "مختارات لينكد إن",
     h2a: "أشرح",
@@ -749,6 +770,7 @@ const ar: typeof en = {
     h2i: "عملوا معي",
     h2b: ".",
     note: "{n} توصية مكتوبة على لينكد إن من مديرين ومؤسسين وزملاء. معروضة كاملة كما كُتبت.",
+    verify: "اقرأها على لينكد إن",
     relations: {
       managed: "كان مديره المباشر",
       senior: "كان أعلى منه",

@@ -39,7 +39,7 @@ export default function ContactModal() {
     <AnimatePresence>
       {open && (
         <motion.div
-          className="fixed inset-0 z-[100] flex items-end justify-center bg-black/50 p-0 backdrop-blur-xl sm:items-center sm:p-6"
+          className="fixed inset-0 z-[100] flex items-end justify-center bg-ink-900/60 p-0 backdrop-blur-xl sm:items-center sm:p-6"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -55,12 +55,12 @@ export default function ContactModal() {
             exit={{ y: 24, opacity: 0, scale: 0.98 }}
             transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
             onClick={(e) => e.stopPropagation()}
-            className="relative max-h-[92svh] w-full max-w-lg overflow-y-auto rounded-t-3xl border border-white/15 bg-ink-900/70 p-7 shadow-[0_30px_120px_-20px_rgba(0,0,0,0.8)] backdrop-blur-2xl sm:rounded-3xl md:p-9"
+            className="relative max-h-[92svh] w-full max-w-lg overflow-y-auto rounded-t-3xl border border-line/12 bg-ink-800 p-7 shadow-[0_30px_120px_-30px_rgb(var(--fg)/0.35)] sm:rounded-3xl md:p-9"
           >
             {/* soft glow behind the glass */}
             <div
               aria-hidden
-              className="pointer-events-none absolute -top-24 left-1/2 h-56 w-[28rem] -translate-x-1/2 rounded-full bg-mint/20 blur-[90px]"
+              className="pointer-events-none absolute -top-24 left-1/2 h-56 w-[28rem] -translate-x-1/2 rounded-full bg-mint/15 blur-[90px]"
             />
 
             <div className="relative flex items-start justify-between gap-4">
@@ -83,7 +83,7 @@ export default function ContactModal() {
                 type="button"
                 onClick={() => setOpen(false)}
                 aria-label={t.master.close}
-                className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-white/20 text-bone-200 transition-colors hover:border-mint/60 hover:text-mint"
+                className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-line/20 text-bone-200 transition-colors hover:border-mint/60 hover:text-mint"
               >
                 ✕
               </button>
@@ -98,7 +98,7 @@ export default function ContactModal() {
               {contacts.map((c) => (
                 <div
                   key={c.label}
-                  className="group flex items-center gap-3 rounded-2xl border border-white/10 bg-white/[0.04] px-5 py-4 transition-colors duration-300 focus-within:border-mint/40 hover:border-mint/40 hover:bg-white/[0.07]"
+                  className="group flex items-center gap-3 rounded-2xl border border-line/10 bg-ink-900 px-5 py-4 transition-colors duration-300 focus-within:border-mint/40 hover:border-mint/40 hover:bg-ink-700/60"
                 >
                   <a
                     href={c.href}

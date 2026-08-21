@@ -24,7 +24,7 @@ export default function Skills() {
   const count = shown.reduce((n, g) => n + g.items.length, 0);
 
   return (
-    <section className="border-y border-line/10 bg-ink-800/40">
+    <section className="border-y border-line/10 bg-ink-800">
       <div className="container-edge mx-auto max-w-edge section-y">
         <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <div>

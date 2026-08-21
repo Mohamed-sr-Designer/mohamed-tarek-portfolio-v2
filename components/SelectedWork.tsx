@@ -21,7 +21,7 @@ function Card({ p }: { p: Project }) {
   const tr = t.projects[p.slug] ?? {};
   return (
     <Link href={`/work/${p.slug}`} className="group block h-full">
-      <div className="flex h-full flex-col rounded-2xl border border-line/10 bg-ink-800/60 p-4 transition-all duration-500 ease-cinema hover:-translate-y-1.5 hover:border-line/25 md:p-5">
+      <div className="flex h-full flex-col rounded-2xl border border-line/10 bg-ink-800 p-4 transition-all duration-500 ease-cinema hover:-translate-y-1.5 hover:border-line/25 md:p-5">
         <div className="relative aspect-[4/5] overflow-hidden rounded-xl bg-ink-700">
           <Media
             src={p.cover}

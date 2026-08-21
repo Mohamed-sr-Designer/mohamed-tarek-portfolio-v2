@@ -42,7 +42,7 @@ const arabic = Alexandria({
 });
 
 export const viewport: Viewport = {
-  themeColor: "#100F0D",
+  themeColor: "#F2F5F6",
   width: "device-width",
   initialScale: 1,
 };
@@ -174,8 +174,6 @@ const jsonLd = {
   ],
 };
 
-const themeScript = `(function(){try{var t=localStorage.getItem('theme')||'dark';document.documentElement.setAttribute('data-theme',t);}catch(e){document.documentElement.setAttribute('data-theme','dark');}})();`;
-
 export default function RootLayout({
   children,
 }: {
@@ -184,11 +182,9 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      data-theme="dark"
       className={`${display.variable} ${sans.variable} ${serif.variable} ${arabic.variable}`}
     >
       <head>
-        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{

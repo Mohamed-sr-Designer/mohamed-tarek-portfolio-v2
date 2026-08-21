@@ -7,6 +7,7 @@ import TypeDesign from "@/components/TypeDesign";
 import SocialCards from "@/components/SocialCards";
 import Storyboards from "@/components/Storyboards";
 import Motion from "@/components/Motion";
+import ThreeD from "@/components/ThreeD";
 import WebProjects from "@/components/WebProjects";
 import LoopSlider from "@/components/LoopSlider";
 import Services from "@/components/Services";
@@ -26,6 +27,9 @@ export default function Home() {
       <LoopSlider />
       <Storyboards />
       <Motion />
+      {/* the Blender work sits with the other things that are built rather
+          than shot, straight after the films */}
+      <ThreeD />
       <WebProjects />
       <Services />
       <HireCta />

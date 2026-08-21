@@ -6,7 +6,6 @@ import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { site } from "@/lib/site";
 import { useLang } from "@/lib/i18n";
-import ThemeToggle from "@/components/ThemeToggle";
 import { openContact } from "@/components/ContactModal";
 
 export default function Nav() {
@@ -43,10 +42,8 @@ export default function Nav() {
   return (
     <>
       <header
-        className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ease-cinema ${
-          scrolled
-            ? "border-b border-line/10 bg-ink-900/70 py-3 backdrop-blur-xl"
-            : "py-5"
+        className={`fixed inset-x-0 top-0 z-50 border-b bg-ink-900/85 backdrop-blur-xl transition-all duration-500 ease-cinema ${
+          scrolled ? "border-line/12 py-3" : "border-transparent py-5"
         }`}
       >
         <div className="container-edge mx-auto flex max-w-edge items-center justify-between">
@@ -89,7 +86,6 @@ export default function Nav() {
             >
               {t.nav.langBtn}
             </button>
-            <ThemeToggle />
             <button
               type="button"
               onClick={openContact}

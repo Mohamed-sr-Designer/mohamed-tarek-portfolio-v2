@@ -32,7 +32,7 @@ function Card({ p }: { p: Project }) {
   const shortClient = p.client.split(" · ")[0];
 
   return (
-    <article className="flex h-full flex-col rounded-2xl border border-line/10 bg-ink-800/40 p-5 transition-colors duration-500 hover:border-line/25 md:p-6">
+    <article className="flex h-full flex-col rounded-2xl border border-line/10 bg-ink-800 p-5 transition-colors duration-500 hover:border-line/25 md:p-6">
       {/* header */}
       <div className="flex items-start justify-between gap-3">
         <div className="min-w-0">

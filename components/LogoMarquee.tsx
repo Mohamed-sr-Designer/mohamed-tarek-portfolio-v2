@@ -21,24 +21,13 @@ export default function LogoMarquee() {
             key={`${n}-${i}`}
             className="relative block h-14 w-36 shrink-0 opacity-75 transition-opacity duration-300 hover:opacity-100"
           >
-            <span className="hidden h-full w-full dark:block">
-              <Media
-                src={`/logos/dark/${n}.webp`}
-                alt="Client logo"
-                fill
-                sizes="144px"
-                className="object-contain"
-              />
-            </span>
-            <span className="block h-full w-full dark:hidden">
-              <Media
-                src={`/logos/light/${n}.webp`}
-                alt="Client logo"
-                fill
-                sizes="144px"
-                className="object-contain"
-              />
-            </span>
+            <Media
+              src={`/logos/light/${n}.webp`}
+              alt="Client logo"
+              fill
+              sizes="144px"
+              className="object-contain"
+            />
           </span>
         ))}
       </div>

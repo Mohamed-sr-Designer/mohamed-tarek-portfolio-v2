@@ -5,7 +5,6 @@ import { Media } from "@/components/ui/Media";
 import { Reveal } from "@/components/ui/Reveal";
 import { Carousel } from "@/components/ui/Carousel";
 import CaseGalleries from "@/components/CaseGalleries";
-import ThemeToggle from "@/components/ThemeToggle";
 import { site } from "@/lib/site";
 import { useLang } from "@/lib/i18n";
 import { withBase } from "@/lib/base";
@@ -165,7 +164,7 @@ export default function CaseView({ project }: { project: Project }) {
         <section className="container-edge mx-auto max-w-edge pb-14 md:pb-20">
           <div className="grid gap-6 md:grid-cols-12 md:gap-8">
             <div className="md:col-span-5">
-              <div className="h-full rounded-2xl border border-line/10 bg-ink-800/40 p-7">
+              <div className="h-full rounded-2xl border border-line/10 bg-ink-800 p-7">
                 <p className="text-[10px] uppercase tracking-ultra text-bone-500">
                   {project.strategyBlock.toneLabel}
                 </p>
@@ -211,7 +210,7 @@ export default function CaseView({ project }: { project: Project }) {
       {/* Final videos: the payoff of the whole case, so it gets a banded
           section and full width rather than a small tile in a two-up grid. */}
       {caseVideos.length > 0 ? (
-        <section className="border-y border-line/10 bg-ink-800/40">
+        <section className="border-y border-line/10 bg-ink-800">
           <div className="container-edge mx-auto max-w-edge py-16 md:py-24">
             <Reveal>
               <h2 className="mb-8 max-w-2xl text-balance text-3xl font-semibold leading-[1.05] tracking-tight text-bone-50 md:text-5xl">
@@ -242,7 +241,7 @@ export default function CaseView({ project }: { project: Project }) {
 
       {/* production workflow — numbered steps + key results + flow diagram */}
       {project.workflow ? (
-        <section className="border-y border-line/10 bg-ink-800/40">
+        <section className="border-y border-line/10 bg-ink-800">
           <div className="container-edge mx-auto max-w-edge py-16 md:py-20">
             <Reveal>
               <h2 className="max-w-2xl text-balance text-3xl font-semibold leading-[1.05] tracking-tight text-bone-50 md:text-4xl">
@@ -268,7 +267,7 @@ export default function CaseView({ project }: { project: Project }) {
               {project.workflow.steps.map((s) => (
                 <div
                   key={s.n}
-                  className="group flex flex-col gap-4 bg-ink-900 p-7 transition-colors duration-500 hover:bg-ink-800"
+                  className="group flex flex-col gap-4 bg-ink-900 p-7 transition-colors duration-500 hover:bg-ink-700"
                 >
                   <span className="font-serif text-5xl text-bone-500 transition-colors duration-500 group-hover:text-mint">
                     {s.n}
@@ -326,7 +325,7 @@ export default function CaseView({ project }: { project: Project }) {
       ) : null}
 
       {/* CTA */}
-      <section className="border-y border-line/10 bg-ink-800/40">
+      <section className="border-y border-line/10 bg-ink-800">
         <div className="container-edge mx-auto flex max-w-edge flex-col items-start justify-between gap-8 py-16 md:flex-row md:items-center md:py-24">
           <h2 className="max-w-2xl text-balance text-3xl font-semibold leading-[1.05] tracking-tight text-bone-50 md:text-5xl">
             {t.case.ctaA}{" "}

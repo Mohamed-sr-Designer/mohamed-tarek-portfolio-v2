@@ -6,6 +6,7 @@ import { Reveal } from "@/components/ui/Reveal";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { Media } from "@/components/ui/Media";
 import { useLang } from "@/lib/i18n";
+import { site } from "@/lib/site";
 import {
   avatarFor,
   recommendations,
@@ -47,7 +48,7 @@ function Card({
         {/* Photo in the circle the initials used to fill. The initials stay
             underneath as the fallback, so a missing avatar degrades to the
             old treatment instead of an empty ring. */}
-        <span className="relative grid h-11 w-11 shrink-0 place-items-center overflow-hidden rounded-full border border-line/15 bg-ink-800 font-serif text-sm text-mint">
+        <span className="relative grid h-11 w-11 shrink-0 place-items-center overflow-hidden rounded-full border border-line/15 bg-ink-900 font-serif text-sm text-mint">
           {initials(rec.name)}
           <Media
             src={avatarFor(rec.name)}
@@ -107,7 +108,7 @@ export default function Recommendations() {
   return (
     <section
       id="recommendations"
-      className="border-y border-line/10 bg-ink-800/40 scroll-mt-24"
+      className="border-y border-line/10 bg-ink-800 scroll-mt-24"
     >
       <div className="container-edge mx-auto max-w-edge section-y">
         <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
@@ -153,15 +154,31 @@ export default function Recommendations() {
           </AnimatePresence>
         </div>
 
-        {hidden > 0 ? (
-          <button
-            type="button"
-            onClick={() => setExpanded(true)}
-            className="mx-auto mt-6 flex items-center gap-2 rounded-full border border-line/25 px-6 py-3 text-sm text-bone-200 transition-colors duration-300 hover:border-mint/50 hover:text-mint"
+        <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+          {hidden > 0 ? (
+            <button
+              type="button"
+              onClick={() => setExpanded(true)}
+              className="flex items-center gap-2 rounded-full border border-line/25 px-6 py-3 text-sm text-bone-200 transition-colors duration-300 hover:border-mint/50 hover:text-mint"
+            >
+              {t.recs.showAll} · {hidden}
+            </button>
+          ) : null}
+          <a
+            href={`${site.linkedin}details/recommendations/`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group flex items-center gap-2.5 rounded-full bg-mint px-6 py-3 text-sm font-medium text-white transition-transform duration-300 hover:scale-[1.03]"
           >
-            {t.recs.showAll} · {hidden}
-          </button>
-        ) : null}
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+              <path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.5 8h4V24h-4V8zm7.5 0h3.8v2.2h.05c.53-1 1.83-2.2 3.77-2.2 4.03 0 4.78 2.65 4.78 6.1V24h-4v-8.5c0-2.03-.04-4.64-2.83-4.64-2.83 0-3.27 2.2-3.27 4.5V24H8V8z" />
+            </svg>
+            {t.recs.verify}
+            <span aria-hidden className="transition-transform duration-300 group-hover:translate-x-0.5 rtl:rotate-180">
+              ↗
+            </span>
+          </a>
+        </div>
       </div>
     </section>
   );
