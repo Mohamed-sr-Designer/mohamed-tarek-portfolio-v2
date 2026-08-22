@@ -1,0 +1,46 @@
+# Security headers.
+#
+# Read natively by Netlify and Cloudflare Pages. GitHub Pages ignores this file
+# entirely -- it serves no custom headers at all -- so on Pages the site runs
+# without them. Equivalents for nginx and Apache are in the README.
+#
+# The policy is this tight because the site loads nothing from anyone else:
+# next/font self-hosts the four typefaces, there is no analytics, no CDN, no
+# embeds. The only external URLs in the markup are outbound links (LinkedIn,
+# wa.me, github.com) and XML namespace URIs, none of which are fetched.
+/*
+  # 'unsafe-inline' on script-src is not laziness: a static export has no
+  # per-request nonce, and Next inlines its hydration payload as ~12 inline
+  # <script> blocks. The upgrade path is SHA-256 hashes of those blocks,
+  # regenerated per build -- worth it only if third-party script ever lands
+  # here. Today the XSS surface is a site with no inputs, no auth and no
+  # cookies. style-src needs it unconditionally: Framer Motion writes inline
+  # styles on every animated element.
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; media-src 'self'; font-src 'self'; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'; upgrade-insecure-requests
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()
+  X-Frame-Options: DENY
+  Cross-Origin-Opener-Policy: same-origin
+  Cross-Origin-Resource-Policy: same-origin
+  # Only safe once the host serves HTTPS on every subdomain.
+  Strict-Transport-Security: max-age=31536000; includeSubDomains
+
+# Hashed build output is immutable -- it is safe to cache it forever.
+/_next/static/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Images and video carry a ?v= content stamp (see lib/assets.ts), so the URL
+# changes whenever the bytes do and a long cache can never serve a stale file.
+/work/*
+  Cache-Control: public, max-age=31536000, immutable
+/me/*
+  Cache-Control: public, max-age=31536000, immutable
+/logos/*
+  Cache-Control: public, max-age=31536000, immutable
+/tools/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# HTML must revalidate or a deploy never reaches anyone.
+/*.html
+  Cache-Control: public, max-age=0, must-revalidate

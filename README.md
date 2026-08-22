@@ -1,76 +1,166 @@
-# Mohamed Tarek — Jr. Art Director · Portfolio
+# Mohamed Tarek — Sr Designer, Team Lead · Portfolio
 
-A premium, cinematic, narrative-driven portfolio built with **Next.js (App Router)
-· TypeScript · Tailwind CSS · Framer Motion**, with light/dark themes, smooth
-scrolling (Lenis), blur-up images, full SEO, and statically generated case-study
-pages.
+Bilingual (EN/AR) portfolio and lead-generation site. **Next.js 14 App Router ·
+TypeScript · Tailwind · Framer Motion**, exported as a fully static site — no
+server, no database, no API routes, no runtime environment variables.
 
----
-
-## Quick start
+Requires **Node ≥ 20.9**.
 
 ```bash
-npm install
+npm ci
 npm run dev      # http://localhost:3000
-npm run build    # production build
-npm run start    # serve the production build
-```
-
-Asset scripts (only needed if you change the source art):
-
-```bash
-npm run optimize            # source images/_raw -> optimized WebP in /public
-node scripts/build-raw-assets.mjs   # rasterize branding PDFs + portrait + clients board
+npm run build    # static export -> out/
+npm run qa       # audits the export (see "QA" below)
+npm run lint
 ```
 
 ---
 
-## Where things live
+## What ships
+
+`npm run build` writes a self-contained static site to `out/`. Serve that
+directory from anything — S3, nginx, Netlify, Cloudflare Pages, GitHub Pages.
+There is nothing to run.
+
+The only build-time inputs are two environment variables, both optional:
+
+| Variable | Purpose |
+| --- | --- |
+| `NEXT_PUBLIC_BASE_PATH` | Sub-path the site is served from. Set to `/mohamed-tarek-portfolio` by the GitHub Pages workflow. **Leave unset when hosting at a domain root.** |
+| `NEXT_DIST_DIR` | Build cache location. See the warning under "Gotchas". |
+
+---
+
+## Layout
 
 ```
-app/
-  layout.tsx              fonts, SEO, theme no-flash script
-  page.tsx                home (Hero, Visual Index, About, Clients, Work,
-                          Process, Experience, Skills, Toolkit, Vision, Contact)
-  work/[slug]/page.tsx    case study (Challenge → Strategy → Direction → Execution → Impact)
-components/               all sections + ThemeToggle + animation helpers
+app/               routes (/, /about, /contact, /work/[slug]) + metadata + JSON-LD
+components/        one file per section; ui/ holds the shared primitives
 lib/
-  site.ts                 ← name, role, contacts (email/WhatsApp/phone/LinkedIn)
-  projects.ts             ← all project content + galleries + the visual-index mosaic
-  assets.json             auto-generated image dimensions + blur placeholders
-scripts/                  image pipeline (sharp) + PDF rasterizers (pdf-to-img)
-public/work/              optimized, web-ready images (committed)
-public/me/                portrait + "brands I've worked with" board (dark + light)
+  dict.ts          every user-facing string, EN and AR. `ar` is typed
+                   `typeof en`, so the two can never drift apart silently
+  projects.ts      case-study content and gallery ordering
+  assets.json      generated image manifest — do not hand-edit
+  assets.ts        getAsset() / assetUrl(); owns the cache stamp
+  i18n.tsx         language provider (client-side, localStorage-backed)
+scripts/           asset pipeline + QA. Only three are wired into npm
+public/            everything served verbatim
 ```
 
-## Light / dark mode
+### The asset manifest
 
-The whole UI is driven by CSS variables that flip on `data-theme` (`dark`
-default). Toggle is in the nav; the choice is saved to `localStorage`. Tokens
-live in `app/globals.css`; Tailwind maps `ink` / `bone` / `line` / `mint` /
-`electric` to them in `tailwind.config.ts`.
+`lib/assets.json` maps each image to its width, height, a base64 blur
+placeholder, and `v` — a hash of the file's own bytes.
 
-## Editing content
+`assetUrl()` appends that hash as `?v=…`. This is load-bearing, not decoration:
+asset filenames here are deliberately stable (the hero banner is always
+`/me/banner-2026.webp`), so without the stamp a replaced image keeps its old
+URL and every browser and CDN holding the previous bytes goes on serving them.
+Four consecutive image replacements deployed correctly and all four looked like
+they had silently failed before this existed.
 
-- **Contact info / title / location** → `lib/site.ts`
-- **Projects, copy, galleries** → `lib/projects.ts`
-- **About bio + traits** → `components/About.tsx`
-- **Experience / Toolkit / Skills** → the matching component files
+`scripts/stamp-assets.mjs` regenerates the hashes and runs automatically as a
+`prebuild` hook, so they cannot drift from the files — including in CI.
 
-To swap or add project images: drop new source files in the asset library,
-update the manifest in `scripts/optimize-assets.mjs`, run `npm run optimize`.
+Any component that builds its own `<img src>` or `<video src>` must use
+`assetUrl()`, not a raw path, or that one asset will cache-poison while
+everything around it updates.
 
 ---
 
 ## Deployment
 
-Best on **Vercel** (zero config for Next.js). Import the repo, set your
-production domain, then update `url` in `lib/site.ts`.
+Currently GitHub Pages via `.github/workflows/deploy.yml` — builds on every push
+to `main` with `NEXT_PUBLIC_BASE_PATH` set to the repo name.
 
-## Note on `npm audit`
+**Moving to a real host:** drop `NEXT_PUBLIC_BASE_PATH` (unless serving from a
+sub-path), build, and upload `out/`. Nothing else changes.
 
-`npm audit` lists Next.js advisories whose only fix is Next 16 (a major upgrade
-needing React 19 + an async-`params` migration). They concern features this
-static site does not use (middleware, rewrites, i18n, remote images, server
-actions), so practical risk is negligible. **Do not run `npm audit fix --force`**
-— it force-installs Next 16 and breaks the build.
+### Security headers
+
+`public/_headers` carries the full set — CSP, HSTS, `nosniff`,
+`Referrer-Policy`, `Permissions-Policy`, frame denial, and cache policy. It is
+read natively by **Netlify** and **Cloudflare Pages**.
+
+**GitHub Pages ignores it** — Pages serves no custom headers at all, so the
+site currently runs without any of them. That is the single biggest reason to
+move hosts.
+
+nginx equivalent:
+
+```nginx
+add_header Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; media-src 'self'; font-src 'self'; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'; upgrade-insecure-requests" always;
+add_header X-Content-Type-Options "nosniff" always;
+add_header Referrer-Policy "strict-origin-when-cross-origin" always;
+add_header Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()" always;
+add_header X-Frame-Options "DENY" always;
+add_header Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
+
+location /_next/static/ { add_header Cache-Control "public, max-age=31536000, immutable"; }
+location ~* \.html$      { add_header Cache-Control "public, max-age=0, must-revalidate"; }
+```
+
+Apache: the same directives inside `<IfModule mod_headers.c>` as `Header always
+set …`.
+
+**On `'unsafe-inline'`:** a static export has no per-request nonce, and Next
+inlines its hydration payload as roughly a dozen `<script>` blocks. The upgrade
+is SHA-256 hashes of those blocks regenerated per build — worth doing the day
+any third-party script lands here. `style-src` needs it unconditionally because
+Framer Motion writes inline styles. The site has no inputs, no auth and no
+cookies, so the practical XSS surface today is nil.
+
+---
+
+## QA
+
+`npm run qa` checks the export: every referenced asset resolves, every page has
+a title, description, canonical and exactly one `h1`, all JSON-LD parses, and
+the sitemap and robots files are present.
+
+It **refuses to run against a stale export** and exits 1 if `out/` is older than
+the newest file in `components/`, `lib/` or `app/`. This is deliberate: a green
+QA run that graded a half-hour-old build once passed all six checks while saying
+nothing about the code just written.
+
+---
+
+## Gotchas
+
+**`NEXT_DIST_DIR` also moves the export.** It exists so a local build does not
+clobber a running dev server's cache, but with `output: "export"` it redirects
+the exported site too — the build lands in that directory and `out/` is left
+untouched. Either stop the dev server before building, or expect the export
+somewhere else. The QA staleness guard exists because of this.
+
+**Running `npm run build` while `npm run dev` is live** overwrites `.next` and
+leaves the dev server serving 404s for chunks it thinks it still has. Symptom: a
+page that renders unstyled, or a section reporting an absurd height. Fix:
+`rm -rf .next` and restart.
+
+**`lib/assets.json` is generated.** Re-run the relevant script in `scripts/`
+rather than editing it.
+
+---
+
+## Known gaps
+
+**Arabic has no SEO presence.** The language switch is client-side and both
+languages share one URL, so every page renders English into the HTML and search
+engines never see a word of Arabic content — verified: the only Arabic string in
+the exported markup is the switcher's own label. There is no `hreflang` either,
+and adding one would be dishonest without distinct URLs to point at.
+
+For a site targeting Egypt, Saudi Arabia and Kuwait this is the largest
+remaining SEO opportunity. The fix is real routing — an `/ar/` route group or a
+`[lang]` segment rendering `dict.ar` at build time — which gives each language
+its own indexable URL, at which point reciprocal `hreflang` tags become correct
+and worth adding.
+
+**Two high-severity advisories remain** in production dependencies, both in
+PostCSS as bundled inside Next 14. They are build-time CSS processing and
+require attacker-controlled CSS input, which does not exist here. Clearing them
+means a Next 15/16 major upgrade — worth scheduling, not urgent.
+
+**React 18 → 19 and Framer Motion 11 → 13** are available and untaken. Both are
+breaking; neither is blocking.

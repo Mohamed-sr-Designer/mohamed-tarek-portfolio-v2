@@ -14,22 +14,15 @@ const en = {
     contact: "Contact",
     letsTalk: "Let's talk",
     roleTag: "· Sr Designer, Team Lead",
-    langBtn: "عربي",
   },
   hero: {
     avail: "Available, Full-time · Remote · Freelance · Hybrid",
-    portfolio: "Portfolio · 2026",
-    intro: "Mohamed Tarek · Sr Designer, Team Lead · based in Egypt",
     l1: "The designer brands",
     l2: "call when they need",
     l3pre: "to be",
     l3accent: "unforgettable.",
     ctaPrimary: "Selected work",
     ctaSecondary: "Hire me ↗",
-    markets:
-      "Working across Egypt · Saudi Arabia · Kuwait, strategy first, craft always.",
-    chipRole: "SR DESIGNER, TEAM LEAD · EGYPT",
-    chipBadge: "ART DIRECTION",
   },
   work: {
     label: "Selected Work",
@@ -233,7 +226,6 @@ const en = {
     note: "Live websites I designed and built through vibe coding, AI-assisted development. Even this portfolio is vibe-coded. Pick one to preview it.",
     live: "Live ↗",
     visit: "Open live site",
-    sites: "sites shipped",
   },
   social: {
     label: "Selected designs, a continuous wall of work",
@@ -298,14 +290,11 @@ const en = {
     h2i: "I make them",
     h2b: ".",
     note: "Instructor across four academies, and an on-call advisor, visiting teams to solve design problems on the ground.",
-    statNote:
-      "Close to 1,200 students graduated across 49 cohorts, numbers are approximate, and still counting.",
     stats: [
       { n: "~1,200", l: "students graduated" },
       { n: "49", l: "cohorts taught" },
       { n: "4", l: "academies" },
     ],
-    current: "Current",
     role: "Design Instructor",
     academies: [
       {
@@ -331,40 +320,6 @@ const en = {
         logo: "/orgs/raya.webp",
         now: false,
         desc: "Hands-on graphic design cohorts, photo manipulation, landing pages and branding, taught project by project.",
-      },
-    ],
-  },
-  process: {
-    label: "Creative Process",
-    h2a: "From a brief to a",
-    h2i: "decision",
-    h2b: ".",
-    note: "Direction is decision-making, the path I take every brand through, from understanding to execution.",
-    steps: [
-      {
-        n: "01",
-        title: "Research",
-        body: "I start with the business, the market and the audience, what the brand needs to achieve, and what everyone else is already saying.",
-      },
-      {
-        n: "02",
-        title: "Insight",
-        body: "I find the one truth that unlocks the work, the tension that makes people care. The insight is the strategy in a single sentence.",
-      },
-      {
-        n: "03",
-        title: "Concept",
-        body: "I translate the insight into a creative idea big enough to live across channels, a platform, not a poster.",
-      },
-      {
-        n: "04",
-        title: "Direction",
-        body: "I define the visual language: type, colour, light and tone. The idea becomes a world with rules everyone can build on.",
-      },
-      {
-        n: "05",
-        title: "Execution",
-        body: "I bring it to life and hold the bar across every touchpoint, from the hero frame to the smallest story.",
       },
     ],
   },
@@ -443,26 +398,6 @@ const en = {
     alsoCol: "Also work with",
     alsoNote: "Comfortable, but not what I lead with",
   },
-  vision: {
-    label: "Vision",
-    h2a: "I want to turn a business problem into the",
-    h2i: "idea",
-    h2b: "everyone rallies behind.",
-    pillars: [
-      {
-        k: "Where I am",
-        v: "An art Team Lead with a designer's craft and a strategist's instinct, already leading the team and building work that performs in market.",
-      },
-      {
-        k: "Where I'm heading",
-        v: "Creative direction: owning concepts end to end, shaping visual languages, and raising the craft of the people around me.",
-      },
-      {
-        k: "Why direction",
-        v: "My strongest work was never about decoration, it's about decisions. That's where strategy, craft and leadership meet.",
-      },
-    ],
-  },
   contact: {
     label: "Contact",
     h2a: "Let's make work that's",
@@ -480,8 +415,6 @@ const en = {
     startProject: "Start a project ↗",
   },
   case: {
-    allWork: "All work",
-    letsTalk: "Let's talk",
     challenge: "The Challenge",
     solution: "The Solution",
     ctaA: "Got a brand worth building?",
@@ -496,9 +429,6 @@ const en = {
     frames: "frames in this stage",
     stageHint: "Pick a stage of the production",
     finalVideos: "Final Videos",
-    interactive: "Interactive",
-    prev: "Previous",
-    next: "Next",
   },
 };
 
@@ -513,21 +443,15 @@ const ar: typeof en = {
     contact: "تواصل",
     letsTalk: "لنتحدث",
     roleTag: "· مصمم أول، قائد فريق",
-    langBtn: "EN",
   },
   hero: {
     avail: "متاح، دوام كامل · عن بُعد · فريلانس · هجين",
-    portfolio: "بورتفوليو · ٢٠٢٦",
-    intro: "محمد طارق · مصمم أول، قائد فريق · مقيم في مصر",
     l1: "المصمّم الذي تناديه",
     l2: "العلامات التجارية حين",
     l3pre: "تريد أن تكون",
     l3accent: "لا تُنسى.",
     ctaPrimary: "أعمال مختارة",
     ctaSecondary: "وظّفني ↗",
-    markets: "أعمل عبر مصر · السعودية · الكويت، الاستراتيجية أولًا، والحِرفة دائمًا.",
-    chipRole: "مصمم أول، قائد فريق · مصر",
-    chipBadge: "آرت دايركشن",
   },
   work: {
     label: "أعمال مختارة",
@@ -797,7 +721,6 @@ const ar: typeof en = {
     note: "مواقع حيّة صمّمتها وبنيتها بالتطوير المعزّز بالذكاء الاصطناعي. حتى هذا البورتفوليو مبني بنفس الطريقة. اختر موقعًا لمعاينته.",
     live: "مباشر ↗",
     visit: "افتح الموقع",
-    sites: "موقع منشور",
   },
   social: {
     label: "تصاميم مختارة، جدار متواصل من الأعمال",
@@ -862,13 +785,11 @@ const ar: typeof en = {
     h2i: "أنا أصنعهم",
     h2b: ".",
     note: "مُحاضر في أربع أكاديميات، ومستشار عند الطلب، أزور الفرق لحل مشكلات التصميم على أرض الواقع.",
-    statNote: "قرابة ١٢٠٠ طالب تخرّجوا عبر ٤٩ دفعة، الأرقام تقريبية، وما زالت تنمو.",
     stats: [
       { n: "~١٢٠٠", l: "طالب متخرّج" },
       { n: "٤٩", l: "دفعة تدريبية" },
       { n: "٤", l: "أكاديميات" },
     ],
-    current: "حاليًا",
     role: "مُحاضر تصميم",
     academies: [
       {
@@ -894,40 +815,6 @@ const ar: typeof en = {
         logo: "/orgs/raya.webp",
         now: false,
         desc: "دفعات جرافيك عملية، فوتو مانيبيوليشن وصفحات هبوط وبراندينج، مشروعًا بمشروع.",
-      },
-    ],
-  },
-  process: {
-    label: "منهجية العمل",
-    h2a: "من البريف إلى",
-    h2i: "قرار",
-    h2b: ".",
-    note: "الإخراج هو صناعة القرار، المسار الذي آخذ فيه كل علامة، من الفهم حتى التنفيذ.",
-    steps: [
-      {
-        n: "01",
-        title: "البحث",
-        body: "أبدأ من العمل والسوق والجمهور، ما الذي تحتاج العلامة تحقيقه، وما الذي يقوله الجميع بالفعل.",
-      },
-      {
-        n: "02",
-        title: "الإنسايت",
-        body: "أجد الحقيقة الواحدة التي تفتح العمل، التوتّر الذي يجعل الناس تهتم. الإنسايت هو الاستراتيجية في جملة.",
-      },
-      {
-        n: "03",
-        title: "الفكرة",
-        body: "أترجم الإنسايت إلى فكرة إبداعية كبيرة تكفي لتعيش عبر القنوات، منصة، لا بوستر.",
-      },
-      {
-        n: "04",
-        title: "الاتجاه الفني",
-        body: "أحدّد اللغة البصرية: الخط واللون والضوء والنبرة. تتحوّل الفكرة إلى عالمٍ بقواعد يبني عليها الجميع.",
-      },
-      {
-        n: "05",
-        title: "التنفيذ",
-        body: "أحوّلها إلى واقع وأحافظ على المستوى في كل نقطة تماس، من الإطار البطولي حتى أصغر ستوري.",
       },
     ],
   },
@@ -1002,26 +889,6 @@ const ar: typeof en = {
     alsoCol: "وأشتغل كمان بـ",
     alsoNote: "مرتاح فيها، لكنها مش الأساس",
   },
-  vision: {
-    label: "الرؤية",
-    h2a: "أريد أن أحوّل مشكلة العمل إلى",
-    h2i: "الفكرة",
-    h2b: "التي يلتفّ حولها الجميع.",
-    pillars: [
-      {
-        k: "أين أنا",
-        v: "قائد فريق فني بحِرفة مصمّم وحدس استراتيجي، أقود الفريق فعلًا وأبني أعمالًا تُحقق نتائج في السوق.",
-      },
-      {
-        k: "إلى أين أتجه",
-        v: "الإخراج الإبداعي: امتلاك المفاهيم من البداية للنهاية، وصياغة اللغات البصرية، ورفع حِرفة من حولي.",
-      },
-      {
-        k: "لماذا الإخراج",
-        v: "أقوى أعمالي لم تكن يومًا عن الزخرفة، بل عن القرارات. هناك تلتقي الاستراتيجية والحِرفة والقيادة.",
-      },
-    ],
-  },
   contact: {
     label: "تواصل",
     h2a: "لنصنع عملًا",
@@ -1039,8 +906,6 @@ const ar: typeof en = {
     startProject: "ابدأ مشروعًا ↗",
   },
   case: {
-    allWork: "كل الأعمال",
-    letsTalk: "لنتحدث",
     challenge: "التحدّي",
     solution: "الحل",
     ctaA: "عندك علامة تستحق البناء؟",
@@ -1055,9 +920,6 @@ const ar: typeof en = {
     frames: "لقطة في المرحلة دي",
     stageHint: "اختر مرحلة من الإنتاج",
     finalVideos: "الفيديوهات النهائية",
-    interactive: "تفاعلي",
-    prev: "السابق",
-    next: "التالي",
   },
 };
 
