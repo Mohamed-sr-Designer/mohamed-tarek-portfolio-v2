@@ -27,6 +27,7 @@ The only build-time inputs are two environment variables, both optional:
 | Variable | Purpose |
 | --- | --- |
 | `NEXT_PUBLIC_BASE_PATH` | Sub-path the site is served from. Set to `/mohamed-tarek-portfolio` by the GitHub Pages workflow. **Leave unset when hosting at a domain root.** |
+| `NEXT_PUBLIC_SITE_URL` | Canonical origin, no trailing slash. Every canonical tag, Open Graph URL, sitemap entry and JSON-LD @id is built from it. **Must be set to the new address when moving hosts** or all 15 pages keep telling Google the real version lives on the old domain. |
 | `NEXT_DIST_DIR` | Build cache location. See the warning under "Gotchas". |
 
 ---
@@ -73,8 +74,17 @@ everything around it updates.
 Currently GitHub Pages via `.github/workflows/deploy.yml` — builds on every push
 to `main` with `NEXT_PUBLIC_BASE_PATH` set to the repo name.
 
-**Moving to a real host:** drop `NEXT_PUBLIC_BASE_PATH` (unless serving from a
-sub-path), build, and upload `out/`. Nothing else changes.
+**Moving to a real host:**
+
+```bash
+NEXT_PUBLIC_SITE_URL="https://yourdomain.com" npm run build
+```
+
+Then upload the contents of `out/` to the web root. Leave
+`NEXT_PUBLIC_BASE_PATH` unset unless the site lives under a sub-path.
+
+Verify before going live: `grep -o 'rel="canonical" href="[^"]*"' out/index.html`
+should show the new domain, not the old one.
 
 ### Security headers
 

@@ -6,7 +6,16 @@ export const site = {
   description:
     "Mohamed Tarek is a Sr Designer and Team Lead based in Egypt, working across Egypt, Saudi Arabia and Kuwait. He builds brand identities, ad campaigns, social media systems, key visuals and motion, and is available for full-time, remote, freelance and hybrid roles.",
   availability: "Full-time · Remote · Freelance · Hybrid",
-  url: "https://mohamed-sr-designer.github.io/mohamed-tarek-portfolio",
+  // Canonical origin. Every canonical tag, Open Graph URL, sitemap entry
+  // and JSON-LD @id is built from this, so on a new host it MUST be the new
+  // address -- left pointing at the old one, all 15 pages would tell Google the
+  // real version lives somewhere else and the new domain would never rank.
+  //
+  // Set NEXT_PUBLIC_SITE_URL at build time when deploying anywhere other than
+  // the current GitHub Pages address. No trailing slash.
+  url:
+    process.env.NEXT_PUBLIC_SITE_URL ||
+    "https://mohamed-sr-designer.github.io/mohamed-tarek-portfolio",
   email: "mohamed.tarek.ahmed1@gmail.com",
   phoneDisplay: "+20 10 1145 8929",
   phone: "+201011458929",
