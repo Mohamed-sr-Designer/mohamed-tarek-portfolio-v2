@@ -6,7 +6,6 @@ import { site } from "@/lib/site";
 import { useLang } from "@/lib/i18n";
 import { Media } from "@/components/ui/Media";
 import Magnetic from "@/components/ui/Magnetic";
-import { useContent } from "@/lib/content";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
@@ -64,7 +63,6 @@ function SocialIcon({
 export default function Hero() {
   const reduce = useReducedMotion();
   const { t } = useLang();
-  const { gta } = useContent();
 
   return (
     <section
@@ -76,14 +74,12 @@ export default function Hero() {
     >
       <div className="relative aspect-[4/5] w-full sm:aspect-[16/10] md:absolute md:inset-0 md:aspect-auto">
         <Media
-          key={gta ? "gta" : "std"}
-          src={gta ? "/me/gta-hero.webp" : "/me/hero-cairo.webp"}
+          src="/me/banner-2026.webp"
           alt={`${site.name} — ${site.role}`}
           fill
           priority
           sizes="100vw"
-          // both covers put him on the right third, so phones crop toward him
-          className="object-cover object-[72%_center] md:object-center"
+          className="object-cover object-center"
         />
         {/* Overlay scrim, md and up only -- on phones the copy is off the photo
             and a scrim would just dim it for nothing. */}
@@ -126,14 +122,6 @@ export default function Hero() {
             direction stays RTL, so the Arabic still runs right to left inside
             each line. */}
         <div className="max-w-lg rtl:mr-auto rtl:text-left md:max-w-[26rem] lg:max-w-lg xl:max-w-xl 2xl:max-w-[40rem]">
-          {/* GTA VI Edition: a cover-art lockup of the name above the line */}
-          {gta ? (
-            <p aria-hidden className="gta-lockup mb-4 font-[family-name:var(--font-gta)] uppercase leading-[0.86] text-white">
-              <span className="block text-[13vw] md:text-[clamp(3.5rem,6vw,6.5rem)]">Mohamed</span>
-              <span className="block text-[13vw] md:text-[clamp(3.5rem,6vw,6.5rem)]">Tarek</span>
-              <span className="mt-2 inline-block rounded-md border-2 border-white px-2 text-[7vw] leading-none md:text-[clamp(1.6rem,2.6vw,2.8rem)]">VI</span>
-            </p>
-          ) : null}
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}

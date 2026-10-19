@@ -17,7 +17,8 @@ export default function Preloader() {
     try {
       seen = sessionStorage.getItem("preloaded") === "1";
     } catch {}
-    if (reduce || seen) {
+    const gta = document.documentElement.dataset.edition === "gta";
+    if (reduce || seen || gta) {
       setDone(true);
       return;
     }
