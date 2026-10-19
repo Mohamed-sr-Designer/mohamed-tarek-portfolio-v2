@@ -77,12 +77,13 @@ export default function Hero() {
       <div className="relative aspect-[4/5] w-full sm:aspect-[16/10] md:absolute md:inset-0 md:aspect-auto">
         <Media
           key={gta ? "gta" : "std"}
-          src={gta ? "/me/gta-hero.webp" : "/me/banner-2026.webp"}
+          src={gta ? "/me/gta-hero.webp" : "/me/hero-cairo.webp"}
           alt={`${site.name} — ${site.role}`}
           fill
           priority
           sizes="100vw"
-          className={`object-cover ${gta ? "object-[70%_center]" : "object-center"}`}
+          // both covers put him on the right third, so phones crop toward him
+          className="object-cover object-[72%_center] md:object-center"
         />
         {/* Overlay scrim, md and up only -- on phones the copy is off the photo
             and a scrim would just dim it for nothing. */}
