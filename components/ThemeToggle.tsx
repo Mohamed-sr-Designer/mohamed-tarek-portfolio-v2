@@ -2,11 +2,12 @@
 
 import { useContent } from "@/lib/content";
 import { useLang } from "@/lib/i18n";
+import type { Lang } from "@/lib/dict";
 
-// Dark / light switch, in the header. Two options rather than one icon that
-// flips: a lone sun or moon has to be read as "switch to" rather than as a
-// state. Each option carries its own border and fill, so the inactive one
-// still reads as something you can press -- not as a label.
+// Language and theme, together in the header as one compact group: EN / ع on
+// one side of a hairline, moon / sun on the other. One pill instead of two
+// keeps the header calm. Every option carries its own border and fill, so the
+// inactive one still reads as something you can press -- not as a label.
 const Sun = () => (
   <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden>
     <circle cx="12" cy="12" r="4.2" />
@@ -19,39 +20,54 @@ const Moon = () => (
   </svg>
 );
 
+const btn = (on: boolean) =>
+  `grid h-9 min-w-9 place-items-center rounded-full border px-2 text-[12px] font-semibold transition-colors duration-300 md:h-8 md:min-w-8 ${
+    on
+      ? "border-mint/70 bg-mint text-ink-900"
+      : "border-line/20 bg-ink-700 text-bone-300 hover:border-mint/50 hover:text-mint"
+  }`;
+
 export default function ThemeToggle() {
   const { theme, setTheme } = useContent();
-  const { t } = useLang();
-  const opts = [
-    { v: "dark" as const, label: t.nav.dark, icon: <Moon /> },
-    { v: "light" as const, label: t.nav.light, icon: <Sun /> },
+  const { t, lang, setLang } = useLang();
+  const langs: { v: Lang; label: string; name: string }[] = [
+    { v: "en", label: "EN", name: "English" },
+    { v: "ar", label: "ع", name: "العربية" },
   ];
   return (
-    <div
-      role="group"
-      aria-label={t.nav.theme}
-      className="inline-flex items-center gap-1 rounded-full border border-line/20 bg-ink-800/80 p-1"
-    >
-      {opts.map((o) => {
-        const on = theme === o.v;
-        return (
+    <div className="inline-flex items-center gap-1 rounded-full border border-line/20 bg-ink-800/80 p-1">
+      <div role="group" aria-label={t.footer.language} className="flex gap-1">
+        {langs.map((l) => (
           <button
-            key={o.v}
+            key={l.v}
             type="button"
-            onClick={() => setTheme(o.v)}
-            aria-pressed={on}
-            aria-label={o.label}
-            title={o.label}
-            className={`grid h-10 w-10 place-items-center rounded-full border md:h-8 md:w-8 transition-colors duration-300 ${
-              on
-                ? "border-mint/70 bg-mint text-ink-900"
-                : "border-line/20 bg-ink-700 text-bone-300 hover:border-mint/50 hover:text-mint"
-            }`}
+            lang={l.v}
+            onClick={() => setLang(l.v)}
+            aria-pressed={lang === l.v}
+            aria-label={l.name}
+            title={l.name}
+            className={btn(lang === l.v)}
           >
-            {o.icon}
+            {l.label}
           </button>
-        );
-      })}
+        ))}
+      </div>
+      <span aria-hidden className="mx-0.5 h-5 w-px bg-line/20" />
+      <div role="group" aria-label={t.nav.theme} className="flex gap-1">
+        {(["dark", "light"] as const).map((v) => (
+          <button
+            key={v}
+            type="button"
+            onClick={() => setTheme(v)}
+            aria-pressed={theme === v}
+            aria-label={v === "dark" ? t.nav.dark : t.nav.light}
+            title={v === "dark" ? t.nav.dark : t.nav.light}
+            className={btn(theme === v)}
+          >
+            {v === "dark" ? <Moon /> : <Sun />}
+          </button>
+        ))}
+      </div>
     </div>
   );
 }

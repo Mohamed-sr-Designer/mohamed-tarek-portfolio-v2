@@ -30,7 +30,7 @@ export function LangProvider({ children }: { children: React.ReactNode }) {
   const { settings } = useContent();
 
   // hydrate from storage after mount (SSR renders English). English is the
-  // default; Arabic is the option in the footer. A visitor's own choice wins,
+  // default; Arabic is the option in the header. A visitor's own choice wins,
   // then the dashboard's default.
   useEffect(() => {
     try {
@@ -44,14 +44,27 @@ export function LangProvider({ children }: { children: React.ReactNode }) {
     const el = document.documentElement;
     el.lang = lang;
     el.dir = lang === "ar" ? "rtl" : "ltr";
-    try {
-      localStorage.setItem("lang", lang);
-    } catch {}
   }, [lang]);
 
-  const setLang = useCallback((l: Lang) => setLangState(l), []);
+  // The choice is saved only when the visitor makes it. Saving from the effect
+  // above wrote the initial "en" back before the saved value was read, so any
+  // remount (a draft preview, the edition switch) reset Arabic to English.
+  const save = (l: Lang) => {
+    try {
+      localStorage.setItem("lang", l);
+    } catch {}
+  };
+  const setLang = useCallback((l: Lang) => {
+    save(l);
+    setLangState(l);
+  }, []);
   const toggle = useCallback(
-    () => setLangState((v) => (v === "en" ? "ar" : "en")),
+    () =>
+      setLangState((v) => {
+        const next = v === "en" ? "ar" : "en";
+        save(next);
+        return next;
+      }),
     []
   );
 

@@ -3,6 +3,7 @@ import { clone, deepMerge, type Overrides } from "./merge";
 import { part1 } from "./articles/part1";
 import { part2 } from "./articles/part2";
 import { part3 } from "./articles/part3";
+import { part4 } from "./articles/part4";
 
 // Long-form articles, the /articles section in the footer.
 //
@@ -46,9 +47,11 @@ export const articleCategories = [
   "Arabic & Bilingual Design",
   "Industries",
   "Leadership & Process",
+  "Tools & Craft",
+  "Logo Design",
 ] as const;
 
-const baseList: Article[] = [...part1, ...part2, ...part3];
+const baseList: Article[] = [...part1, ...part2, ...part3, ...part4];
 
 export const baseArticles: Article[] = clone(baseList);
 export const articles: Article[] = [];

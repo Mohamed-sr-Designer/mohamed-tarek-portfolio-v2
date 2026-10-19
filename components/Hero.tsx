@@ -81,16 +81,8 @@ export default function Hero() {
           sizes="100vw"
           className="object-cover object-center"
         />
-        {/* Overlay scrim, md and up only -- on phones the copy is off the photo
-            and a scrim would just dim it for nothing. */}
-        <div
-          aria-hidden
-          className="absolute inset-0 hidden bg-gradient-to-tr from-black/85 via-black/35 to-transparent md:block"
-        />
-        <div
-          aria-hidden
-          className="absolute inset-x-0 bottom-0 hidden h-24 bg-gradient-to-t from-ink-900 to-transparent md:block"
-        />
+        {/* no scrim over the photograph: v2 shows it clean, the type carries
+            its own shadow instead */}
       </div>
 
       <div className="container-edge relative z-10 mx-auto w-full max-w-edge pb-4 pt-10 md:pb-20 md:pt-44">
@@ -126,7 +118,7 @@ export default function Hero() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1, delay: 0.2 }}
-            className="flex items-center gap-2 text-[11px] uppercase tracking-[0.14em] text-bone-400 rtl:flex-row-reverse sm:text-xs sm:tracking-[0.28em] md:text-white/75"
+            className="flex items-center gap-2 text-[11px] uppercase tracking-[0.14em] text-bone-400 rtl:flex-row-reverse sm:text-xs sm:tracking-[0.28em] md:text-white md:[text-shadow:0_1px_12px_rgb(0_0_0/0.7)]"
           >
             <span className="relative flex h-2 w-2">
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-mint opacity-70 md:bg-white" />

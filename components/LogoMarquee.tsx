@@ -19,7 +19,7 @@ export default function LogoMarquee() {
         {[...logos, ...logos].map((n, i) => (
           <span
             key={`${n}-${i}`}
-            className="relative block h-14 w-36 shrink-0 opacity-75 transition-opacity duration-300 hover:opacity-100"
+            className="relative block h-14 w-36 shrink-0 opacity-75 transition-opacity duration-300 hover:opacity-100 light:invert"
           >
             <Media
               src={`/logos/dark/${n}.webp`}

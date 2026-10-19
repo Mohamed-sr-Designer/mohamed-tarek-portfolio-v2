@@ -323,7 +323,7 @@ function Overview({ go, changed }: { go: (t: Tab) => void; changed: boolean }) {
   const tiles: { t: Tab; title: string; body: string; n?: number }[] = [
     { t: "texts", title: "Texts", body: "Every heading, paragraph and button, in English and Arabic.", n: count(doc.en) + count(doc.ar) },
     { t: "projects", title: "Projects", body: "Case studies: copy, images, order, hide or add new ones.", n: count(doc.projects) + (doc.newProjects?.length ?? 0) },
-    { t: "articles", title: "Articles", body: "The 30 articles: titles, body, keywords and FAQ.", n: count(doc.articles) },
+    { t: "articles", title: "Articles", body: "Every article: titles, cover, body, keywords and FAQ.", n: count(doc.articles) },
     { t: "media", title: "Images", body: "Upload new images or replace any image on the site.", n: Object.keys(doc.assets ?? {}).length },
     { t: "site", title: "Contact & info", body: "Name, role, email, phone, WhatsApp, LinkedIn.", n: count(doc.site) },
     { t: "settings", title: "Theme & layout", body: "Default theme and language, accent colours, section order.", n: count(doc.settings) },

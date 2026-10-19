@@ -1,15 +1,21 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { assetUrl } from "@/lib/assets";
+import { withBase } from "@/lib/base";
 import { useContent } from "@/lib/content";
 import { useLang } from "@/lib/i18n";
 
 // The GTA VI Edition loading screen: cover art with a slow push-in, the title
-// lockup, a loading bar and rotating tips, like a game booting story mode.
-// Plays when the edition is switched on, and once per session on arrival.
-// Fire `window.dispatchEvent(new Event("gta-load"))` to play it on demand.
+// lockup, rotating tips, and a twelve-second loading bar that runs with a
+// quiet music cue, fading out as it lands you in the edition.
+//
+// Browsers only let sound start from a click or a key, so:
+//  - switching the edition on (a click) goes straight into the loader;
+//  - arriving in the edition cold shows a "press start" screen first, the
+//    way a game waits on its title screen, and the press starts the music.
+// `window.dispatchEvent(new Event("gta-load"))` plays it on demand.
 
 const TIPS = {
   en: [
@@ -18,7 +24,7 @@ const TIPS = {
     "Tip: sell the life, not the square metres.",
     "Tip: one offer per post. The number is the hero.",
     "Tip: Arabic needs more line height than Latin. Give it air.",
-    "Tip: press ← → on the home screen to switch titles.",
+    "Tip: press ← → on the home screen to switch the art.",
   ],
   ar: [
     "نصيحة: كل حملة بتبدأ بجملة، مش بصورة.",
@@ -26,19 +32,53 @@ const TIPS = {
     "نصيحة: بيع الحياة، مش الأمتار.",
     "نصيحة: عرض واحد في البوست. الرقم هو البطل.",
     "نصيحة: العربي محتاج مسافة سطور أكبر من الإنجليزي.",
-    "نصيحة: دوس ← → في الشاشة الرئيسية عشان تغيّر العنوان.",
+    "نصيحة: دوس ← → في الشاشة الرئيسية عشان تغيّر الصورة.",
   ],
 };
 
-const DURATION = 2600;
+const DURATION = 12000; // matches the music cue
+const VOLUME = 0.22;
+
+type Phase = "off" | "press" | "loading";
 
 export default function GtaLoader() {
   const { gta } = useContent();
   const { lang } = useLang();
-  const [show, setShow] = useState(false);
+  const [phase, setPhase] = useState<Phase>("off");
   const [tip, setTip] = useState(0);
+  const audio = useRef<HTMLAudioElement | null>(null);
 
-  // once per session on arrival in the edition
+  const fadeOut = useCallback(() => {
+    const a = audio.current;
+    if (!a) return;
+    const start = a.volume;
+    const t0 = performance.now();
+    const step = (now: number) => {
+      const k = Math.min(1, (now - t0) / 700);
+      a.volume = start * (1 - k);
+      if (k < 1) requestAnimationFrame(step);
+      else a.pause();
+    };
+    requestAnimationFrame(step);
+  }, []);
+
+  const finish = useCallback(() => {
+    fadeOut();
+    setPhase("off");
+  }, [fadeOut]);
+
+  const startLoading = useCallback(() => {
+    try {
+      const a = audio.current ?? new Audio(withBase("/audio/gta-loading.mp3"));
+      audio.current = a;
+      a.currentTime = 0;
+      a.volume = VOLUME;
+      void a.play().catch(() => {});
+    } catch {}
+    setPhase("loading");
+  }, []);
+
+  // cold arrival in the edition: once per session, behind a press-start
   useEffect(() => {
     if (!gta) return;
     let seen = false;
@@ -46,49 +86,63 @@ export default function GtaLoader() {
       seen = sessionStorage.getItem("gta-loaded") === "1";
       sessionStorage.setItem("gta-loaded", "1");
     } catch {}
-    if (!seen) setShow(true);
+    if (!seen) setPhase("press");
   }, [gta]);
 
+  // switched on from the header: that click already counts as the press
   useEffect(() => {
-    const play = () => setShow(true);
+    const play = () => startLoading();
     window.addEventListener("gta-load", play);
     return () => window.removeEventListener("gta-load", play);
-  }, []);
+  }, [startLoading]);
 
   useEffect(() => {
-    if (!show) return;
+    if (phase !== "press") return;
+    const go = () => startLoading();
+    window.addEventListener("keydown", go, { once: true });
+    return () => window.removeEventListener("keydown", go);
+  }, [phase, startLoading]);
+
+  useEffect(() => {
+    if (phase === "off") {
+      document.body.style.overflow = "";
+      return;
+    }
     document.body.style.overflow = "hidden";
+    if (phase !== "loading") return;
     setTip(Math.floor(Math.random() * TIPS.en.length));
-    const tipId = setInterval(() => setTip((x) => (x + 1) % TIPS.en.length), 1300);
-    const done = setTimeout(() => setShow(false), DURATION);
+    const tipId = setInterval(() => setTip((x) => (x + 1) % TIPS.en.length), 2400);
+    const done = setTimeout(finish, DURATION);
     return () => {
       clearInterval(tipId);
       clearTimeout(done);
-      document.body.style.overflow = "";
     };
-  }, [show]);
+  }, [phase, finish]);
+
+  useEffect(() => () => audio.current?.pause(), []);
 
   return (
     <AnimatePresence>
-      {show ? (
+      {phase !== "off" ? (
         <motion.div
           key="gta-loader"
-          className="fixed inset-0 z-[120] overflow-hidden bg-[#1a0b2e]"
+          className="fixed inset-0 z-[120] cursor-pointer overflow-hidden bg-[#1a0b2e]"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0, scale: 1.04 }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.6 }}
           role="status"
           aria-label="Loading"
+          onClick={phase === "press" ? startLoading : undefined}
         >
           <motion.div
             className="absolute inset-0 bg-cover bg-[70%_center]"
             style={{ backgroundImage: `url(${assetUrl("/me/gta-hero.webp")})` }}
-            initial={{ scale: 1.12 }}
-            animate={{ scale: 1 }}
-            transition={{ duration: DURATION / 1000 + 0.6, ease: "linear" }}
+            initial={{ scale: 1.14 }}
+            animate={{ scale: phase === "loading" ? 1 : 1.1 }}
+            transition={{ duration: phase === "loading" ? DURATION / 1000 : 0.6, ease: "linear" }}
           />
-          <div className="absolute inset-0 bg-[linear-gradient(90deg,rgb(26_11_46/0.92)_0%,rgb(26_11_46/0.35)_55%,transparent),linear-gradient(0deg,rgb(26_11_46/0.95),transparent_45%)]" />
+          <div className="absolute inset-0 bg-[linear-gradient(90deg,rgb(26_11_46/0.9)_0%,rgb(26_11_46/0.3)_55%,transparent),linear-gradient(0deg,rgb(26_11_46/0.95),transparent_45%)]" />
 
           <div dir="ltr" className="absolute bottom-8 left-6 right-6 flex flex-col gap-8 md:bottom-12 md:left-12 md:right-12 md:flex-row md:items-end md:justify-between">
             <div>
@@ -103,37 +157,59 @@ export default function GtaLoader() {
                 Tarek{" "}
                 <span className="inline-block rounded-lg border-[3px] border-white bg-[linear-gradient(135deg,#ff4fa3,#ff9a3c)] px-2 align-middle text-[0.4em] leading-[1.05] text-[#1a0b2e]">VI</span>
               </motion.p>
-              <AnimatePresence mode="wait">
+              {phase === "loading" ? (
+                <AnimatePresence mode="wait">
+                  <motion.p
+                    key={tip}
+                    dir={lang === "ar" ? "rtl" : "ltr"}
+                    initial={{ opacity: 0, y: 6 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="mt-5 max-w-md text-sm text-white/85 md:text-base"
+                  >
+                    {TIPS[lang][tip]}
+                  </motion.p>
+                </AnimatePresence>
+              ) : (
                 <motion.p
-                  key={tip}
-                  dir={lang === "ar" ? "rtl" : "ltr"}
-                  initial={{ opacity: 0, y: 6 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.3 }}
-                  className="mt-5 max-w-md text-sm text-white/85 md:text-base"
+                  animate={{ opacity: [0.35, 1, 0.35] }}
+                  transition={{ duration: 1.6, repeat: Infinity }}
+                  className="mt-6 font-[family-name:var(--font-gta)] text-2xl uppercase tracking-[0.12em] text-[#ffd34d] md:text-3xl"
                 >
-                  {TIPS[lang][tip]}
+                  {lang === "ar" ? "اضغط في أي مكان للبدء" : "Press any key to start"}
                 </motion.p>
-              </AnimatePresence>
+              )}
             </div>
 
-            <div className="flex items-center gap-4 md:flex-col md:items-end">
-              <span className="gta-spinner text-3xl text-[#ffd34d]" aria-hidden>
-                ★
-              </span>
-              <div className="flex-1 md:w-56 md:flex-none">
-                <p className="text-end font-[family-name:var(--font-gta)] text-lg uppercase tracking-wide text-white">Loading story mode</p>
-                <div className="mt-2 h-1.5 w-full overflow-hidden rounded-full bg-white/20">
-                  <motion.div
-                    className="h-full bg-[linear-gradient(90deg,#ff4fa3,#ff9a3c)]"
-                    initial={{ width: "0%" }}
-                    animate={{ width: "100%" }}
-                    transition={{ duration: DURATION / 1000 - 0.2, ease: [0.4, 0, 0.2, 1] }}
-                  />
+            {phase === "loading" ? (
+              <div className="flex items-center gap-4 md:flex-col md:items-end">
+                <span className="gta-spinner text-3xl text-[#ffd34d]" aria-hidden>
+                  ★
+                </span>
+                <div className="flex-1 md:w-64 md:flex-none">
+                  <p className="text-end font-[family-name:var(--font-gta)] text-lg uppercase tracking-wide text-white">Loading story mode</p>
+                  <div className="mt-2 h-1.5 w-full overflow-hidden rounded-full bg-white/20">
+                    <motion.div
+                      className="h-full bg-[linear-gradient(90deg,#ff4fa3,#ff9a3c)]"
+                      initial={{ width: "0%" }}
+                      animate={{ width: "100%" }}
+                      transition={{ duration: DURATION / 1000, ease: [0.3, 0.1, 0.3, 1] }}
+                    />
+                  </div>
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      finish();
+                    }}
+                    className="mt-3 ms-auto block min-h-[36px] rounded-full border border-white/40 px-4 text-xs font-bold uppercase tracking-[0.18em] text-white hover:border-white"
+                  >
+                    Skip ▸▸
+                  </button>
                 </div>
               </div>
-            </div>
+            ) : null}
           </div>
         </motion.div>
       ) : null}

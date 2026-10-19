@@ -7,6 +7,7 @@ import Magnetic from "@/components/ui/Magnetic";
 import { Media } from "@/components/ui/Media";
 import { site } from "@/lib/site";
 import { useLang } from "@/lib/i18n";
+import { useContent } from "@/lib/content";
 
 // Cinematic opening for the About page: the same night-shoot banner as the
 // home hero, the name, the role, and the two actions a hiring manager needs.
@@ -16,17 +17,20 @@ import { useLang } from "@/lib/i18n";
 // "Mohamed Tarek" at 8xl runs about 700px and would have crossed him.
 export default function AboutHero() {
   const { t } = useLang();
+  // the Player page of the GTA VI Edition: his second game-art portrait
+  const { gta } = useContent();
 
   return (
     <section className="relative flex min-h-[86svh] flex-col justify-end overflow-hidden">
       <div className="absolute inset-0">
         <Media
-          src="/me/banner-2026.webp"
+          key={gta ? "gta" : "std"}
+          src={gta ? "/me/gta-player.webp" : "/me/banner-2026.webp"}
           alt={`${site.name} — ${site.role}`}
           fill
           priority
           sizes="100vw"
-          className="object-cover object-center"
+          className={`object-cover ${gta ? "object-[72%_center]" : "object-center"}`}
         />
       </div>
       {/* Fixed dark scrim (not theme-tinted) so the portrait never washes out.

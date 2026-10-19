@@ -8,9 +8,7 @@ import { useLang } from "@/lib/i18n";
 import { site } from "@/lib/site";
 import { projects } from "@/lib/projects";
 import { articles } from "@/lib/articles";
-import { assetUrl } from "@/lib/assets";
 import { openContact } from "@/components/ContactModal";
-import motionClips from "@/lib/motion.json";
 import Motion from "@/components/Motion";
 
 // GTA VI Edition home: the portfolio played as a game. A console home screen
@@ -51,6 +49,14 @@ const copy = {
     platforms: ["Full-time", "Remote", "Freelance", "Hybrid"],
     hireLevel: "Hire level",
     cash: "Years",
+    kv: "Key visual",
+    kvNote: "A campaign board from the work. Pick another below, or start a mission.",
+    crewA: "The",
+    crewB: "crew",
+    crewNote: "Brands I have run missions with, across Egypt, Saudi Arabia and Kuwait.",
+    typeA: "Type",
+    typeB: "play",
+    typeNote: "Custom Arabic and Latin lettering, run like footage. Hover to hold a frame.",
   },
   ar: {
     start: "ابدأ المهمة",
@@ -81,6 +87,14 @@ const copy = {
     platforms: ["دوام كامل", "عن بُعد", "فريلانس", "هجين"],
     hireLevel: "مستوى التوظيف",
     cash: "سنين",
+    kv: "صورة رئيسية",
+    kvNote: "لوحة حملة من الشغل. اختار غيرها من تحت، أو ابدأ مهمة.",
+    crewA: "",
+    crewB: "الكرو",
+    crewNote: "علامات نفّذت معاها مهمات في مصر والسعودية والكويت.",
+    typeA: "لعب",
+    typeB: "بالحروف",
+    typeNote: "حروف عربية ولاتينية مخصّصة، معروضة زي لقطات فيلم. وقّف الماوس عليها عشان تثبت.",
   },
 };
 
@@ -107,23 +121,18 @@ function Hud({ label, cash }: { label: string; cash: string }) {
 }
 
 /* ------------------------------------------------------------- console */
-type Tile = { id: string; img: string; title: string; sub: string; href?: string };
+// The hero art is one of the wide campaign boards. The picker sits small in
+// the lower corner, like a console's recently-played row, so the art owns the
+// screen; the first tile is the edition's own cover.
+const boards = [4, 1, 2, 3, 9, 5, 6, 7, 8].map((n) => `/work/master/${String(n).padStart(2, "0")}.webp`);
+type Tile = { id: string; img: string; n?: number };
 
 function ConsoleHero() {
-  const { t, lang } = useLang();
+  const { lang } = useLang();
   const c = copy[lang];
   const tiles: Tile[] = useMemo(
-    () => [
-      { id: "me", img: "/me/gta-hero.webp", title: site.name, sub: "VI" },
-      ...projects.map((p) => ({
-        id: p.slug,
-        img: p.hero || p.cover,
-        title: (t.projects[p.slug]?.title ?? p.title).split(",")[0],
-        sub: t.projects[p.slug]?.category ?? p.category,
-        href: `/work/${p.slug}`,
-      })),
-    ],
-    [t]
+    () => [{ id: "me", img: "/me/gta-hero.webp" }, ...boards.map((img, k) => ({ id: `kv-${k}`, img, n: k + 1 }))],
+    []
   );
   const [i, setI] = useState(0);
   const cur = tiles[i];
@@ -139,12 +148,12 @@ function ConsoleHero() {
   }, [tiles.length]);
 
   return (
-    <section id="top" className="relative flex min-h-[100svh] flex-col overflow-hidden pt-20">
-      {/* background art, cross-faded per tile */}
+    <section id="top" className="relative flex min-h-[100svh] flex-col overflow-hidden bg-black pt-20">
+      {/* the art, shown clean, cross-faded per tile */}
       <AnimatePresence mode="popLayout">
         <motion.div
           key={cur.id}
-          initial={{ opacity: 0, scale: 1.06 }}
+          initial={{ opacity: 0, scale: 1.05 }}
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.9, ease }}
@@ -153,47 +162,16 @@ function ConsoleHero() {
           <Media src={cur.img} alt="" fill priority sizes="100vw" className={`object-cover ${cur.id === "me" ? "object-[70%_center]" : "object-center"}`} />
         </motion.div>
       </AnimatePresence>
-      <div aria-hidden className="absolute inset-0 bg-[linear-gradient(180deg,rgb(26_11_46/0.85)_0%,rgb(26_11_46/0.05)_30%,rgb(26_11_46/0.15)_55%,rgb(26_11_46/0.95)_100%)]" />
-      <div aria-hidden className="absolute inset-0 bg-[linear-gradient(90deg,rgb(26_11_46/0.7),transparent_55%)]" />
 
-      {/* tile row, like a console home screen */}
-      <div className="container-edge relative z-10 mx-auto w-full max-w-edge">
-        <div className="flex items-start justify-between gap-6">
-          <div className="-mx-1 flex gap-2.5 overflow-x-auto px-1 pb-3 pt-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-            {tiles.map((tile, k) => {
-              const on = k === i;
-              return (
-                <button
-                  key={tile.id}
-                  type="button"
-                  onClick={() => setI(k)}
-                  aria-label={tile.title}
-                  aria-pressed={on}
-                  className={`relative shrink-0 overflow-hidden rounded-xl border-2 transition-all duration-300 ${
-                    on
-                      ? "h-20 w-20 border-white shadow-[0_0_0_3px_rgb(255_79_163),0_10px_30px_-8px_rgb(255_79_163)] md:h-24 md:w-24"
-                      : "h-14 w-14 border-white/20 opacity-75 hover:opacity-100 md:h-16 md:w-16"
-                  }`}
-                >
-                  <Media src={tile.img} alt="" fill sizes="96px" className="object-cover" />
-                  {tile.id === "me" ? (
-                    <span className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent pb-1 text-center font-[family-name:var(--font-gta)] text-sm text-white">VI</span>
-                  ) : null}
-                </button>
-              );
-            })}
-          </div>
-          <div className="hidden shrink-0 pt-2 md:block">
-            <Hud label={c.hireLevel} cash={c.cash} />
-          </div>
+      <div className="container-edge relative z-10 mx-auto flex w-full max-w-edge justify-end pt-2">
+        <div className="hidden md:block">
+          <Hud label={c.hireLevel} cash={c.cash} />
         </div>
-        <p className="mt-1 text-xs font-bold uppercase tracking-[0.22em] text-white/80">
-          {cur.id === "me" ? `${site.name} · VI` : cur.title}
-        </p>
       </div>
 
-      {/* title lockup */}
-      <div className="container-edge relative z-10 mx-auto mt-auto w-full max-w-edge pb-14 md:pb-20">
+      {/* in Arabic the copy stays on the left too: he sits on the right of the art */}
+      <div className="container-edge relative z-10 mx-auto mt-auto flex w-full max-w-edge flex-col gap-8 pb-10 md:flex-row md:items-end md:justify-between md:pb-14 md:rtl:flex-row-reverse">
+        {/* title lockup */}
         <AnimatePresence mode="wait">
           <motion.div
             key={cur.id}
@@ -212,93 +190,94 @@ function ConsoleHero() {
                 </span>
               </h1>
             ) : (
-              <>
-                <p className="text-xs font-bold uppercase tracking-[0.24em] text-[#ffd34d]">{cur.sub}</p>
-                <h1 className="gta-lockup mt-3 font-[family-name:var(--font-gta)] text-[13vw] uppercase leading-[0.9] text-white md:text-[clamp(3.5rem,6vw,6.5rem)]">
-                  {cur.title}
-                </h1>
-              </>
+              <h1 className="gta-lockup font-[family-name:var(--font-gta)] text-[14vw] uppercase leading-[0.88] text-white md:text-[clamp(3.5rem,6vw,6.5rem)]">
+                {c.kv} <span dir="ltr">{String(cur.n).padStart(2, "0")}</span>
+              </h1>
             )}
-            <p className="mt-5 max-w-md text-base text-white/85 md:text-lg">{cur.id === "me" ? c.tagline : t.projects[cur.id]?.tagline ?? projects.find((p) => p.slug === cur.id)?.tagline}</p>
-            <div className="mt-7 flex flex-wrap items-center gap-3">
-              <Link
-                href={cur.href ?? "#missions"}
-                className="cta-blend inline-flex min-h-[48px] items-center gap-3 rounded-full px-7 text-sm uppercase tracking-[0.12em]"
-              >
+            <p className="mt-4 max-w-md text-base font-medium text-white [text-shadow:0_2px_10px_rgb(0_0_0/0.85)] md:text-lg">
+              {cur.id === "me" ? c.tagline : c.kvNote}
+            </p>
+            <div className="mt-6 flex flex-wrap items-center gap-3">
+              <Link href="#missions" className="cta-blend inline-flex min-h-[48px] items-center gap-3 rounded-full px-7 text-sm uppercase tracking-[0.12em]">
                 <span aria-hidden>▶</span> {c.start}
               </Link>
               <Link
                 href="/about"
-                className="inline-flex min-h-[48px] items-center rounded-full border-2 border-white/80 bg-black/30 px-6 text-sm font-semibold uppercase tracking-[0.12em] text-white backdrop-blur-md hover:bg-white hover:text-[#1a0b2e]"
+                className="inline-flex min-h-[48px] items-center rounded-full border-2 border-white/85 bg-black/35 px-6 text-sm font-semibold uppercase tracking-[0.12em] text-white backdrop-blur-md hover:bg-white hover:text-[#1a0b2e]"
               >
                 {c.profile}
               </Link>
-              <span className="hidden text-[11px] uppercase tracking-[0.2em] text-white/60 md:inline">← → to switch</span>
             </div>
           </motion.div>
         </AnimatePresence>
-        <div className="mt-8 md:hidden">
-          <Hud label={c.hireLevel} cash={c.cash} />
+
+        {/* the picker: small wide thumbnails in the corner */}
+        <div className="w-full md:w-auto md:max-w-[46%]">
+          <p dir="ltr" className="mb-2 text-end text-[11px] font-bold uppercase tracking-[0.2em] text-white [text-shadow:0_1px_6px_rgb(0_0_0/0.9)]">
+            {String(i + 1).padStart(2, "0")} / {String(tiles.length).padStart(2, "0")} · ← →
+          </p>
+          <div className="flex gap-2 overflow-x-auto rounded-xl bg-black/45 p-2 backdrop-blur-md [scrollbar-width:none] md:flex-wrap md:justify-end md:overflow-visible [&::-webkit-scrollbar]:hidden">
+            {tiles.map((tile, k) => {
+              const on = k === i;
+              return (
+                <button
+                  key={tile.id}
+                  type="button"
+                  onClick={() => setI(k)}
+                  aria-label={tile.id === "me" ? "Edition cover" : `${c.kv} ${tile.n}`}
+                  aria-pressed={on}
+                  className={`relative aspect-video w-20 shrink-0 overflow-hidden rounded-md border-2 transition-all duration-300 md:w-24 ${
+                    on ? "border-white shadow-[0_0_0_2px_rgb(255_79_163)]" : "border-transparent opacity-60 hover:opacity-100"
+                  }`}
+                >
+                  <Media src={tile.img} alt="" fill sizes="96px" className="object-cover" />
+                </button>
+              );
+            })}
+          </div>
         </div>
       </div>
     </section>
   );
 }
 
-/* ------------------------------------------------------------ reel strip */
-function ReelStrip() {
+/* ------------------------------------------------------------ the crew */
+// The client logos, as the crew roster: two counter-running rows of logo
+// badges on a tilted band, the way a game credits its gangs.
+const logos = Array.from({ length: 36 }, (_, i) => `/logos/dark/${String(i + 1).padStart(2, "0")}.webp`);
+
+function LogoRow({ list, reverse }: { list: string[]; reverse?: boolean }) {
+  return (
+    <div className="overflow-hidden">
+      <div className={`flex w-max gap-4 py-2 hover:[animation-play-state:paused] ${reverse ? "animate-marquee-rev" : "animate-marquee"}`} style={{ animationDuration: "70s" }}>
+        {[...list, ...list].map((src, k) => (
+          <span key={src + k} className="relative grid h-20 w-40 shrink-0 place-items-center rounded-xl border-2 border-white/15 bg-white/[0.04] transition-colors duration-300 hover:border-[#ff4fa3] hover:bg-[#ff4fa3]/15 md:h-24 md:w-48">
+            <span className="relative block h-10 w-28 md:h-12 md:w-32">
+              <Media src={src} alt="Client logo" fill sizes="128px" className="object-contain" />
+            </span>
+          </span>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function CrewStrip() {
   const { lang } = useLang();
   const c = copy[lang];
-  const [open, setOpen] = useState(false);
-  const clip = (motionClips as { src: string; poster: string; collection: string }[]).find((m) => m.collection === "landscape");
-  const words = [...c.reel, ...c.reel, ...c.reel, ...c.reel];
+  const half = Math.ceil(logos.length / 2);
   return (
-    <section className="relative overflow-hidden bg-black py-14 md:py-20">
-      <div className="-rotate-3 scale-110">
-        <div className="flex w-max animate-marquee gap-10 whitespace-nowrap font-[family-name:var(--font-gta)] text-[22vw] uppercase leading-none text-white md:text-[12rem]">
-          {[...words, ...words].map((w, k) => (
-            <span key={k} className={k % 2 ? "text-transparent [-webkit-text-stroke:2px_#ff4fa3]" : ""}>
-              {w}
-            </span>
-          ))}
-        </div>
+    <section aria-label={c.crewNote} className="relative overflow-hidden bg-black py-16 md:py-24">
+      <div className="container-edge mx-auto max-w-edge text-center">
+        <h2 className="text-6xl text-white md:text-8xl">
+          {c.crewA} <span className="italic">{c.crewB}</span>
+        </h2>
+        <p className="mx-auto mt-3 max-w-md text-sm text-white/70">{c.crewNote}</p>
       </div>
-      {clip ? (
-        <button
-          type="button"
-          onClick={() => setOpen(true)}
-          className="absolute left-1/2 top-1/2 grid h-32 w-32 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full border-4 border-white bg-[#1a0b2e] text-center font-[family-name:var(--font-gta)] text-xl uppercase leading-none text-white shadow-[6px_6px_0_#ff4fa3] transition-transform hover:scale-110 md:h-40 md:w-40 md:text-2xl"
-        >
-          <span>
-            <span aria-hidden className="mb-1 block text-3xl">▶</span>
-            {c.watch}
-          </span>
-        </button>
-      ) : null}
-      <AnimatePresence>
-        {open && clip ? (
-          <motion.div
-            className="fixed inset-0 z-[95] grid place-items-center bg-black/90 p-4"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={() => setOpen(false)}
-          >
-            <video
-              src={assetUrl(clip.src)}
-              poster={assetUrl(clip.poster)}
-              controls
-              autoPlay
-              playsInline
-              className="max-h-full max-w-full rounded-xl border-2 border-white"
-              onClick={(e) => e.stopPropagation()}
-            />
-            <button type="button" onClick={() => setOpen(false)} aria-label="Close" className="absolute right-5 top-5 grid h-11 w-11 place-items-center rounded-full border-2 border-white text-white">
-              ✕
-            </button>
-          </motion.div>
-        ) : null}
-      </AnimatePresence>
+      <div className="mt-10 -rotate-2 scale-[1.04] border-y-4 border-[#ff4fa3] bg-[#120822] py-4">
+        <LogoRow list={logos.slice(0, half)} />
+        <LogoRow list={logos.slice(half)} reverse />
+      </div>
     </section>
   );
 }
@@ -314,7 +293,7 @@ function MissionSelect() {
   return (
     <section id="missions" className="container-edge mx-auto max-w-edge scroll-mt-24 section-y">
       <div className="text-center">
-        <h2 className="text-5xl text-white md:text-8xl">
+        <h2 className="text-5xl text-bone-50 md:text-8xl">
           {c.chooseA} <span className="italic">{c.chooseB}</span>
         </h2>
         <p className="mx-auto mt-4 max-w-xl text-bone-300">{c.chooseNote}</p>
@@ -371,8 +350,8 @@ function MissionSelect() {
                     <Media src={p.cover} alt="" fill sizes="96px" className="object-cover transition-transform duration-500 group-hover:scale-110" />
                   </span>
                   <span className="flex min-w-0 flex-col py-1">
-                    <span className="font-[family-name:var(--font-gta)] text-sm uppercase tracking-wide text-[#ffd34d]">Mission {p.index}</span>
-                    <span className="mt-1 line-clamp-2 text-base font-semibold leading-snug text-white">{tr.title ?? p.title}</span>
+                    <span className="font-[family-name:var(--font-gta)] text-sm uppercase tracking-wide text-electric">Mission {p.index}</span>
+                    <span className="mt-1 line-clamp-2 text-base font-semibold leading-snug text-bone-50">{tr.title ?? p.title}</span>
                     <span className="mt-auto flex items-center gap-2 pt-2 text-xs font-bold uppercase tracking-[0.14em] text-mint">
                       ▶ {c.play}
                     </span>
@@ -387,16 +366,20 @@ function MissionSelect() {
   );
 }
 
-/* --------------------------------------------------------------- gameplay */
-const boards = [4, 1, 2, 3, 9, 5, 6, 7, 8].map((n) => `/work/master/${String(n).padStart(2, "0")}.webp`);
+/* ----------------------------------------------------------- type play */
+// The lettering pieces, framed as film footage: each piece sits on its own
+// dark frame with sprocket holes running above and below.
+const typePieces = Array.from({ length: 10 }, (_, i) => `/work/type/${String(i + 1).padStart(2, "0")}-dark.webp`);
 
 function FilmRow({ imgs, reverse }: { imgs: string[]; reverse?: boolean }) {
   return (
     <div className={`gta-film overflow-hidden ${reverse ? "rotate-2" : "-rotate-2"}`}>
       <div className={`flex w-max gap-3 px-3 py-4 hover:[animation-play-state:paused] ${reverse ? "animate-marquee-rev" : "animate-marquee"}`}>
         {[...imgs, ...imgs].map((src, k) => (
-          <div key={src + k} className="relative h-40 w-[17rem] shrink-0 overflow-hidden rounded-sm border-2 border-black md:h-56 md:w-[24rem]">
-            <Media src={src} alt="" fill sizes="384px" className="object-cover" />
+          <div key={src + k} className="relative h-40 w-[17rem] shrink-0 overflow-hidden rounded-sm border-2 border-black bg-[radial-gradient(circle_at_50%_40%,#2a1446,#0b0614)] md:h-56 md:w-[24rem]">
+            <span className="absolute inset-6 md:inset-8">
+              <Media src={src} alt="Lettering" fill sizes="384px" className="object-contain" />
+            </span>
           </div>
         ))}
       </div>
@@ -404,19 +387,21 @@ function FilmRow({ imgs, reverse }: { imgs: string[]; reverse?: boolean }) {
   );
 }
 
-function Gameplay() {
+function TypePlay() {
   const { lang } = useLang();
   const c = copy[lang];
-  const shots = projects.flatMap((p) => p.gallery.slice(0, 2).map((g) => g.src)).slice(0, 12);
+  const half = Math.ceil(typePieces.length / 2);
   return (
-    <section className="overflow-hidden bg-black section-y">
+    <section id="type" className="overflow-hidden bg-black section-y">
       <div className="container-edge mx-auto max-w-edge text-center">
-        <h2 className="text-6xl text-white md:text-9xl">{c.gameplay}</h2>
-        <p className="mx-auto mt-3 max-w-md text-sm text-white/70">{c.gameplayNote}</p>
+        <h2 className="text-6xl text-white md:text-9xl">
+          {c.typeA} <span className="italic">{c.typeB}</span>
+        </h2>
+        <p className="mx-auto mt-3 max-w-md text-sm text-white/70">{c.typeNote}</p>
       </div>
       <div className="mt-12 flex flex-col gap-6">
-        <FilmRow imgs={boards} />
-        <FilmRow imgs={shots} reverse />
+        <FilmRow imgs={typePieces.slice(0, half).concat(typePieces.slice(0, half))} />
+        <FilmRow imgs={typePieces.slice(half).concat(typePieces.slice(half))} reverse />
       </div>
     </section>
   );
@@ -429,7 +414,7 @@ function Story() {
   return (
     <section className="container-edge mx-auto max-w-edge section-y">
       <div className="text-center">
-        <h2 className="text-6xl text-white md:text-8xl">{c.story}</h2>
+        <h2 className="text-6xl text-bone-50 md:text-8xl">{c.story}</h2>
         <p className="mt-3 text-bone-300">{c.storyNote}</p>
       </div>
       <div className="mt-12 grid items-stretch gap-6 md:grid-cols-[1fr_1.2fr]">
@@ -446,7 +431,7 @@ function Story() {
               { n: String(articles.length), l: c.articlesDone },
             ].map((s) => (
               <div key={s.l} className="border-s-4 border-[#ff4fa3] ps-3">
-                <dt className="font-[family-name:var(--font-gta)] text-4xl leading-none text-white md:text-5xl" dir="ltr">{s.n}</dt>
+                <dt className="font-[family-name:var(--font-gta)] text-4xl leading-none text-bone-50 md:text-5xl" dir="ltr">{s.n}</dt>
                 <dd className="mt-1 text-xs font-semibold uppercase tracking-[0.14em] text-bone-300">{s.l}</dd>
               </div>
             ))}
@@ -514,9 +499,9 @@ export default function GtaHome() {
   return (
     <>
       <ConsoleHero />
-      <ReelStrip />
+      <CrewStrip />
       <MissionSelect />
-      <Gameplay />
+      <TypePlay />
       {/* the films, under the game skin: they are the cutscenes */}
       <Motion />
       <Story />

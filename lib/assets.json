@@ -1898,12 +1898,12 @@
   "/articles/ai-typography-arabic-lettering.webp": {
     "width": 1600,
     "height": 900,
-    "blur": "data:image/webp;base64,UklGRloAAABXRUJQVlA4IE4AAAAQAgCdASoQAAkAA4BaJaACdAEDDFCW4RMAAM3KzJjp2wyrKDpQ/j03jtpAslww5xSTmC3Zqhr30Ka8Sxvohbdb+4/DuJnhgSqPgXqMAAA="
+    "blur": "data:image/webp;base64,UklGRlwAAABXRUJQVlA4IFAAAADQAQCdASoQAAkAA4BaJZACdAEMUgX0AAD+q7Er1y/PsDyndQN94QUsO8+JgnbaWJHdimIeow84q3OhAXVlslLvF64AxrkN6e2nK+5vJAAAAA=="
   },
   "/articles/arabic-typography-hierarchy-in-campaigns.webp": {
     "width": 1600,
     "height": 900,
-    "blur": "data:image/webp;base64,UklGRl4AAABXRUJQVlA4IFIAAADwAQCdASoQAAkAA4BaJQAB8cndCtgKzigA/vNS/DYFv+fzTrg0xwBcDqLezpj3T3zitx+YrkjOUhBXF30aUMsV/+dC/q8oz0xbjPxnzE9WxAAA"
+    "blur": "data:image/webp;base64,UklGRlQAAABXRUJQVlA4IEgAAADQAQCdASoQAAkAA4BaJZwAAsaVOGpUAAD+5vJNZsWXRycc7tKv/vpbPMIl06uNuaqOH42yHrEsYgN9d1GFU1B4a/a9cJcAAAA="
   },
   "/articles/designing-bilingual-arabic-english-layouts.webp": {
     "width": 1600,
@@ -2039,5 +2039,60 @@
     "width": 2560,
     "height": 1429,
     "blur": "data:image/webp;base64,UklGRlYAAABXRUJQVlA4IEoAAAAQAgCdASoQAAkAA4BaJQBOkCYig0kWYY46AP7f+WtFyJaC88GI8R7FlGLfk8fmGFQU8tY7ooWAAD8ukcnCIzrQGOCvE7iux3gAAA=="
+  },
+  "/me/gta-player.webp": {
+    "width": 2560,
+    "height": 1429,
+    "blur": "data:image/webp;base64,UklGRmAAAABXRUJQVlA4IFQAAADwAQCdASoQAAkAA4BaJbACdAEOANsusgAA/rxy6w5R6meUSJNXwvZex6obS6nYrDC+ixQE1ieS7Aa8HLqFaFBYLJjkeCRYPP5ADvZQjRLQ+8gAAAA="
+  },
+  "/articles/art-direction-for-photo-shoots.webp": {
+    "width": 1600,
+    "height": 900,
+    "blur": "data:image/webp;base64,UklGRkoAAABXRUJQVlA4ID4AAACQAQCdASoQAAkAA4BaJYwAAoccfoAA/vaX+IGrA9k/lOW/UmlX4xUqq2o2INue94e1Z7CRLgQDWqikzxqgAA=="
+  },
+  "/articles/choosing-an-ai-image-generator-as-a-designer.webp": {
+    "width": 1600,
+    "height": 900,
+    "blur": "data:image/webp;base64,UklGRmIAAABXRUJQVlA4IFYAAADwAQCdASoQAAkAA4BaJZACdAEQCs2zJcAA/vM31sP/NsGCSzuXLsr4nqvIld0FVYxSWMikDLNUfJ5qpEgsNdMxSG72Gdbi7ZCTkRraBpo1XdwLzhYAAA=="
+  },
+  "/articles/designing-arabic-and-bilingual-logos.webp": {
+    "width": 1600,
+    "height": 900,
+    "blur": "data:image/webp;base64,UklGRj4AAABXRUJQVlA4IDIAAADwAQCdASoQAAkAA4BaJZQAAtz+F+5GegAA/vF+Un2XN3SgBeVMxeEL1TYhBjUsdaWkAA=="
+  },
+  "/articles/graphic-design-tool-stack-2026.webp": {
+    "width": 1600,
+    "height": 900,
+    "blur": "data:image/webp;base64,UklGRlAAAABXRUJQVlA4IEQAAACQAQCdASoQAAkAA4BaJQAALcO6pI4A997ZUIrmjV679uSdf9vwe2JdQxiKC7RQqhEhjUJDOj/RB8Gt4ujP9QDwgYAAAA=="
+  },
+  "/articles/illustrator-vs-photoshop-which-tool.webp": {
+    "width": 1600,
+    "height": 900,
+    "blur": "data:image/webp;base64,UklGRlwAAABXRUJQVlA4IFAAAABwAQCdASoQAAkAA4BaJZQAAR3WsAD+7SqPtLJS2EPC7+q2bnk6DEOXUow/24feHChe2NCy12awQ4Sx1AX5nm76Rjw96kfFy5P5oSB++BcwAA=="
+  },
+  "/articles/keeping-brand-imagery-consistent-colour-and-light.webp": {
+    "width": 1600,
+    "height": 900,
+    "blur": "data:image/webp;base64,UklGRloAAABXRUJQVlA4IE4AAADQAQCdASoQAAkAA4BaJYgCdAEUnqz5BAD+81RCfQLhkh91vOMbmBxtw5UEG43l/3iw8GH1FIYadf5s1PnTeu0Lg/sOUxusok1e2w7WAAA="
+  },
+  "/articles/logo-design-process-step-by-step.webp": {
+    "width": 1600,
+    "height": 900,
+    "blur": "data:image/webp;base64,UklGRlYAAABXRUJQVlA4IEoAAADwAQCdASoQAAkAA4BaJZACw7DhjgQA0MAA/qofdnDa6/fhdSx25pqXSgAq/Vdcc6bfgSPqUsfvmPUuI9JTRvXfbTpUXuwsA2AAAA=="
+  },
+  "/articles/photoshop-generative-fill-for-designers.webp": {
+    "width": 1600,
+    "height": 900,
+    "blur": "data:image/webp;base64,UklGRlgAAABXRUJQVlA4IEwAAAAwAgCdASoQAAkAA4BaJYwCdAEWUip4QKcMAAD+9aIe2Pr97+h5JLyEtKqHHuZry3e/CuyXn2vwhXOEdetZAxg2PSWGAHoAC29rsuAA"
+  },
+  "/articles/photoshop-retouching-workflow-for-key-visuals.webp": {
+    "width": 1600,
+    "height": 900,
+    "blur": "data:image/webp;base64,UklGRlAAAABXRUJQVlA4IEQAAADQAQCdASoQAAkAA4BaJZQAAxec6o4tgAD+9dL3Ymd54Kngrb8wu+Z/xJfndYKg1bHue08MFGDkRPR7hHxbNNUhwIAAAA=="
+  },
+  "/articles/what-makes-a-logo-memorable.webp": {
+    "width": 1600,
+    "height": 900,
+    "blur": "data:image/webp;base64,UklGRkAAAABXRUJQVlA4IDQAAADQAQCdASoQAAkAA4BaJZwAAlxVniC4AAD+97223vAdNdsXDYkpoQ5IZLbk35F7PhXabQAA"
   }
 }
