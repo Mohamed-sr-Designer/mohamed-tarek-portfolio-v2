@@ -23,7 +23,8 @@ export function generateMetadata({
     openGraph: {
       title: project.title,
       description: project.summary,
-      images: [{ url: project.cover, alt: project.title }],
+      // absolute: a root-relative path would drop the Pages sub-path
+      images: [{ url: `${site.url}${project.cover}`, alt: project.title }],
     },
   };
 }

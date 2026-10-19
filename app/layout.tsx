@@ -4,6 +4,7 @@ import {
   Hanken_Grotesk,
   Fraunces,
   Alexandria,
+  Anton,
 } from "next/font/google";
 import { site } from "@/lib/site";
 import { LangProvider } from "@/lib/i18n";
@@ -34,6 +35,14 @@ const serif = Fraunces({
   variable: "--font-serif",
   display: "swap",
   style: ["normal", "italic"],
+});
+
+// GTA VI Edition only: the tall condensed display face for its headlines
+const gta = Anton({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-gta",
+  display: "swap",
 });
 
 const arabic = Alexandria({
@@ -87,13 +96,13 @@ export const metadata: Metadata = {
     siteName: `${site.name} · Portfolio`,
     title: site.title,
     description: site.description,
-    images: [{ url: "/og.jpg", width: 1200, height: 630, alt: site.name }],
+    images: [{ url: `${site.url}/og.jpg`, width: 1200, height: 630, alt: site.name }],
   },
   twitter: {
     card: "summary_large_image",
     title: site.title,
     description: site.description,
-    images: ["/og.jpg"],
+    images: [`${site.url}/og.jpg`],
   },
   robots: {
     index: true,
@@ -186,7 +195,7 @@ export default function RootLayout({
       lang="en"
       data-theme={defaultTheme}
       suppressHydrationWarning
-      className={`${display.variable} ${sans.variable} ${serif.variable} ${arabic.variable}`}
+      className={`${display.variable} ${sans.variable} ${serif.variable} ${arabic.variable} ${gta.variable}`}
     >
       <head>
         {/* sets data-theme before first paint, so there is no flash */}

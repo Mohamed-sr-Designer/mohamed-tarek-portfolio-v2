@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useLang } from "@/lib/i18n";
 import { site } from "@/lib/site";
-import { articles, getArticle, readMinutes, type Article } from "@/lib/articles";
+import { articles, coverOf, getArticle, readMinutes, type Article } from "@/lib/articles";
 import { projects } from "@/lib/projects";
 import { Media } from "@/components/ui/Media";
 
@@ -50,6 +50,10 @@ export default function ArticleView({ initial }: { initial: Article }) {
           {" · "}
           {site.role} · {readMinutes(a)} {t.articles.min}
         </p>
+
+        <div className="relative mt-8 aspect-[16/9] overflow-hidden rounded-2xl border border-line/10 bg-ink-700">
+          <Media src={coverOf(a)} alt={a.title} fill priority sizes="(max-width: 768px) 92vw, 44rem" className="object-cover" />
+        </div>
 
         {/* the direct answer, first: the part people and assistants quote */}
         <div className="mt-8 rounded-2xl border border-mint/25 bg-ink-800 p-5 md:p-6">

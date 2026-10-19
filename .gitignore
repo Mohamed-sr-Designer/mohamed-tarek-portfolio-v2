@@ -42,3 +42,4 @@ next-env.d.ts
 
 # local production-build check
 /.next-build/
+/_review

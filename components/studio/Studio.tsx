@@ -11,6 +11,7 @@ import { withBase } from "@/lib/base";
 import { slugify } from "@/lib/studio-utils";
 import { Btn, Card, Field, KnownAssetsList, Select, Studio as StudioContext, useStudio } from "./ui";
 import TextsPanel from "./TextsPanel";
+import { Aurora, LivePreview, MobileNav, Palette, Sidebar, type NavItem } from "./Shell";
 import { ArticlesPanel, MediaPanel, ProjectsPanel } from "./ContentPanels";
 
 // The dashboard. Everything is edited as one JSON document of changes:
@@ -54,40 +55,70 @@ export default function StudioApp() {
 function Gate({ onOk }: { onOk: () => void }) {
   const [v, setV] = useState("");
   const [err, setErr] = useState(false);
+  const input = useRef<HTMLInputElement>(null);
+  const submit = (val: string) => {
+    if (val === PASSWORD) {
+      try {
+        sessionStorage.setItem(UNLOCK_KEY, "1");
+      } catch {}
+      onOk();
+    } else {
+      setErr(true);
+      setTimeout(() => setV(""), 450);
+    }
+  };
   return (
-    <div className="grid min-h-svh place-items-center bg-ink-900 px-5">
-      <form
-        className="w-full max-w-sm rounded-3xl border border-line/10 bg-ink-800 p-7"
-        onSubmit={(e) => {
-          e.preventDefault();
-          if (v.trim() === PASSWORD) {
-            try {
-              sessionStorage.setItem(UNLOCK_KEY, "1");
-            } catch {}
-            onOk();
-          } else setErr(true);
-        }}
-      >
-        <span className="grid h-11 w-11 place-items-center rounded-full border border-line/20 font-serif text-sm text-bone-50">MT</span>
-        <h1 className="mt-5 text-2xl font-semibold text-bone-50">Site dashboard</h1>
-        <p className="mt-2 text-sm text-bone-400">Enter the password to edit the site.</p>
-        <input
-          type="password"
-          inputMode="numeric"
-          autoFocus
-          value={v}
-          onChange={(e) => {
-            setV(e.target.value);
-            setErr(false);
+    <div className="relative grid min-h-svh place-items-center overflow-hidden bg-ink-900 px-5" onClick={() => input.current?.focus()}>
+      <Aurora />
+      <div className="relative w-full max-w-md text-center">
+        <span className="mx-auto grid h-14 w-14 place-items-center rounded-2xl bg-[linear-gradient(135deg,rgb(var(--mint)),rgb(var(--electric)))] font-serif text-lg font-semibold text-ink-900 shadow-[0_20px_60px_-20px_rgb(var(--mint))]">
+          MT
+        </span>
+        <h1 className="mt-8 text-[clamp(3rem,12vw,5.5rem)] font-semibold leading-none tracking-tight text-bone-50">
+          Studio<span className="text-blend">.</span>
+        </h1>
+        <p className="mt-4 text-sm text-bone-400">Every word, image and colour on the site, in one place.</p>
+        <form
+          className={`mt-10 ${err ? "studio-shake" : ""}`}
+          onSubmit={(e) => {
+            e.preventDefault();
+            submit(v);
           }}
-          aria-label="Password"
-          aria-invalid={err}
-          className={`mt-5 min-h-[48px] w-full rounded-xl border bg-ink-900 px-4 text-base text-bone-50 outline-none focus:border-mint/70 ${err ? "border-electric" : "border-line/15"}`}
-        />
-        {err ? <p className="mt-2 text-sm text-electric">That password is not right.</p> : null}
-        <Btn kind="primary" type="submit" className="mt-5 w-full !min-h-[48px]">Open dashboard</Btn>
-        <Link href="/" className="mt-4 block text-center text-xs text-bone-400 hover:text-mint">← Back to the site</Link>
-      </form>
+        >
+          <label htmlFor="pin" className="text-[11px] uppercase tracking-[0.3em] text-bone-400">Passcode</label>
+          <div className="relative mx-auto mt-4 flex w-fit gap-3">
+            {[0, 1, 2, 3].map((k) => (
+              <span
+                key={k}
+                className={`grid h-16 w-14 place-items-center rounded-2xl border text-2xl font-semibold transition-all duration-300 ${
+                  err ? "border-electric text-electric" : v.length > k ? "border-mint bg-mint/10 text-bone-50" : v.length === k ? "border-bone-300/60 bg-ink-800" : "border-line/15 bg-ink-800/70"
+                }`}
+              >
+                {v[k] ? "•" : ""}
+              </span>
+            ))}
+            <input
+              id="pin"
+              ref={input}
+              autoFocus
+              inputMode="numeric"
+              autoComplete="off"
+              maxLength={4}
+              value={v}
+              aria-invalid={err}
+              onChange={(e) => {
+                const val = e.target.value.replace(/\D/g, "").slice(0, 4);
+                setV(val);
+                setErr(false);
+                if (val.length === 4) submit(val);
+              }}
+              className="absolute inset-0 h-full w-full cursor-pointer opacity-0"
+            />
+          </div>
+          <p className={`mt-4 h-5 text-sm ${err ? "text-electric" : "text-transparent"}`}>That passcode is not right.</p>
+        </form>
+        <Link href="/" className="mt-6 inline-block text-xs text-bone-400 hover:text-mint">← Back to the site</Link>
+      </div>
     </div>
   );
 }
@@ -118,6 +149,8 @@ function Dashboard() {
   const [gh, setGh] = useState<GhConfig>({ repo: "", branch: "main", token: "" });
   const [previews, setPreviews] = useState<Record<string, string>>({});
   const [toasts, setToasts] = useState<{ id: number; msg: string; kind: "ok" | "err" }[]>([]);
+  const [showPreview, setShowPreview] = useState(true);
+  const [palette, setPalette] = useState(false);
 
   useEffect(() => {
     const d = readDraft();
@@ -170,64 +203,95 @@ function Dashboard() {
 
   const changed = JSON.stringify(doc) !== JSON.stringify(publishedOverrides);
 
+  const count = (o: unknown): number =>
+    typeof o === "string" || typeof o === "number" || typeof o === "boolean"
+      ? 1
+      : Array.isArray(o)
+        ? 1
+        : o && typeof o === "object"
+          ? Object.values(o).reduce((n: number, x) => n + count(x), 0)
+          : 0;
+  const nav: NavItem[] = [
+    { id: "overview", label: "Overview", hint: "", icon: "home" },
+    { id: "texts", label: "Texts", hint: "", icon: "text", count: count(doc.en) + count(doc.ar) },
+    { id: "projects", label: "Projects", hint: "", icon: "grid", count: count(doc.projects) + (doc.newProjects?.length ?? 0) },
+    { id: "articles", label: "Articles", hint: "", icon: "doc", count: count(doc.articles) },
+    { id: "media", label: "Images", hint: "", icon: "image", count: Object.keys(doc.assets ?? {}).length },
+    { id: "site", label: "Contact & info", hint: "", icon: "user", count: count(doc.site) },
+    { id: "settings", label: "Theme & layout", hint: "", icon: "palette", count: count(doc.settings) },
+    { id: "publish", label: "Publish", hint: "", icon: "rocket" },
+    { id: "advanced", label: "Advanced", hint: "", icon: "code" },
+  ];
+  const editCount = nav.reduce((n, x) => n + (x.count ?? 0), 0);
+  const title = TABS.find((t) => t.id === tab)?.label ?? "";
+  const openDraft = () => {
+    try {
+      localStorage.setItem(DRAFT_KEY, JSON.stringify(doc));
+      localStorage.setItem(PREVIEW_KEY, "1");
+    } catch {}
+    window.open(withBase("/"), "_blank");
+  };
+  const paletteActions = [
+    { label: "Open the draft on the full site", group: "Action", run: openDraft },
+    { label: "Toggle the live preview", group: "Action", run: () => setShowPreview((v) => !v) },
+    { label: "Publish to the live site", group: "Action", run: () => setTab("publish") },
+  ];
+
   return (
     <StudioContext.Provider value={{ doc, update, gh, upload, previews, toast }}>
       <KnownAssetsList />
-      <div className="min-h-svh bg-ink-900 text-bone-50">
-        <header className="sticky top-0 z-30 border-b border-line/10 bg-ink-900/90 backdrop-blur-xl">
-          <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-3 md:px-6">
-            <Link href="/" className="flex items-center gap-3">
-              <span className="grid h-9 w-9 place-items-center rounded-full border border-line/20 font-serif text-xs">MT</span>
-              <span className="hidden text-sm sm:block">Dashboard</span>
-            </Link>
-            <div className="flex items-center gap-2">
-              <span className={`hidden rounded-full px-3 py-1 text-xs sm:inline ${changed ? "bg-electric/15 text-electric" : "bg-mint/15 text-mint"}`}>
-                {changed ? "Unpublished changes" : "Matches the live site"}
-              </span>
-              <Btn
-                onClick={() => {
-                  try {
-                    localStorage.setItem(DRAFT_KEY, JSON.stringify(doc));
-                    localStorage.setItem(PREVIEW_KEY, "1");
-                  } catch {}
-                  window.open(withBase("/"), "_blank");
-                }}
-              >
-                Preview
-              </Btn>
-              <Btn kind="primary" onClick={() => setTab("publish")}>Publish</Btn>
+      <div className="relative flex min-h-svh bg-ink-900 text-bone-50">
+        <Aurora />
+        <Sidebar items={nav} tab={tab} setTab={(t) => setTab(t as Tab)} changed={changed} editCount={editCount} />
+
+        <div className="relative min-w-0 flex-1 pb-28 lg:pb-10">
+          <header className="sticky top-0 z-30 border-b border-line/10 bg-ink-900/75 backdrop-blur-xl">
+            <div className="flex items-center gap-3 px-4 py-3 md:px-8">
+              <Link href="/" className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-[linear-gradient(135deg,rgb(var(--mint)),rgb(var(--electric)))] font-serif text-xs font-semibold text-ink-900 lg:hidden">MT</Link>
+              <div className="min-w-0">
+                <p className="text-[11px] uppercase tracking-[0.24em] text-bone-500">Studio</p>
+                <h1 className="truncate text-lg font-semibold leading-tight text-bone-50">{title}</h1>
+              </div>
+              <div className="ms-auto flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={() => setPalette(true)}
+                  className="hidden min-h-[40px] items-center gap-3 rounded-full border border-line/15 bg-ink-800/80 px-4 text-sm text-bone-400 hover:border-mint/50 md:flex"
+                >
+                  Search…
+                  <kbd className="rounded border border-line/20 px-1.5 text-[11px]">Ctrl K</kbd>
+                </button>
+                <Btn className="hidden xl:inline-flex" onClick={() => setShowPreview((v) => !v)}>{showPreview ? "Hide preview" : "Show preview"}</Btn>
+                <Btn onClick={openDraft} title="Open the draft on the full site in a new tab">Open draft ↗</Btn>
+                <Btn kind="primary" className="lg:hidden" onClick={() => setTab("publish")}>Publish</Btn>
+              </div>
             </div>
-          </div>
-          <nav aria-label="Dashboard sections" className="mx-auto flex max-w-6xl gap-1.5 overflow-x-auto px-4 pb-3 [scrollbar-width:none] md:px-6 [&::-webkit-scrollbar]:hidden">
-            {TABS.map((t) => (
-              <button
-                key={t.id}
-                type="button"
-                onClick={() => setTab(t.id)}
-                aria-current={tab === t.id ? "page" : undefined}
-                className={`min-h-[38px] shrink-0 rounded-full border px-4 text-sm transition-colors ${
-                  tab === t.id ? "border-mint bg-mint font-semibold text-ink-900" : "border-line/15 bg-ink-800 text-bone-200 hover:border-mint/50"
-                }`}
-              >
-                {t.label}
-              </button>
-            ))}
-          </nav>
-        </header>
+          </header>
 
-        <main className="mx-auto max-w-6xl px-4 py-6 md:px-6 md:py-8">
-          {tab === "overview" && <Overview go={setTab} changed={changed} />}
-          {tab === "texts" && <TextsPanel />}
-          {tab === "projects" && <ProjectsPanel />}
-          {tab === "articles" && <ArticlesPanel />}
-          {tab === "media" && <MediaPanel />}
-          {tab === "site" && <SitePanel />}
-          {tab === "settings" && <SettingsPanel />}
-          {tab === "publish" && <PublishPanel gh={gh} setGh={(c) => { setGh(c); saveGh(c); }} discard={() => setDoc(clone(publishedOverrides))} changed={changed} />}
-          {tab === "advanced" && <AdvancedPanel replace={setDoc} />}
-        </main>
+          <main className="mx-auto max-w-5xl px-4 py-6 md:px-8 md:py-8">
+            {tab === "overview" && <Overview go={setTab} changed={changed} />}
+            {tab === "texts" && <TextsPanel />}
+            {tab === "projects" && <ProjectsPanel />}
+            {tab === "articles" && <ArticlesPanel />}
+            {tab === "media" && <MediaPanel />}
+            {tab === "site" && <SitePanel />}
+            {tab === "settings" && <SettingsPanel />}
+            {tab === "publish" && <PublishPanel gh={gh} setGh={(c) => { setGh(c); saveGh(c); }} discard={() => setDoc(clone(publishedOverrides))} changed={changed} />}
+            {tab === "advanced" && <AdvancedPanel replace={setDoc} />}
+          </main>
+        </div>
 
-        <div className="pointer-events-none fixed inset-x-0 bottom-4 z-50 flex flex-col items-center gap-2 px-4">
+        {showPreview ? <LivePreview doc={doc} onClose={() => setShowPreview(false)} /> : null}
+        <MobileNav items={nav} tab={tab} setTab={(t) => setTab(t as Tab)} />
+        <Palette
+          open={palette}
+          setOpen={setPalette}
+          items={nav}
+          setTab={(t) => setTab(t as Tab)}
+          actions={paletteActions}
+        />
+
+        <div className="pointer-events-none fixed inset-x-0 bottom-24 z-50 flex flex-col items-center gap-2 px-4 lg:bottom-6">
           {toasts.map((t) => (
             <div
               key={t.id}

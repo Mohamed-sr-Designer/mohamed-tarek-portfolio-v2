@@ -35,6 +35,7 @@ export type Article = {
   body: Block[];
   faq: { q: string; a: string }[];
   related?: string[]; // project slugs on this site that prove the point
+  cover?: string; // defaults to /articles/<slug>.webp
 };
 
 export const articleCategories = [
@@ -65,6 +66,9 @@ export function applyArticleOverrides(o: Overrides) {
 applyArticleOverrides(published as Overrides);
 
 export const getArticle = (slug: string) => articles.find((a) => a.slug === slug);
+
+/** Cover image path: generated per article, overridable from the dashboard. */
+export const coverOf = (a: Article) => a.cover || `/articles/${a.slug}.webp`;
 
 export const readMinutes = (a: Article) => {
   const words = a.body

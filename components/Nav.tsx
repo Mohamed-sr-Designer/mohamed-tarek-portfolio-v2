@@ -8,6 +8,7 @@ import { site } from "@/lib/site";
 import { useLang } from "@/lib/i18n";
 import { openContact } from "@/components/ContactModal";
 import ThemeToggle from "@/components/ThemeToggle";
+import EditionToggle from "@/components/EditionToggle";
 
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
@@ -56,7 +57,7 @@ export default function Nav() {
             <span className="grid h-10 w-10 place-items-center rounded-full border border-line/20 font-serif text-sm md:h-9 md:w-9 transition-colors duration-300 group-hover:border-mint/60 group-hover:text-mint">
               MT
             </span>
-            <span className="hidden text-sm tracking-tight text-bone-200 sm:block">
+            <span className="hidden text-sm tracking-tight text-bone-200 xl:block">
               {site.name}
               <span className="text-bone-400"> {t.nav.roleTag}</span>
             </span>
@@ -79,6 +80,7 @@ export default function Nav() {
           </nav>
 
           <div className="flex items-center gap-2 sm:gap-3">
+            <EditionToggle />
             <ThemeToggle />
             <button
               type="button"

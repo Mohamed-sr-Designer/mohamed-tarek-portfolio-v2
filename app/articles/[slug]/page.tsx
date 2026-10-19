@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import SiteShell from "@/components/SiteShell";
 import ArticleView from "@/components/ArticleView";
-import { articles, getArticle } from "@/lib/articles";
+import { articles, coverOf, getArticle } from "@/lib/articles";
 import { site } from "@/lib/site";
 
 export function generateStaticParams() {
@@ -23,6 +23,7 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
       description: a.description,
       publishedTime: a.date,
       authors: [site.name],
+      images: [{ url: `${site.url}${coverOf(a)}`, width: 1600, height: 900, alt: a.title }],
     },
   };
 }
@@ -49,6 +50,7 @@ export default function ArticlePage({ params }: { params: { slug: string } }) {
         datePublished: a.date,
         dateModified: a.date,
         inLanguage: "en",
+        image: `${site.url}${coverOf(a)}`,
         url,
         mainEntityOfPage: url,
         author: { "@id": `${site.url}/#person` },

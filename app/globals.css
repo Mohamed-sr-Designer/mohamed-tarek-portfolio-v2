@@ -61,6 +61,81 @@ html[data-theme="light"] {
   color-scheme: light;
 }
 
+/* ---- GTA VI Edition ---------------------------------------------------------
+   A skin, not a third theme: switched from the header, it sits on top of
+   either dark or light and wins over both (declared later, same weight).
+   Vice City at dusk -- violet night, hot-pink and sunset-orange accents, cream
+   type -- with the condensed cover face on every headline, cards framed like
+   loading-screen art, and a hard offset shadow instead of soft glows. */
+html[data-edition="gta"] {
+  --bg: 26 11 46;
+  --bg2: 40 18 68;
+  --bg3: 56 27 90;
+  --bg4: 76 38 114;
+  --bg5: 110 58 150;
+  --fg: 255 244 230;
+  --fg1: 250 230 214;
+  --fg2: 236 210 220;
+  --fg25: 214 186 210;
+  --fg3: 190 160 196;
+  --fg4: 160 132 172;
+  --line: 255 214 236;
+  --mint: 255 79 163;
+  --mint-lift: 255 122 184;
+  --electric: 255 154 60;
+  color-scheme: dark;
+}
+html[data-edition="gta"] body {
+  background-image: radial-gradient(120% 60% at 50% 0%, rgb(255 154 60 / 0.10), transparent 60%),
+    linear-gradient(180deg, rgb(26 11 46) 0%, rgb(34 12 52) 50%, rgb(26 11 46) 100%);
+  background-attachment: fixed;
+}
+html[data-edition="gta"] h1,
+html[data-edition="gta"] h2 {
+  font-family: var(--font-gta), var(--font-display), sans-serif !important;
+  font-weight: 400 !important;
+  text-transform: uppercase;
+  letter-spacing: 0.01em !important;
+  line-height: 0.95 !important;
+}
+html[data-edition="gta"] h2 .italic,
+html[data-edition="gta"] h1 .italic {
+  font-family: inherit !important;
+  font-style: normal;
+  color: #ffd34d;
+  text-shadow: 3px 3px 0 rgb(26 11 46);
+}
+html[data-edition="gta"] main article,
+html[data-edition="gta"] main section .rounded-2xl {
+  border: 2px solid rgb(255 244 230 / 0.9) !important;
+  box-shadow: 6px 6px 0 rgb(255 79 163);
+}
+html[data-edition="gta"] main article:hover {
+  box-shadow: 9px 9px 0 rgb(255 154 60);
+  transform: translate(-2px, -2px);
+}
+html[data-edition="gta"] .cta-blend {
+  background-image: linear-gradient(100deg, #ff4fa3 0%, #ff9a3c 52%, #ff4fa3 100%);
+  color: #1a0b2e;
+  font-weight: 700;
+  border: 2px solid #fff4e6;
+  box-shadow: 4px 4px 0 #1a0b2e;
+}
+html[data-edition="gta"] .gta-lockup {
+  text-shadow: 4px 4px 0 rgb(26 11 46), 0 0 32px rgb(255 79 163 / 0.45);
+}
+html[data-edition="gta"] ::selection {
+  background: #ffd34d;
+  color: #1a0b2e;
+}
+/* Arabic keeps Alexandria: the condensed Latin face has no Arabic glyphs */
+html[data-edition="gta"][dir="rtl"] h1,
+html[data-edition="gta"][dir="rtl"] h2 {
+  font-family: var(--font-ar), sans-serif !important;
+  font-weight: 700 !important;
+  line-height: 1.4 !important;
+}
+
 * {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -90,6 +165,34 @@ body {
 }
 [dir="rtl"] .italic {
   font-style: normal;
+}
+
+/* Arabic needs more air than Latin. Alexandria carries tall ascenders, deep
+   descenders and dots above and below, so the tight leading the Latin layout
+   uses (1.0-1.1 on headings, 1.5 on body) made Arabic lines touch each other.
+   These floors apply only in Arabic and only to text blocks, not to pills and
+   buttons, so the component sizes do not move. */
+[dir="rtl"] h1,
+[dir="rtl"] h2,
+[dir="rtl"] h3 {
+  line-height: 1.4 !important;
+}
+[dir="rtl"] p,
+[dir="rtl"] li,
+[dir="rtl"] blockquote,
+[dir="rtl"] dd,
+[dir="rtl"] summary {
+  line-height: 1.9 !important;
+}
+
+/* Phone numbers, e-mail addresses and handles are left-to-right data even
+   inside an Arabic page; isolated, the bidi algorithm can no longer flip
+   "+20 122 874 8098" into "8098 874 122 20+". */
+[dir="rtl"] a[href^="tel:"],
+[dir="rtl"] a[href^="mailto:"],
+[dir="rtl"] a[href*="wa.me"],
+[dir="rtl"] [dir="ltr"] {
+  unicode-bidi: isolate;
 }
 
 h1,
@@ -393,4 +496,21 @@ main > * + * {
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
   }
+}
+
+/* dashboard passcode: a short shake on a wrong code */
+@keyframes studioShake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-8px); }
+  40%, 80% { transform: translateX(8px); }
+}
+.studio-shake {
+  animation: studioShake 0.4s ease;
+}
+
+/* the GTA lockup is Latin artwork: it keeps its face in Arabic too */
+[dir="rtl"] .gta-lockup,
+[dir="rtl"] .gta-lockup *,
+[dir="rtl"] .edition-btn span:first-child {
+  font-family: var(--font-gta), sans-serif !important;
 }

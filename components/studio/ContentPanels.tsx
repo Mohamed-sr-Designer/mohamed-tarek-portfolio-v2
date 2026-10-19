@@ -379,6 +379,7 @@ export function ArticlesPanel() {
           <div className="grid gap-4">
             <Field label="Title" value={a.title} onChange={(v) => set(a.slug, "title", v)} />
             <Field label="Arabic title" dir="rtl" value={a.titleAr} onChange={(v) => set(a.slug, "titleAr", v)} />
+            <ImageField label="Cover image" value={a.cover || `/articles/${a.slug}.webp`} onChange={(v) => set(a.slug, "cover", v)} />
             <Field label="Description (search snippet, also the summary box)" multiline value={a.description} onChange={(v) => set(a.slug, "description", v)} />
             <Field label="Arabic summary" dir="rtl" multiline value={a.summaryAr} onChange={(v) => set(a.slug, "summaryAr", v)} />
             <div className="grid gap-4 md:grid-cols-2">

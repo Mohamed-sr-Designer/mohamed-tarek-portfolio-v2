@@ -137,7 +137,7 @@ export default function Footer() {
 
         <div className="mt-12 flex flex-col gap-5 border-t border-line/10 pt-6 text-sm text-bone-500 md:flex-row md:items-center md:justify-between">
           <p className="order-2 md:order-1">
-            © {year} {site.name}. {t.footer.rights}
+            <bdi dir="ltr">© {year} {site.name}.</bdi> {t.footer.rights}
           </p>
 
           <div className="order-1 flex flex-wrap items-center gap-x-5 gap-y-3 md:order-2">

@@ -3,6 +3,7 @@
 export const DRAFT_KEY = "mt_draft";
 export const PREVIEW_KEY = "mt_preview";
 export const THEME_KEY = "theme";
+export const EDITION_KEY = "edition";
 
 /**
  * Runs before first paint (inlined in <head>) so the page never flashes the
@@ -10,5 +11,5 @@ export const THEME_KEY = "theme";
  * then the published default.
  */
 export function themeBootScript(defaultTheme: "dark" | "light") {
-  return `(function(){var t="${defaultTheme}";try{var s=localStorage.getItem("${THEME_KEY}");if(s==="light"||s==="dark"){t=s;}else if(localStorage.getItem("${PREVIEW_KEY}")==="1"){var d=JSON.parse(localStorage.getItem("${DRAFT_KEY}")||"{}");if(d&&d.settings&&d.settings.defaultTheme)t=d.settings.defaultTheme;}}catch(e){}document.documentElement.dataset.theme=t;})();`;
+  return `(function(){var t="${defaultTheme}";try{var s=localStorage.getItem("${THEME_KEY}");if(s==="light"||s==="dark"){t=s;}else if(localStorage.getItem("${PREVIEW_KEY}")==="1"){var d=JSON.parse(localStorage.getItem("${DRAFT_KEY}")||"{}");if(d&&d.settings&&d.settings.defaultTheme)t=d.settings.defaultTheme;}}catch(e){}document.documentElement.dataset.theme=t;try{if(localStorage.getItem("${EDITION_KEY}")==="gta")document.documentElement.dataset.edition="gta";}catch(e){}})();`;
 }

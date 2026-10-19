@@ -534,22 +534,28 @@ const baseList: Project[] = [
   {
     slug: "brand-vitals",
     index: "12",
-    title: "BrandVitals, Marketing, Built in Blocks",
+    title: "BrandVitals, Measuring Your Brand's Vitals",
     client: "BrandVitals",
-    year: "2025",
-    category: "Marketing · Social",
+    year: "2026",
+    category: "Marketing · Social Campaign",
     sector: "Marketing & Agency",
-    discipline: "Social Design · 3D Concept",
+    discipline: "Social Design · Key Visuals · 3D Concept",
     accent: "electric",
     simple: true,
     summary:
-      "Social media design for a marketing agency, familiar toy blocks turned into sharp visual metaphors for tired marketing truths.",
-    tagline: "Marketing advice that looks like a toy box and lands like a punch.",
+      "A social campaign for a performance marketing agency: one electric-blue world where every post turns a hard marketing truth into a single, sharp visual metaphor, from a cracked Ctrl+Z key to a chess pawn crowned king.",
+    tagline: "Hard marketing truths, each one turned into a single image.",
     cover: "/work/social/brand-vitals/01.webp",
     hero: "/work/social/brand-vitals/02.webp",
-    tags: ["Marketing", "3D Concept", "Social Design"],
-    contribution: ["Social Design", "3D Concept", "Art Direction"],
-    gallery: g(...seq("/work/social/brand-vitals/", 1, 9)),
+    tags: ["Marketing Agency", "Social Campaign", "Key Visuals", "3D Concept"],
+    contribution: ["Campaign Direction", "Key Visuals", "Social Design", "3D Concept"],
+    // the 2026 "Measuring Your Brand's Vitals" set replaced the toy-block feed
+    gallery: g(...seq("/work/social/brand-vitals/", 1, 15)),
+    cardPicks: [
+      "/work/social/brand-vitals/09.webp",
+      "/work/social/brand-vitals/13.webp",
+      "/work/social/brand-vitals/02.webp",
+    ],
   },
 ];
 

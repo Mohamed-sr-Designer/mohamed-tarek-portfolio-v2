@@ -5,7 +5,8 @@ import Link from "next/link";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { useLang } from "@/lib/i18n";
-import { articles, articleCategories, readMinutes } from "@/lib/articles";
+import { articles, articleCategories, coverOf, readMinutes } from "@/lib/articles";
+import { Media } from "@/components/ui/Media";
 
 const fmt = (iso: string, lang: string) =>
   new Date(iso).toLocaleDateString(lang === "ar" ? "ar-EG" : "en-GB", {
@@ -76,8 +77,18 @@ export default function ArticlesIndex() {
           <li key={a.slug}>
             <Link
               href={`/articles/${a.slug}`}
-              className="group flex h-full flex-col rounded-2xl border border-line/10 bg-ink-800 p-6 transition-colors duration-300 hover:border-mint/40"
+              className="group flex h-full flex-col overflow-hidden rounded-2xl border border-line/10 bg-ink-800 transition-colors duration-300 hover:border-mint/40"
             >
+              <span className="relative block aspect-[16/9] overflow-hidden bg-ink-700">
+                <Media
+                  src={coverOf(a)}
+                  alt=""
+                  fill
+                  sizes="(max-width: 768px) 92vw, (max-width: 1280px) 46vw, 30vw"
+                  className="object-cover transition-transform duration-700 ease-cinema group-hover:scale-[1.04]"
+                />
+              </span>
+              <span className="flex flex-1 flex-col p-6">
               <span className="text-xs uppercase tracking-[0.18em] text-mint">{catLabel(a.category)}</span>
               <h2 className="mt-3 text-pretty text-xl font-semibold leading-snug text-bone-50">
                 {lang === "ar" ? a.titleAr : a.title}
@@ -92,6 +103,7 @@ export default function ArticlesIndex() {
                 <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full border border-line/20 text-bone-200 transition-colors group-hover:border-mint group-hover:bg-mint group-hover:text-ink-900 rtl:rotate-180">
                   →
                 </span>
+              </span>
               </span>
             </Link>
           </li>

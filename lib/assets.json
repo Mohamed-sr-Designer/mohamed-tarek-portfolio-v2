@@ -821,60 +821,6 @@
     "blur": "data:image/webp;base64,UklGRmoAAABXRUJQVlA4IF4AAABQAwCdASoQABQAPzGAt1MuqCUisAgB0CYJZgAAUeXiA9V2EACfKt6lH9GGM+AY6Gz/hhT9vs5PEoFRpIk8KSnQBL8iHdJG9sgL4rMx8rUTFGFfzUI89x4oSDQ6kAAA",
     "v": "5ac64b79"
   },
-  "/work/social/brand-vitals/01.webp": {
-    "width": 1080,
-    "height": 1350,
-    "blur": "data:image/webp;base64,UklGRm4AAABXRUJQVlA4IGIAAAAQBACdASoQABQAPzGAt1MuqCUisAgB0CYJZgC06B6VvJXZUHfEuz6mUAD+6/6PIFO/2UPpvs/3km2FA2D+Zui97Jqn7fafkHWlwXUNCypngKLHuAITyE1f3VLgwrConKiAAA==",
-    "v": "ee179fa9"
-  },
-  "/work/social/brand-vitals/02.webp": {
-    "width": 1080,
-    "height": 1350,
-    "blur": "data:image/webp;base64,UklGRnwAAABXRUJQVlA4IHAAAABQBACdASoQABQAPzGAt1KuqCUisAgB0CYJbACdMoAC8hM/1xdtL6CjYNtQAP7o+2kqWlEmaLFHREiA39aEYr39W6YmHO2gelvwgBhLnlP0o19RBg+IA27xbCejOZk1j2ZfjRgxOpkP1ZMaSV7GFkAA",
-    "v": "b5ca2927"
-  },
-  "/work/social/brand-vitals/03.webp": {
-    "width": 1080,
-    "height": 1350,
-    "blur": "data:image/webp;base64,UklGRngAAABXRUJQVlA4IGwAAADwAwCdASoQABQAPzGAt1KuqCUisAgB0CYJbACdACKVO0quJUm0ktIAAP7l9T2T4+2Vj4CPWlZqe3m1QDH09nOOJCRwBCzkEnhdQ75H8qGnE38r3XWJiQ6PY1xkz/SkC6K3z3KfVZsdPtIAAAA=",
-    "v": "e2ac3768"
-  },
-  "/work/social/brand-vitals/04.webp": {
-    "width": 1080,
-    "height": 1350,
-    "blur": "data:image/webp;base64,UklGRmAAAABXRUJQVlA4IFQAAABQBACdASoQABQAPzGAt1KuqCUisAgB0CYJaACdMoR3ACnH/G37ZzpeQsMQAP7pPNPOXSBlx5canV72XvArCBSpYJYKm/XB6t5HOhb2IX67XcpygAA=",
-    "v": "d2cb7fb3"
-  },
-  "/work/social/brand-vitals/05.webp": {
-    "width": 1080,
-    "height": 1350,
-    "blur": "data:image/webp;base64,UklGRnAAAABXRUJQVlA4IGQAAAAwBACdASoQABQAPzGAt1KuqCUisAgB0CYJZACdMoADUEH2Nl4CAyJThPAA/tDaNIKHkQ5+tWx3BvNe6Tt3OBLhudfErxUDjhALdUuWsx6jmLIS37NZmnDcVXed4ZfrTx4hYAAA",
-    "v": "f86b2c08"
-  },
-  "/work/social/brand-vitals/06.webp": {
-    "width": 1080,
-    "height": 1350,
-    "blur": "data:image/webp;base64,UklGRnwAAABXRUJQVlA4IHAAAAAwBACdASoQABQAPzGAt1KuqCUisAgB0CYJbACdMoAC8Z4tN6EIR1Nv4YAA/uX1PhDVSISBUd1lxbDKGIljfuXSHYMFnPCY3jRCyFaEEBmbhCFcToIwfCiDRBlCj9wNwytcsiExHmyIeknnkkpDAAAA",
-    "v": "c5b51e39"
-  },
-  "/work/social/brand-vitals/07.webp": {
-    "width": 1080,
-    "height": 1350,
-    "blur": "data:image/webp;base64,UklGRmgAAABXRUJQVlA4IFwAAAAwBACdASoQABQAPzGCt1MuqKUisAgB0CYJbACdMoAC8JRCVTKg1ZafT0AA/ujv6yrpBZfk+PvC9TYvahdSosvUk+GuJZrg10nqSfWsYr5gmR9f7ecbL7N2hKyAAA==",
-    "v": "0dcf4af8"
-  },
-  "/work/social/brand-vitals/08.webp": {
-    "width": 1080,
-    "height": 1350,
-    "blur": "data:image/webp;base64,UklGRnIAAABXRUJQVlA4IGYAAAAQBACdASoQABQAPzGAt1MuqCUisAgB0CYJZACdMoADUCjFvbOETR1qwAD+5fCTt6kpPKglB2KN81p9Es/vB6B4HDmIivyL7ZBqNjz0e6rbtKgD2Ojw82+6R+hY3UmVwbogAwmgAAA=",
-    "v": "7fe484a6"
-  },
-  "/work/social/brand-vitals/09.webp": {
-    "width": 1080,
-    "height": 1350,
-    "blur": "data:image/webp;base64,UklGRm4AAABXRUJQVlA4IGIAAADwAwCdASoQABQAPzGAt1KuqCUisAgB0CYJYgC06CDn98aZKfpnIEZQAP7r4wUiD+5U/mupGhfX8LZe36pYw4CsgG8xoL3CJ2dOjbMoA2wI7MTKL/VW8RXbcFq/5j8DhQIkAA==",
-    "v": "53881eff"
-  },
   "/work/social/el-raghi/01.webp": {
     "width": 1080,
     "height": 1350,
@@ -1858,5 +1804,235 @@
     "width": 1191,
     "height": 645,
     "blur": "data:image/webp;base64,UklGRiABAABXRUJQVlA4WAoAAAAQAAAADwAACAAAQUxQSJAAAAABgGNt2zHnGdu2Udq2rWq6mdg2F4DWqVMlpZ2dzSIiYgIwlgAAZBAm98bwIoihP6gmR4AoYKVeLvyvex9a55bTku3xfmchuMJznZnYl+u7aw5p3FG2e7QmXyx0YUEWACa/t1dvnl53ARAAhJ6P3k+nZkZKaz3IAcBWJS63hvOzoyAJgEqplog0er1Uq9YpmABWUDggagAAADACAJ0BKhAACQADgFolnAAPje8pP1pr1L4AAPuh8AGHEOi5e3Ztx7uS8A1n7/NC04fOTY66ep3EsU2eYBuBpNODiEd76P7wZ+3RRz4xqO9xy78s3VH6JiC3U169dU8xiyFesl1e55sAAAA="
+  },
+  "/articles/how-to-hire-a-senior-graphic-designer-in-egypt.webp": {
+    "width": 1600,
+    "height": 900,
+    "blur": "data:image/webp;base64,UklGRlgAAABXRUJQVlA4IEwAAADQAQCdASoQAAkAA4BaJZwAAvmHtb97UAD+9pPqsbVa2mfnJDMUqSmGAoZvNN2Wwzjstj/3nLR7uWIDNPflAN8qT0sTz0cAPYQAwAAA"
+  },
+  "/articles/freelance-remote-or-full-time-graphic-designer.webp": {
+    "width": 1600,
+    "height": 900,
+    "blur": "data:image/webp;base64,UklGRkgAAABXRUJQVlA4IDwAAADQAQCdASoQAAkAA4BaJZwAAl3A7HseAAD+8YIj3uNe6R6ry5igvJETebwVwgwcI4rtwVmcI/NLdl5PgAA="
+  },
+  "/articles/what-a-graphic-design-portfolio-should-prove.webp": {
+    "width": 1600,
+    "height": 900,
+    "blur": "data:image/webp;base64,UklGRlYAAABXRUJQVlA4IEoAAACwAQCdASoQAAkAA4BaJYwAAvY2UypgAP70tm/sfilvhr5I8cLMh+Fwpr95nDHIXRg4yRK4cFcqVWxZh1J0vrhVfwwWuTQc38AAAA=="
+  },
+  "/articles/hiring-a-designer-in-egypt-for-saudi-and-kuwait.webp": {
+    "width": 1600,
+    "height": 900,
+    "blur": "data:image/webp;base64,UklGRkQAAABXRUJQVlA4IDgAAADwAQCdASoQAAkAA4BaJYwCdAD0j28UpAAA/veX0m2ybRY6GCssBFae89/fPxWKA3jfaUXxWKAAAA=="
+  },
+  "/articles/art-director-vs-graphic-designer.webp": {
+    "width": 1600,
+    "height": 900,
+    "blur": "data:image/webp;base64,UklGRlIAAABXRUJQVlA4IEYAAADwAQCdASoQAAkAA4BaJZACdAEPC4kZp0QA/vSVQKopP4/32OHgMQkcjjdl2Xzez3FXccCYpjrgY2cg4rmSdWIBvs1ozNAA"
+  },
+  "/articles/what-is-a-key-visual.webp": {
+    "width": 1600,
+    "height": 900,
+    "blur": "data:image/webp;base64,UklGRk4AAABXRUJQVlA4IEIAAADwAQCdASoQAAkAA4BaJZwCdAD8F6UfTAAA/vhWTyFw/inTOoNaGZFTD+jL1ve87bn+As+We/4t7ufUziQhvZ2QAAA="
+  },
+  "/articles/brand-identity-is-a-system-not-a-logo.webp": {
+    "width": 1600,
+    "height": 900,
+    "blur": "data:image/webp;base64,UklGRlgAAABXRUJQVlA4IEwAAADwAQCdASoQAAkAA4BaJQBdgBwwmVz/qsAA/vaugBBzE71wK9kY7rf86qHvcmrALkHsxZvh8X6BrqtpaHsbb6q2kY8/Owszpk8MIAAA"
+  },
+  "/articles/how-to-write-a-design-brief.webp": {
+    "width": 1600,
+    "height": 900,
+    "blur": "data:image/webp;base64,UklGRkwAAABXRUJQVlA4IEAAAAAQAgCdASoQAAkAA4BaJZACw7ELY8OC4UGAAP70Ko7mt5XEKM0ceG2RG4QRUjPO3eshs3l5Ffiq3rZxxXeBoAAA"
+  },
+  "/articles/from-insight-to-campaign-concept.webp": {
+    "width": 1600,
+    "height": 900,
+    "blur": "data:image/webp;base64,UklGRkQAAABXRUJQVlA4IDgAAADwAQCdASoQAAkAA4BaJZQCsAEWtebSTcAA/vaRfHJkO5PhrnXNNPBVGeacfWpftekKYuwwOgAAAA=="
+  },
+  "/articles/lifestyle-led-real-estate-campaigns.webp": {
+    "width": 1600,
+    "height": 900,
+    "blur": "data:image/webp;base64,UklGRlYAAABXRUJQVlA4IEoAAADQAQCdASoQAAkAA4BaJQBOgBwomuFCgAD+6jG+KZbnBEUoDQFWNnMHc67JkqkBz1GfWClk9DkzGpjpG6Bwe5qqmVdx1Xc6GqgAAA=="
+  },
+  "/articles/social-media-design-system.webp": {
+    "width": 1600,
+    "height": 900,
+    "blur": "data:image/webp;base64,UklGRlgAAABXRUJQVlA4IEwAAAAwAgCdASoQAAkAA4BaJZgCdAYskAMLQVMtMAD+75PWSlSznZUmnOgeY3pKmZ2fOjEYE+7LsZkpUrDlHTTb1gVtyYqGBSjh1Oc4IAAA"
+  },
+  "/articles/planning-an-instagram-grid-for-brands.webp": {
+    "width": 1600,
+    "height": 900,
+    "blur": "data:image/webp;base64,UklGRlQAAABXRUJQVlA4IEgAAADwAQCdASoQAAkAA4BaJYgC7ADG2qbMmwAA/vaRd3DlT6+VQeHKKxucZCm70dJQfbtgAcxbsrzdWF5sAakCbIqS1lzrRhoYAAA="
+  },
+  "/articles/social-media-templates-that-dont-look-like-templates.webp": {
+    "width": 1600,
+    "height": 900,
+    "blur": "data:image/webp;base64,UklGRkQAAABXRUJQVlA4IDgAAACQAQCdASoQAAkAA4BaJQBOgBuY6sAA/vhWIsR5Hx6pmcPuY4uer4hSH6vqRa3HI4l60/46KwAAAA=="
+  },
+  "/articles/designing-offer-posts-that-still-look-premium.webp": {
+    "width": 1600,
+    "height": 900,
+    "blur": "data:image/webp;base64,UklGRl4AAABXRUJQVlA4IFIAAAAQAgCdASoQAAkAA4BaJYwCsAEfcX6HphSwAP73xzZLx2plHWDpXHvvQu1t3vmYyzsJa+z48NtYd2NjO5rWuv5saT2cZhXOYydFmVc9pWQQ6wAA"
+  },
+  "/articles/how-i-use-ai-in-graphic-design.webp": {
+    "width": 1600,
+    "height": 900,
+    "blur": "data:image/webp;base64,UklGRl4AAABXRUJQVlA4IFIAAAAQAgCdASoQAAkAA4BaJZgCdAEPUgJiKir4AP7xlfI9TFKOSt3pWT04NMSeIOUxrhhNaOHn+hfa5KjVoh/6RYA/lfPji2Hf94ETcO7mzZLyAAAA"
+  },
+  "/articles/ai-product-photography-consistent-library.webp": {
+    "width": 1600,
+    "height": 900,
+    "blur": "data:image/webp;base64,UklGRjwAAABXRUJQVlA4IDAAAADQAQCdASoQAAkAA4BaJZQAAxZeWYuUAAD++Gg9DWzc5fzpQMkgq/OZ11//gHeLZAA="
+  },
+  "/articles/ai-video-production-as-one-system.webp": {
+    "width": 1600,
+    "height": 900,
+    "blur": "data:image/webp;base64,UklGRkgAAABXRUJQVlA4IDwAAAAQAgCdASoQAAkAA4BaJZACdAED/6oaKPhAAP722dppuW3B3TkXhNS53HRi+PhrI2rYbqMhybGztZ9wAAA="
+  },
+  "/articles/prompt-engineering-for-designers.webp": {
+    "width": 1600,
+    "height": 900,
+    "blur": "data:image/webp;base64,UklGRlIAAABXRUJQVlA4IEYAAACwAQCdASoQAAkAA4BaJQAAXHyfpfpAAP73gM3la7SvlS0n6jRpz3BanPUzA5aP6tWeGuroer1qR7k9bljQQS4JGH70N4AA"
+  },
+  "/articles/ai-typography-arabic-lettering.webp": {
+    "width": 1600,
+    "height": 900,
+    "blur": "data:image/webp;base64,UklGRloAAABXRUJQVlA4IE4AAAAQAgCdASoQAAkAA4BaJaACdAEDDFCW4RMAAM3KzJjp2wyrKDpQ/j03jtpAslww5xSTmC3Zqhr30Ka8Sxvohbdb+4/DuJnhgSqPgXqMAAA="
+  },
+  "/articles/arabic-typography-hierarchy-in-campaigns.webp": {
+    "width": 1600,
+    "height": 900,
+    "blur": "data:image/webp;base64,UklGRl4AAABXRUJQVlA4IFIAAADwAQCdASoQAAkAA4BaJQAB8cndCtgKzigA/vNS/DYFv+fzTrg0xwBcDqLezpj3T3zitx+YrkjOUhBXF30aUMsV/+dC/q8oz0xbjPxnzE9WxAAA"
+  },
+  "/articles/designing-bilingual-arabic-english-layouts.webp": {
+    "width": 1600,
+    "height": 900,
+    "blur": "data:image/webp;base64,UklGRmYAAABXRUJQVlA4IFoAAAAwAgCdASoQAAkAA4BaJZACdAYtzv1iI5uHAAD+8bpfjwlJm/Yx1g1RZkzOkkdYbvirk1tqL4JQz8Vpo30ftJq+dXIiV/CWIyy7D3iE76oKrQd6t+fQlIU4AAA="
+  },
+  "/articles/rtl-website-design-arabic-sites.webp": {
+    "width": 1600,
+    "height": 900,
+    "blur": "data:image/webp;base64,UklGRmIAAABXRUJQVlA4IFYAAADwAQCdASoQAAkAA4BaJZAC7AEfUkl5LgAA/vG8po6Vr9hGM/bPY2VVvmITgXwpesSd+8y03I9hCRhWhbj7FhcdY/2tBphvYcTELty83SVYLMSFr2HgAA=="
+  },
+  "/articles/real-estate-social-media-design-saudi-arabia.webp": {
+    "width": 1600,
+    "height": 900,
+    "blur": "data:image/webp;base64,UklGRlIAAABXRUJQVlA4IEYAAADwAQCdASoQAAkAA4BaJQBOgCHemQuz+QAA4fy/snoixyiCowwfBjNcIiN2woAT2v7+ylRNmeN+5A/KVXNBDod/aLLLIAAA"
+  },
+  "/articles/food-and-beverage-social-media-design.webp": {
+    "width": 1600,
+    "height": 900,
+    "blur": "data:image/webp;base64,UklGRlQAAABXRUJQVlA4IEgAAADwAQCdASoQAAkAA4BaJagCdAEO9EKL2gAA/vNLlpNj1MazoiqlEvJGJ/Wft/UHdPlFWE6EHC6mTWcZFqKSBLe2EJ8ghbGjAAA="
+  },
+  "/articles/saas-marketing-design-making-software-simple.webp": {
+    "width": 1600,
+    "height": 900,
+    "blur": "data:image/webp;base64,UklGRloAAABXRUJQVlA4IE4AAADQAQCdASoQAAkAA4BaJYwCw7ELXsxMgAD+9Zjuk3t+4yNQbpK1P+tVxSGXAdSfXe+BpfP3hCNWZWugjFY/WKb+HEvZ/uLnQr2thYzsAAA="
+  },
+  "/articles/marketing-design-for-training-academies.webp": {
+    "width": 1600,
+    "height": 900,
+    "blur": "data:image/webp;base64,UklGRl4AAABXRUJQVlA4IFIAAAAQAgCdASoQAAkAA4BaJYgCdAYu5gaCNFwAAP7mea7J53XbJp0Ou1n6xdn5z3uQ2lRYbl/v6Kosy/oeiJzBID39AbBRLmqptIGgrUZ3FobwAAAA"
+  },
+  "/articles/seasonal-content-calendar-saudi-market.webp": {
+    "width": 1600,
+    "height": 900,
+    "blur": "data:image/webp;base64,UklGRlYAAABXRUJQVlA4IEoAAABQAgCdASoQAAkAA4BaJZQCdAYuR29SK6TNAAAA/vRZ+TviSGQ2O4eHhwL3kYKzLJo4urxJgIIYb70WEwJYXnyx0tkE4pBpnwAAAA=="
+  },
+  "/articles/leading-a-design-team.webp": {
+    "width": 1600,
+    "height": 900,
+    "blur": "data:image/webp;base64,UklGRlQAAABXRUJQVlA4IEgAAADQAQCdASoQAAkAA4BaJZQCsADD02IZ4AD+9JU5U5nevKsfqT5pMW9GCceOYuAGJelLuD02pEU3jpvW7XZL8cuJFFEfAP4AAAA="
+  },
+  "/articles/why-every-film-should-be-storyboarded.webp": {
+    "width": 1600,
+    "height": 900,
+    "blur": "data:image/webp;base64,UklGRkgAAABXRUJQVlA4IDwAAADQAQCdASoQAAkAA4BaJZQCdAD2LL9r4AD+9dnkFhtdcDVIfUmsz4FNuwOL3ITrfQycBBqBLOSASBd/gAA="
+  },
+  "/articles/what-teaching-design-taught-me.webp": {
+    "width": 1600,
+    "height": 900,
+    "blur": "data:image/webp;base64,UklGRkwAAABXRUJQVlA4IEAAAADQAQCdASoQAAkAA4BaJZQAAsQfKjcckAD+7MiEO4CVK/lxbJdTa54YUAmf2o8S3NV8PlBzrnkmGgwrmlXwgAAA"
+  },
+  "/work/social/brand-vitals/01.webp": {
+    "width": 1080,
+    "height": 1350,
+    "blur": "data:image/webp;base64,UklGRmIAAABXRUJQVlA4IFYAAADQAQCdASoNABAAA4BaJbACdAEOlioYAAD+9XbpFuztt8H+f4YEWLorJZhaegxnEtTTRkGkF70oy3jJ2aMV/DLJbfyHT/dSJtio2jT8bpDGdPdGkSgAAA=="
+  },
+  "/work/social/brand-vitals/02.webp": {
+    "width": 1080,
+    "height": 1350,
+    "blur": "data:image/webp;base64,UklGRloAAABXRUJQVlA4IE4AAADwAQCdASoNABAAA4BaJbACdAEQT+7IxXAA/vSgLRZNWC27pAzYKbovEso8UnzsGEICRbWmUwa4ltIrxJSsRfuOfy6R8uvm1nnwZf4AAAA="
+  },
+  "/work/social/brand-vitals/03.webp": {
+    "width": 1080,
+    "height": 1350,
+    "blur": "data:image/webp;base64,UklGRlgAAABXRUJQVlA4IEwAAADwAQCdASoNABAAA4BaJbACdAEPAeNIeWAA/vV2ffHI3ZXL0h00nzCkrYmnbV1p0/XA2xMint5CFhCXuIEzrtftVzoCZ6UjKMBZuAAA"
+  },
+  "/work/social/brand-vitals/04.webp": {
+    "width": 1080,
+    "height": 1350,
+    "blur": "data:image/webp;base64,UklGRmIAAABXRUJQVlA4IFYAAADwAQCdASoNABAAA4BaJbACdADdhthoHAAA/vFxHoaqenSJX0BEC9jXU61elLujacsywWTC58QUIUA20lur9h1SH6uPupDlL43/i5JUkd/2u4ScWioKAA=="
+  },
+  "/work/social/brand-vitals/05.webp": {
+    "width": 1080,
+    "height": 1350,
+    "blur": "data:image/webp;base64,UklGRnQAAABXRUJQVlA4IGgAAAAQAgCdASoNABAAA4BaJbACdADc+wf08vUAAP70l+Pf8OF0+3HSStgxqIRt9iUwjxBOpmSImFg8anVZd+TBfo3fN03Ikb0+3bti3mIRnrGcwRgQny3xsk7cwn80ixKW2nfIDh7cfAAAAA=="
+  },
+  "/work/social/brand-vitals/06.webp": {
+    "width": 1080,
+    "height": 1350,
+    "blur": "data:image/webp;base64,UklGRk4AAABXRUJQVlA4IEIAAADQAQCdASoNABAAA4BaJYgCdAEfSJaVcAD++FqFpL8GBeTUMuc2q1PQN4lYVmHgNanS/hs9Sk2uJQ7eBrrZ9UPu4AA="
+  },
+  "/work/social/brand-vitals/07.webp": {
+    "width": 1080,
+    "height": 1350,
+    "blur": "data:image/webp;base64,UklGRloAAABXRUJQVlA4IE4AAAAQAgCdASoNABAAA4BaJbACdAEPArWmGTrAAP73xsIzyiVgPEFUJu89KOxXVRr3C1z2wm0VH4E7lyJUlrEBoWRMyn+iC3IdZgXzhaYAAAA="
+  },
+  "/work/social/brand-vitals/08.webp": {
+    "width": 1080,
+    "height": 1350,
+    "blur": "data:image/webp;base64,UklGRlgAAABXRUJQVlA4IEwAAAAQAgCdASoNABAAA4BaJQBOgCIj91nOdAEAAP74UZ+msI1mfqXjGJbDluvKKZt83InIpzhsRzVuNsPlyr84Cqp6DZR3ZQfyWZgLuAAA"
+  },
+  "/work/social/brand-vitals/09.webp": {
+    "width": 1080,
+    "height": 1350,
+    "blur": "data:image/webp;base64,UklGRlwAAABXRUJQVlA4IFAAAAAQAgCdASoNABAAA4BaJbACdAEPgXVZypKAAP7sV8a/efLme/bN9q0m2xpbx3CGayWNHH+h6yqvAw0s4CSBhM/6jlVoF77NYX5eNS76e8AAAA=="
+  },
+  "/work/social/brand-vitals/10.webp": {
+    "width": 1080,
+    "height": 1350,
+    "blur": "data:image/webp;base64,UklGRlwAAABXRUJQVlA4IFAAAADQAQCdASoNABAAA4BaJbACdAEOJK47AAD+8YGX1bf4GLuXqBeP29C+ABDVg/8zH0xi3ZoU69yprQT8Y9EC2rcoyaHxv/if/pTFtblkPYAAAA=="
+  },
+  "/work/social/brand-vitals/11.webp": {
+    "width": 1080,
+    "height": 1350,
+    "blur": "data:image/webp;base64,UklGRmgAAABXRUJQVlA4IFwAAABQAgCdASoNABAAA4BaJbACdAYvDvt43jDvFAAA/vfGuiJQuipae4hCJs1AJ40gwIfbgX6pl1P2wqopitFdG6adim6vtbShYsCaOK4tavUZ+Ss3dVYzrBPN74UAAA=="
+  },
+  "/work/social/brand-vitals/12.webp": {
+    "width": 1080,
+    "height": 1350,
+    "blur": "data:image/webp;base64,UklGRnAAAABXRUJQVlA4IGQAAADwAQCdASoNABAAA4BaJbACdADZutJE5xAA/s3/i0UER3jR3UOZbj2S5FPtJUwPwIK7CQxAe8Q2NJ55cxL94KKU1L7ufuogOWWTKPmyvu6wsp6IJ/rABfHQ5I9Uc6guDQLMATAA"
+  },
+  "/work/social/brand-vitals/13.webp": {
+    "width": 1080,
+    "height": 1350,
+    "blur": "data:image/webp;base64,UklGRlgAAABXRUJQVlA4IEwAAACQAQCdASoNABAAA4BaJbFefRgAiwAA/vN/GrHNpoXIyrM9HswAHBgZw47S/2JmRYLShTDp6ba5a3pXbrATLMZyVLA5mGTRDL74WZAA"
+  },
+  "/work/social/brand-vitals/14.webp": {
+    "width": 1080,
+    "height": 1350,
+    "blur": "data:image/webp;base64,UklGRmwAAABXRUJQVlA4IGAAAAAQAgCdASoNABAAA4BaJbACdAEPhxnD0JAAAP73xsdICN+5H0TmbDsPNxfNxV63UUQPci7zF5ffpK8/9VhtEiLVjE4C5PCAqQl9GRkmGQuIfm3e8J8+35Fb+IEfDt0PYAA="
+  },
+  "/work/social/brand-vitals/15.webp": {
+    "width": 1080,
+    "height": 1350,
+    "blur": "data:image/webp;base64,UklGRnIAAABXRUJQVlA4IGYAAADwAQCdASoNABAAA4BaJbACdAEO4mP/NJAA/vXdDYrN6q3JaQaAMqLUDiuxyI+PMLt7yjxCWrehwOQQPBmoEIriPjs3T9dqaHJ9aPjPmzZcNSnmdtlOTe2o6H+BmiGz4qdMTwcQAAA="
+  },
+  "/me/gta-hero.webp": {
+    "width": 2560,
+    "height": 1429,
+    "blur": "data:image/webp;base64,UklGRmgAAABXRUJQVlA4IFwAAACwAQCdASoQAAkAA4BaJbACdACuhsfkAMsnmqc80mqM4N4fzFZ7p3xVuacmpYcvzSr8hOJpvKiOmq7jMawt+YcZ4OCKTrVaCT/Jv90RPYR3dg5Uu5iCZqG/wAAAAA=="
   }
 }

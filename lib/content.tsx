@@ -23,7 +23,7 @@ import { clone, hexToTriplet, type Overrides, type Settings } from "./merge";
 // localStorage, and on load it is folded over the base data the same way, then
 // the tree remounts once so every component reads the new values.
 
-import { DRAFT_KEY, PREVIEW_KEY, THEME_KEY } from "./theme-boot";
+import { DRAFT_KEY, EDITION_KEY, PREVIEW_KEY, THEME_KEY } from "./theme-boot";
 export { DRAFT_KEY, PREVIEW_KEY, THEME_KEY };
 
 export const publishedOverrides = published as Overrides;
@@ -39,7 +39,9 @@ export function readDraft(): Overrides | null {
 
 export function previewOn(): boolean {
   try {
-    return localStorage.getItem(PREVIEW_KEY) === "1";
+    // localStorage: the dashboard's Preview button; sessionStorage: the live
+    // preview pane inside the dashboard (same tab, so the iframe shares it)
+    return localStorage.getItem(PREVIEW_KEY) === "1" || sessionStorage.getItem(PREVIEW_KEY) === "1";
   } catch {
     return false;
   }
@@ -69,6 +71,9 @@ type ContentCtx = {
   draft: boolean;
   theme: "dark" | "light";
   setTheme: (t: "dark" | "light") => void;
+  /** the GTA VI Edition skin, on top of either theme */
+  gta: boolean;
+  setGta: (on: boolean) => void;
 };
 
 const Ctx = createContext<ContentCtx>({
@@ -76,6 +81,8 @@ const Ctx = createContext<ContentCtx>({
   draft: false,
   theme: "dark",
   setTheme: () => {},
+  gta: false,
+  setGta: () => {},
 });
 
 export function ContentProvider({ children }: { children: React.ReactNode }) {
@@ -85,6 +92,7 @@ export function ContentProvider({ children }: { children: React.ReactNode }) {
   const [draft, setDraft] = useState(false);
   const [version, setVersion] = useState(0);
   const [theme, setThemeState] = useState<"dark" | "light">("dark");
+  const [gta, setGtaState] = useState(false);
 
   useEffect(() => {
     let s = publishedOverrides.settings;
@@ -102,6 +110,32 @@ export function ContentProvider({ children }: { children: React.ReactNode }) {
     // the pre-paint script in <head> already set the attribute; mirror it
     const current = document.documentElement.dataset.theme;
     setThemeState(current === "light" ? "light" : "dark");
+    setGtaState(document.documentElement.dataset.edition === "gta");
+
+    // Live preview: the dashboard posts the draft into this page (when it is
+    // the iframe in the dashboard) on every edit, so changes show while typing.
+    const onMsg = (e: MessageEvent) => {
+      if (e.origin !== location.origin) return;
+      const m = e.data as { type?: string; doc?: Overrides };
+      if (m?.type !== "mt-draft" || !m.doc) return;
+      applyAll(m.doc);
+      setSettings(clone(m.doc.settings ?? {}));
+      applySettingsToDocument(m.doc.settings);
+      setDraft(true);
+      setVersion((v) => v + 1);
+    };
+    window.addEventListener("message", onMsg);
+    return () => window.removeEventListener("message", onMsg);
+  }, []);
+
+  const setGta = useCallback((on: boolean) => {
+    setGtaState(on);
+    if (on) document.documentElement.dataset.edition = "gta";
+    else delete document.documentElement.dataset.edition;
+    try {
+      if (on) localStorage.setItem(EDITION_KEY, "gta");
+      else localStorage.removeItem(EDITION_KEY);
+    } catch {}
   }, []);
 
   const setTheme = useCallback((t: "dark" | "light") => {
@@ -115,7 +149,7 @@ export function ContentProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   return (
-    <Ctx.Provider value={{ settings, draft, theme, setTheme }}>
+    <Ctx.Provider value={{ settings, draft, theme, setTheme, gta, setGta }}>
       {/* the key remounts the tree once after a draft is folded in */}
       <div key={version} className="contents">
         {children}
@@ -130,6 +164,8 @@ export function useContent() {
 }
 
 function DraftBar() {
+  // inside the dashboard preview pane the dashboard already says it is a draft
+  if (typeof window !== "undefined" && window.self !== window.top) return null;
   return (
     <div className="fixed left-1/2 top-[76px] z-[120] flex -translate-x-1/2 items-center gap-3 whitespace-nowrap rounded-full md:bottom-4 md:top-auto border border-electric/50 bg-ink-800/95 py-2 pl-4 pr-2 text-xs text-bone-50 shadow-2xl backdrop-blur-md">
       <span className="h-2 w-2 rounded-full bg-electric" aria-hidden />
