@@ -155,7 +155,7 @@ export default function GtaLoader() {
                 Mohamed
                 <br />
                 Tarek{" "}
-                <span className="inline-block rounded-lg border-[3px] border-white bg-[linear-gradient(135deg,#ff4fa3,#ff9a3c)] px-2 align-middle text-[0.4em] leading-[1.05] text-[#1a0b2e]">VI</span>
+                <span className="gta-vi inline-block rounded-lg border-[3px] border-white bg-[linear-gradient(135deg,#ff4fa3,#ff9a3c)] px-2 align-middle text-[0.4em] leading-[1.05]">VI</span>
               </motion.p>
               {phase === "loading" ? (
                 <AnimatePresence mode="wait">

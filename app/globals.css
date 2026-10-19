@@ -587,3 +587,9 @@ html[data-edition="gta"][data-theme="light"] h2 .italic {
 [dir="rtl"] :has(> .animate-marquee-rev) {
   direction: ltr;
 }
+
+/* the VI badge: white type, hard dark offset, none of the lockup's glow */
+.gta-vi {
+  color: #fff !important;
+  text-shadow: 3px 3px 0 #1a0b2e !important;
+}

@@ -145,7 +145,7 @@ function ConsoleHero() {
             <span className="block text-[17vw] md:text-[clamp(4.5rem,8vw,8.5rem)]">Mohamed</span>
             <span className="flex items-end gap-4 text-[17vw] md:text-[clamp(4.5rem,8vw,8.5rem)]">
               Tarek
-              <span className="mb-[0.12em] rounded-lg border-[3px] border-white bg-[linear-gradient(135deg,#ff4fa3,#ff9a3c)] px-2 text-[0.42em] leading-[1.05] text-[#1a0b2e]">VI</span>
+              <span className="gta-vi mb-[0.12em] rounded-lg border-[3px] border-white bg-[linear-gradient(135deg,#ff4fa3,#ff9a3c)] px-2 text-[0.42em] leading-[1.05]">VI</span>
             </span>
           </h1>
           <p className="mt-4 max-w-md text-base font-medium text-white [text-shadow:0_2px_10px_rgb(0_0_0/0.85)] md:text-lg">{c.tagline}</p>
@@ -197,6 +197,10 @@ function KvConsole() {
 
   return (
     <section id="key-visuals" dir="ltr" className="relative overflow-hidden bg-black">
+      <div className="container-edge mx-auto flex max-w-edge items-end gap-6 pb-5 pt-10 md:pt-14">
+        <h2 className="text-5xl text-white md:text-7xl">{t.master.label}</h2>
+        <span className="pb-1 text-lg font-semibold text-white/50 md:text-2xl">{lang === "ar" ? "الحملات" : "Campaigns"}</span>
+      </div>
       <div className="relative aspect-[4/5] w-full sm:aspect-video md:max-h-[92svh] md:min-h-[620px]">
         <AnimatePresence mode="popLayout">
           <motion.div
@@ -210,41 +214,6 @@ function KvConsole() {
             <Media src={boards[i]} alt={name(i)} fill sizes="100vw" className="object-cover" />
           </motion.div>
         </AnimatePresence>
-
-        {/* top bar + title tiles */}
-        <div className="container-edge relative z-10 mx-auto max-w-edge pt-6 md:pt-8">
-          <div className="flex items-center gap-6 text-lg font-semibold text-white [text-shadow:0_1px_8px_rgb(0_0_0/0.8)] md:text-2xl">
-            <span>{t.master.label}</span>
-            <span className="text-white/55">{lang === "ar" ? "الحملات" : "Campaigns"}</span>
-          </div>
-          <div className="mt-4 flex items-start gap-2.5 overflow-x-auto pb-2 [scrollbar-width:none] md:gap-3 [&::-webkit-scrollbar]:hidden">
-            {boards.map((src, k) => {
-              const on = k === i;
-              return (
-                <div key={src} className="flex shrink-0 flex-col items-start">
-                  <button
-                    type="button"
-                    onClick={() => setI(k)}
-                    aria-label={name(k)}
-                    aria-pressed={on}
-                    className={`relative overflow-hidden rounded-xl transition-all duration-300 ${
-                      on
-                        ? "h-20 w-20 ring-[3px] ring-white ring-offset-2 ring-offset-black/40 md:h-28 md:w-28"
-                        : "mt-2 h-14 w-14 opacity-85 hover:opacity-100 md:mt-3 md:h-20 md:w-20"
-                    }`}
-                  >
-                    <Media src={src} alt="" fill sizes="112px" className="object-cover" />
-                  </button>
-                  {on ? (
-                    <span className="mt-2 whitespace-nowrap text-sm font-medium text-white [text-shadow:0_1px_8px_rgb(0_0_0/0.9)] md:text-base">
-                      {name(k)}
-                    </span>
-                  ) : null}
-                </div>
-              );
-            })}
-          </div>
-        </div>
 
       </div>
 
@@ -282,6 +251,31 @@ function KvConsole() {
               •••
             </button>
           </div>
+      </div>
+
+      {/* the picker: small wide thumbnails on the black, never over the art */}
+      <div className="container-edge mx-auto max-w-edge pb-10 md:pb-14">
+        <div className="flex items-end gap-2.5 overflow-x-auto pb-2 [scrollbar-width:none] md:gap-3 [&::-webkit-scrollbar]:hidden">
+          {boards.map((src, k) => {
+            const on = k === i;
+            return (
+              <button
+                key={src}
+                type="button"
+                onClick={() => setI(k)}
+                aria-label={name(k)}
+                aria-pressed={on}
+                className={`relative aspect-video shrink-0 overflow-hidden rounded-lg transition-all duration-300 ${
+                  on
+                    ? "w-32 ring-[3px] ring-white ring-offset-2 ring-offset-black md:w-40"
+                    : "w-24 opacity-55 hover:opacity-100 md:w-32"
+                }`}
+              >
+                <Media src={src} alt="" fill sizes="160px" className="object-cover" />
+              </button>
+            );
+          })}
+        </div>
       </div>
 
       <AnimatePresence>
@@ -523,7 +517,7 @@ function BoxArt() {
             <span dir="ltr" className="gta-lockup absolute bottom-4 start-4 z-10 font-[family-name:var(--font-gta)] text-5xl uppercase leading-[0.85] text-white">
               Mohamed
               <br />
-              Tarek <span className="rounded border-2 border-white px-1 text-2xl align-middle">VI</span>
+              Tarek <span className="gta-vi rounded border-2 border-white bg-[linear-gradient(135deg,#ff4fa3,#ff9a3c)] px-1 align-middle text-2xl">VI</span>
             </span>
           </div>
         </div>
