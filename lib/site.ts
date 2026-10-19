@@ -15,7 +15,7 @@ export const site = {
   // the current GitHub Pages address. No trailing slash.
   url:
     process.env.NEXT_PUBLIC_SITE_URL ||
-    "https://mohamed-sr-designer.github.io/mohamed-tarek-portfolio",
+    "https://mohamed-sr-designer.github.io/mohamed-tarek-portfolio-v2",
   email: "mohamed.tarek.ahmed1@gmail.com",
   phoneDisplay: "+20 10 1145 8929",
   phone: "+201011458929",

@@ -26,7 +26,7 @@ The only build-time inputs are two environment variables, both optional:
 
 | Variable | Purpose |
 | --- | --- |
-| `NEXT_PUBLIC_BASE_PATH` | Sub-path the site is served from. Set to `/mohamed-tarek-portfolio` by the GitHub Pages workflow. **Leave unset when hosting at a domain root.** |
+| `NEXT_PUBLIC_BASE_PATH` | Sub-path the site is served from. Set to `/mohamed-tarek-portfolio-v2` by the GitHub Pages workflow. **Leave unset when hosting at a domain root.** |
 | `NEXT_PUBLIC_SITE_URL` | Canonical origin, no trailing slash. Every canonical tag, Open Graph URL, sitemap entry and JSON-LD @id is built from it. **Must be set to the new address when moving hosts** or all 15 pages keep telling Google the real version lives on the old domain. |
 | `NEXT_DIST_DIR` | Build cache location. See the warning under "Gotchas". |
 
