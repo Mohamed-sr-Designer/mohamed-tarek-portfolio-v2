@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import { Media } from "@/components/ui/Media";
+import { assetUrl } from "@/lib/assets";
 import { useLang } from "@/lib/i18n";
 import { site } from "@/lib/site";
 import { projects } from "@/lib/projects";
@@ -121,47 +122,15 @@ function Hud({ label, cash }: { label: string; cash: string }) {
 }
 
 /* ------------------------------------------------------------- console */
-// The hero art is one of the wide campaign boards. The picker sits small in
-// the lower corner, like a console's recently-played row, so the art owns the
-// screen; the first tile is the edition's own cover.
-const boards = [4, 1, 2, 3, 9, 5, 6, 7, 8].map((n) => `/work/master/${String(n).padStart(2, "0")}.webp`);
-type Tile = { id: string; img: string; n?: number };
-
+// The hero is the edition's cover only: him, the lockup, the HUD.
 function ConsoleHero() {
   const { lang } = useLang();
   const c = copy[lang];
-  const tiles: Tile[] = useMemo(
-    () => [{ id: "me", img: "/me/gta-hero.webp" }, ...boards.map((img, k) => ({ id: `kv-${k}`, img, n: k + 1 }))],
-    []
-  );
-  const [i, setI] = useState(0);
-  const cur = tiles[i];
-
-  useEffect(() => {
-    const onKey = (e: KeyboardEvent) => {
-      if ((e.target as HTMLElement)?.closest("input,textarea")) return;
-      if (e.key === "ArrowRight") setI((x) => (x + 1) % tiles.length);
-      if (e.key === "ArrowLeft") setI((x) => (x - 1 + tiles.length) % tiles.length);
-    };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [tiles.length]);
-
   return (
     <section id="top" className="relative flex min-h-[100svh] flex-col overflow-hidden bg-black pt-20">
-      {/* the art, shown clean, cross-faded per tile */}
-      <AnimatePresence mode="popLayout">
-        <motion.div
-          key={cur.id}
-          initial={{ opacity: 0, scale: 1.05 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.9, ease }}
-          className="absolute inset-0"
-        >
-          <Media src={cur.img} alt="" fill priority sizes="100vw" className={`object-cover ${cur.id === "me" ? "object-[70%_center]" : "object-center"}`} />
-        </motion.div>
-      </AnimatePresence>
+      <div className="absolute inset-0">
+        <Media src="/me/gta-hero.webp" alt="" fill priority sizes="100vw" className="object-cover object-[70%_center]" />
+      </div>
 
       <div className="container-edge relative z-10 mx-auto flex w-full max-w-edge justify-end pt-2">
         <div className="hidden md:block">
@@ -170,73 +139,168 @@ function ConsoleHero() {
       </div>
 
       {/* in Arabic the copy stays on the left too: he sits on the right of the art */}
-      <div className="container-edge relative z-10 mx-auto mt-auto flex w-full max-w-edge flex-col gap-8 pb-10 md:flex-row md:items-end md:justify-between md:pb-14 md:rtl:flex-row-reverse">
-        {/* title lockup */}
-        <AnimatePresence mode="wait">
+      <div className="container-edge relative z-10 mx-auto mt-auto w-full max-w-edge pb-10 md:pb-14 rtl:text-left">
+        <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, ease }} className="max-w-2xl rtl:mr-auto">
+          <h1 dir="ltr" className="gta-lockup font-[family-name:var(--font-gta)] uppercase leading-[0.84] text-white">
+            <span className="block text-[17vw] md:text-[clamp(4.5rem,8vw,8.5rem)]">Mohamed</span>
+            <span className="flex items-end gap-4 text-[17vw] md:text-[clamp(4.5rem,8vw,8.5rem)]">
+              Tarek
+              <span className="mb-[0.12em] rounded-lg border-[3px] border-white bg-[linear-gradient(135deg,#ff4fa3,#ff9a3c)] px-2 text-[0.42em] leading-[1.05] text-[#1a0b2e]">VI</span>
+            </span>
+          </h1>
+          <p className="mt-4 max-w-md text-base font-medium text-white [text-shadow:0_2px_10px_rgb(0_0_0/0.85)] md:text-lg">{c.tagline}</p>
+          <div className="mt-6 flex flex-wrap items-center gap-3 rtl:justify-end">
+            <Link href="#missions" className="cta-blend inline-flex min-h-[48px] items-center gap-3 rounded-full px-7 text-sm uppercase tracking-[0.12em]">
+              <span aria-hidden>▶</span> {c.start}
+            </Link>
+            <Link
+              href="/about"
+              className="inline-flex min-h-[48px] items-center rounded-full border-2 border-white/85 bg-black/35 px-6 text-sm font-semibold uppercase tracking-[0.12em] text-white backdrop-blur-md hover:bg-white hover:text-[#1a0b2e]"
+            >
+              {c.profile}
+            </Link>
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
+/* ---------------------------------------------------- key visuals console */
+// The wide campaign boards as a console home screen (the PS5 reference): the
+// selected board fills the panel, a row of title tiles runs along the top
+// with the current one enlarged and named under it, and the title and a Play
+// button sit bottom-left. Play opens the board full size.
+const boards = [4, 1, 2, 3, 9, 5, 6, 7, 8].map((n) => `/work/master/${String(n).padStart(2, "0")}.webp`);
+
+function KvConsole() {
+  const { lang, t } = useLang();
+  const c = copy[lang];
+  const [i, setI] = useState(0);
+  const [open, setOpen] = useState(false);
+  const name = (k: number) => `${c.kv} ${String(k + 1).padStart(2, "0")}`;
+
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if ((e.target as HTMLElement)?.closest("input,textarea")) return;
+      if (e.key === "Escape") setOpen(false);
+      const el = document.getElementById("key-visuals");
+      if (!el) return;
+      const r = el.getBoundingClientRect();
+      if (r.bottom < 0 || r.top > innerHeight) return; // only while it is on screen
+      if (e.key === "ArrowRight") setI((x) => (x + 1) % boards.length);
+      if (e.key === "ArrowLeft") setI((x) => (x - 1 + boards.length) % boards.length);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, []);
+
+  return (
+    <section id="key-visuals" dir="ltr" className="relative overflow-hidden bg-black">
+      <div className="relative aspect-[4/5] w-full sm:aspect-video md:max-h-[92svh] md:min-h-[620px]">
+        <AnimatePresence mode="popLayout">
           <motion.div
-            key={cur.id}
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.6, ease }}
-            className="max-w-2xl"
+            key={boards[i]}
+            initial={{ opacity: 0, scale: 1.04 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.8, ease }}
+            className="absolute inset-0"
           >
-            {cur.id === "me" ? (
-              <h1 dir="ltr" className="gta-lockup font-[family-name:var(--font-gta)] uppercase leading-[0.84] text-white">
-                <span className="block text-[17vw] md:text-[clamp(4.5rem,8vw,8.5rem)]">Mohamed</span>
-                <span className="flex items-end gap-4 text-[17vw] md:text-[clamp(4.5rem,8vw,8.5rem)]">
-                  Tarek
-                  <span className="mb-[0.12em] rounded-lg border-[3px] border-white bg-[linear-gradient(135deg,#ff4fa3,#ff9a3c)] px-2 text-[0.42em] leading-[1.05] text-[#1a0b2e]">VI</span>
-                </span>
-              </h1>
-            ) : (
-              <h1 className="gta-lockup font-[family-name:var(--font-gta)] text-[14vw] uppercase leading-[0.88] text-white md:text-[clamp(3.5rem,6vw,6.5rem)]">
-                {c.kv} <span dir="ltr">{String(cur.n).padStart(2, "0")}</span>
-              </h1>
-            )}
-            <p className="mt-4 max-w-md text-base font-medium text-white [text-shadow:0_2px_10px_rgb(0_0_0/0.85)] md:text-lg">
-              {cur.id === "me" ? c.tagline : c.kvNote}
-            </p>
-            <div className="mt-6 flex flex-wrap items-center gap-3">
-              <Link href="#missions" className="cta-blend inline-flex min-h-[48px] items-center gap-3 rounded-full px-7 text-sm uppercase tracking-[0.12em]">
-                <span aria-hidden>▶</span> {c.start}
-              </Link>
-              <Link
-                href="/about"
-                className="inline-flex min-h-[48px] items-center rounded-full border-2 border-white/85 bg-black/35 px-6 text-sm font-semibold uppercase tracking-[0.12em] text-white backdrop-blur-md hover:bg-white hover:text-[#1a0b2e]"
-              >
-                {c.profile}
-              </Link>
-            </div>
+            <Media src={boards[i]} alt={name(i)} fill sizes="100vw" className="object-cover" />
           </motion.div>
         </AnimatePresence>
 
-        {/* the picker: small wide thumbnails in the corner */}
-        <div className="w-full md:w-auto md:max-w-[46%]">
-          <p dir="ltr" className="mb-2 text-end text-[11px] font-bold uppercase tracking-[0.2em] text-white [text-shadow:0_1px_6px_rgb(0_0_0/0.9)]">
-            {String(i + 1).padStart(2, "0")} / {String(tiles.length).padStart(2, "0")} · ← →
-          </p>
-          <div className="flex gap-2 overflow-x-auto rounded-xl bg-black/45 p-2 backdrop-blur-md [scrollbar-width:none] md:flex-wrap md:justify-end md:overflow-visible [&::-webkit-scrollbar]:hidden">
-            {tiles.map((tile, k) => {
+        {/* top bar + title tiles */}
+        <div className="container-edge relative z-10 mx-auto max-w-edge pt-6 md:pt-8">
+          <div className="flex items-center gap-6 text-lg font-semibold text-white [text-shadow:0_1px_8px_rgb(0_0_0/0.8)] md:text-2xl">
+            <span>{t.master.label}</span>
+            <span className="text-white/55">{lang === "ar" ? "الحملات" : "Campaigns"}</span>
+          </div>
+          <div className="mt-4 flex items-start gap-2.5 overflow-x-auto pb-2 [scrollbar-width:none] md:gap-3 [&::-webkit-scrollbar]:hidden">
+            {boards.map((src, k) => {
               const on = k === i;
               return (
-                <button
-                  key={tile.id}
-                  type="button"
-                  onClick={() => setI(k)}
-                  aria-label={tile.id === "me" ? "Edition cover" : `${c.kv} ${tile.n}`}
-                  aria-pressed={on}
-                  className={`relative aspect-video w-20 shrink-0 overflow-hidden rounded-md border-2 transition-all duration-300 md:w-24 ${
-                    on ? "border-white shadow-[0_0_0_2px_rgb(255_79_163)]" : "border-transparent opacity-60 hover:opacity-100"
-                  }`}
-                >
-                  <Media src={tile.img} alt="" fill sizes="96px" className="object-cover" />
-                </button>
+                <div key={src} className="flex shrink-0 flex-col items-start">
+                  <button
+                    type="button"
+                    onClick={() => setI(k)}
+                    aria-label={name(k)}
+                    aria-pressed={on}
+                    className={`relative overflow-hidden rounded-xl transition-all duration-300 ${
+                      on
+                        ? "h-20 w-20 ring-[3px] ring-white ring-offset-2 ring-offset-black/40 md:h-28 md:w-28"
+                        : "mt-2 h-14 w-14 opacity-85 hover:opacity-100 md:mt-3 md:h-20 md:w-20"
+                    }`}
+                  >
+                    <Media src={src} alt="" fill sizes="112px" className="object-cover" />
+                  </button>
+                  {on ? (
+                    <span className="mt-2 whitespace-nowrap text-sm font-medium text-white [text-shadow:0_1px_8px_rgb(0_0_0/0.9)] md:text-base">
+                      {name(k)}
+                    </span>
+                  ) : null}
+                </div>
               );
             })}
           </div>
         </div>
+
       </div>
+
+      {/* title + actions, under the art: the boards carry their own copy, so
+          nothing is laid over them */}
+      <div className="container-edge mx-auto flex max-w-edge flex-wrap items-center justify-between gap-5 py-6 md:py-8">
+        <div>
+          <AnimatePresence mode="wait">
+            <motion.p
+              key={i}
+              initial={{ opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.45, ease }}
+              className="gta-lockup font-[family-name:var(--font-gta)] text-4xl uppercase leading-none text-white md:text-6xl"
+            >
+              {name(i)}
+            </motion.p>
+          </AnimatePresence>
+        </div>
+          <div className="flex items-center gap-3">
+            <button
+              type="button"
+              onClick={() => setOpen(true)}
+              className="inline-flex min-h-[48px] items-center gap-2 rounded-full bg-white px-8 text-base font-semibold text-[#1a0b2e] shadow-lg transition-transform hover:scale-[1.04]"
+            >
+              {lang === "ar" ? "شغّل" : "Play"}
+            </button>
+            <button
+              type="button"
+              onClick={() => setI((x) => (x + 1) % boards.length)}
+              aria-label={lang === "ar" ? "التالي" : "Next"}
+              className="grid h-12 w-12 place-items-center rounded-full bg-black/45 text-xl font-bold text-white backdrop-blur-md hover:bg-black/65"
+            >
+              •••
+            </button>
+          </div>
+      </div>
+
+      <AnimatePresence>
+        {open ? (
+          <motion.div
+            className="fixed inset-0 z-[95] grid place-items-center bg-black/92 p-3 md:p-8"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setOpen(false)}
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={assetUrl(boards[i])} alt={name(i)} className="max-h-full max-w-full rounded-lg object-contain" onClick={(e) => e.stopPropagation()} />
+            <button type="button" onClick={() => setOpen(false)} aria-label="Close" className="absolute right-5 top-5 grid h-11 w-11 place-items-center rounded-full border-2 border-white text-white">
+              ✕
+            </button>
+          </motion.div>
+        ) : null}
+      </AnimatePresence>
     </section>
   );
 }
@@ -376,8 +440,8 @@ function FilmRow({ imgs, reverse }: { imgs: string[]; reverse?: boolean }) {
     <div className={`gta-film overflow-hidden ${reverse ? "rotate-2" : "-rotate-2"}`}>
       <div className={`flex w-max gap-3 px-3 py-4 hover:[animation-play-state:paused] ${reverse ? "animate-marquee-rev" : "animate-marquee"}`}>
         {[...imgs, ...imgs].map((src, k) => (
-          <div key={src + k} className="relative h-40 w-[17rem] shrink-0 overflow-hidden rounded-sm border-2 border-black bg-[radial-gradient(circle_at_50%_40%,#2a1446,#0b0614)] md:h-56 md:w-[24rem]">
-            <span className="absolute inset-6 md:inset-8">
+          <div key={src + k} className="relative h-28 w-[12rem] shrink-0 overflow-hidden rounded-sm border-2 border-black bg-[radial-gradient(circle_at_50%_40%,#2a1446,#0b0614)] md:h-36 md:w-[16rem]">
+            <span className="absolute inset-4 md:inset-5">
               <Media src={src} alt="Lettering" fill sizes="384px" className="object-contain" />
             </span>
           </div>
@@ -392,14 +456,14 @@ function TypePlay() {
   const c = copy[lang];
   const half = Math.ceil(typePieces.length / 2);
   return (
-    <section id="type" className="overflow-hidden bg-black section-y">
+    <section id="type" className="overflow-hidden bg-black py-12 md:py-16">
       <div className="container-edge mx-auto max-w-edge text-center">
-        <h2 className="text-6xl text-white md:text-9xl">
+        <h2 className="text-5xl text-white md:text-7xl">
           {c.typeA} <span className="italic">{c.typeB}</span>
         </h2>
         <p className="mx-auto mt-3 max-w-md text-sm text-white/70">{c.typeNote}</p>
       </div>
-      <div className="mt-12 flex flex-col gap-6">
+      <div className="mt-8 flex flex-col gap-4">
         <FilmRow imgs={typePieces.slice(0, half).concat(typePieces.slice(0, half))} />
         <FilmRow imgs={typePieces.slice(half).concat(typePieces.slice(half))} reverse />
       </div>
@@ -500,6 +564,7 @@ export default function GtaHome() {
     <>
       <ConsoleHero />
       <CrewStrip />
+      <KvConsole />
       <MissionSelect />
       <TypePlay />
       {/* the films, under the game skin: they are the cutscenes */}
