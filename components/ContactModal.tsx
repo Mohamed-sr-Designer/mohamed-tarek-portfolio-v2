@@ -49,6 +49,9 @@ export default function ContactModal() {
             role="dialog"
             aria-modal="true"
             aria-label={t.contact.label}
+            // the card scrolls on short screens: let the wheel reach it
+            // natively instead of Lenis taking it for the page behind
+            data-lenis-prevent
             dir={lang === "ar" ? "rtl" : "ltr"}
             initial={{ y: 40, opacity: 0, scale: 0.97 }}
             animate={{ y: 0, opacity: 1, scale: 1 }}

@@ -41,8 +41,11 @@ export default function Nav() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // Lock only while the menu is open. Clearing the overflow when closed also
+  // ran on every mount, which released the intro preloader's lock under it.
   useEffect(() => {
-    document.body.style.overflow = open ? "hidden" : "";
+    if (!open) return;
+    document.body.style.overflow = "hidden";
     return () => {
       document.body.style.overflow = "";
     };
@@ -139,7 +142,7 @@ export default function Nav() {
                     onClick={() => setOpen(false)}
                     className="font-serif text-4xl text-bone-50"
                   >
-                    <span className="mr-3 align-top text-sm text-bone-400">
+                    <span className="me-3 align-top text-sm text-bone-400">
                       0{i + 1}
                     </span>
                     {item.label}

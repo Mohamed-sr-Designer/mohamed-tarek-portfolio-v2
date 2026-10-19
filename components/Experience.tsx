@@ -132,11 +132,11 @@ const jobs: Job[] = [
 // hire is a step up, so all but the last carry the promotion badge.
 function Ladder({ roles, promoted }: { roles: Role[]; promoted: string }) {
   return (
-    <ol className="relative ml-1 border-l border-line/15">
+    <ol className="relative ms-1 border-s border-line/15">
       {roles.map((r, i) => (
-        <li key={r.title} className="relative pb-5 pl-6 last:pb-0">
+        <li key={r.title} className="relative pb-5 ps-6 last:pb-0">
           <span
-            className={`absolute -left-[5px] top-1.5 h-2.5 w-2.5 rounded-full ${
+            className={`absolute -start-[5px] top-1.5 h-2.5 w-2.5 rounded-full ${
               i === 0 ? "bg-mint" : "bg-bone-500"
             }`}
           />

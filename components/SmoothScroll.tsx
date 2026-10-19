@@ -47,6 +47,19 @@ export default function SmoothScroll() {
     };
     document.addEventListener("click", onClick);
 
+    // Overlays (preloader, GTA loader, lightboxes, menu, contact card) lock the
+    // page by setting body overflow to hidden. Lenis scrolls the window
+    // programmatically, which overflow does not stop, so the wheel kept moving
+    // the page behind them -- the GTA loader dropped you 1,700px down the home
+    // page. Follow the lock instead of each overlay knowing about Lenis.
+    const sync = () => {
+      if (document.body.style.overflow === "hidden") lenis.stop();
+      else lenis.start();
+    };
+    const lock = new MutationObserver(sync);
+    lock.observe(document.body, { attributes: true, attributeFilter: ["style"] });
+    sync();
+
     let raf = 0;
     const loop = (time: number) => {
       lenis.raf(time);
@@ -56,6 +69,7 @@ export default function SmoothScroll() {
 
     return () => {
       cancelAnimationFrame(raf);
+      lock.disconnect();
       document.removeEventListener("click", onClick);
       lenis.destroy();
       lenisRef.current = null;

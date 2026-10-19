@@ -47,6 +47,7 @@ export default function GtaLoader() {
   const [phase, setPhase] = useState<Phase>("off");
   const [tip, setTip] = useState(0);
   const audio = useRef<HTMLAudioElement | null>(null);
+  const fade = useRef(0);
 
   const fadeOut = useCallback(() => {
     const a = audio.current;
@@ -56,10 +57,10 @@ export default function GtaLoader() {
     const step = (now: number) => {
       const k = Math.min(1, (now - t0) / 700);
       a.volume = start * (1 - k);
-      if (k < 1) requestAnimationFrame(step);
+      if (k < 1) fade.current = requestAnimationFrame(step);
       else a.pause();
     };
-    requestAnimationFrame(step);
+    fade.current = requestAnimationFrame(step);
   }, []);
 
   const finish = useCallback(() => {
@@ -68,6 +69,15 @@ export default function GtaLoader() {
   }, [fadeOut]);
 
   const startLoading = useCallback(() => {
+    // a fade still running from the last exit would pause this new cue
+    cancelAnimationFrame(fade.current);
+    // Counts as this session's load. Switching the edition on from the header
+    // lands here before the cold-arrival check below runs, and without the
+    // flag that check saw a first visit and swapped the running loader for
+    // the press-start screen, music already playing under it.
+    try {
+      sessionStorage.setItem("gta-loaded", "1");
+    } catch {}
     try {
       const a = audio.current ?? new Audio(withBase("/audio/gta-loading.mp3"));
       audio.current = a;
@@ -103,12 +113,17 @@ export default function GtaLoader() {
     return () => window.removeEventListener("keydown", go);
   }, [phase, startLoading]);
 
+  // Only ever unlock what this screen locked: clearing the overflow while off
+  // also ran on mount, and released the intro preloader's lock under it.
   useEffect(() => {
-    if (phase === "off") {
-      document.body.style.overflow = "";
-      return;
-    }
+    if (phase === "off") return;
     document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [phase]);
+
+  useEffect(() => {
     if (phase !== "loading") return;
     setTip(Math.floor(Math.random() * TIPS.en.length));
     const tipId = setInterval(() => setTip((x) => (x + 1) % TIPS.en.length), 2400);
@@ -126,7 +141,7 @@ export default function GtaLoader() {
       {phase !== "off" ? (
         <motion.div
           key="gta-loader"
-          className="fixed inset-0 z-[120] cursor-pointer overflow-hidden bg-[#1a0b2e]"
+          className={`fixed inset-0 z-[120] overflow-hidden bg-[#1a0b2e] ${phase === "press" ? "cursor-pointer" : ""}`}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0, scale: 1.04 }}

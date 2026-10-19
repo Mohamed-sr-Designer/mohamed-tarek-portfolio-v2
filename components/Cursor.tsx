@@ -39,10 +39,13 @@ export default function Cursor() {
 
   if (!enabled) return null;
 
+  // Above every overlay. It used to share z-[120] with the GTA loading screen,
+  // and the loader comes later in the DOM, so it painted over the cursor while
+  // the native one stays hidden: no pointer at all for the whole load.
   return (
     <motion.div
       style={{ x: sx, y: sy }}
-      className="custom-cursor pointer-events-none fixed left-0 top-0 z-[120] mix-blend-difference"
+      className="custom-cursor pointer-events-none fixed left-0 top-0 z-[130] mix-blend-difference"
       aria-hidden
     >
       <motion.div
