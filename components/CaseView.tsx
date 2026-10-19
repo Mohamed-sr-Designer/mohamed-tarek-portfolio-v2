@@ -165,7 +165,7 @@ export default function CaseView({ project }: { project: Project }) {
           <div className="grid gap-6 md:grid-cols-12 md:gap-8">
             <div className="md:col-span-5">
               <div className="h-full rounded-2xl border border-line/10 bg-ink-800 p-7">
-                <p className="text-[10px] uppercase tracking-ultra text-bone-500">
+                <p className="text-[11px] uppercase tracking-ultra text-bone-500">
                   {project.strategyBlock.toneLabel}
                 </p>
                 <p className="mt-4 text-pretty text-lg leading-relaxed text-bone-100">
@@ -184,7 +184,7 @@ export default function CaseView({ project }: { project: Project }) {
               </div>
             </div>
             <div className="md:col-span-7">
-              <p className="text-[10px] uppercase tracking-ultra text-bone-500">
+              <p className="text-[11px] uppercase tracking-ultra text-bone-500">
                 {project.strategyBlock.pillarsLabel}
               </p>
               <div className="mt-4 grid gap-px overflow-hidden rounded-2xl border border-line/10 bg-line/10 sm:grid-cols-2">

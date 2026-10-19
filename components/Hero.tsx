@@ -126,7 +126,7 @@ export default function Hero() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1, delay: 0.2 }}
-            className="flex items-center gap-2 text-[10px] uppercase tracking-[0.16em] text-bone-400 rtl:flex-row-reverse sm:text-xs sm:tracking-[0.28em] md:text-white/75"
+            className="flex items-center gap-2 text-[11px] uppercase tracking-[0.14em] text-bone-400 rtl:flex-row-reverse sm:text-xs sm:tracking-[0.28em] md:text-white/75"
           >
             <span className="relative flex h-2 w-2">
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-mint opacity-70 md:bg-white" />

@@ -8,6 +8,7 @@ import {
   useState,
 } from "react";
 import { dict, type Lang } from "@/lib/dict";
+import { useContent } from "@/lib/content";
 
 type Ctx = {
   lang: Lang;
@@ -26,13 +27,18 @@ const LangContext = createContext<Ctx>({
 export function LangProvider({ children }: { children: React.ReactNode }) {
   const [lang, setLangState] = useState<Lang>("en");
 
-  // hydrate from storage after mount (SSR renders English)
+  const { settings } = useContent();
+
+  // hydrate from storage after mount (SSR renders English). English is the
+  // default; Arabic is the option in the footer. A visitor's own choice wins,
+  // then the dashboard's default.
   useEffect(() => {
     try {
       const saved = localStorage.getItem("lang");
-      if (saved === "ar") setLangState("ar");
+      if (saved === "ar" || saved === "en") setLangState(saved);
+      else if (settings.defaultLang === "ar") setLangState("ar");
     } catch {}
-  }, []);
+  }, [settings.defaultLang]);
 
   useEffect(() => {
     const el = document.documentElement;

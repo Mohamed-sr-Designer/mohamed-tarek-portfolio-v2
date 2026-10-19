@@ -22,7 +22,7 @@ import { assetUrl } from "@/lib/assets";
 // on a near-black scrim, so the same artwork serves both. The black cuts stay in
 // the repo -- 08's was derived from its own artwork rather than supplied, and
 // they cost nothing to keep.
-const pieces = Array.from({ length: 8 }, (_, i) => {
+const pieces = Array.from({ length: 10 }, (_, i) => {
   const id = String(i + 1).padStart(2, "0");
   return {
     id,
@@ -55,10 +55,20 @@ function Piece({
       className="group relative h-24 w-44 shrink-0 transition-transform duration-500 ease-cinema hover:scale-[1.06] sm:h-32 sm:w-56"
     >
       <span className="absolute inset-0 block p-5 sm:p-7">
-        <span className="relative block h-full w-full">
+        {/* white cut on the dark theme, black cut on the light one */}
+        <span className="relative block h-full w-full light:hidden">
           <Media
             src={piece.dark}
             alt={`${label} ${index + 1}`}
+            fill
+            sizes="288px"
+            className="object-contain"
+          />
+        </span>
+        <span className="relative hidden h-full w-full light:block">
+          <Media
+            src={piece.light}
+            alt=""
             fill
             sizes="288px"
             className="object-contain"

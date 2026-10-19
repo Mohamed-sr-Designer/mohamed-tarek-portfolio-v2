@@ -156,7 +156,7 @@ export default function WebProjects() {
                   href={current.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="cta-edge shrink-0 rounded-full px-3 py-1 text-[11px] font-medium text-mint"
+                  className="cta-edge inline-flex min-h-[36px] shrink-0 items-center rounded-full px-4 text-xs font-medium text-mint"
                 >
                   {t.web.live}
                 </a>

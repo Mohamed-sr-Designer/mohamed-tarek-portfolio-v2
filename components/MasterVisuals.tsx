@@ -13,7 +13,8 @@ import { assetUrl } from "@/lib/assets";
 // nine are reachable without a very long scroll. Click to view full size.
 // 04 (TANK 700) is the hero of this section, then the rest in order.
 // 09 (SOC Analyst diploma) and 10 (Makkiyoon) were pulled at his request.
-const ORDER = [4, 1, 2, 3, 5, 6, 7, 8];
+// v2: 09 is now the ElSewedy landscape board, set in the middle of the run.
+const ORDER = [4, 1, 2, 3, 9, 5, 6, 7, 8];
 const boards = ORDER.map(
   (n) => `/work/master/${String(n).padStart(2, "0")}.webp`
 );
@@ -93,7 +94,7 @@ export default function MasterVisuals() {
 
         {/* thumbnail rail */}
         <Reveal delay={0.15}>
-          <div className="mt-4 grid grid-cols-3 gap-2 sm:grid-cols-4 lg:grid-cols-8">
+          <div className="mt-4 grid grid-cols-3 gap-2 md:grid-cols-9">
             {boards.map((src, n) => (
               <button
                 key={src}

@@ -66,7 +66,7 @@ function VideoCard({
   };
 
   const btn =
-    "grid h-9 w-9 place-items-center rounded-full border border-white/25 bg-black/40 text-white backdrop-blur-md transition-colors duration-300 hover:border-mint/60 hover:text-mint";
+    "grid h-11 w-11 place-items-center rounded-full border border-white/25 md:h-9 md:w-9 bg-black/40 text-white backdrop-blur-md transition-colors duration-300 hover:border-mint/60 hover:text-mint";
 
   return (
     <div

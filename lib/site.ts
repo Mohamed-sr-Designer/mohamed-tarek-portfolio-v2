@@ -1,3 +1,6 @@
+import published from "./overrides.json";
+import { clone, deepMerge, type Overrides } from "./merge";
+
 export const site = {
   name: "Mohamed Tarek",
   role: "Sr Designer, Team Lead",
@@ -30,7 +33,7 @@ export const site = {
 
 // `copy` is what lands on the clipboard, the raw, usable value rather than
 // the prettified one shown on screen.
-export const contacts = [
+const buildContacts = () => [
   {
     label: "Email",
     value: site.email,
@@ -56,6 +59,21 @@ export const contacts = [
     copy: site.linkedin,
   },
 ];
+export const contacts = buildContacts();
+
+/** Site details exactly as written in this file. */
+export const baseSite = clone(site);
+
+/** Folds dashboard edits into `site` (the canonical url is never editable). */
+export function applySiteOverrides(o: Overrides) {
+  const url = site.url;
+  Object.assign(site, clone(baseSite));
+  if (o.site) deepMerge(site, o.site);
+  site.url = url;
+  contacts.splice(0, contacts.length, ...buildContacts());
+}
+
+applySiteOverrides(published as Overrides);
 
 export const nav = [
   { label: "Work", href: "/" },

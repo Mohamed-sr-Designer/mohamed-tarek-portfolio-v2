@@ -1,10 +1,11 @@
 import type { MetadataRoute } from "next";
 import { site } from "@/lib/site";
 import { projects } from "@/lib/projects";
+import { articles } from "@/lib/articles";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
-  const pages = ["", "/about", "/contact"].map((p) => ({
+  const pages = ["", "/about", "/contact", "/articles"].map((p) => ({
     url: `${site.url}${p}`,
     lastModified: now,
     changeFrequency: "monthly" as const,
@@ -17,6 +18,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: now,
       changeFrequency: "monthly" as const,
       priority: 0.7,
+    })),
+    ...articles.map((a) => ({
+      url: `${site.url}/articles/${a.slug}`,
+      lastModified: new Date(a.date),
+      changeFrequency: "yearly" as const,
+      priority: 0.6,
     })),
   ];
 }

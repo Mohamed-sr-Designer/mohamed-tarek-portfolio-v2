@@ -31,8 +31,8 @@ export function Media({
         fill
         sizes={sizes}
         priority={priority}
-        placeholder="blur"
-        blurDataURL={meta.blur}
+        placeholder={meta.blur ? "blur" : "empty"}
+        blurDataURL={meta.blur || undefined}
         className={className}
       />
     );
@@ -46,8 +46,8 @@ export function Media({
       height={meta.height}
       sizes={sizes}
       priority={priority}
-      placeholder="blur"
-      blurDataURL={meta.blur}
+      placeholder={meta.blur ? "blur" : "empty"}
+      blurDataURL={meta.blur || undefined}
       className={className}
     />
   );

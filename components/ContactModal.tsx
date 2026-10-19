@@ -108,7 +108,7 @@ export default function ContactModal() {
                     }`}
                     className="min-w-0 flex-1"
                   >
-                    <span className="block text-[10px] uppercase tracking-ultra text-bone-500">
+                    <span className="block text-[11px] uppercase tracking-ultra text-bone-500">
                       {t.contact.labels[c.label] ?? c.label}
                     </span>
                     <span

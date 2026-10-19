@@ -1,7 +1,9 @@
 import type { Config } from "tailwindcss";
+import plugin from "tailwindcss/plugin";
 
-// Colors are CSS-variable backed. There is one theme now — see the :root block
-// in globals.css — so nothing swaps them and there is no dark variant.
+// Colors are CSS-variable backed. Two themes swap the variables (see
+// globals.css); the `light:` variant exists only for artwork that ships as
+// separate cuts per theme.
 const config: Config = {
   content: [
     "./app/**/*.{ts,tsx}",
@@ -20,7 +22,11 @@ const config: Config = {
         },
         bone: {
           50: "rgb(var(--fg) / <alpha-value>)",
+          // 100 and 300 were used across the site but never defined, so those
+          // elements silently inherited their parent's colour
+          100: "rgb(var(--fg1) / <alpha-value>)",
           200: "rgb(var(--fg2) / <alpha-value>)",
+          300: "rgb(var(--fg25) / <alpha-value>)",
           400: "rgb(var(--fg3) / <alpha-value>)",
           500: "rgb(var(--fg4) / <alpha-value>)",
         },
@@ -60,7 +66,11 @@ const config: Config = {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    plugin(({ addVariant }) => {
+      addVariant("light", 'html[data-theme="light"] &');
+    }),
+  ],
 };
 
 export default config;

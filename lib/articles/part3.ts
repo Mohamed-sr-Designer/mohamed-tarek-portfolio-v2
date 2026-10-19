@@ -1,0 +1,405 @@
+import type { Article } from "../articles";
+
+// Arabic & Bilingual · Industries · Leadership & Process
+export const part3: Article[] = [
+  {
+    slug: "designing-bilingual-arabic-english-layouts",
+    title: "Designing Bilingual Arabic and English Layouts",
+    titleAr: "تصميم لياوت ثنائي اللغة عربي وإنجليزي",
+    description:
+      "How to design layouts that carry Arabic and English together: reading direction, which language leads, balancing visual weight and keeping both versions on brand.",
+    summaryAr:
+      "إزاي تصمم لياوت فيه عربي وإنجليزي مع بعض: اتجاه القراءة، أي لغة تتصدّر، توازن الوزن البصري، وإزاي النسختين يفضلوا على هوية العلامة.",
+    category: "Arabic & Bilingual Design",
+    keywords: [
+      "bilingual design Arabic English",
+      "bilingual social media",
+      "Arabic English layout",
+      "bilingual brand design Gulf",
+    ],
+    date: "2026-06-08",
+    takeaways: [
+      "Decide which language leads per market, then design for it first.",
+      "Mirror the layout for RTL rather than squeezing Arabic into an LTR grid.",
+      "Balance weight: Arabic usually needs more size to match English presence.",
+    ],
+    body: [
+      { p: "In the Gulf, bilingual is the default. Real estate, banking, government and many retail brands publish in Arabic and English, sometimes in the same post. Done well, bilingual design signals a brand that respects its whole audience. Done badly, it looks like a translation pasted on top." },
+      { h2: "Which language leads" },
+      { p: "Start from the audience. A Makkah community campaign leads in Arabic, with English as support. An investor deck in Riyadh may lead in English. Pick the lead language for each piece and design for it first, then fit the second language into a clear secondary role." },
+      { h2: "Two layouts, not one" },
+      { p: "When a piece exists in two separate versions, mirror the layout for Arabic: the logo, the reading start and the call to action move to the right. Squeezing Arabic into a left-to-right grid makes it read backwards." },
+      { h2: "Both languages in one frame" },
+      { ul: [
+        "Separate them clearly: different lines or blocks, never interleaved.",
+        "Give each language its own alignment: Arabic right, English left, or both centred.",
+        "Match the visual weight, not the point size.",
+        "Use one colour system across both, so they read as one message.",
+      ] },
+      { h2: "Translation is not enough" },
+      { p: "The best bilingual campaigns write each language natively. A strong English line translated word for word into Arabic often loses its rhythm. I prefer to agree on the idea, then write each version so it sounds right in its own language." },
+      { p: "Most of the campaigns on this site were delivered bilingually, and this website itself switches fully between English and Arabic, including direction." },
+    ],
+    faq: [
+      { q: "Should a bilingual post have Arabic on the right?", a: "Yes, Arabic text should align and read from the right. In a combined layout, separate the two languages into their own blocks." },
+    ],
+    related: ["amam", "tilal-v", "hr-link"],
+  },
+  {
+    slug: "rtl-website-design-arabic-sites",
+    title: "RTL Website Design: Building Arabic Sites That Feel Native",
+    titleAr: "تصميم مواقع RTL: إزاي تبني موقع عربي حاسّه أصلي",
+    description:
+      "What it takes for an Arabic (right-to-left) website to feel native rather than translated: mirrored layouts, Arabic fonts, icons, numbers, forms and testing.",
+    summaryAr:
+      "إزاي الموقع العربي (من اليمين للشمال) يبان أصلي مش مترجم: لياوت معكوس، خطوط عربية، أيقونات، أرقام، فورمز، واختبار.",
+    category: "Arabic & Bilingual Design",
+    keywords: [
+      "RTL website design",
+      "Arabic website design",
+      "bilingual website",
+      "Arabic UI design",
+    ],
+    date: "2026-06-15",
+    takeaways: [
+      "Set dir=\"rtl\" at the document level and let the layout mirror itself.",
+      "Mirror directional icons; keep logos, media controls and numbers as they are.",
+      "Test on real phones in Arabic, not only in a desktop browser.",
+    ],
+    body: [
+      { p: "An Arabic website that was designed in English and then translated always gives itself away: arrows pointing the wrong way, text crammed into boxes sized for English, a Latin font where an Arabic one should be. RTL design is not hard, but it has to be intended from the start." },
+      { h2: "Let the document mirror" },
+      { p: "Set the page direction to right-to-left and build layouts with logical properties, start and end rather than left and right. The navigation, grids and text alignment then mirror correctly without a second design." },
+      { h2: "What to mirror and what not to" },
+      { ul: [
+        "Mirror: arrows, back and next icons, progress direction, sliders.",
+        "Do not mirror: logos, play buttons, phone numbers, brand marks, maps.",
+        "Check carousels: the first item should start on the right.",
+      ] },
+      { h2: "Arabic type on screen" },
+      { p: "Pick an Arabic web font with several weights and good hinting. This portfolio uses Alexandria for every Arabic word, and removes letter-spacing for Arabic, because tracking breaks the connections between letters." },
+      { h2: "Exceptions are allowed" },
+      { p: "Sometimes the design should not follow the direction. On this site's home page the hero copy stays on the left in Arabic too, because on the right it would sit straight over the person in the photograph. Direction is a rule, and a good designer knows when the composition overrides it." },
+      { h2: "Test it on a phone" },
+      { p: "Most visitors in the region browse on phones. Check every page in Arabic at phone width: line breaks, buttons, forms and menus. That is where translated sites usually break." },
+    ],
+    faq: [
+      { q: "What is RTL in web design?", a: "Right-to-left layout used for languages like Arabic, where text, navigation and directional elements read from the right." },
+    ],
+  },
+  {
+    slug: "real-estate-social-media-design-saudi-arabia",
+    title: "Real Estate Social Media Design in Saudi Arabia",
+    titleAr: "تصميم سوشيال ميديا العقارات في السعودية",
+    description:
+      "What works in real estate social media design for Saudi developers: lifestyle-led content pillars, renders versus photography, bilingual copy and lead-focused posts.",
+    summaryAr:
+      "إيه اللي بينجح في تصميم سوشيال ميديا العقارات للمطوّرين في السعودية: محاور محتوى مبنية على أسلوب الحياة، الرندر مقابل التصوير، الكوبي ثنائي اللغة، وبوستات هدفها الليدز.",
+    category: "Industries",
+    keywords: [
+      "real estate social media design",
+      "real estate marketing Saudi Arabia",
+      "property marketing design Jeddah",
+      "real estate designer Riyadh",
+    ],
+    date: "2026-07-05",
+    takeaways: [
+      "Build content pillars: project, life there, location, seasons, moments.",
+      "Mix renders with lifestyle so the feed feels lived in.",
+      "Every few posts, give a clear next step: register interest, call, visit.",
+    ],
+    body: [
+      { p: "Saudi real estate is one of the busiest categories on social media, and one of the most repetitive. Most feeds alternate renders and price posts. The developers that stand out treat their feed like a lifestyle publication with a sales desk attached." },
+      { h2: "Content pillars" },
+      { p: "For the Amam campaign at Durrat Al Arous, the pillars were the project and units, life at Amam, waterfront and marine lifestyle, seasons and events, and moments. Pillars keep the feed varied and make planning a month of content straightforward." },
+      { h2: "Renders and real life" },
+      { p: "Renders show the product; lifestyle imagery sells the dream. Use both, but light them the same way, warm evening light, the same sky, so the feed holds together." },
+      { h2: "Place is a selling point" },
+      { p: "Near the Haram, on the waterfront, minutes from a business district: location should be visible, not only written. Aerials, maps and the city in the frame do more than a list of distances." },
+      { h2: "Make the next step obvious" },
+      { p: "Lifestyle content builds desire, but the feed still has to produce leads. Every few posts, include a clear action: register interest, book a visit, call the sales line. Keep that call to action in a fixed position so people learn where to look." },
+      { h2: "Bilingual by default" },
+      { p: "Saudi audiences include Arabic speakers and a large expatriate community. Most developers publish bilingually, with Arabic leading." },
+    ],
+    faq: [
+      { q: "What content works for real estate on Instagram in Saudi Arabia?", a: "Lifestyle moments, location and community content, project updates and clear lead-focused posts, published bilingually with Arabic leading." },
+    ],
+    related: ["amam", "tilal-v", "el-raghi"],
+  },
+  {
+    slug: "food-and-beverage-social-media-design",
+    title: "Food & Beverage Social Media: Designing for Appetite",
+    titleAr: "سوشيال ميديا الأكل والمشروبات: إزاي تصمم للشهية",
+    description:
+      "Design principles for café, restaurant, dessert and food-app social media: appetite-first photography, restrained layouts, brand colour and offer posts that do not cheapen the brand.",
+    summaryAr:
+      "مبادئ تصميم سوشيال ميديا الكافيهات والمطاعم والحلويات وتطبيقات الأكل: تصوير الشهية أولًا، لياوت هادي، لون العلامة، وبوستات عروض ما ترخّصش العلامة.",
+    category: "Industries",
+    keywords: [
+      "food social media design",
+      "restaurant social media design",
+      "cafe Instagram design",
+      "F&B marketing design",
+    ],
+    date: "2026-07-12",
+    takeaways: [
+      "The food is the hero; design gets out of its way.",
+      "Pick one light style and stay with it.",
+      "Let the brand colour live in props and surfaces, not only in graphics.",
+    ],
+    body: [
+      { p: "Food content has one job before any other: make people hungry. Every design decision, the crop, the light, the amount of text, should serve appetite first and branding second." },
+      { h2: "Appetite-first framing" },
+      { p: "Close enough to see texture, crumbs, steam, a pour. For Guilt Free, a healthy dessert brand, that meant playful colour and flying crumbs that still felt light. For THE NINE, a specialty café, a black and white brand world where the food and the pour do all the talking." },
+      { h2: "Restraint in layout" },
+      { p: "A great dish under a heavy layout looks worse. Keep text short, keep the logo small and consistent, and leave the image room to breathe." },
+      { h2: "Colour in the scene" },
+      { p: "Brand colour does not have to arrive as a graphic band. For Prepd, the mint green lives in the plates, the linen and the marble, so even a photo without a logo reads as the brand." },
+      { h2: "AI and food" },
+      { p: "AI-generated food imagery has become common, and it can be excellent if it is honest about texture. Fresh Valley's produce set on this site was written as prompts and directed into one consistent set, the same light and the same appetite across fifteen frames." },
+    ],
+    faq: [
+      { q: "How do you make food look good on Instagram?", a: "Use close, textured framing, one consistent light style, minimal text and props in the brand's colours." },
+    ],
+    related: ["gf", "the-nine", "fresh-valley", "prepd"],
+  },
+  {
+    slug: "saas-marketing-design-making-software-simple",
+    title: "SaaS Marketing Design: Making Software Feel Simple",
+    titleAr: "تصميم تسويق الـ SaaS: إزاي تخلّي السوفتوير يبان بسيط",
+    description:
+      "How to design marketing for software products: lead with the user's worry, show the product solving it, simplify the interface in visuals and keep a bilingual system.",
+    summaryAr:
+      "إزاي تصمم تسويق لمنتجات السوفتوير: ابدأ بقلق المستخدم، اعرض المنتج وهو بيحلّه، بسّط الواجهة في الصور، وحافظ على نظام ثنائي اللغة.",
+    category: "Industries",
+    keywords: [
+      "SaaS marketing design",
+      "B2B social media design",
+      "HR software marketing",
+      "tech product design marketing",
+    ],
+    date: "2026-07-19",
+    takeaways: [
+      "Lead with the problem the buyer feels, not the feature list.",
+      "Simplify product screens into readable, focused crops.",
+      "One post, one worry, one answer.",
+    ],
+    body: [
+      { p: "Software is hard to photograph and harder to make exciting. The instinct is to show dashboards full of numbers. The buyer, usually an HR manager or a finance lead, does not want more screens. They want fewer problems." },
+      { h2: "Start from the worry" },
+      { p: "For HR Link, an HR software platform, every post answers one real worry and shows the product solving it. Think of the worries an HR manager actually carries, payroll mistakes, leave requests lost in email, month-end paperwork: the headline names the pain, the visual shows the relief." },
+      { h2: "Simplify the interface" },
+      { p: "Never paste a full screenshot into a post. Crop to the one panel that matters, enlarge it, and remove what distracts. A simplified UI crop reads in two seconds on a phone; a full dashboard reads as noise." },
+      { h2: "Make it human" },
+      { p: "People using the product, a calm manager, a relieved employee, make software feel approachable. Keep them real and local to the market." },
+      { h2: "Training and education brands" },
+      { p: "The same logic applies to training academies: NEXT Academy's posts were sharp and high-contrast, built to turn interest into enrolment by naming the career outcome first." },
+    ],
+    faq: [
+      { q: "How do you design social media for a SaaS company?", a: "Lead with one customer problem per post, show a simplified product crop solving it, and keep a consistent bilingual system." },
+    ],
+    related: ["hr-link", "next-academy"],
+  },
+  {
+    slug: "marketing-design-for-training-academies",
+    title: "Designing for Training Academies: From Interest to Enrolment",
+    titleAr: "التصميم للأكاديميات التدريبية: من الاهتمام للتسجيل",
+    description:
+      "How to design marketing for training academies and courses: sell the outcome, show real proof, structure course posts and keep the enrolment step obvious.",
+    summaryAr:
+      "إزاي تصمم تسويق لأكاديميات وكورسات التدريب: بيع النتيجة، اعرض دليل حقيقي، نظّم بوستات الكورسات، وخلّي خطوة التسجيل واضحة.",
+    category: "Industries",
+    keywords: [
+      "academy marketing design",
+      "course marketing social media",
+      "education social media design",
+      "training center ads",
+    ],
+    date: "2026-08-02",
+    takeaways: [
+      "People enrol for the career outcome, not the syllabus.",
+      "Course posts need a fixed structure: outcome, duration, start date, action.",
+      "Real student work is the best proof an academy has.",
+    ],
+    body: [
+      { p: "I teach graphic design across several academies and have designed their marketing too, so I have seen both sides of the enrolment decision. Students rarely sign up because of a syllabus. They sign up because they can picture who they will be afterwards." },
+      { h2: "Sell the outcome" },
+      { p: "Lead with the job, the skill or the portfolio the student will leave with. The course name and modules come second." },
+      { h2: "A fixed course post" },
+      { ul: [
+        "Outcome headline.",
+        "Duration and format: online, on site, evenings.",
+        "Start date, in a fixed position.",
+        "One clear action: register, message, book a call.",
+      ] },
+      { h2: "Proof" },
+      { p: "Student work, graduation moments and instructor credentials build trust faster than any slogan. Ask students for permission and feature their projects." },
+      { h2: "High contrast, high clarity" },
+      { p: "Education feeds compete with entertainment. Sharp contrast, a bold headline and minimal text help a course post survive the scroll." },
+    ],
+    faq: [
+      { q: "How do you market a training course on social media?", a: "Lead with the career outcome, use a consistent course post format with dates and duration, and show real student work as proof." },
+    ],
+    related: ["next-academy"],
+  },
+  {
+    slug: "seasonal-content-calendar-saudi-market",
+    title: "Planning Seasonal Content for the Saudi Market",
+    titleAr: "تخطيط محتوى المواسم للسوق السعودي",
+    description:
+      "How brands in Saudi Arabia can plan design work around the year's key moments: Ramadan, Eid, Founding Day, National Day and summer, without losing their identity.",
+    summaryAr:
+      "إزاي العلامات في السعودية تخطّط شغل التصميم حوالين أهم مواسم السنة: رمضان، العيد، يوم التأسيس، اليوم الوطني، والصيف، من غير ما تضيّع هويتها.",
+    category: "Industries",
+    keywords: [
+      "Saudi National Day design",
+      "Ramadan social media design",
+      "Founding Day campaign",
+      "Saudi content calendar",
+    ],
+    date: "2026-08-16",
+    takeaways: [
+      "Plan the big moments a quarter ahead.",
+      "Adapt your system to the season; do not replace it.",
+      "Respect the meaning of each occasion; avoid using it as a discount excuse.",
+    ],
+    body: [
+      { p: "The Saudi calendar has a handful of moments every brand is expected to mark: Ramadan and Eid, Founding Day in February, National Day in September, and the summer season. Brands that plan these early produce work that feels considered; brands that react the week before produce work that looks like everyone else's." },
+      { h2: "Plan a quarter ahead" },
+      { p: "Key visuals for Ramadan or National Day need concept, production and approvals. Start them at least six to eight weeks ahead, and have the whole set, feed, stories, website banner, ready before the date." },
+      { h2: "Adapt, don't replace" },
+      { p: "The most common mistake is dropping the brand identity for generic seasonal graphics. Keep your type, layout and colour logic, and bring in the season through light, props, motifs and copy." },
+      { h2: "Meaning first" },
+      { p: "Founding Day and National Day are about pride and history; Ramadan is about family, generosity and reflection. Content that reflects the meaning is shared; content that only attaches an offer is scrolled past." },
+      { h2: "Summer" },
+      { p: "Summer is a strong season for food, travel and leisure brands. Prepd's summer offer on this site, a poolside plate in bright daylight, is a simple example of bringing the season in without changing the brand." },
+    ],
+    faq: [
+      { q: "When should brands start designing Saudi National Day content?", a: "Ideally six to eight weeks before 23 September, so concept, production and approvals are done in time." },
+    ],
+    related: ["prepd"],
+  },
+  {
+    slug: "leading-a-design-team",
+    title: "Leading a Design Team: Standards, Reviews and Growth",
+    titleAr: "قيادة فريق تصميم: المعايير والمراجعات والنمو",
+    description:
+      "What a design team lead actually does: setting visual standards, running fast and fair reviews, protecting focus time and growing designers, not just fixing their files.",
+    summaryAr:
+      "قائد فريق التصميم بيعمل إيه فعلًا: يحط معايير بصرية، يدير مراجعات سريعة وعادلة، يحمي وقت التركيز، وينمّي المصممين بدل ما يصلّح ملفاتهم.",
+    category: "Leadership & Process",
+    keywords: [
+      "design team lead",
+      "art team leader",
+      "creative team management",
+      "design review process",
+    ],
+    date: "2026-09-07",
+    takeaways: [
+      "Write standards down; unwritten standards are just moods.",
+      "Review against the brief and the checklist, not personal taste.",
+      "Explain the why, so next time the designer does not need you.",
+    ],
+    body: [
+      { p: "Moving from senior designer to team lead changes the job more than the title suggests. Your output is no longer your files; it is the quality of everything the team ships, on time, across every account." },
+      { h2: "Standards, written down" },
+      { p: "Each account needs a short page: the type hierarchy, colours, logo rules, approved references and the things that must never happen. When standards live only in the lead's head, every review becomes a debate." },
+      { h2: "Fast, fair reviews" },
+      { ul: [
+        "Is the message readable in two seconds?",
+        "Does it follow the brand's hierarchy and layout rules?",
+        "Is the Arabic and English copy correct?",
+        "Does it match the rest of the set?",
+        "Does it answer the brief's objective?",
+      ] },
+      { p: "Five questions turn feedback from opinion into a checklist, and designers stop guessing what the lead wants." },
+      { h2: "Teach, don't fix" },
+      { p: "It is often faster to fix a file yourself. It is almost always better to explain the fix. I learned this teaching in academies: a designer who understands why a layout fails will not make the same mistake twice." },
+      { h2: "Protect focus" },
+      { p: "Designers need uninterrupted time. Batch client feedback into fixed windows, plan the week on Sunday or Monday, and keep urgent requests genuinely rare." },
+      { h2: "Grow people" },
+      { p: "Give each designer a stretch account, rotate them across industries and share credit for good work with the client. Teams that grow stay, and teams that stay get better every quarter." },
+    ],
+    faq: [
+      { q: "What does a design team lead do?", a: "Sets visual standards, plans and reviews the team's work, mentors designers and is accountable for the quality and delivery of everything the team ships." },
+    ],
+  },
+  {
+    slug: "why-every-film-should-be-storyboarded",
+    title: "Why Every Film Should Be Storyboarded Before It Is Shot",
+    titleAr: "ليه كل فيلم لازم يتعمله ستوري بورد قبل ما يتصوّر",
+    description:
+      "Storyboards lock the story, shots and pacing before production. How to build one for ads and reels, and how it saves time on set or in AI production.",
+    summaryAr:
+      "الستوري بورد بيثبّت القصة واللقطات والإيقاع قبل الإنتاج. إزاي تبنيه للإعلانات والريلز، وإزاي بيوفّر وقت في التصوير أو في الإنتاج بالـ AI.",
+    category: "Leadership & Process",
+    keywords: [
+      "storyboard for ads",
+      "storyboarding process",
+      "reel storyboard",
+      "video pre-production",
+    ],
+    date: "2026-09-21",
+    takeaways: [
+      "Approve the storyboard, not the edit; changes are cheap on paper.",
+      "Each frame should note the shot, the action, the text and the timing.",
+      "Storyboards are even more important for AI video, where every shot is generated.",
+    ],
+    body: [
+      { p: "Every film is drawn before it is shot. That line sits above the storyboards on this site because it is the cheapest decision a production can make. Changing a frame on paper costs minutes; changing it after the shoot costs days." },
+      { h2: "What a frame contains" },
+      { ul: [
+        "The shot: framing, angle and movement.",
+        "The action: what happens in the frame.",
+        "On-screen text and voice-over.",
+        "Duration, so the pacing adds up to the target length.",
+      ] },
+      { h2: "Pacing for social" },
+      { p: "A reel has about two seconds to earn attention. The storyboard makes that visible: if the first frame does not carry the hook, it is obvious before anything is produced." },
+      { h2: "Storyboards and AI" },
+      { p: "In AI video every shot is generated, so a vague plan produces a pile of inconsistent clips. A storyboard tells you exactly which shots to generate and which to skip, and keeps the cast and light consistent from frame to frame." },
+      { h2: "Approval" },
+      { p: "Get the client to approve the storyboard before production. The edit should then be a confirmation, not a surprise." },
+    ],
+    faq: [
+      { q: "Do social media reels need a storyboard?", a: "Yes, even a simple one. It locks the hook, the shot order and the timing before production starts." },
+    ],
+    related: ["video-production"],
+  },
+  {
+    slug: "what-teaching-design-taught-me",
+    title: "What Teaching 1,200 Design Students Taught Me About Design",
+    titleAr: "إيه اللي اتعلّمته عن التصميم من تدريس ١٢٠٠ طالب",
+    description:
+      "Lessons from teaching graphic design to around 1,200 students across 49 cohorts and four academies: fundamentals, feedback and why explaining design makes you better at it.",
+    summaryAr:
+      "دروس من تدريس الجرافيك ديزاين لحوالي ١٢٠٠ طالب في ٤٩ دفعة وأربع أكاديميات: الأساسيات، الفيدباك، وليه شرح التصميم بيخلّيك أشطر فيه.",
+    category: "Leadership & Process",
+    keywords: [
+      "graphic design instructor Egypt",
+      "learn graphic design",
+      "design teaching",
+      "design mentorship",
+    ],
+    date: "2026-10-05",
+    takeaways: [
+      "Fundamentals, hierarchy, contrast, spacing, fix most bad designs.",
+      "Feedback works when it names the principle, not just the change.",
+      "Explaining design out loud makes your own decisions sharper.",
+    ],
+    body: [
+      { p: "Alongside client work I have taught graphic design across four academies, around 1,200 graduates over 49 cohorts, from fundamentals to portfolio-ready projects, and inside a film school. Teaching changed how I design more than any tool has." },
+      { h2: "Fundamentals fix most problems" },
+      { p: "When a student's design feels wrong, the cause is almost never a missing effect. It is hierarchy, contrast or spacing. The same is true of professional work: most weak posts I review as a team lead fail on fundamentals, not on taste." },
+      { h2: "Name the principle" },
+      { p: "“Make the headline bigger” fixes one file. “The headline and the image are fighting for attention, so choose which one leads” fixes the next twenty. Good feedback names the principle behind the change." },
+      { h2: "Explaining makes you better" },
+      { p: "Having to explain every decision to a room of students forces you to know why you made it. Designers who can explain their choices also present better to clients and defend good work more calmly." },
+      { h2: "Students keep you current" },
+      { p: "Students adopt new tools fast. Teaching AI workflows to each cohort has kept my own production methods sharp, and their questions often expose the gaps in a process." },
+    ],
+    faq: [
+      { q: "What is the most important skill in graphic design?", a: "Hierarchy: deciding what the viewer sees first, second and third. Contrast and spacing follow from it." },
+    ],
+  },
+];

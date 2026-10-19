@@ -1,3 +1,6 @@
+import published from "./overrides.json";
+import { clone, deepMerge, type Overrides } from "./merge";
+
 export type GalleryItem = { src: string; caption?: string };
 
 // A named gallery group (e.g. "Before" / "After") rendered with the same
@@ -70,7 +73,7 @@ const seq = (prefix: string, from: number, to: number, ext = ".webp") => {
   return out;
 };
 
-export const projects: Project[] = [
+const baseList: Project[] = [
   // ==========================================================  AI WORK FLOW
   {
     slug: "photo-sessions",
@@ -419,9 +422,56 @@ export const projects: Project[] = [
       "/work/social/fresh-valley/09.webp",
     ],
   },
+  // Prepd sits with the other food brands, straight after Fresh Valley.
+  {
+    slug: "prepd",
+    index: "08",
+    title: "Prepd, The City's Chefs, One Subscription",
+    client: "Prepd",
+    year: "2026",
+    category: "Food Tech · Campaign",
+    sector: "Food & Retail",
+    discipline: "Campaign · Social · Win-back",
+    accent: "mint",
+    summary:
+      "A promo and win-back campaign for a Saudi meal-subscription app: the city's best-known chefs on one table, and a reason for quiet subscribers to come back.",
+    tagline: "Every famous chef in one subscription, and a reason to come back.",
+    cover: "/work/social/prepd/01.webp",
+    hero: "/work/social/prepd/05.webp",
+    tags: ["Food Tech", "Campaign", "Social Design", "Arabic Typography", "Win-back"],
+    challenge:
+      "Food apps compete on discounts, and most feeds in the category look the same: a burger, a percentage, a code. Prepd needed offer posts that still felt premium, plus a win-back message for subscribers who had quietly stopped ordering.",
+    strategy:
+      "Sell the table, not the coupon. Every post stages the chefs' dishes as a calm, styled meal in a real Saudi setting, so the offer reads as an invitation. The win-back line, \"we missed you, see what changed\", turns a discount into news: more chefs, more dishes, worth coming back for.",
+    direction:
+      "Prepd's mint green carried into the props, the linen and the marble; daylight interiors and a city-view table; one Arabic type hierarchy where the number is the hero and the code always sits in the same green pill.",
+    execution:
+      "A set of offer key visuals and social posts: a lifestyle scene, flat-lays, a poolside summer post, three discount mechanics and a win-back post in two settings.",
+    impact:
+      "A promo system the team can reuse for any offer: swap the dish, the number and the code, and the post still looks like Prepd.",
+    contribution: ["Campaign Direction", "Key Visuals", "Social Design", "Arabic Typography"],
+    gallery: g(...seq("/work/social/prepd/", 1, 6)),
+    cardPicks: [
+      "/work/social/prepd/02.webp",
+      "/work/social/prepd/05.webp",
+      "/work/social/prepd/06.webp",
+    ],
+    strategyBlock: {
+      toneLabel: "Tone of voice",
+      tone: "Warm, generous and confident, it talks like a host inviting you to the table, never like a coupon shouting a price.",
+      toneTraits: ["Generous, never cheap", "Saudi-warm and close", "One clear offer per post"],
+      pillarsLabel: "Content pillars",
+      pillars: [
+        { n: "01", title: "The chefs & their dishes" },
+        { n: "02", title: "Offers & codes" },
+        { n: "03", title: "Win-back: what changed" },
+        { n: "04", title: "Seasons & moments" },
+      ],
+    },
+  },
   {
     slug: "the-nine",
-    index: "08",
+    index: "09",
     title: "THE NINE, Coffee & Kitchen",
     client: "THE NINE",
     year: "2025",
@@ -443,7 +493,7 @@ export const projects: Project[] = [
   // the social grid; HR Link follows it.
   {
     slug: "next-academy",
-    index: "09",
+    index: "10",
     title: "NEXT Academy, Skills, Recruited",
     client: "NEXT Academy",
     year: "2025",
@@ -463,7 +513,7 @@ export const projects: Project[] = [
   },
   {
     slug: "hr-link",
-    index: "10",
+    index: "11",
     title: "HR Link, Software, Sold Simply",
     client: "HR Link",
     year: "2025",
@@ -483,7 +533,7 @@ export const projects: Project[] = [
   },
   {
     slug: "brand-vitals",
-    index: "11",
+    index: "12",
     title: "BrandVitals, Marketing, Built in Blocks",
     client: "BrandVitals",
     year: "2025",
@@ -503,9 +553,39 @@ export const projects: Project[] = [
   },
 ];
 
-export const sectors: string[] = Array.from(
-  new Set(projects.map((p) => p.sector))
-);
+/** Every project exactly as written in this file. */
+export const baseProjects: Project[] = clone(baseList);
+
+// The live list. Mutated in place by applyProjectOverrides so every importer
+// sees dashboard edits, additions, hiding and reordering.
+export const projects: Project[] = [];
+export const sectors: string[] = [];
+
+export function applyProjectOverrides(o: Overrides) {
+  let list: Project[] = clone(baseProjects).concat(
+    clone((o.newProjects ?? []) as unknown as Project[])
+  );
+  list = list
+    .map((p) => {
+      const patch = o.projects?.[p.slug];
+      return patch ? deepMerge(p, patch) : p;
+    })
+    .filter((p) => !(p as Project & { hidden?: boolean }).hidden);
+  if (o.projectOrder?.length) {
+    const rank = (s: string) => {
+      const i = o.projectOrder!.indexOf(s);
+      return i === -1 ? 1e6 : i;
+    };
+    list = list
+      .map((p, i) => ({ p, i }))
+      .sort((a, b) => rank(a.p.slug) - rank(b.p.slug) || a.i - b.i)
+      .map(({ p }) => p);
+  }
+  projects.splice(0, projects.length, ...list);
+  sectors.splice(0, sectors.length, ...Array.from(new Set(list.map((p) => p.sector))));
+}
+
+applyProjectOverrides(published as Overrides);
 
 export function getProject(slug: string): Project | undefined {
   return projects.find((p) => p.slug === slug);

@@ -11,6 +11,7 @@ import Skills from "@/components/Skills";
 import Tools from "@/components/Tools";
 import HireCta from "@/components/HireCta";
 import { site } from "@/lib/site";
+import Sections from "@/components/Sections";
 
 export const metadata: Metadata = {
   title: "About · Sr Designer, Team Lead",
@@ -39,16 +40,21 @@ export default function AboutPage() {
           __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c"),
         }}
       />
-      <AboutHero />
-      <About />
-      <Clients />
-      <Experience />
-      <Recommendations />
-      <Featured />
-      <Teaching />
-      <Skills />
-      <Tools />
-      <HireCta />
+      <Sections
+        page="about"
+        items={[
+          { id: "aboutHero", node: <AboutHero /> },
+          { id: "about", node: <About /> },
+          { id: "clients", node: <Clients /> },
+          { id: "experience", node: <Experience /> },
+          { id: "recommendations", node: <Recommendations /> },
+          { id: "featured", node: <Featured /> },
+          { id: "teaching", node: <Teaching /> },
+          { id: "skills", node: <Skills /> },
+          { id: "tools", node: <Tools /> },
+          { id: "hire", node: <HireCta /> },
+        ]}
+      />
     </SiteShell>
   );
 }

@@ -7,6 +7,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { site } from "@/lib/site";
 import { useLang } from "@/lib/i18n";
 import { openContact } from "@/components/ContactModal";
+import ThemeToggle from "@/components/ThemeToggle";
 
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
@@ -42,7 +43,7 @@ export default function Nav() {
   return (
     <>
       <header
-        className={`fixed inset-x-0 top-0 z-50 border-b bg-ink-900/85 backdrop-blur-xl transition-all duration-500 ease-cinema ${
+        className={`fixed inset-x-0 top-0 z-50 border-b bg-ink-900/85 backdrop-blur-xl light:bg-ink-900/95 transition-all duration-500 ease-cinema ${
           scrolled ? "border-line/12 py-3" : "border-transparent py-5"
         }`}
       >
@@ -52,7 +53,7 @@ export default function Nav() {
             className="group flex items-center gap-3"
             aria-label="Mohamed Tarek — home"
           >
-            <span className="grid h-9 w-9 place-items-center rounded-full border border-line/20 font-serif text-sm transition-colors duration-300 group-hover:border-mint/60 group-hover:text-mint">
+            <span className="grid h-10 w-10 place-items-center rounded-full border border-line/20 font-serif text-sm md:h-9 md:w-9 transition-colors duration-300 group-hover:border-mint/60 group-hover:text-mint">
               MT
             </span>
             <span className="hidden text-sm tracking-tight text-bone-200 sm:block">
@@ -77,7 +78,8 @@ export default function Nav() {
             ))}
           </nav>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 sm:gap-3">
+            <ThemeToggle />
             <button
               type="button"
               onClick={openContact}
@@ -87,7 +89,7 @@ export default function Nav() {
             </button>
             <button
               onClick={() => setOpen((v) => !v)}
-              className="relative z-50 flex h-10 w-10 flex-col items-center justify-center gap-[5px] md:hidden"
+              className="relative z-50 flex h-11 w-11 flex-col items-center justify-center gap-[5px] md:hidden"
               aria-label="Toggle menu"
               aria-expanded={open}
             >

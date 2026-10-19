@@ -27,6 +27,13 @@ export default function Footer() {
     { label: t.nav.contact, href: "/contact" },
   ];
 
+  // v2: every page beyond the three main ones lives here, not in the header.
+  // The dashboard link is here for now, until it gets a quieter home.
+  const more = [
+    { label: t.footer.articles, href: "/articles" },
+    { label: t.footer.dashboard, href: "/studio" },
+  ];
+
   const social = [
     { label: "LinkedIn", value: site.linkedinHandle, href: site.linkedin },
     {
@@ -46,7 +53,7 @@ export default function Footer() {
       <div className="container-edge mx-auto max-w-edge py-12 md:py-16">
         <div className="grid gap-10 md:grid-cols-12">
           {/* identity */}
-          <div className="md:col-span-6">
+          <div className="md:col-span-5">
             <div className="flex items-center gap-3">
               <span className="grid h-9 w-9 place-items-center rounded-full border border-line/20 font-serif text-xs text-bone-200">
                 MT
@@ -59,7 +66,8 @@ export default function Footer() {
           </div>
 
           {/* site nav */}
-          <nav className="md:col-span-3" aria-label="Footer">
+          <nav className="grid grid-cols-2 gap-8 md:col-span-4" aria-label="Footer">
+            <div>
             <p className="text-xs uppercase tracking-ultra text-bone-500">
               {t.footer.siteCol}
             </p>
@@ -68,13 +76,31 @@ export default function Footer() {
                 <li key={n.href}>
                   <Link
                     href={n.href}
-                    className="text-bone-300 transition-colors hover:text-bone-50"
+                    className="inline-flex min-h-[40px] items-center text-bone-300 transition-colors hover:text-bone-50"
                   >
                     {n.label}
                   </Link>
                 </li>
               ))}
             </ul>
+            </div>
+            <div>
+              <p className="text-xs uppercase tracking-ultra text-bone-500">
+                {t.footer.moreCol}
+              </p>
+              <ul className="mt-4 grid gap-2 text-sm">
+                {more.map((n) => (
+                  <li key={n.href}>
+                    <Link
+                      href={n.href}
+                      className="inline-flex min-h-[40px] items-center text-bone-300 transition-colors hover:text-bone-50"
+                    >
+                      {n.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </nav>
 
           {/* social / contact */}
@@ -98,7 +124,8 @@ export default function Footer() {
                     <span className="block text-xs uppercase tracking-ultra text-bone-500">
                       {s.label}
                     </span>
-                    <span className="mt-0.5 block break-words text-bone-300 transition-colors group-hover:text-bone-50">
+                    {/* numbers, handles and addresses stay left-to-right in Arabic */}
+                    <span dir="ltr" className="mt-0.5 block break-words text-bone-300 transition-colors group-hover:text-bone-50 rtl:text-right">
                       {s.value} ↗
                     </span>
                   </a>
@@ -132,10 +159,10 @@ export default function Footer() {
                       lang={l.code}
                       onClick={() => setLang(l.code)}
                       aria-current={on ? "true" : undefined}
-                      className={`rounded-full px-3 py-1.5 text-xs transition-colors duration-300 ${
+                      className={`min-h-[40px] rounded-full border px-4 text-sm transition-colors duration-300 ${
                         on
-                          ? "cta-blend font-semibold"
-                          : "text-bone-300 hover:text-bone-50"
+                          ? "cta-blend border-transparent font-semibold"
+                          : "border-line/20 bg-ink-700 text-bone-200 hover:border-mint/50 hover:text-bone-50"
                       }`}
                     >
                       {l.label}
@@ -145,9 +172,14 @@ export default function Footer() {
               </div>
             </div>
 
-            <a href="#top" className="link-underline text-bone-300">
+            {/* a button, not #top: only the home page has a #top anchor */}
+            <button
+              type="button"
+              onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+              className="link-underline min-h-[40px] text-bone-300"
+            >
               {t.footer.backTop}
-            </a>
+            </button>
           </div>
         </div>
       </div>

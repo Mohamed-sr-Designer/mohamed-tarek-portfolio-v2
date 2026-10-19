@@ -168,7 +168,7 @@ export default function CaseGalleries({
             />
 
             <div className="border-s-2 border-mint/50 ps-5">
-              <p className="text-[10px] uppercase tracking-ultra text-mint">
+              <p className="text-[11px] uppercase tracking-ultra text-mint">
                 {t.case.stage} {String(index + 1).padStart(2, "0")} {t.case.of}{" "}
                 {String(groups.length).padStart(2, "0")}
               </p>

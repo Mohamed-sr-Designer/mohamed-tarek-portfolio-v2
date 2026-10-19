@@ -12,27 +12,32 @@ import WebProjects from "@/components/WebProjects";
 import LoopSlider from "@/components/LoopSlider";
 import Services from "@/components/Services";
 import HireCta from "@/components/HireCta";
+import Sections from "@/components/Sections";
 
 export default function Home() {
   return (
     <SiteShell>
-      <Hero />
-      <LogoMarquee />
-      <AiWorkflow />
-      <MasterVisuals />
-      <TypeDesign />
-      <SocialCards />
-      {/* the wall of selected designs closes out the social run, before the
-          page moves on to how the films get planned */}
-      <LoopSlider />
-      <Storyboards />
-      <Motion />
-      {/* the Blender work sits with the other things that are built rather
-          than shot, straight after the films */}
-      <ThreeD />
-      <WebProjects />
-      <Services />
-      <HireCta />
+      {/* default order below; the dashboard can reorder or hide sections.
+          The wall of selected designs closes out the social run, and the
+          Blender work sits with the other built-not-shot work after films. */}
+      <Sections
+        page="home"
+        items={[
+          { id: "hero", node: <Hero /> },
+          { id: "logos", node: <LogoMarquee /> },
+          { id: "ai", node: <AiWorkflow /> },
+          { id: "master", node: <MasterVisuals /> },
+          { id: "type", node: <TypeDesign /> },
+          { id: "social", node: <SocialCards /> },
+          { id: "slider", node: <LoopSlider /> },
+          { id: "storyboards", node: <Storyboards /> },
+          { id: "motion", node: <Motion /> },
+          { id: "threeD", node: <ThreeD /> },
+          { id: "web", node: <WebProjects /> },
+          { id: "services", node: <Services /> },
+          { id: "hire", node: <HireCta /> },
+        ]}
+      />
     </SiteShell>
   );
 }

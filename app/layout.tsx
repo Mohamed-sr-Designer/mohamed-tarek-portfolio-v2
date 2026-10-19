@@ -7,12 +7,14 @@ import {
 } from "next/font/google";
 import { site } from "@/lib/site";
 import { LangProvider } from "@/lib/i18n";
-import ContactModal from "@/components/ContactModal";
-import SmoothScroll from "@/components/SmoothScroll";
-import ScrollProgress from "@/components/ScrollProgress";
-import WhatsAppButton from "@/components/WhatsAppButton";
-import Cursor from "@/components/Cursor";
-import Preloader from "@/components/Preloader";
+import { ContentProvider } from "@/lib/content";
+import { themeBootScript } from "@/lib/theme-boot";
+import published from "@/lib/overrides.json";
+import type { Overrides } from "@/lib/merge";
+
+const defaultTheme =
+  (published as Overrides).settings?.defaultTheme === "light" ? "light" : "dark";
+import SiteChrome from "@/components/SiteChrome";
 import "./globals.css";
 
 const display = Bricolage_Grotesque({
@@ -42,7 +44,7 @@ const arabic = Alexandria({
 });
 
 export const viewport: Viewport = {
-  themeColor: "#080E12",
+  themeColor: defaultTheme === "light" ? "#F5F7F8" : "#080E12",
   width: "device-width",
   initialScale: 1,
 };
@@ -182,9 +184,13 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      data-theme={defaultTheme}
+      suppressHydrationWarning
       className={`${display.variable} ${sans.variable} ${serif.variable} ${arabic.variable}`}
     >
       <head>
+        {/* sets data-theme before first paint, so there is no flash */}
+        <script dangerouslySetInnerHTML={{ __html: themeBootScript(defaultTheme) }} />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -193,15 +199,12 @@ export default function RootLayout({
         />
       </head>
       <body className="bg-ink-900 font-sans text-bone-50 antialiased">
+        <ContentProvider>
         <LangProvider>
-          <Preloader />
-          <SmoothScroll />
-          <ScrollProgress />
-          <Cursor />
-          <WhatsAppButton />
-          <ContactModal />
+          <SiteChrome />
           {children}
         </LangProvider>
+        </ContentProvider>
       </body>
     </html>
   );

@@ -1,6 +1,9 @@
 // Full EN/AR dictionary, every user-facing string on the site lives here.
 // Components read dict[lang] via useLang().
 
+import published from "./overrides.json";
+import { clone, deepMerge, type Overrides } from "./merge";
+
 export type Lang = "en" | "ar";
 
 const en = {
@@ -14,6 +17,9 @@ const en = {
     contact: "Contact",
     letsTalk: "Let's talk",
     roleTag: "· Sr Designer, Team Lead",
+    theme: "Theme",
+    dark: "Dark theme",
+    light: "Light theme",
   },
   hero: {
     avail: "Available, Full-time · Remote · Freelance · Hybrid",
@@ -236,7 +242,7 @@ const en = {
     h2a: "Have a brand that needs",
     h2i: "direction",
     h2b: "?",
-    body: "I am open to full-time, remote, freelance and hybrid roles across Egypt · Saudi Arabia · Kuwait. Tell me what you're building, I'll tell you how design gets it there.",
+    body: "",
     wa: "WhatsApp me ↗",
     all: "All contact options",
   },
@@ -248,11 +254,34 @@ const en = {
     rights: "Designed, art-directed & vibe-coded in-house.",
     language: "Language",
     backTop: "Back to top ↑",
+    moreCol: "More",
+    articles: "Articles",
+    dashboard: "Dashboard",
+  },
+  articles: {
+    label: "Articles",
+    h2a: "Notes on design, hiring and",
+    h2i: "AI",
+    h2b: ", from the work itself.",
+    note: "Thirty practical articles for brands, recruiters and designers across Egypt, Saudi Arabia and Kuwait.",
+    all: "All",
+    min: "min read",
+    summary: "In short",
+    takeaways: "Key takeaways",
+    faq: "Questions people ask",
+    related: "Work on this site that shows it",
+    more: "Keep reading",
+    back: "All articles",
+    arNote: "",
+    read: "Read",
+    by: "By",
+    filter: "Filter by topic",
+    categories: {} as Record<string, string>,
   },
   about: {
     label: "About",
     heroBio:
-      "More than five years turning business problems into visual answers: brand identities, campaigns and social systems for companies across Egypt, Saudi Arabia and Kuwait. Today I lead a design team, and I am looking for the next place to build one.",
+      "It started with one question: what is this brand actually trying to say? Five years and three markets later, Egypt, Saudi Arabia and Kuwait, that question still drives every identity, campaign and social system I build, and every team I lead.",
     intro1: "A designer who leads, treating every brand as a",
     introAccent: "business problem",
     intro2: "with a creative answer.",
@@ -402,7 +431,7 @@ const en = {
     label: "Contact",
     h2a: "Let's make work that's",
     h2i: "remembered.",
-    body: "Open to new roles, freelance projects and creative collaborations across Egypt · Saudi Arabia · Kuwait. If you're building something ambitious, I'd love to hear about it.",
+    body: "Every brand worth remembering began as a conversation. From Cairo to Riyadh to Kuwait City, the best work I've made started with someone saying, \"here's what we're trying to build.\" Tell me yours.",
     labels: {
       Email: "Email",
       WhatsApp: "WhatsApp",
@@ -443,6 +472,9 @@ const ar: typeof en = {
     contact: "تواصل",
     letsTalk: "لنتحدث",
     roleTag: "· مصمم أول، قائد فريق",
+    theme: "المظهر",
+    dark: "المظهر الداكن",
+    light: "المظهر الفاتح",
   },
   hero: {
     avail: "متاح، دوام كامل · عن بُعد · فريلانس · هجين",
@@ -535,6 +567,15 @@ const ar: typeof en = {
       title: 'جيلت فري، بلا ندم، طعم بس',
       tagline: 'حلويات تبان دسمة وتفضل خفيفة.',
       category: 'أغذية وتجزئة · سوشيال',
+    },
+    prepd: {
+      title: 'بريبد، أشهر الشيفز في اشتراك واحد',
+      tagline: 'كل الشيفز المشهورين في اشتراك واحد، وسبب يخلّيك ترجع.',
+      category: 'تقنية أغذية · حملة',
+      challenge:
+        'تطبيقات الأكل بتتنافس بالخصومات، ومعظم الفيدات في الفئة دي شبه بعض: برجر ونسبة وكود. بريبد كانت محتاجة بوستات عروض تفضل فاخرة، ورسالة ترجّع المشتركين اللي بطّلوا يطلبوا من غير ما حد ياخد باله.',
+      strategy:
+        'بيع السفرة، مش الكوبون. كل بوست بيقدّم أطباق الشيفز كوجبة هادية ومتنسّقة في مكان سعودي حقيقي، فالعرض يتقري كعزومة. وجملة «وحشتنا، تدري إيش تغيّر» حوّلت الخصم لخبر: شيفز أكتر وأطباق أكتر تستاهل ترجع لها.',
     },
     'the-nine': {
       title: 'ذا ناين، قهوة ومطبخ',
@@ -731,7 +772,7 @@ const ar: typeof en = {
     h2a: "عندك علامة تحتاج",
     h2i: "اتجاهًا",
     h2b: "؟",
-    body: "أنا متاح لأدوار دوام كامل وعن بُعد وفريلانس وهجين عبر مصر · السعودية · الكويت. احكِ لي ما تبنيه، وسأخبرك كيف يوصله التصميم.",
+    body: "",
     wa: "راسلني واتساب ↗",
     all: "كل وسائل التواصل",
   },
@@ -743,11 +784,42 @@ const ar: typeof en = {
     rights: "صُمّم وأُخرج فنيًا وبُرمج داخليًا.",
     language: "اللغة",
     backTop: "العودة للأعلى ↑",
+    moreCol: "المزيد",
+    articles: "مقالات",
+    dashboard: "لوحة التحكم",
+  },
+  articles: {
+    label: "مقالات",
+    h2a: "ملاحظات عن التصميم والتوظيف و",
+    h2i: "الذكاء الاصطناعي",
+    h2b: "، من قلب الشغل.",
+    note: "تلاتين مقال عملي للعلامات والمسؤولين عن التوظيف والمصممين في مصر والسعودية والكويت.",
+    all: "الكل",
+    min: "دقائق قراءة",
+    summary: "باختصار",
+    takeaways: "أهم النقاط",
+    faq: "أسئلة شائعة",
+    related: "أعمال في الموقع ده بتوضّح الفكرة",
+    more: "كمّل قراءة",
+    back: "كل المقالات",
+    arNote: "نص المقال الكامل باللغة الإنجليزية.",
+    read: "اقرأ",
+    by: "بقلم",
+    filter: "تصفية حسب الموضوع",
+    categories: {
+      "Hiring a Designer": "توظيف مصمم",
+      "Brand & Campaigns": "العلامات والحملات",
+      "Social Media Design": "تصميم السوشيال ميديا",
+      "AI in Design": "الذكاء الاصطناعي في التصميم",
+      "Arabic & Bilingual Design": "التصميم العربي وثنائي اللغة",
+      Industries: "القطاعات",
+      "Leadership & Process": "القيادة وطريقة الشغل",
+    },
   },
   about: {
     label: "عنّي",
     heroBio:
-      "أكتر من خمس سنين بحوّل فيها مشاكل الشغل لإجابات بصرية: هويات وحملات وأنظمة سوشيال لشركات في مصر والسعودية والكويت. دلوقتي بقود فريق تصميم، وبدوّر على المكان الجاي اللي أبني فيه فريق.",
+      "بدأت الحكاية بسؤال واحد: العلامة دي عايزة تقول إيه فعلًا؟ وبعد خمس سنين وتلات أسواق، مصر والسعودية والكويت، لسه السؤال ده هو اللي بيحرّك كل هوية وكل حملة وكل نظام سوشيال ببنيه، وكل فريق بقوده.",
     intro1: "مصمّم يقود، يتعامل مع كل علامة بوصفها",
     introAccent: "مشكلة عمل",
     intro2: "لها إجابة إبداعية.",
@@ -893,7 +965,7 @@ const ar: typeof en = {
     label: "تواصل",
     h2a: "لنصنع عملًا",
     h2i: "يُتذكَّر.",
-    body: "متاح لأدوار جديدة ومشاريع فريلانس وتعاونات إبداعية عبر مصر · السعودية · الكويت. إن كنت تبني شيئًا طموحًا، يسعدني أن أسمع عنه.",
+    body: "كل علامة تستحق أن تُتذكَّر بدأت بحديث. من القاهرة للرياض للكويت، أحسن شغل عملته بدأ بجملة واحدة: «ده اللي بنحاول نبنيه». احكيلي عن اللي بتبنيه.",
     labels: {
       Email: "البريد",
       WhatsApp: "واتساب",
@@ -924,3 +996,21 @@ const ar: typeof en = {
 };
 
 export const dict = { en, ar };
+
+/** The copy exactly as written in this file, before any dashboard edits. */
+export const baseDict = clone(dict);
+
+function resetInto(target: Record<string, unknown>, base: Record<string, unknown>) {
+  for (const k of Object.keys(target)) delete target[k];
+  Object.assign(target, clone(base));
+}
+
+/** Folds a dashboard document into the live dict, starting from the base. */
+export function applyDictOverrides(o: Overrides) {
+  resetInto(dict.en as unknown as Record<string, unknown>, baseDict.en as unknown as Record<string, unknown>);
+  resetInto(dict.ar as unknown as Record<string, unknown>, baseDict.ar as unknown as Record<string, unknown>);
+  if (o.en) deepMerge(dict.en, o.en);
+  if (o.ar) deepMerge(dict.ar, o.ar);
+}
+
+applyDictOverrides(published as Overrides);

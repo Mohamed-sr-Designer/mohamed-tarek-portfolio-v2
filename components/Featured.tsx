@@ -131,7 +131,7 @@ export default function Featured() {
                 </div>
 
                 <div className="flex flex-1 flex-col p-5">
-                  <span className="text-[10px] uppercase tracking-ultra text-mint">
+                  <span className="text-[11px] uppercase tracking-ultra text-mint">
                     {post?.kind}
                   </span>
                   <h3 className="mt-2 text-balance text-lg font-medium tracking-tight text-bone-50">

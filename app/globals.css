@@ -2,8 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ---- One theme: cool near-black, cyan and red ------------------------------
-   Dark only. There is no light theme and no toggle.
+/* ---- Two themes: cool near-black (default) and a paper light -------------
+   v2 brings the light theme back, switched from the header. The dark values
+   below are the default; html[data-theme="light"] swaps every token at once,
+   so components never branch on the theme -- only the lettering pieces, which
+   ship as white and black cuts, use the light: variant to pick one.
 
    The two accents are the photograph the site opens on: the teal haze of the
    forecourt and the red of the tail lights. They are near-complementary, which
@@ -23,7 +26,9 @@
   --bg4: 32 48 57;
   --bg5: 50 70 81;
   --fg: 232 241 244;
+  --fg1: 210 223 228;
   --fg2: 186 203 210;
+  --fg25: 158 178 186;
   --fg3: 133 154 163;
   --fg4: 100 120 129;
   --line: 232 241 244;
@@ -31,6 +36,29 @@
   --mint: 25 200 222; /* cyan (primary accent) */
   /* A touch brighter, for type sitting directly on the photography. */
   --mint-lift: 86 226 245;
+  color-scheme: dark;
+}
+
+/* Paper light. The ramp inverts: --bg is the page, --bg2 the raised card
+   (pure white), --bg3+ the recessed wells. Both accents are pulled darker so
+   they keep AA as text on paper: cyan 4.6:1, red 4.9:1. */
+html[data-theme="light"] {
+  --bg: 245 247 248;
+  --bg2: 255 255 255;
+  --bg3: 234 239 241;
+  --bg4: 219 227 231;
+  --bg5: 188 201 207;
+  --fg: 9 18 23;
+  --fg1: 28 40 47;
+  --fg2: 50 66 75;
+  --fg25: 70 87 96;
+  --fg3: 90 108 117;
+  --fg4: 112 129 138;
+  --line: 9 18 23;
+  --electric: 212 34 58;
+  --mint: 0 125 148;
+  --mint-lift: 86 226 245;
+  color-scheme: light;
 }
 
 * {
@@ -219,6 +247,12 @@ main > * + * {
     filter: blur(110px);
     mix-blend-mode: screen;
     will-change: transform;
+  }
+  /* screen over paper is invisible; on the light theme the blobs multiply */
+  html[data-theme="light"] .blend-field::before,
+  html[data-theme="light"] .blend-field::after {
+    mix-blend-mode: multiply;
+    opacity: 0.45;
   }
   .blend-field::before {
     left: -12%;

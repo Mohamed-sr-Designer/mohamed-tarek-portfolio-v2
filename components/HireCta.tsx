@@ -37,11 +37,15 @@ export default function HireCta() {
           </h2>
         </Reveal>
 
-        <Reveal delay={0.1}>
-          <p className="mx-auto mt-6 max-w-xl text-pretty text-base leading-relaxed text-bone-300 md:text-lg">
-            {t.hire.body}
-          </p>
-        </Reveal>
+        {/* empty by default in v2 — the paragraph was pulled; the dashboard
+            can put one back without touching code */}
+        {t.hire.body ? (
+          <Reveal delay={0.1}>
+            <p className="mx-auto mt-6 max-w-xl text-pretty text-base leading-relaxed text-bone-300 md:text-lg">
+              {t.hire.body}
+            </p>
+          </Reveal>
+        ) : null}
 
         <Reveal delay={0.15}>
           <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
@@ -61,7 +65,7 @@ export default function HireCta() {
             </a>
             <Link
               href="/contact"
-              className="text-sm text-bone-400 underline-offset-4 hover:text-bone-50 hover:underline"
+              className="inline-flex min-h-[44px] items-center text-sm text-bone-400 underline-offset-4 hover:text-bone-50 hover:underline"
             >
               {t.hire.all}
             </Link>

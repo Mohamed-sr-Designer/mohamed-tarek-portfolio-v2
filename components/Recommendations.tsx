@@ -69,7 +69,7 @@ function Card({
       </div>
 
       <div className="mt-4 flex flex-wrap items-center gap-2">
-        <span className="rounded-full border border-mint/25 bg-mint/5 px-2.5 py-0.5 text-[10px] uppercase tracking-widest text-mint">
+        <span className="rounded-full border border-mint/25 bg-mint/5 px-2.5 py-0.5 text-[11px] uppercase tracking-widest text-mint">
           {relationLabel}
         </span>
         <span className="text-[11px] text-bone-500">{rec.dateLabel}</span>

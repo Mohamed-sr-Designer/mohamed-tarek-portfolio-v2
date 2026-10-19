@@ -150,7 +150,7 @@ function Ladder({ roles, promoted }: { roles: Role[]; promoted: string }) {
                 {r.title}
               </span>
               {i !== roles.length - 1 ? (
-                <span className="text-[10px] uppercase tracking-widest text-mint">
+                <span className="text-[11px] uppercase tracking-widest text-mint">
                   {promoted}
                 </span>
               ) : null}
@@ -254,13 +254,13 @@ export default function Experience() {
                     {j.company}
                   </h3>
                   {j.current ? (
-                    <span className="flex items-center gap-1.5 rounded-full border border-mint/40 bg-mint/5 px-2.5 py-0.5 text-[10px] uppercase tracking-widest text-mint">
+                    <span className="flex items-center gap-1.5 rounded-full border border-mint/40 bg-mint/5 px-2.5 py-0.5 text-[11px] uppercase tracking-widest text-mint">
                       <span className="h-1.5 w-1.5 rounded-full bg-mint" />
                       {t.exp.now}
                     </span>
                   ) : null}
                   {j.returned ? (
-                    <span className="rounded-full border border-line/25 px-2.5 py-0.5 text-[10px] uppercase tracking-widest text-bone-300">
+                    <span className="rounded-full border border-line/25 px-2.5 py-0.5 text-[11px] uppercase tracking-widest text-bone-300">
                       {t.exp.returned}
                     </span>
                   ) : null}

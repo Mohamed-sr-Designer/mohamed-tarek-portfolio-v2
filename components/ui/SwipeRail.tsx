@@ -91,7 +91,7 @@ export function SwipeRail({
 
       {railed && items.length > 1 ? (
         <div className="mt-4 flex items-center gap-3 sm:hidden">
-          <span className="shrink-0 text-[10px] uppercase tracking-ultra text-mint">
+          <span className="shrink-0 text-[11px] uppercase tracking-ultra text-mint">
             {t.ui.swipe}
           </span>
           <span

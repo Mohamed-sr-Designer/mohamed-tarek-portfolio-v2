@@ -30,6 +30,8 @@ export default function SmoothScroll() {
       syncTouch: false,
     });
     lenisRef.current = lenis;
+    // dev only: lets the browser QA jump straight to a section
+    if (process.env.NODE_ENV !== "production") (window as unknown as { __lenis?: Lenis }).__lenis = lenis;
 
     // Anchor links route through Lenis for smooth in-page scrolling.
     const onClick = (e: MouseEvent) => {

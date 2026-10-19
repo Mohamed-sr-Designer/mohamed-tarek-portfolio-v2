@@ -26,7 +26,7 @@ export function Toggle<T extends string>({
   return (
     <div className="flex flex-col gap-2.5">
       {hint ? (
-        <span className="flex items-center gap-2 text-[10px] uppercase tracking-ultra text-mint">
+        <span className="flex items-center gap-2 text-[11px] uppercase tracking-ultra text-mint">
           <span aria-hidden className="text-xs leading-none">
             ⇄
           </span>

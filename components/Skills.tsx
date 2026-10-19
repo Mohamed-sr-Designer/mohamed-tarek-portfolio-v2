@@ -52,7 +52,7 @@ export default function Skills() {
         {/* discipline filter */}
         <Reveal delay={0.1}>
           <div className="mt-8 flex flex-col gap-2.5">
-            <span className="flex items-center gap-2 text-[10px] uppercase tracking-ultra text-mint">
+            <span className="flex items-center gap-2 text-[11px] uppercase tracking-ultra text-mint">
               <span aria-hidden className="text-xs leading-none">
                 ⇄
               </span>

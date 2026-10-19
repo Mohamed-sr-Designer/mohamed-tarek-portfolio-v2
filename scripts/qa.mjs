@@ -3,7 +3,7 @@
 import { promises as fs } from "node:fs";
 import path from "node:path";
 
-const OUT = "out";
+const OUT = process.env.QA_OUT || "out";
 const fail = [];
 const warn = [];
 const ok = [];
@@ -77,7 +77,10 @@ for (const p of pages) {
   )) {
     // route-group folders like /work/[slug]/ arrive percent-encoded in the HTML,
     // and images carry a ?v= cache stamp the filesystem knows nothing about
-    const rel = decodeURIComponent(m[1]);
+    // a Pages build serves everything under the repo sub-path; out/ does not
+    const base = process.env.NEXT_PUBLIC_BASE_PATH || "";
+    let rel = decodeURIComponent(m[1]);
+    if (base && rel.startsWith(base + "/")) rel = rel.slice(base.length);
     if (seen.has(rel)) continue;
     seen.add(rel);
     if (!(await exists(path.join(OUT, rel)))) missing.add(rel);
