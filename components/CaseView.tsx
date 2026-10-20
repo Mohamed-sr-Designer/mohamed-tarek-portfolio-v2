@@ -305,7 +305,10 @@ export default function CaseView({ project }: { project: Project }) {
           columns would reflow the set vertically, so this stays a real grid) */}
       {gallery.length > 0 ? (
         <section className="container-edge mx-auto max-w-edge pb-14 md:pb-20">
-          <div className="mx-auto grid max-w-5xl grid-cols-3 gap-1.5 md:gap-3">
+          {/* always left-to-right: many sets are one continuous puzzle across
+              the 3x3, and an RTL grid mirrored every row (7 8 9 instead of
+              9 8 7) in Arabic. Hairline gaps so the tiles read as one image. */}
+          <div dir="ltr" className="mx-auto grid max-w-5xl grid-cols-3 gap-[2px] md:gap-1">
             {gallery.map((g) => (
               <figure
                 key={g.src}
