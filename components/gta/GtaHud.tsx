@@ -70,17 +70,31 @@ export default function GtaHud() {
         {banner ? (
           <motion.div
             key={banner}
-            initial={{ opacity: 0, scale: 1.2 }}
-            animate={{ opacity: 1, scale: 1 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-            className="pointer-events-none fixed inset-x-0 top-[38%] z-[100] text-center"
+            transition={{ duration: 0.35 }}
+            className="pointer-events-none fixed inset-0 z-[100] grid place-items-center bg-[#1a0b2e]/45 backdrop-blur-md"
             role="status"
           >
-            <p className="font-[family-name:var(--font-gta)] text-[11vw] uppercase leading-none text-[#ffd34d] [text-shadow:4px_4px_0_#1a0b2e] md:text-7xl">
-              {lang === "ar" ? "بدأت المهمة" : "Mission started"}
-            </p>
-            <p className="mt-2 text-sm font-bold uppercase tracking-[0.3em] text-white [text-shadow:2px_2px_0_#1a0b2e]">{banner}</p>
+            {/* the page blurs out behind it, the way a game freezes the world
+                for a mission title; a dark band carries the type */}
+            <motion.div
+              initial={{ scaleX: 0.6, opacity: 0 }}
+              animate={{ scaleX: 1, opacity: 1 }}
+              transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+              className="w-full bg-[linear-gradient(90deg,transparent,rgb(10_4_20/0.85)_18%,rgb(10_4_20/0.85)_82%,transparent)] py-8 text-center md:py-10"
+            >
+              <motion.p
+                initial={{ scale: 1.25, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{ delay: 0.1, duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+                className="font-[family-name:var(--font-gta)] text-[11vw] uppercase leading-none text-[#ffd34d] [text-shadow:4px_4px_0_#1a0b2e] md:text-8xl"
+              >
+                {lang === "ar" ? "بدأت المهمة" : "Mission started"}
+              </motion.p>
+              <p className="mt-3 text-sm font-bold uppercase tracking-[0.3em] text-white [text-shadow:2px_2px_0_#1a0b2e] md:text-base">{banner}</p>
+            </motion.div>
           </motion.div>
         ) : null}
       </AnimatePresence>
