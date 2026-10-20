@@ -42,7 +42,7 @@ export default function Cursor() {
   return (
     <motion.div
       style={{ x: sx, y: sy }}
-      className="custom-cursor pointer-events-none fixed left-0 top-0 z-[120] mix-blend-difference"
+      className="custom-cursor pointer-events-none fixed left-0 top-0 z-[200] mix-blend-difference"
       aria-hidden
     >
       <motion.div
