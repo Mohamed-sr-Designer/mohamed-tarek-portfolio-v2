@@ -9,7 +9,7 @@ import { projects } from "@/lib/projects";
 import { assetUrl } from "@/lib/assets";
 import { openContact } from "@/components/ContactModal";
 
-// The Minimal edition home: one ink on paper. Huge italic serif headlines that
+// The Minimal edition home: black ink on paper. Huge italic serif headlines that
 // end on a full stop, small tracked labels, hairline rules, photographs in
 // black and white until you hover them, and one solid ink band to close.
 // Everything here is the real portfolio; only the voice of the layout changes.
@@ -27,6 +27,11 @@ const copy = {
       { n: "49", l: "Cohorts taught" },
       { n: "3", l: "Markets" },
     ],
+    visualsLabel: "Key visuals",
+    visualsA: "One idea.",
+    visualsB: "One frame.",
+    visualsNote: "Photo manipulation for food, retail and campaign brands.",
+    behance: "More on Behance",
     behind: "Behind the work",
     first: "Mohamed",
     last: "Tarek.",
@@ -66,6 +71,11 @@ const copy = {
       { n: "٤٩", l: "دفعة تدريبية" },
       { n: "٣", l: "أسواق" },
     ],
+    visualsLabel: "كي فيجوال",
+    visualsA: "فكرة واحدة.",
+    visualsB: "كادر واحد.",
+    visualsNote: "فوتو مانيبوليشن لعلامات أكل وتجزئة وحملات.",
+    behance: "المزيد على Behance",
     behind: "ورا الشغل",
     first: "محمد",
     last: "طارق.",
@@ -94,6 +104,38 @@ const copy = {
     read: "اقرأ المقالات",
   },
 };
+
+// Key visuals picked from behance.net/mohmedrk, shown in full colour: in this
+// edition they are the only colour on the page
+const wide = [
+  { src: "/work/behance/burger.webp", t: "Burger", k: "Food" },
+  { src: "/work/behance/cabin.webp", t: "The cabin", k: "Matte painting" },
+];
+const squares = [
+  { src: "/work/behance/inferno.webp", t: "Inferno", k: "Key visual" },
+  { src: "/work/behance/tiger-sea.webp", t: "Tiger chips", k: "Packaging" },
+  { src: "/work/behance/albayt.webp", t: "Albayt", k: "Campaign" },
+  { src: "/work/behance/italiano.webp", t: "Italiano", k: "Food" },
+  { src: "/work/behance/alrahden.webp", t: "Alrahden", k: "Retail" },
+  { src: "/work/behance/medlab.webp", t: "Medlab", k: "Healthcare" },
+  { src: "/work/behance/ebtl.webp", t: "Ebtl", k: "Retail" },
+  { src: "/work/behance/tiger-field.webp", t: "Tiger chips", k: "Packaging" },
+];
+
+function Visual({ src, t, k, ratio }: { src: string; t: string; k: string; ratio: string }) {
+  return (
+    <figure className="min-color">
+      <div className={`overflow-hidden bg-ink-800 ${ratio}`}>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src={assetUrl(src)} alt={t} loading="lazy" decoding="async" className="h-full w-full object-cover transition-transform duration-700 hover:scale-[1.03]" />
+      </div>
+      <figcaption className="mt-3 flex items-baseline justify-between gap-3 text-[11px] uppercase tracking-[0.16em]">
+        <span className="font-semibold">{t}</span>
+        <span className="opacity-70">{k}</span>
+      </figcaption>
+    </figure>
+  );
+}
 
 const logos = Array.from({ length: 36 }, (_, i) => `/logos/dark/${String(i + 1).padStart(2, "0")}.webp`);
 // 07 and 09 carry a keyline or a solid extrude, which a mask fills into a
@@ -143,6 +185,35 @@ export default function MinimalHome() {
             </div>
           ))}
         </dl>
+      </section>
+
+      {/* --------------------------------------------------- key visuals */}
+      <section className="container-edge mx-auto max-w-edge pb-20 md:pb-28">
+        <div className="flex flex-col gap-6 border-t border-line/20 pt-14 md:flex-row md:items-end md:justify-between">
+          <div>
+            <Label>{c.visualsLabel}</Label>
+            <h2 className="min-display mt-6">
+              <span className="block">{c.visualsA}</span>
+              <span className="block">{c.visualsB}</span>
+            </h2>
+          </div>
+          <div className="max-w-[16rem] text-[11px] uppercase tracking-[0.18em]">
+            <p>{c.visualsNote}</p>
+            <a href="https://www.behance.net/mohmedrk" target="_blank" rel="noopener noreferrer" className="mt-4 inline-block font-semibold underline underline-offset-4">
+              {c.behance} ↗
+            </a>
+          </div>
+        </div>
+        <div className="mt-14 grid gap-x-6 gap-y-10 md:grid-cols-2">
+          {wide.map((v) => (
+            <Visual key={v.src} {...v} ratio="aspect-[3/2]" />
+          ))}
+        </div>
+        <div className="mt-10 grid grid-cols-2 gap-x-4 gap-y-10 md:grid-cols-4 md:gap-x-6">
+          {squares.map((v) => (
+            <Visual key={v.src} {...v} ratio="aspect-square" />
+          ))}
+        </div>
       </section>
 
       {/* ------------------------------------------- the lettering, in ink */}

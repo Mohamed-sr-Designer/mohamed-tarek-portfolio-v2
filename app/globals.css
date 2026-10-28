@@ -595,45 +595,46 @@ html[data-edition="gta"][data-theme="light"] h2 .italic {
 }
 
 /* ---- Minimal edition --------------------------------------------------------
-   One ink on paper. Every token collapses to the same blue so the whole site
-   reads as a single printed colour; headlines go to an italic editorial
-   serif in capitals that end on a full stop; photographs sit in black and
+   Black ink on warm paper. Every token collapses to the same ink so the
+   site reads as one printed colour, and the only colour left is the work
+   itself (the key visuals); headlines go to an italic editorial serif in
+   capitals that end on a full stop; other photographs sit in black and
    white until hovered; every gradient, glow and blend is switched off.
-   A dark variant inverts it to pale ink on night paper. */
+   A dark variant inverts it to paper-white ink on near-black. */
 html[data-edition="min"] {
-  --bg: 252 252 250;
-  --bg2: 238 243 250;
-  --bg3: 226 234 246;
-  --bg4: 210 222 240;
-  --bg5: 180 200 228;
-  --fg: 24 96 168;
-  --fg1: 24 96 168;
-  --fg2: 24 96 168;
-  --fg25: 40 108 176;
-  --fg3: 64 124 186;
-  --fg4: 92 144 198;
-  --line: 24 96 168;
-  --mint: 24 96 168;
-  --mint-lift: 24 96 168;
-  --electric: 24 96 168;
+  --bg: 247 245 240;
+  --bg2: 238 235 228;
+  --bg3: 228 224 215;
+  --bg4: 212 207 197;
+  --bg5: 180 175 165;
+  --fg: 20 20 20;
+  --fg1: 20 20 20;
+  --fg2: 20 20 20;
+  --fg25: 44 44 42;
+  --fg3: 74 73 70;
+  --fg4: 110 108 104;
+  --line: 20 20 20;
+  --mint: 20 20 20;
+  --mint-lift: 20 20 20;
+  --electric: 20 20 20;
   color-scheme: light;
 }
 html[data-edition="min"][data-theme="dark"] {
-  --bg: 12 18 28;
-  --bg2: 20 30 46;
-  --bg3: 28 42 64;
-  --bg4: 40 58 86;
-  --bg5: 60 84 120;
-  --fg: 150 192 245;
-  --fg1: 150 192 245;
-  --fg2: 150 192 245;
-  --fg25: 136 180 236;
-  --fg3: 120 164 222;
-  --fg4: 100 144 204;
-  --line: 150 192 245;
-  --mint: 150 192 245;
-  --mint-lift: 150 192 245;
-  --electric: 150 192 245;
+  --bg: 14 14 13;
+  --bg2: 24 24 22;
+  --bg3: 34 34 31;
+  --bg4: 50 49 46;
+  --bg5: 78 77 72;
+  --fg: 240 237 230;
+  --fg1: 240 237 230;
+  --fg2: 240 237 230;
+  --fg25: 222 219 212;
+  --fg3: 190 187 180;
+  --fg4: 150 147 140;
+  --line: 240 237 230;
+  --mint: 240 237 230;
+  --mint-lift: 240 237 230;
+  --electric: 240 237 230;
   color-scheme: dark;
 }
 html[data-edition="min"] body {
@@ -682,7 +683,8 @@ html[data-edition="min"] main img {
 }
 html[data-edition="min"] main a:hover img,
 html[data-edition="min"] main figure:hover img,
-html[data-edition="min"] main button:hover img {
+html[data-edition="min"] main button:hover img,
+html[data-edition="min"] main .min-color img {
   filter: grayscale(0);
 }
 /* no blends, gradients or glows */
