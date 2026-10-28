@@ -15,6 +15,7 @@ import HireCta from "@/components/HireCta";
 import Sections from "@/components/Sections";
 import HomeSwitch from "@/components/gta/HomeSwitch";
 import GtaHome from "@/components/gta/GtaHome";
+import MinimalHome from "@/components/minimal/MinimalHome";
 
 export default function Home() {
   return (
@@ -22,7 +23,7 @@ export default function Home() {
       {/* default order below; the dashboard can reorder or hide sections.
           The wall of selected designs closes out the social run, and the
           Blender work sits with the other built-not-shot work after films. */}
-      <HomeSwitch game={<GtaHome />}>
+      <HomeSwitch game={<GtaHome />} minimal={<MinimalHome />}>
       <Sections
         page="home"
         items={[

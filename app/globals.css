@@ -543,7 +543,7 @@ main > * + * {
 /* the GTA lockup is Latin artwork: it keeps its face in Arabic too */
 [dir="rtl"] .gta-lockup,
 [dir="rtl"] .gta-lockup *,
-[dir="rtl"] .edition-btn span:first-child {
+[dir="rtl"] .edition-btn .gta-mark {
   font-family: var(--font-gta), sans-serif !important;
 }
 
@@ -592,4 +592,162 @@ html[data-edition="gta"][data-theme="light"] h2 .italic {
 .gta-vi {
   color: #fff !important;
   text-shadow: 3px 3px 0 #1a0b2e !important;
+}
+
+/* ---- Minimal edition --------------------------------------------------------
+   One ink on paper. Every token collapses to the same blue so the whole site
+   reads as a single printed colour; headlines go to an italic editorial
+   serif in capitals that end on a full stop; photographs sit in black and
+   white until hovered; every gradient, glow and blend is switched off.
+   A dark variant inverts it to pale ink on night paper. */
+html[data-edition="min"] {
+  --bg: 252 252 250;
+  --bg2: 238 243 250;
+  --bg3: 226 234 246;
+  --bg4: 210 222 240;
+  --bg5: 180 200 228;
+  --fg: 24 96 168;
+  --fg1: 24 96 168;
+  --fg2: 24 96 168;
+  --fg25: 40 108 176;
+  --fg3: 64 124 186;
+  --fg4: 92 144 198;
+  --line: 24 96 168;
+  --mint: 24 96 168;
+  --mint-lift: 24 96 168;
+  --electric: 24 96 168;
+  color-scheme: light;
+}
+html[data-edition="min"][data-theme="dark"] {
+  --bg: 12 18 28;
+  --bg2: 20 30 46;
+  --bg3: 28 42 64;
+  --bg4: 40 58 86;
+  --bg5: 60 84 120;
+  --fg: 150 192 245;
+  --fg1: 150 192 245;
+  --fg2: 150 192 245;
+  --fg25: 136 180 236;
+  --fg3: 120 164 222;
+  --fg4: 100 144 204;
+  --line: 150 192 245;
+  --mint: 150 192 245;
+  --mint-lift: 150 192 245;
+  --electric: 150 192 245;
+  color-scheme: dark;
+}
+html[data-edition="min"] body {
+  background-image: none;
+}
+/* headlines: italic serif capitals, tight, everywhere on the site */
+html[data-edition="min"] h1,
+html[data-edition="min"] h2 {
+  font-family: var(--font-serif), Georgia, serif !important;
+  font-style: italic;
+  font-weight: 400 !important;
+  text-transform: uppercase;
+  letter-spacing: -0.025em !important;
+  line-height: 0.98 !important;
+}
+html[data-edition="min"] h1 *,
+html[data-edition="min"] h2 * {
+  font-family: inherit !important;
+  font-style: inherit !important;
+  color: inherit !important;
+  text-shadow: none !important;
+  background: none !important;
+  -webkit-text-fill-color: currentColor;
+}
+.min-display {
+  font-size: clamp(3rem, 9vw, 9rem);
+}
+.min-serif {
+  font-family: var(--font-serif), Georgia, serif;
+  font-style: italic;
+}
+/* Arabic has no italic serif: bold Alexandria carries the same weight */
+[dir="rtl"] .min-serif,
+html[data-edition="min"][dir="rtl"] h1,
+html[data-edition="min"][dir="rtl"] h2 {
+  font-family: var(--font-ar), sans-serif !important;
+  font-style: normal;
+  font-weight: 700 !important;
+  line-height: 1.25 !important;
+  letter-spacing: 0 !important;
+}
+/* photographs in black and white, colour on hover */
+html[data-edition="min"] main img {
+  filter: grayscale(1);
+  transition: filter 0.6s ease;
+}
+html[data-edition="min"] main a:hover img,
+html[data-edition="min"] main figure:hover img,
+html[data-edition="min"] main button:hover img {
+  filter: grayscale(0);
+}
+/* no blends, gradients or glows */
+html[data-edition="min"] .blend-field,
+html[data-edition="min"] .custom-cursor {
+  display: none !important;
+}
+html[data-edition="min"] .cta-blend {
+  background: rgb(var(--mint)) !important;
+  color: rgb(var(--bg)) !important;
+  border-radius: 0 !important;
+}
+html[data-edition="min"] .cta-edge {
+  background: transparent !important;
+  border: 1px solid rgb(var(--mint)) !important;
+  color: rgb(var(--mint)) !important;
+  border-radius: 0 !important;
+}
+html[data-edition="min"] .text-blend {
+  background: none;
+  color: rgb(var(--mint));
+  -webkit-text-fill-color: currentColor;
+}
+html[data-edition="min"] main .rounded-2xl,
+html[data-edition="min"] main .rounded-3xl,
+html[data-edition="min"] main .rounded-xl {
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+html[data-edition="min"] [class*="shadow-"] {
+  box-shadow: none !important;
+}
+html[data-edition="min"].cursor-ready,
+html[data-edition="min"].cursor-ready * {
+  cursor: auto !important;
+}
+html[data-edition="min"].cursor-ready a,
+html[data-edition="min"].cursor-ready button {
+  cursor: pointer !important;
+}
+/* logos and lettering printed in the ink through their alpha */
+.min-mask {
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+}
+/* the three practice glyphs, drawn in CSS */
+.min-glyph {
+  display: block;
+  width: 3.5rem;
+  height: 3.5rem;
+  background: currentColor;
+}
+.min-glyph[data-k="0"] {
+  border-radius: 9999px;
+}
+.min-glyph[data-k="1"] {
+  clip-path: polygon(0 100%, 50% 0, 100% 100%);
+}
+.min-glyph[data-k="2"] {
+  border-radius: 0 9999px 9999px 0;
+}
+[dir="rtl"] .min-glyph[data-k="2"] {
+  border-radius: 9999px 0 0 9999px;
 }

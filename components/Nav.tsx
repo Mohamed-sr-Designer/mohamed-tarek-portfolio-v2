@@ -88,7 +88,11 @@ export default function Nav() {
 
           <div className="flex items-center gap-2 sm:gap-3">
             <EditionToggle />
-            <ThemeToggle />
+            {/* on phones the language and theme pill moves into the menu, so
+                the bar keeps the edition switch and the menu button */}
+            <div className="hidden sm:block">
+              <ThemeToggle />
+            </div>
             <button
               type="button"
               onClick={openContact}
@@ -157,6 +161,9 @@ export default function Nav() {
             >
               {gta ? gameLabels.talk : t.nav.letsTalk}
             </button>
+            <div className="mt-8 sm:hidden">
+              <ThemeToggle />
+            </div>
             <a href={`mailto:${site.email}`} className="mt-6 text-sm text-mint">
               {site.email}
             </a>

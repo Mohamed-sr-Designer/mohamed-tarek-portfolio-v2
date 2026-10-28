@@ -74,6 +74,9 @@ type ContentCtx = {
   /** the GTA VI Edition skin, on top of either theme */
   gta: boolean;
   setGta: (on: boolean) => void;
+  /** the Minimal edition: one ink colour on paper, editorial serif */
+  minimal: boolean;
+  setMinimal: (on: boolean) => void;
 };
 
 const Ctx = createContext<ContentCtx>({
@@ -83,6 +86,8 @@ const Ctx = createContext<ContentCtx>({
   setTheme: () => {},
   gta: false,
   setGta: () => {},
+  minimal: false,
+  setMinimal: () => {},
 });
 
 export function ContentProvider({ children }: { children: React.ReactNode }) {
@@ -92,7 +97,10 @@ export function ContentProvider({ children }: { children: React.ReactNode }) {
   const [draft, setDraft] = useState(false);
   const [version, setVersion] = useState(0);
   const [theme, setThemeState] = useState<"dark" | "light">("dark");
-  const [gta, setGtaState] = useState(false);
+  // one edition at a time: standard, GTA VI, or Minimal
+  const [edition, setEditionState] = useState<"std" | "gta" | "min">("std");
+  const gta = edition === "gta";
+  const minimal = edition === "min";
 
   useEffect(() => {
     let s = publishedOverrides.settings;
@@ -110,7 +118,8 @@ export function ContentProvider({ children }: { children: React.ReactNode }) {
     // the pre-paint script in <head> already set the attribute; mirror it
     const current = document.documentElement.dataset.theme;
     setThemeState(current === "light" ? "light" : "dark");
-    setGtaState(document.documentElement.dataset.edition === "gta");
+    const ed = document.documentElement.dataset.edition;
+    setEditionState(ed === "gta" ? "gta" : ed === "min" ? "min" : "std");
 
     // Live preview: the dashboard posts the draft into this page (when it is
     // the iframe in the dashboard) on every edit, so changes show while typing.
@@ -128,15 +137,17 @@ export function ContentProvider({ children }: { children: React.ReactNode }) {
     return () => window.removeEventListener("message", onMsg);
   }, []);
 
-  const setGta = useCallback((on: boolean) => {
-    setGtaState(on);
-    if (on) document.documentElement.dataset.edition = "gta";
-    else delete document.documentElement.dataset.edition;
+  const setEdition = useCallback((e: "std" | "gta" | "min") => {
+    setEditionState(e);
+    if (e === "std") delete document.documentElement.dataset.edition;
+    else document.documentElement.dataset.edition = e;
     try {
-      if (on) localStorage.setItem(EDITION_KEY, "gta");
-      else localStorage.removeItem(EDITION_KEY);
+      if (e === "std") localStorage.removeItem(EDITION_KEY);
+      else localStorage.setItem(EDITION_KEY, e);
     } catch {}
   }, []);
+  const setGta = useCallback((on: boolean) => setEdition(on ? "gta" : "std"), [setEdition]);
+  const setMinimal = useCallback((on: boolean) => setEdition(on ? "min" : "std"), [setEdition]);
 
   const setTheme = useCallback((t: "dark" | "light") => {
     setThemeState(t);
@@ -149,7 +160,7 @@ export function ContentProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   return (
-    <Ctx.Provider value={{ settings, draft, theme, setTheme, gta, setGta }}>
+    <Ctx.Provider value={{ settings, draft, theme, setTheme, gta, setGta, minimal, setMinimal }}>
       {/* the key remounts the tree once after a draft is folded in */}
       <div key={version} className="contents">
         {children}
