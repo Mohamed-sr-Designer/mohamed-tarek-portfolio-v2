@@ -8,25 +8,17 @@ import { site } from "@/lib/site";
 import { useLang } from "@/lib/i18n";
 import { openContact } from "@/components/ContactModal";
 import ThemeToggle from "@/components/ThemeToggle";
-import EditionToggle from "@/components/EditionToggle";
-import { useContent } from "@/lib/content";
+import SideSwitch from "@/components/SideSwitch";
 
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
   const { t, lang } = useLang();
-  const { gta } = useContent();
-
-  // in the GTA VI Edition the menu reads like a game's pause menu
-  const gameLabels =
-    lang === "ar"
-      ? { work: "المهمات", about: "ملف اللاعب", contact: "الهاتف", talk: "اتصل بمحمد" }
-      : { work: "Missions", about: "Player", contact: "Phone", talk: "Call Mohamed" };
   const links = [
-    { label: gta ? gameLabels.work : t.nav.work, href: "/" },
-    { label: gta ? gameLabels.about : t.nav.about, href: "/about" },
-    { label: gta ? gameLabels.contact : t.nav.contact, href: "/contact" },
+    { label: t.nav.work, href: "/" },
+    { label: t.nav.about, href: "/about" },
+    { label: t.nav.contact, href: "/contact" },
   ];
 
   const isActive = (href: string) =>
@@ -87,9 +79,9 @@ export default function Nav() {
           </nav>
 
           <div className="flex items-center gap-2 sm:gap-3">
-            <EditionToggle />
+            <SideSwitch />
             {/* on phones the language and theme pill moves into the menu, so
-                the bar keeps the edition switch and the menu button */}
+                the bar keeps the Portfolio / Academy switch and the menu button */}
             <div className="hidden sm:block">
               <ThemeToggle />
             </div>
@@ -98,7 +90,7 @@ export default function Nav() {
               onClick={openContact}
               className="cta-edge hidden rounded-full px-5 py-2 text-sm text-bone-50 md:inline-block"
             >
-              {gta ? gameLabels.talk : t.nav.letsTalk}
+              {t.nav.letsTalk}
             </button>
             <button
               onClick={() => setOpen((v) => !v)}
@@ -159,7 +151,7 @@ export default function Nav() {
               }}
               className="cta-blend mt-10 w-fit rounded-full px-6 py-3 text-sm font-medium"
             >
-              {gta ? gameLabels.talk : t.nav.letsTalk}
+              {t.nav.letsTalk}
             </button>
             <div className="mt-8 sm:hidden">
               <ThemeToggle />

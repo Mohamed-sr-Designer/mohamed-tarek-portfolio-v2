@@ -71,9 +71,6 @@ type ContentCtx = {
   draft: boolean;
   theme: "dark" | "light";
   setTheme: (t: "dark" | "light") => void;
-  /** the GTA VI Edition skin, on top of either theme */
-  gta: boolean;
-  setGta: (on: boolean) => void;
   /** the Minimal edition: one ink colour on paper, editorial serif */
   minimal: boolean;
   setMinimal: (on: boolean) => void;
@@ -84,8 +81,6 @@ const Ctx = createContext<ContentCtx>({
   draft: false,
   theme: "dark",
   setTheme: () => {},
-  gta: false,
-  setGta: () => {},
   minimal: false,
   setMinimal: () => {},
 });
@@ -97,9 +92,8 @@ export function ContentProvider({ children }: { children: React.ReactNode }) {
   const [draft, setDraft] = useState(false);
   const [version, setVersion] = useState(0);
   const [theme, setThemeState] = useState<"dark" | "light">("dark");
-  // one edition at a time: standard, GTA VI, or Minimal
-  const [edition, setEditionState] = useState<"std" | "gta" | "min">("std");
-  const gta = edition === "gta";
+  // one edition at a time: standard or Minimal
+  const [edition, setEditionState] = useState<"std" | "min">("std");
   const minimal = edition === "min";
 
   useEffect(() => {
@@ -119,7 +113,7 @@ export function ContentProvider({ children }: { children: React.ReactNode }) {
     const current = document.documentElement.dataset.theme;
     setThemeState(current === "light" ? "light" : "dark");
     const ed = document.documentElement.dataset.edition;
-    setEditionState(ed === "gta" ? "gta" : ed === "min" ? "min" : "std");
+    setEditionState(ed === "min" ? "min" : "std");
 
     // Live preview: the dashboard posts the draft into this page (when it is
     // the iframe in the dashboard) on every edit, so changes show while typing.
@@ -137,7 +131,7 @@ export function ContentProvider({ children }: { children: React.ReactNode }) {
     return () => window.removeEventListener("message", onMsg);
   }, []);
 
-  const setEdition = useCallback((e: "std" | "gta" | "min") => {
+  const setEdition = useCallback((e: "std" | "min") => {
     setEditionState(e);
     if (e === "std") delete document.documentElement.dataset.edition;
     else document.documentElement.dataset.edition = e;
@@ -146,7 +140,6 @@ export function ContentProvider({ children }: { children: React.ReactNode }) {
       else localStorage.setItem(EDITION_KEY, e);
     } catch {}
   }, []);
-  const setGta = useCallback((on: boolean) => setEdition(on ? "gta" : "std"), [setEdition]);
   const setMinimal = useCallback((on: boolean) => setEdition(on ? "min" : "std"), [setEdition]);
 
   const setTheme = useCallback((t: "dark" | "light") => {
@@ -160,7 +153,7 @@ export function ContentProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   return (
-    <Ctx.Provider value={{ settings, draft, theme, setTheme, gta, setGta, minimal, setMinimal }}>
+    <Ctx.Provider value={{ settings, draft, theme, setTheme, minimal, setMinimal }}>
       {/* the key remounts the tree once after a draft is folded in */}
       <div key={version} className="contents">
         {children}

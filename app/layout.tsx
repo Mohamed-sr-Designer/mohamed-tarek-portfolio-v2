@@ -4,7 +4,6 @@ import {
   Hanken_Grotesk,
   Fraunces,
   Alexandria,
-  Anton,
 } from "next/font/google";
 import { site } from "@/lib/site";
 import { LangProvider } from "@/lib/i18n";
@@ -37,13 +36,6 @@ const serif = Fraunces({
   style: ["normal", "italic"],
 });
 
-// GTA VI Edition only: the tall condensed display face for its headlines
-const gta = Anton({
-  subsets: ["latin"],
-  weight: "400",
-  variable: "--font-gta",
-  display: "swap",
-});
 
 const arabic = Alexandria({
   subsets: ["arabic", "latin"],
@@ -195,7 +187,7 @@ export default function RootLayout({
       lang="en"
       data-theme={defaultTheme}
       suppressHydrationWarning
-      className={`${display.variable} ${sans.variable} ${serif.variable} ${arabic.variable} ${gta.variable}`}
+      className={`${display.variable} ${sans.variable} ${serif.variable} ${arabic.variable}`}
     >
       <head>
         {/* sets data-theme before first paint, so there is no flash */}

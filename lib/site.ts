@@ -27,6 +27,8 @@ export const site = {
   linkedin: "https://www.linkedin.com/in/mohamedrk/",
   linkedinHandle: "/in/mohamedrk",
   github: "https://github.com/Mohamed-sr-Designer",
+  // the other half: the design academy, its own site
+  academy: "https://mohamed-sr-designer.github.io/atelier-lms/",
   location: "Egypt",
   markets: "Egypt · Saudi Arabia · Kuwait",
 };

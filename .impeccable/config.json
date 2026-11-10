@@ -1,0 +1,17 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "side-tab",
+        "value": "*",
+        "files": [
+          "components/gta/GtaHome.tsx"
+        ],
+        "createdAt": "2026-10-28T19:53:34.399Z",
+        "reason": "Claude triage: the pink start bar on GTA player stats is a deliberate game-HUD stat marker in the approved GTA VI edition, not a card accent"
+      }
+    ]
+  }
+}

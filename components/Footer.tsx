@@ -3,12 +3,14 @@
 import Link from "next/link";
 import { site } from "@/lib/site";
 import { useLang } from "@/lib/i18n";
+import { useContent } from "@/lib/content";
 
 // The language control moved to the header in v2, grouped with the theme
 // switch (components/ThemeToggle.tsx).
 
 export default function Footer() {
-  const { t } = useLang();
+  const { t, lang } = useLang();
+  const { minimal, setMinimal } = useContent();
   const year = new Date().getFullYear();
 
   const links = [
@@ -138,6 +140,17 @@ export default function Footer() {
               className="link-underline min-h-[40px] text-bone-300"
             >
               {t.footer.backTop}
+            </button>
+            <a href={site.academy} className="link-underline min-h-[40px] content-center text-bone-300">
+              {lang === "ar" ? "الأكاديمية ↗" : "Academy ↗"}
+            </a>
+            <button
+              type="button"
+              aria-pressed={minimal}
+              onClick={() => { setMinimal(!minimal); window.scrollTo({ top: 0 }); }}
+              className="link-underline min-h-[40px] text-bone-300"
+            >
+              {minimal ? (lang === "ar" ? "العرض العادي" : "Standard view") : (lang === "ar" ? "العرض المينيمال" : "Minimal view")}
             </button>
           </div>
         </div>

@@ -11,5 +11,5 @@ export const EDITION_KEY = "edition";
  * then the published default.
  */
 export function themeBootScript(defaultTheme: "dark" | "light") {
-  return `(function(){var t="${defaultTheme}";try{var s=localStorage.getItem("${THEME_KEY}");if(s==="light"||s==="dark"){t=s;}else if(localStorage.getItem("${PREVIEW_KEY}")==="1"){var d=JSON.parse(localStorage.getItem("${DRAFT_KEY}")||"{}");if(d&&d.settings&&d.settings.defaultTheme)t=d.settings.defaultTheme;}}catch(e){}document.documentElement.dataset.theme=t;try{var e=localStorage.getItem("${EDITION_KEY}");if(e==="gta"||e==="min")document.documentElement.dataset.edition=e;}catch(e){}})();`;
+  return `(function(){var t="${defaultTheme}";try{var s=localStorage.getItem("${THEME_KEY}");if(s==="light"||s==="dark"){t=s;}else if(localStorage.getItem("${PREVIEW_KEY}")==="1"){var d=JSON.parse(localStorage.getItem("${DRAFT_KEY}")||"{}");if(d&&d.settings&&d.settings.defaultTheme)t=d.settings.defaultTheme;}}catch(e){}document.documentElement.dataset.theme=t;try{var e=localStorage.getItem("${EDITION_KEY}");if(e==="min")document.documentElement.dataset.edition=e;else if(e)localStorage.removeItem("${EDITION_KEY}");}catch(e){}})();`;
 }
