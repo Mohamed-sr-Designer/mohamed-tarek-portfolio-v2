@@ -14,7 +14,7 @@ import motionData from "@/lib/motion.json";
 type Clip = { slug: string; src: string; poster: string };
 
 export default function CaseView({ project }: { project: Project }) {
-  const { t } = useLang();
+  const { t, lang } = useLang();
   const tr = t.projects[project.slug] ?? {};
   const accent = project.accent === "mint" ? "text-mint" : "text-electric";
   // The grid is laid out like an Instagram profile: the first post sits
@@ -41,32 +41,60 @@ export default function CaseView({ project }: { project: Project }) {
 
   const title = tr.title ?? project.title;
   const category = tr.category ?? project.category;
+  // workflow cases lead with their flow diagram below, so they open on type alone
+  const showLead = !leadIsFlow;
+  const meta = [
+    { k: lang === "ar" ? "العميل" : "Client", v: project.client.split(" · ")[0] },
+    { k: lang === "ar" ? "القطاع" : "Sector", v: category.split(" · ")[0] },
+    { k: lang === "ar" ? "السنة" : "Year", v: project.year },
+    { k: lang === "ar" ? "دوري" : "My role", v: project.contribution.slice(0, 2).join(", ") },
+  ];
+  const at = projects.findIndex((p) => p.slug === project.slug);
+  const next = projects[(at + 1) % projects.length];
+  const ntr = t.projects[next.slug] ?? {};
 
   return (
     <>
 
 
-      {/* title */}
-      <section className="container-edge mx-auto max-w-edge pt-32 text-center md:pt-40">
-        <Reveal>
-          <p className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-xs uppercase tracking-[0.28em] text-bone-400">
-            <span className={accent}>{category}</span>
-            <span className="h-px w-6 bg-line/30" />
-            <span>{project.client}</span>
-            <span className="h-px w-6 bg-line/30" />
-            <span>{project.year}</span>
-          </p>
-        </Reveal>
-        <Reveal delay={0.06}>
-          <h1 className="mx-auto mt-6 max-w-4xl text-balance text-5xl font-semibold leading-[0.98] tracking-tightest text-bone-50 md:text-8xl">
-            {title}
-          </h1>
-        </Reveal>
-        <Reveal delay={0.12}>
-          <p className="mx-auto mt-6 max-w-2xl text-pretty font-serif text-xl italic leading-snug text-bone-200 md:text-2xl">
-            {tr.tagline ?? project.tagline}
-          </p>
-        </Reveal>
+      {/* opening: the same split as the home hero */}
+      <section className="container-edge mx-auto max-w-edge pt-28 md:pt-32">
+        <Link href="/#cases" className="link-underline inline-flex min-h-[40px] items-center gap-2 text-sm text-bone-300">
+          <span aria-hidden className="inline-block rtl:rotate-180">←</span> {lang === "ar" ? "كل المشاريع" : "All work"}
+        </Link>
+        <div className={`mt-6 grid items-end gap-10 ${showLead ? "lg:grid-cols-[1.1fr_0.9fr] lg:gap-16" : ""}`}>
+          <div>
+            <Reveal>
+              <p className={`text-xs font-medium uppercase tracking-[0.22em] ${accent}`}>{category}</p>
+            </Reveal>
+            <Reveal delay={0.06}>
+              <h1 className={`mt-5 text-balance font-display text-5xl font-semibold leading-[0.98] tracking-[-0.035em] text-bone-50 md:text-7xl ${showLead ? "" : "max-w-5xl lg:text-8xl"}`}>
+                {title}
+              </h1>
+            </Reveal>
+            <Reveal delay={0.12}>
+              <p className="mt-6 max-w-2xl text-pretty font-serif text-xl italic leading-snug text-bone-200 md:text-2xl">
+                {tr.tagline ?? project.tagline}
+              </p>
+            </Reveal>
+          </div>
+          {showLead ? (
+            <Reveal delay={0.1}>
+              <div className="relative mx-auto aspect-[4/5] w-full max-w-md overflow-hidden rounded-[2rem] bg-ink-800 lg:max-w-none">
+                <Media src={project.hero || project.cover} alt={title} fill priority sizes="(max-width:1024px) 90vw, 40vw" className="object-cover" />
+              </div>
+            </Reveal>
+          ) : null}
+        </div>
+
+        <dl className="mt-12 grid grid-cols-2 border-y border-line/15 md:mt-16 md:grid-cols-4">
+          {meta.map((m, i) => (
+            <div key={m.k} className={`py-5 md:py-6 ${i % 2 ? "ps-5 border-s border-line/15" : ""} ${i > 1 ? "border-t border-line/15 md:border-t-0" : ""} ${i ? "md:ps-7 md:border-s md:border-line/15" : ""}`}>
+              <dt className="text-[11px] uppercase tracking-[0.18em] text-bone-400">{m.k}</dt>
+              <dd className="mt-2 text-base font-medium text-bone-50 md:text-lg">{m.v}</dd>
+            </div>
+          ))}
+        </dl>
       </section>
 
       {/* lead visual — the flow diagram leads on workflow cases, so the
@@ -123,37 +151,29 @@ export default function CaseView({ project }: { project: Project }) {
             </div>
           </div>
         ) : (
-          <div className="grid gap-10 border-y border-line/10 py-10 md:grid-cols-12 md:gap-8">
-            <div className="md:col-span-3">
-              <p className="text-xs uppercase tracking-[0.28em] text-bone-400">
-                {project.client} · {category}
-              </p>
-              <ul className="mt-4 flex flex-wrap gap-2">
-                {project.contribution.map((c) => (
-                  <li
-                    key={c}
-                    className="rounded-full border border-line/15 px-3 py-1 text-xs text-bone-200"
-                  >
-                    {c}
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div className="md:col-span-4">
-              <h2 className={`text-sm font-medium ${accent}`}>
-                {t.case.challenge}
-              </h2>
-              <p className="mt-3 text-pretty text-lg leading-relaxed text-bone-200">
-                {tr.challenge ?? project.challenge}
-              </p>
-            </div>
-            <div className="md:col-span-5">
-              <h2 className={`text-sm font-medium ${accent}`}>
-                {t.case.solution}
-              </h2>
-              <p className="mt-3 text-pretty text-lg leading-relaxed text-bone-200">
-                {tr.strategy ?? project.strategy}
-              </p>
+          <div>
+            <ul className="flex flex-wrap gap-2">
+              {project.contribution.map((c) => (
+                <li key={c} className="rounded-full border border-line/15 px-3.5 py-1.5 text-xs text-bone-200">
+                  {c}
+                </li>
+              ))}
+            </ul>
+            <div className="mt-8 grid gap-4 md:grid-cols-2">
+              <Reveal>
+                <div className="h-full rounded-2xl bg-ink-800 p-7 md:p-10">
+                  <span className="font-serif text-6xl font-light italic text-bone-500">01</span>
+                  <h2 className={`mt-6 text-sm font-medium uppercase tracking-[0.18em] ${accent}`}>{t.case.challenge}</h2>
+                  <p className="mt-4 text-pretty text-lg leading-relaxed text-bone-100 md:text-xl">{tr.challenge ?? project.challenge}</p>
+                </div>
+              </Reveal>
+              <Reveal delay={0.08}>
+                <div className="h-full rounded-2xl border border-mint/30 bg-ink-800 p-7 md:p-10">
+                  <span className="font-serif text-6xl font-light italic text-mint">02</span>
+                  <h2 className={`mt-6 text-sm font-medium uppercase tracking-[0.18em] ${accent}`}>{t.case.solution}</h2>
+                  <p className="mt-4 text-pretty text-lg leading-relaxed text-bone-100 md:text-xl">{tr.strategy ?? project.strategy}</p>
+                </div>
+              </Reveal>
             </div>
           </div>
         )}
@@ -308,7 +328,7 @@ export default function CaseView({ project }: { project: Project }) {
           {/* always left-to-right: many sets are one continuous puzzle across
               the 3x3, and an RTL grid mirrored every row (7 8 9 instead of
               9 8 7) in Arabic. Hairline gaps so the tiles read as one image. */}
-          <div dir="ltr" className="mx-auto grid max-w-5xl grid-cols-3 gap-[2px] md:gap-1">
+          <div dir="ltr" className="mx-auto grid max-w-5xl grid-cols-3 gap-[2px] overflow-hidden rounded-2xl md:gap-1">
             {gallery.map((g) => (
               <figure
                 key={g.src}
@@ -343,6 +363,22 @@ export default function CaseView({ project }: { project: Project }) {
             {t.case.ctaBtn}
           </Link>
         </div>
+      </section>
+
+      {/* next case */}
+      <section className="container-edge mx-auto max-w-edge pt-16 md:pt-24">
+        <Link href={`/work/${next.slug}`} className="group grid items-center gap-8 overflow-hidden rounded-[2rem] bg-ink-800 p-6 md:grid-cols-[1fr_auto] md:p-10">
+          <div>
+            <p className="text-xs uppercase tracking-[0.22em] text-bone-400">{lang === "ar" ? "المشروع التالي" : "Next case"}</p>
+            <h2 className="mt-4 font-display text-4xl font-semibold leading-[1] tracking-[-0.03em] text-bone-50 transition-colors duration-300 group-hover:text-mint md:text-6xl">
+              {next.client.split(" · ")[0]} <span aria-hidden className="inline-block transition-transform duration-300 group-hover:translate-x-2 rtl:rotate-180 rtl:group-hover:-translate-x-2">→</span>
+            </h2>
+            <p className="mt-4 max-w-xl text-base leading-relaxed text-bone-300">{ntr.tagline ?? next.tagline}</p>
+          </div>
+          <div className="relative aspect-[4/5] w-full overflow-hidden rounded-2xl bg-ink-700 md:w-56">
+            <Media src={next.cover} alt={ntr.title ?? next.title} fill sizes="(max-width:768px) 90vw, 14rem" className="object-cover transition-transform duration-700 group-hover:scale-105" />
+          </div>
+        </Link>
       </section>
 
       {/* continue */}

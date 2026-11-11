@@ -6,7 +6,7 @@ import Clients from "@/components/Clients";
 import Experience from "@/components/Experience";
 import Featured from "@/components/Featured";
 import Recommendations from "@/components/Recommendations";
-import Teaching from "@/components/Teaching";
+import AcademyBand from "@/components/home/AcademyBand";
 import Skills from "@/components/Skills";
 import Tools from "@/components/Tools";
 import HireCta from "@/components/HireCta";
@@ -48,10 +48,10 @@ export default function AboutPage() {
           { id: "clients", node: <Clients /> },
           { id: "experience", node: <Experience /> },
           { id: "recommendations", node: <Recommendations /> },
-          { id: "featured", node: <Featured /> },
-          { id: "teaching", node: <Teaching /> },
           { id: "skills", node: <Skills /> },
           { id: "tools", node: <Tools /> },
+          { id: "featured", node: <Featured /> },
+          { id: "teaching", node: <AcademyBand /> },
           { id: "hire", node: <HireCta /> },
         ]}
       />

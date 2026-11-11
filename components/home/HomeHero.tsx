@@ -13,7 +13,7 @@ import Magnetic from "@/components/ui/Magnetic";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
-const copy = {
+export const heroCopy = {
   en: {
     eyebrow: "Sr Graphic Designer & Team Lead",
     l1: "I build brands,",
@@ -80,7 +80,7 @@ function Line({ children, delay }: { children: React.ReactNode; delay: number })
 export default function HomeHero() {
   const { lang } = useLang();
   const reduce = useReducedMotion();
-  const c = copy[lang];
+  const c = heroCopy[lang];
 
   return (
     <section id="top" className="relative overflow-hidden pt-24 md:pt-28">

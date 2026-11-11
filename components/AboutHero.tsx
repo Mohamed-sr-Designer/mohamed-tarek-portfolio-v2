@@ -1,97 +1,86 @@
 "use client";
 
 import Link from "next/link";
-import { Reveal } from "@/components/ui/Reveal";
-import { SectionLabel } from "@/components/ui/SectionLabel";
-import Magnetic from "@/components/ui/Magnetic";
+import { motion } from "framer-motion";
 import { Media } from "@/components/ui/Media";
+import Magnetic from "@/components/ui/Magnetic";
 import { site } from "@/lib/site";
 import { useLang } from "@/lib/i18n";
+import { heroCopy } from "@/components/home/HomeHero";
 
-// Cinematic opening for the About page: the same night-shoot banner as the
-// home hero, the name, the role, and the two actions a hiring manager needs.
-//
-// He stands centre frame, so the name is stacked to two lines inside a narrow
-// measure and the whole copy block is capped at max-w-xl: set as one line,
-// "Mohamed Tarek" at 8xl runs about 700px and would have crossed him.
+// The About page opens the way the home does: type on one side, one framed
+// picture on the other, and the same four numbers underneath. The portrait is
+// a frame now, not a full-bleed backdrop, so no text ever sits on his face.
+
+const ease = [0.16, 1, 0.3, 1] as const;
+
 export default function AboutHero() {
-  const { t } = useLang();
+  const { t, lang } = useLang();
+  const stats = heroCopy[lang].stats;
 
   return (
-    <section className="relative flex min-h-[86svh] flex-col justify-end overflow-hidden">
-      <div className="absolute inset-0">
-        <Media
-          key="std"
-          src="/me/banner-2026.webp"
-          alt={`${site.name} — ${site.role}`}
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover object-center"
-        />
-      </div>
-      {/* Fixed dark scrim (not theme-tinted) so the portrait never washes out.
-          Lightened again: only the very bottom needs to be dense enough to
-          carry the text, the rest of the photograph should stay visible. */}
-      <div
-        aria-hidden
-        className="absolute inset-0 bg-gradient-to-tr from-black/85 via-black/35 to-transparent"
-      />
+    <section className="relative overflow-hidden pt-24 md:pt-28">
+      <div className="container-edge mx-auto grid max-w-edge items-center gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
+        <div className="lg:py-10">
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1, delay: 0.15 }}
+            className="flex items-center gap-2.5 text-xs uppercase tracking-[0.2em] text-bone-300"
+          >
+            <span className="h-2 w-2 rounded-full bg-mint" />
+            {t.about.label} · <bdi>{site.markets}</bdi>
+          </motion.p>
 
-      {/* Arabic pins left here for the same reason as the home hero: a block
-          that follows the page direction starts on the right, which in this
-          frame is where he is standing. */}
-      <div className="container-edge relative z-10 mx-auto w-full max-w-edge pb-14 pt-40 rtl:text-left">
-        <Reveal>
-          <SectionLabel>{t.about.label}</SectionLabel>
-        </Reveal>
-        <Reveal delay={0.06}>
-          <h1 className="mt-6 font-display text-6xl font-semibold leading-[0.92] tracking-tightest text-white [text-shadow:0_2px_30px_rgb(0_0_0/0.5)] md:text-8xl">
-            <span className="block">Mohamed</span>
-            <span className="block font-serif font-normal italic tracking-normal text-mint-lift">
-              Tarek
+          <h1 className="mt-6 font-display text-[15vw] font-semibold leading-[0.94] tracking-[-0.035em] text-bone-50 sm:text-[10vw] lg:text-[clamp(4rem,7vw,7.5rem)]">
+            <span className="block overflow-hidden pb-[0.1em]">
+              <motion.span className="block" initial={{ y: "115%" }} animate={{ y: 0 }} transition={{ duration: 1, ease, delay: 0.25 }}>
+                Mohamed
+              </motion.span>
+            </span>
+            <span className="block overflow-hidden pb-[0.14em]">
+              <motion.span className="block font-serif font-light italic text-mint" initial={{ y: "115%" }} animate={{ y: 0 }} transition={{ duration: 1, ease, delay: 0.37 }}>
+                Tarek.
+              </motion.span>
             </span>
           </h1>
-        </Reveal>
 
-        <div className="mt-7 flex max-w-md flex-col gap-8 rtl:mr-auto">
-          <div>
-            <Reveal delay={0.12}>
-              <p className="text-lg text-white/80 md:text-xl">
-                {site.roleFull} —{" "}
-                <span className="text-white/60">{site.markets}</span>
-              </p>
-            </Reveal>
-            <Reveal delay={0.16}>
-              <p className="mt-4 text-pretty text-base leading-relaxed text-white/70">
-                {t.about.heroBio}
-              </p>
-            </Reveal>
-          </div>
-          <Reveal delay={0.22}>
-            <div className="flex shrink-0 flex-wrap gap-4">
+          <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, delay: 0.65 }}>
+            <p className="mt-6 text-lg font-medium text-bone-100 md:text-xl">{site.roleFull}</p>
+            <p className="mt-4 max-w-xl text-pretty text-base leading-relaxed text-bone-300 md:text-lg">{t.about.heroBio}</p>
+            <div className="mt-9 flex flex-wrap gap-3">
               <Magnetic>
-                <Link
-                  href="/contact"
-                  className="cta-blend rounded-full px-7 py-3.5 text-sm font-medium hover:scale-[1.03]"
-                >
+                <Link href="/contact" className="cta-blend rounded-full px-7 py-3.5 text-sm font-medium">
                   {t.hero.ctaSecondary}
                 </Link>
               </Magnetic>
               <Magnetic>
-                <a
-                  href={`https://wa.me/${site.whatsapp}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="cta-edge rounded-full px-7 py-3.5 text-sm text-white"
-                >
+                <a href={`https://wa.me/${site.whatsapp}`} target="_blank" rel="noopener noreferrer" className="cta-edge rounded-full px-7 py-3.5 text-sm text-bone-50">
                   {t.hire.wa}
                 </a>
               </Magnetic>
             </div>
-          </Reveal>
+          </motion.div>
         </div>
+
+        <motion.div
+          initial={{ opacity: 0, scale: 1.04 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1.2, ease, delay: 0.2 }}
+          className="relative mx-auto aspect-[4/5] w-full max-w-md overflow-hidden rounded-[2rem] bg-ink-800 lg:max-w-none"
+        >
+          <Media src="/me/portrait-hero.webp" alt={`${site.name}, ${site.role}`} fill priority sizes="(max-width:1024px) 90vw, 45vw" className="object-cover object-[center_20%]" />
+        </motion.div>
       </div>
+
+      <dl className="container-edge mx-auto mt-12 grid max-w-edge grid-cols-2 border-y border-line/15 md:mt-16 md:grid-cols-4">
+        {stats.map((s, i) => (
+          <div key={s.l} className={`py-6 md:py-7 ${i % 2 ? "ps-5 border-s border-line/15" : ""} ${i > 1 ? "border-t border-line/15 md:border-t-0" : ""} ${i ? "md:ps-7 md:border-s md:border-line/15" : ""}`}>
+            <dt dir="ltr" className="font-display text-4xl font-semibold tracking-tight text-bone-50 rtl:text-right md:text-5xl">{s.n}</dt>
+            <dd className="mt-2 text-xs uppercase tracking-[0.16em] text-bone-400">{s.l}</dd>
+          </div>
+        ))}
+      </dl>
     </section>
   );
 }

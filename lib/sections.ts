@@ -21,7 +21,7 @@ export const pageSections: Record<string, { id: string; label: string }[]> = {
     { id: "experience", label: "Experience" },
     { id: "recommendations", label: "Recommendations" },
     { id: "featured", label: "Featured on LinkedIn" },
-    { id: "teaching", label: "Teaching" },
+    { id: "teaching", label: "Academy band" },
     { id: "skills", label: "Capabilities" },
     { id: "tools", label: "Toolkit" },
     { id: "hire", label: "Hire band" },
