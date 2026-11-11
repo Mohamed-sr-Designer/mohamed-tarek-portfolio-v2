@@ -8,6 +8,7 @@ export const pageSections: Record<string, { id: string; label: string }[]> = {
     { id: "featured", label: "Selected work (case studies)" },
     { id: "master", label: "Key Visuals" },
     { id: "brands", label: "Brand identities" },
+    { id: "concepts", label: "Concept lab (self-initiated key visuals)" },
     { id: "craft", label: "The craft (tabs: AI, social, lettering, storyboards, motion, 3D, web)" },
     { id: "academy", label: "Academy band" },
     { id: "recommendations", label: "Recommendations" },

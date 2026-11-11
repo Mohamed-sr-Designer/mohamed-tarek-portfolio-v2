@@ -620,8 +620,6 @@ html[data-edition="min"].cursor-ready button {
 /* the academy band wears the academy's own violet, in both themes */
 .academy-band { background: #1B0B2E; background-image: radial-gradient(120% 90% at 100% 0%, #6D28D9 0%, transparent 60%), radial-gradient(90% 80% at 0% 100%, #BE185D 0%, transparent 55%); }
 
-/* brand logos are white artwork: on a light caption they print dark */
-html[data-theme="light"] .brand-logo { filter: brightness(0); }
 
 /* inside the craft tabs each discipline sits closer to the tab bar */
 .craft-panel > section { padding-top: 3.5rem; }

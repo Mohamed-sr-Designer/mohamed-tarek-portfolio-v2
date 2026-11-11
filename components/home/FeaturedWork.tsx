@@ -6,24 +6,17 @@ import { SectionLabel } from "@/components/ui/SectionLabel";
 import { Media } from "@/components/ui/Media";
 import { useLang } from "@/lib/i18n";
 import { projects } from "@/lib/projects";
+import { getAsset } from "@/lib/assets";
 
-// Six case studies, laid out as a bento rather than a list: two wide frames
-// carry the campaigns, four tall ones carry the systems. Every card opens the
-// full case.
+// Six case studies, and only six. Every cover is shown whole, at the ratio it
+// was designed in: these are finished posts, and cropping a designed layout to
+// fit a frame cuts its type and makes the work look careless.
 
-const picks: { slug: string; span: string; ratio: string; img?: string }[] = [
-  { slug: "amam", span: "md:col-span-4", ratio: "aspect-[4/5] md:aspect-[16/10]" },
-  { slug: "photo-sessions", span: "md:col-span-2", ratio: "aspect-[4/5]" },
-  { slug: "tilal-v", span: "md:col-span-2", ratio: "aspect-[4/5]" },
-  { slug: "prepd", span: "md:col-span-2", ratio: "aspect-[4/5]" },
-  { slug: "gf", span: "md:col-span-2", ratio: "aspect-[4/5]" },
-  { slug: "video-production", span: "md:col-span-3", ratio: "aspect-[4/5] md:aspect-[16/10]" },
-  { slug: "brand-vitals", span: "md:col-span-3", ratio: "aspect-[4/5] md:aspect-[16/10]" },
-];
+const picks = ["amam", "tilal-v", "prepd", "gf", "brand-vitals", "photo-sessions"];
 
 const copy = {
-  en: { label: "Selected work", a: "Seven cases,", i: "one standard", b: ".", note: "Campaigns, social systems and AI production. Open any case for the problem, the idea and the result.", open: "Open case" },
-  ar: { label: "أعمال مختارة", a: "سبع مشاريع،", i: "بمعيار واحد", b: ".", note: "حملات وأنظمة سوشيال وإنتاج بالـ AI. افتح أي مشروع وشوف المشكلة والفكرة والنتيجة.", open: "افتح المشروع" },
+  en: { label: "Selected work", a: "Six cases,", i: "one standard", b: ".", note: "Campaigns, social systems and AI production. Open any case for the problem, the idea and the result.", open: "Open case" },
+  ar: { label: "أعمال مختارة", a: "ست مشاريع،", i: "بمعيار واحد", b: ".", note: "حملات وأنظمة سوشيال وإنتاج بالـ AI. افتح أي مشروع وشوف المشكلة والفكرة والنتيجة.", open: "افتح المشروع" },
 };
 
 export default function FeaturedWork() {
@@ -45,26 +38,25 @@ export default function FeaturedWork() {
         </Reveal>
       </div>
 
-      <ul className="mt-12 grid gap-4 md:mt-16 md:grid-cols-6">
-        {picks.map((p, k) => {
-          const pr = projects.find((x) => x.slug === p.slug);
+      <ul className="mt-12 grid items-start gap-x-5 gap-y-12 sm:grid-cols-2 md:mt-16 lg:grid-cols-3">
+        {picks.map((slug, k) => {
+          const pr = projects.find((x) => x.slug === slug);
           if (!pr) return null;
           const tr = t.projects[pr.slug] ?? {};
+          const src = pr.hero || pr.cover;
+          const meta = getAsset(src);
           return (
-            <li key={p.slug} className={p.span}>
+            <li key={slug}>
               <Reveal delay={0.05 * (k % 3)}>
                 <Link href={`/work/${pr.slug}`} className="group block">
-                  <div className={`relative overflow-hidden rounded-2xl bg-ink-800 ${p.ratio}`}>
+                  <div className="relative overflow-hidden rounded-2xl bg-ink-800" style={{ aspectRatio: meta.width && meta.height ? `${meta.width} / ${meta.height}` : "4 / 5" }}>
                     <Media
-                      src={pr.hero || pr.cover}
+                      src={src}
                       alt={tr.title ?? pr.title}
                       fill
-                      sizes="(max-width:768px) 92vw, 60vw"
-                      className="object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.04]"
+                      sizes="(max-width:640px) 92vw, (max-width:1024px) 46vw, 30vw"
+                      className="object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.03]"
                     />
-                    <span className="absolute end-4 top-4 rounded-full bg-ink-900/85 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.12em] text-bone-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                      {c.open} ↗
-                    </span>
                   </div>
                   <div className="mt-4 flex items-start justify-between gap-4">
                     <div>
@@ -73,6 +65,9 @@ export default function FeaturedWork() {
                     </div>
                     <span className="mt-1.5 shrink-0 text-[11px] uppercase tracking-[0.14em] text-bone-400">{(tr.category ?? pr.category).split(" · ")[0]}</span>
                   </div>
+                  <span className="mt-3 inline-block text-sm text-mint opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                    {c.open} <span aria-hidden>↗</span>
+                  </span>
                 </Link>
               </Reveal>
             </li>

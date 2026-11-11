@@ -4,6 +4,7 @@ import LogoMarquee from "@/components/LogoMarquee";
 import FeaturedWork from "@/components/home/FeaturedWork";
 import MasterVisuals from "@/components/MasterVisuals";
 import BrandIdentities from "@/components/home/BrandIdentities";
+import ConceptLab from "@/components/home/ConceptLab";
 import Disciplines from "@/components/home/Disciplines";
 import AcademyBand from "@/components/home/AcademyBand";
 import Recommendations from "@/components/Recommendations";
@@ -28,6 +29,7 @@ export default function Home() {
             { id: "featured", node: <FeaturedWork /> },
             { id: "master", node: <MasterVisuals /> },
             { id: "brands", node: <BrandIdentities /> },
+            { id: "concepts", node: <ConceptLab /> },
             { id: "craft", node: <Disciplines /> },
             { id: "academy", node: <AcademyBand /> },
             { id: "recommendations", node: <Recommendations /> },
